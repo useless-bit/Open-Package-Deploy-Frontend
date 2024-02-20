@@ -1,0 +1,19 @@
+.main {
+  overflow: hidden;
+}
+
+.logo {
+  text-align: center;
+}
+
+.main-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: left;
+}
+
+button {
+  margin-bottom: 10px;
+  justify-content: left;
+}
