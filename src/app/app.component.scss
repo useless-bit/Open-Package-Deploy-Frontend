@@ -9,7 +9,7 @@
   overflow-y: auto;
 }
 
-.example-container {
+.container {
   height: 100%;
   width: 100%;
 }
@@ -17,4 +17,8 @@
 .menu-button {
   position: fixed;
   z-index: 100;
+}
+
+.hide {
+  display: none;
 }

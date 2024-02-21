@@ -1,15 +1,17 @@
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container [class.hide]="appLoaded" class="container" autosize>
+  <app-loading-fullscreen></app-loading-fullscreen>
+</mat-drawer-container>
+
+<mat-drawer-container [class.hide]="!appLoaded" class="container" autosize>
   <mat-drawer #matDrawer class="mat-drawer" [mode]="sidenavMode">
     <app-sidenav></app-sidenav>
   </mat-drawer>
-  <!--<router-outlet/>-->
   <div class="menu-button">
-    <button mat-icon-button *ngIf="!sidenav?.opened" (click)="openSideNav()">
+    <button mat-icon-button *ngIf="!matDrawer?.opened" (click)="openSideNav()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
   <div class="content">
-    <app-test-content></app-test-content>
+    <router-outlet/>
   </div>
 </mat-drawer-container>
-
