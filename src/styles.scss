@@ -21,3 +21,13 @@ $my-app-theme: mat.define-dark-theme(
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error {
+  --mdc-snackbar-container-color: red;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+.notification {
+  text-align: center;
+  --mdc-snackbar-supporting-text-weight: bold;
+}
