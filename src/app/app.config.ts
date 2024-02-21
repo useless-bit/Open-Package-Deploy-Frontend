@@ -51,7 +51,7 @@ export const appConfig: ApplicationConfig = {
           variableService.loadVariables().then(() => {
             initializeKeycloak(keycloakService, variableService).then(() => {
               // Navigate back to the original URL while removing url parameters (from Keycloak)
-                router.navigateByUrl(currentUrl.split('&state=')[0]).then(() => {
+                router.navigateByUrl(currentUrl.split('state=')[0]).then(() => {
                 });
               sharedService.emitInitFinished(true);
             });
