@@ -47,11 +47,19 @@ export const appConfig: ApplicationConfig = {
       useFactory: (variableService: VariableService, keycloakService: KeycloakService, router: Router, sharedService: ApplicationLoadedService, location: Location) => {
         return () => new Promise<void>((resolve) => {
           const currentUrl = location.path(true);
+          let separator: string;
+          if (currentUrl.substring(0, 6) == "state=") {
+            separator = "state=";
+          } else {
+            separator = "&state=";
+          }
+          console.log(currentUrl)
+          console.log(separator)
 
           variableService.loadVariables().then(() => {
             initializeKeycloak(keycloakService, variableService).then(() => {
               // Navigate back to the original URL while removing url parameters (from Keycloak)
-                router.navigateByUrl(currentUrl.split('state=')[0]).then(() => {
+                router.navigateByUrl(currentUrl.split(separator)[0]).then(() => {
                 });
               sharedService.emitInitFinished(true);
             });
