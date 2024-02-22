@@ -1,5 +1,4 @@
 .main {
-  overflow: hidden;
 }
 
 .logo {
@@ -9,12 +8,12 @@
 
 .main-buttons {
   display: flex;
-  flex-wrap: wrap;
+  height: max-content;
   flex-direction: column;
   text-align: left;
 }
 
 button {
-  margin-bottom: 10px;
+  margin-top: 10px;
   justify-content: left;
 }
