@@ -1,3 +1,11 @@
-.search-field{
+.main-content {
   width: 100%;
+}
+
+.search-field {
+  width: inherit;
+}
+
+.table-container {
+  overflow: auto;
 }

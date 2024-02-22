@@ -1,16 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
   MatTable,
   MatTableDataSource
 } from "@angular/material/table";
 import {AgentEntity} from "../../service/api/entity/agentEntity";
 import {ApiService} from "../../service/api/api.service";
-import {AgentListResponse} from "../../service/api/reponse/agentListResponse";
 import {NgIf} from "@angular/common";
 import {LoadingFullscreenComponent} from "../loading-fullscreen/loading-fullscreen.component";
 import {MatFormField} from "@angular/material/form-field";
