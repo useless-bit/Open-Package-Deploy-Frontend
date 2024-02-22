@@ -15,6 +15,7 @@ import {KeycloakService} from "keycloak-angular";
 import {provideHttpClient} from "@angular/common/http";
 import {Location} from "@angular/common";
 import {CustomRouteReuseStrategy} from "./strategy/CustomRouteReuseStrategy";
+import {MatTableDataSource} from "@angular/material/table";
 
 async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService) {
   return new Promise<void>(async (resolve) => {
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAnimationsAsync(),
     provideHttpClient(),
+    MatTableDataSource,
     ApplicationLoadedService,
     KeycloakService,
     {
@@ -52,8 +54,6 @@ export const appConfig: ApplicationConfig = {
           } else {
             separator = "&state=";
           }
-          console.log(currentUrl)
-          console.log(separator)
 
           variableService.loadVariables().then(() => {
             initializeKeycloak(keycloakService, variableService).then(() => {

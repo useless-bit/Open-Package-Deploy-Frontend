@@ -19,7 +19,7 @@ export class ApiService {
     const snackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
     snackBarConfig.verticalPosition = 'top';
     snackBarConfig.horizontalPosition = 'right';
-    snackBarConfig.duration = 5000000;
+    snackBarConfig.duration = 5000;
     snackBarConfig.panelClass = ["notification", "error"]
     if (data.status == 0) {
       this.snackbar.open("Server connection Error", "", {duration: 5000, panelClass: "notification-error"});
@@ -35,16 +35,17 @@ export class ApiService {
   }
 
   // Agent
-  public getAllAgents(): AgentListResponse | null {
-    this.httpClient.get(this.variableService.backendURL + "/api/agent/").subscribe({
+  public getAllAgents(): Promise<AgentListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/agent").subscribe({
         next: value => {
-          return value as AgentListResponse;
+          resolve(value as AgentListResponse);
         },
-        error: error => {
-          this.errorHandling(error)
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
         }
-      }
-    )
-    return null;
+      });
+    });
   }
 }
