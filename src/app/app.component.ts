@@ -1,11 +1,4 @@
-import {
-  AfterContentChecked,
-  AfterContentInit,
-  AfterRenderPhase, AfterViewChecked,
-  AfterViewInit,
-  Component,
-  ViewChild
-} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {TestContentComponent} from "./components/test-content/test-content.component";
 import {MatDrawer, MatDrawerContainer, MatDrawerMode} from "@angular/material/sidenav";
@@ -28,7 +21,7 @@ import {LoadingFullscreenComponent} from "./components/loading-fullscreen/loadin
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent{
+export class AppComponent {
   @ViewChild('matDrawer') matDrawer: MatDrawer | null = null;
   public sidenavMode: MatDrawerMode = "over";
   public appLoaded: boolean = false;
@@ -47,6 +40,7 @@ export class AppComponent{
     });
   }
 
+
   ngAfterViewInit() {
     this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small]).subscribe(result => {
       if (result.matches) {
@@ -60,15 +54,13 @@ export class AppComponent{
   }
 
   public async ngOnInit() {
-    this.isLoggedIn = this.keycloakService.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      this.userProfile = await this.keycloakService.loadUserProfile();
-    }
-
     this.keycloakService.keycloakEvents$.subscribe({
-      next: (e) => {
-        if (e.type == KeycloakEventType.OnTokenExpired) {
+      next: (event) => {
+        this.keycloakService.loadUserProfile().then(userProfile => this.userProfile = userProfile);
+        if (event.type == KeycloakEventType.OnAuthSuccess) {
+          this.isLoggedIn = this.keycloakService.isLoggedIn();
+        }
+        if (event.type == KeycloakEventType.OnTokenExpired) {
           this.keycloakService.updateToken(20);
         }
       }
@@ -81,4 +73,5 @@ export class AppComponent{
       this.matDrawer.toggle();
     }
   }
+
 }

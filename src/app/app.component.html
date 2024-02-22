@@ -1,8 +1,8 @@
-<mat-drawer-container [class.hide]="appLoaded" class="container" autosize>
+<mat-drawer-container [class.hide]="appLoaded && isLoggedIn" class="container" autosize>
   <app-loading-fullscreen></app-loading-fullscreen>
 </mat-drawer-container>
 
-<mat-drawer-container [class.hide]="!appLoaded" class="container" autosize>
+<mat-drawer-container [class.hide]="!appLoaded || !isLoggedIn" class="container" autosize>
   <mat-drawer #matDrawer class="mat-drawer" [mode]="sidenavMode">
     <app-sidenav></app-sidenav>
   </mat-drawer>
