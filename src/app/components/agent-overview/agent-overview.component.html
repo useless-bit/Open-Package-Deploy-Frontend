@@ -4,10 +4,10 @@
   <mat-form-field class="search-field">
     <mat-label>Search</mat-label>
     <input #searchInputField matInput autofocus (keyup)="applyFilter($event)">
-    <button matSuffix mat-icon-button (click)="clearTextField()">
+    <button matSuffix mat-icon-button matTooltip="Clear search" (click)="clearTextField()">
       <mat-icon>close</mat-icon>
     </button>
-    <button matSuffix mat-icon-button (click)="refreshData()">
+    <button matSuffix mat-icon-button matTooltip="Reload data" (click)="refreshData()">
       <mat-icon>refresh</mat-icon>
     </button>
     <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
@@ -45,5 +45,7 @@
       <tr mat-row *matRowDef="let row; columns: selectedColumns;" (click)="showAgentInfo(row.uuid)"
           class="table-row"></tr>
     </table>
+    <mat-paginator #tablePaginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+                   showFirstLastButtons></mat-paginator>
   </div>
 </div>

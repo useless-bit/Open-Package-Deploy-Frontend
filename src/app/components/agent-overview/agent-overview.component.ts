@@ -26,6 +26,8 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {PlaceholderComponent} from "../placeholder/placeholder.component";
+import {MatTooltip} from "@angular/material/tooltip";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-agent-overview',
@@ -57,13 +59,22 @@ import {PlaceholderComponent} from "../placeholder/placeholder.component";
     MatIconButton,
     MatFormFieldModule,
     MatProgressBar,
-    MatButton
+    MatButton,
+    MatTooltip,
+    MatPaginator
   ],
   templateUrl: './agent-overview.component.html',
   styleUrl: './agent-overview.component.scss'
 })
 export class AgentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
+
+  @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
+
   dataSource: MatTableDataSource<AgentEntity>;
 
   public dataLoaded: boolean = false;
@@ -91,6 +102,7 @@ export class AgentOverviewComponent implements OnInit {
         this.dataSource.filter = "";
         this.dataLoaded = true;
         this.searchLoadingBar = false;
+
       }
     });
   }
