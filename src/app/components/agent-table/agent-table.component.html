@@ -23,21 +23,9 @@
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" class="agent-table">
       <!-- UUID Column -->
-      <ng-container matColumnDef="uuid">
-        <th mat-header-cell *matHeaderCellDef> UUID</th>
-        <td mat-cell style="white-space: normal;" *matCellDef="let agent"> {{ agent.uuid }}</td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name</th>
-        <td mat-cell *matCellDef="let agent"> {{ agent.name }}</td>
-      </ng-container>
-
-      <!-- Registration Completed Column -->
-      <ng-container matColumnDef="registrationCompleted">
-        <th mat-header-cell *matHeaderCellDef> Registration Completed</th>
-        <td mat-cell *matCellDef="let agent"> {{ agent.registrationCompleted }}</td>
+      <ng-container *ngFor="let column of this.agentKeys" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef> {{ column }}</th>
+        <td mat-cell *matCellDef="let agent">{{ agent[column] }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
