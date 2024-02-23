@@ -5,7 +5,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     return true;
   }
 
-  store(route: ActivatedRouteSnapshot, handle: {}): void {}
+  store(route: ActivatedRouteSnapshot, handle: {}): void {
+  }
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
     return false;

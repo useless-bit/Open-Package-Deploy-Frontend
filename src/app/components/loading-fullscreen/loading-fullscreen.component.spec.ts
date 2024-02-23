@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LoadingFullscreenComponent } from './loading-fullscreen.component';
+import {LoadingFullscreenComponent} from './loading-fullscreen.component';
 
 describe('LoadingFullscreenComponent', () => {
   let component: LoadingFullscreenComponent;
@@ -10,8 +10,8 @@ describe('LoadingFullscreenComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LoadingFullscreenComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(LoadingFullscreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

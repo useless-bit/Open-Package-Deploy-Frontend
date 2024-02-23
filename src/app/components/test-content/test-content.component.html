@@ -133,9 +133,11 @@
   .pill-group .pill:nth-child(6n + 1) {
     --pill-accent: var(--bright-blue);
   }
+
   .pill-group .pill:nth-child(6n + 2) {
     --pill-accent: var(--french-violet);
   }
+
   .pill-group .pill:nth-child(6n + 3),
   .pill-group .pill:nth-child(6n + 4),
   .pill-group .pill:nth-child(6n + 5) {
@@ -205,9 +207,9 @@
             gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#FF41F8" />
-            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
-            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
+            <stop stop-color="#FF41F8"/>
+            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5"/>
+            <stop offset="1" stop-color="#FF41F8" stop-opacity="0"/>
           </radialGradient>
           <linearGradient
             id="b"
@@ -217,12 +219,14 @@
             y2="192"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F0060B" />
-            <stop offset="0" stop-color="#F0070C" />
-            <stop offset=".526" stop-color="#CC26D5" />
-            <stop offset="1" stop-color="#7702FF" />
+            <stop stop-color="#F0060B"/>
+            <stop offset="0" stop-color="#F0070C"/>
+            <stop offset=".526" stop-color="#CC26D5"/>
+            <stop offset="1" stop-color="#7702FF"/>
           </linearGradient>
-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
+          <clipPath id="a">
+            <path fill="#fff" d="M0 0h982v239H0z"/>
+          </clipPath>
         </defs>
       </svg>
       <h1>Hello, {{ this.data.agentUUID }}</h1>
@@ -232,11 +236,11 @@
     <div class="right-side">
       <div class="pill-group">
         @for (item of [
-          { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
+          {title: 'Explore the Docs', link: 'https://angular.dev'},
+          {title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials'},
+          {title: 'CLI Docs', link: 'https://angular.dev/tools/cli'},
+          {title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service'},
+          {title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools'},
         ]; track item.title) {
           <a
             class="pill"
