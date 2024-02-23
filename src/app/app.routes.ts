@@ -7,7 +7,7 @@ import {PlaceholderComponent} from "./components/placeholder/placeholder.compone
 import {AgentTableComponent} from "./components/agent-table/agent-table.component";
 
 export const routes: Routes = [
-  {path: '', pathMatch: 'full', component: TestContentComponent, canActivate: [keycloakGuard]},
+  {path: '', pathMatch: 'full', component: PlaceholderComponent, canActivate: [keycloakGuard]},
   {path: 'agent', pathMatch: 'full', component: AgentTableComponent, canActivate: [keycloakGuard]},
   {path: 'package', pathMatch: 'full', component: PlaceholderComponent, canActivate: [keycloakGuard]},
   {path: 'deployment', pathMatch: 'full', component: PlaceholderComponent, canActivate: [keycloakGuard]},

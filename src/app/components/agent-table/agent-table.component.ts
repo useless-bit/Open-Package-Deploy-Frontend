@@ -59,7 +59,7 @@ export class AgentTableComponent implements OnInit {
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];
   public agentInstance: AgentEntity = {name: "", registrationCompleted: false, uuid: ""};
-  public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>;
+  public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
 
   constructor(dataSource: MatTableDataSource<AgentEntity>,
               private apiService: ApiService,
@@ -76,6 +76,7 @@ export class AgentTableComponent implements OnInit {
       this.dataLoaded = true;
       this.dataSource.filter = "";
     });
+    console.log(this.agentKeys);
   }
 
   applyFilter(event: Event) {
@@ -106,5 +107,12 @@ export class AgentTableComponent implements OnInit {
 
   public showAgentInfo(agentUUID: string): void {
     this.dialog.open(TestContentComponent, {data: {agentUUID}, panelClass: "main-popup"});
+  }
+
+  public convertString(str: string): string {
+    const convertedString = str.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+    return convertedString.split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 }
