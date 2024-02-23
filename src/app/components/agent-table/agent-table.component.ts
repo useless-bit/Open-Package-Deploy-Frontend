@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -16,12 +16,15 @@ import {AgentEntity} from "../../service/api/entity/agentEntity";
 import {ApiService} from "../../service/api/api.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {LoadingFullscreenComponent} from "../loading-fullscreen/loading-fullscreen.component";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatChip, MatChipListbox, MatChipOption, MatChipSet} from "@angular/material/chips";
 import {MatDialog} from "@angular/material/dialog";
 import {TestContentComponent} from "../test-content/test-content.component";
+import {MatIcon} from "@angular/material/icon";
+import {MatIconButton} from "@angular/material/button";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 @Component({
   selector: 'app-agent-table',
@@ -48,18 +51,24 @@ import {TestContentComponent} from "../test-content/test-content.component";
     MatChipOption,
     NgForOf,
     MatChip,
-    MatChipSet
+    MatChipSet,
+    MatIcon,
+    MatIconButton,
+    MatFormFieldModule,
+    MatProgressBar
   ],
   templateUrl: './agent-table.component.html',
   styleUrl: './agent-table.component.scss'
 })
 export class AgentTableComponent implements OnInit {
-
+  @ViewChild('searchInputField') searchField: ElementRef | null = null;
   dataSource: MatTableDataSource<AgentEntity>;
+
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];
   public agentInstance: AgentEntity = {name: "", registrationCompleted: false, uuid: ""};
   public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
+  public searchLoadingBar: boolean = false;
 
   constructor(dataSource: MatTableDataSource<AgentEntity>,
               private apiService: ApiService,
@@ -69,14 +78,19 @@ export class AgentTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    const storedSelectedColumns = localStorage.getItem('selectedColumns');
+    if (storedSelectedColumns) {
+      this.selectedColumns = JSON.parse(storedSelectedColumns);
+      this.selectedColumns = this.selectedColumns.filter(col => this.agentKeys.includes(col as keyof AgentEntity));
+    }
     this.apiService.getAllAgents().then(response => {
       if (response) {
         this.dataSource.data = response.agents;
+        this.dataSource.filter = "";
+        this.dataLoaded = true;
+        this.searchLoadingBar = false;
       }
-      this.dataLoaded = true;
-      this.dataSource.filter = "";
     });
-    console.log(this.agentKeys);
   }
 
   applyFilter(event: Event) {
@@ -91,6 +105,7 @@ export class AgentTableComponent implements OnInit {
     } else {
       this.selectedColumns.splice(index, 1);
     }
+    localStorage.setItem('selectedColumns', JSON.stringify(this.selectedColumns));
     this.dataSource.filter = this.dataSource.filter;
   }
 
@@ -114,5 +129,23 @@ export class AgentTableComponent implements OnInit {
     return convertedString.split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+  }
+
+  refreshData(): void {
+    this.searchLoadingBar = true;
+    this.apiService.getAllAgents().then(response => {
+      if (response) {
+        this.dataSource.data = response.agents;
+        this.searchLoadingBar = false;
+      }
+    });
+  }
+
+  clearTextField(): void {
+
+    if (this.searchField) {
+      this.searchField.nativeElement.value = "";
+    }
+    this.dataSource.filter = "";
   }
 }

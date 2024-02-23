@@ -2,7 +2,11 @@
 
 <div *ngIf="dataLoaded" class="main-content">
   <mat-form-field class="search-field">
-    <input matInput autofocus (keyup)="applyFilter($event)" placeholder="Search">
+    <mat-label>Search</mat-label>
+    <input #searchInputField matInput autofocus (keyup)="applyFilter($event)">
+    <button matSuffix mat-icon-button (click)="clearTextField()"><mat-icon>close</mat-icon></button>
+    <button matSuffix mat-icon-button (click)="refreshData()"><mat-icon>refresh</mat-icon></button>
+    <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
   </mat-form-field>
 
   <mat-accordion>
