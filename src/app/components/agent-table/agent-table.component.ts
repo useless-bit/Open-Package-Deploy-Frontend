@@ -20,6 +20,8 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatChip, MatChipListbox, MatChipOption, MatChipSet} from "@angular/material/chips";
+import {MatDialog} from "@angular/material/dialog";
+import {TestContentComponent} from "../test-content/test-content.component";
 
 @Component({
   selector: 'app-agent-table',
@@ -60,7 +62,8 @@ export class AgentTableComponent implements OnInit {
   public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>;
 
   constructor(dataSource: MatTableDataSource<AgentEntity>,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private dialog: MatDialog) {
     this.dataSource = dataSource;
     this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
   }
@@ -99,5 +102,9 @@ export class AgentTableComponent implements OnInit {
       const value = String(data[column as keyof AgentEntity]).toLowerCase();
       return value.includes(filter);
     });
+  }
+
+  public showAgentInfo(agentUUID: string): void {
+    this.dialog.open(TestContentComponent, {data: {agentUUID}, panelClass: "main-popup"});
   }
 }

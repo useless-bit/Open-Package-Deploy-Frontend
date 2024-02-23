@@ -41,7 +41,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: selectedColumns;" (click)="showAgentInfo(row.uuid)" class="table-row"></tr>
     </table>
   </div>
 </div>
