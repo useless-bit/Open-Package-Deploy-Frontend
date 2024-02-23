@@ -39,7 +39,7 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/agent").subscribe({
         next: value => {
-          resolve(value as AgentListResponse);
+          resolve(new AgentListResponse(value));
         },
         error: (error) => {
           this.errorHandling(error);

@@ -14,3 +14,16 @@
 .table-row {
   cursor: pointer;
 }
+
+.option-bar {
+  display: flex;
+
+  mat-accordion {
+    flex: 1;
+  }
+
+  button {
+    margin-left: 20px;
+    width: max-content;
+  }
+}

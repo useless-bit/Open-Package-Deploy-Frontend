@@ -23,8 +23,9 @@ import {MatChip, MatChipListbox, MatChipOption, MatChipSet} from "@angular/mater
 import {MatDialog} from "@angular/material/dialog";
 import {TestContentComponent} from "../test-content/test-content.component";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
+import {PlaceholderComponent} from "../placeholder/placeholder.component";
 
 @Component({
   selector: 'app-agent-overview',
@@ -55,7 +56,8 @@ import {MatProgressBar} from "@angular/material/progress-bar";
     MatIcon,
     MatIconButton,
     MatFormFieldModule,
-    MatProgressBar
+    MatProgressBar,
+    MatButton
   ],
   templateUrl: './agent-overview.component.html',
   styleUrl: './agent-overview.component.scss'
@@ -66,7 +68,7 @@ export class AgentOverviewComponent implements OnInit {
 
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];
-  public agentInstance: AgentEntity = {name: "", registrationCompleted: false, uuid: ""};
+  public agentInstance: AgentEntity = new AgentEntity(2);
   public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
   public searchLoadingBar: boolean = false;
 
@@ -147,5 +149,10 @@ export class AgentOverviewComponent implements OnInit {
       this.searchField.nativeElement.value = "";
     }
     this.dataSource.filter = "";
+  }
+
+  openAddAgentPopup() {
+    this.dialog.open(PlaceholderComponent);
+
   }
 }

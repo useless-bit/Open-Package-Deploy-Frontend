@@ -1,5 +1,9 @@
 import {AgentEntity} from "../entity/agentEntity";
 
-export interface AgentListResponse{
-  agents: AgentEntity[]
+export class AgentListResponse {
+  agents: AgentEntity[];
+
+  constructor(data: any) {
+    this.agents = data.agents.map((agentData: any) => new AgentEntity(agentData));
+  }
 }
