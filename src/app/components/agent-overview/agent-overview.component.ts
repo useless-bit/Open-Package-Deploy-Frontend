@@ -27,7 +27,7 @@ import {MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 
 @Component({
-  selector: 'app-agent-table',
+  selector: 'app-agent-overview',
   standalone: true,
   imports: [
     MatTable,
@@ -57,10 +57,10 @@ import {MatProgressBar} from "@angular/material/progress-bar";
     MatFormFieldModule,
     MatProgressBar
   ],
-  templateUrl: './agent-table.component.html',
-  styleUrl: './agent-table.component.scss'
+  templateUrl: './agent-overview.component.html',
+  styleUrl: './agent-overview.component.scss'
 })
-export class AgentTableComponent implements OnInit {
+export class AgentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   dataSource: MatTableDataSource<AgentEntity>;
 
