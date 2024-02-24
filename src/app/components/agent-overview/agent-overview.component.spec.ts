@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AgentOverviewComponent} from './agent-overview.component';
 
-describe('AgentTableComponent', () => {
+describe('AgentOverviewComponent', () => {
   let component: AgentOverviewComponent;
   let fixture: ComponentFixture<AgentOverviewComponent>;
 
