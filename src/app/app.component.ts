@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {TestContentComponent} from "./components/test-content/test-content.component";
 import {MatDrawer, MatDrawerContainer, MatDrawerMode} from "@angular/material/sidenav";
@@ -31,7 +31,8 @@ export class AppComponent {
 
   constructor(breakpointObserver: BreakpointObserver,
               private readonly keycloakService: KeycloakService,
-              private applicationLoadedService: ApplicationLoadedService) {
+              private applicationLoadedService: ApplicationLoadedService,
+              private changeDetector : ChangeDetectorRef) {
     this.breakpointObserver = breakpointObserver;
     this.applicationLoadedService.initFinished.subscribe((isFinished) => {
       if (isFinished) {
@@ -50,6 +51,7 @@ export class AppComponent {
         this.sidenavMode = "side"
         this.matDrawer?.open()
       }
+      this.changeDetector.detectChanges();
     });
   }
 
