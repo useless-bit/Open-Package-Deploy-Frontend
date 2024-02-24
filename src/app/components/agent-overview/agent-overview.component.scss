@@ -16,14 +16,16 @@
 }
 
 .option-bar {
+  width: 100%;
   display: flex;
 
   mat-accordion {
+    width: 0%;
     flex: 1;
   }
 
   button {
     margin-left: 20px;
-    width: max-content;
+    width: min-content;
   }
 }

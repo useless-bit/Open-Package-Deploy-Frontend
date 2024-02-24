@@ -2,15 +2,37 @@ export class AgentEntity {
   uuid: string;
   name: string;
   lastConnectionTime: string;
-  operatingSystemName: string;
   registrationCompleted: boolean;
+  operatingSystem: string;
+  operatingSystemFamily: string;
+  operatingSystemArchitecture: string;
+  operatingSystemVersion: string;
+  operatingSystemCodeName: string;
+  operatingSystemBuildNumber: string;
+  memory: string;
+  cpuName: string;
+  cpuArchitecture: string;
+  cpuLogicalCores: string;
+  cpuPhysicalCores: string;
+  cpuSockets: string;
 
   constructor(agentData: any) {
     this.uuid = agentData.uuid;
     this.name = agentData.name;
     this.lastConnectionTime = this.formatDate(agentData.lastConnectionTime);
-    this.operatingSystemName = this.formatOsName(agentData.operatingSystemName);
     this.registrationCompleted = agentData.registrationCompleted;
+    this.operatingSystem = this.formatOsName(agentData.operatingSystem);
+    this.operatingSystemFamily = this.formatName(agentData.operatingSystemFamily);
+    this.operatingSystemArchitecture = this.formatName(agentData.operatingSystemArchitecture);
+    this.operatingSystemVersion = this.formatName(agentData.operatingSystemVersion);
+    this.operatingSystemCodeName = this.formatName(agentData.operatingSystemCodeName);
+    this.operatingSystemBuildNumber = this.formatName(agentData.operatingSystemBuildNumber);
+    this.memory = this.formatMemory(agentData.memory);
+    this.cpuName = this.formatName(agentData.cpuName);
+    this.cpuArchitecture = this.formatName(agentData.cpuArchitecture);
+    this.cpuLogicalCores = this.formatName(agentData.cpuLogicalCores);
+    this.cpuPhysicalCores = this.formatName(agentData.cpuPhysicalCores);
+    this.cpuSockets = this.formatName(agentData.cpuSockets);
   }
 
   formatDate(timestamp: number): string {
@@ -30,9 +52,24 @@ export class AgentEntity {
     return "N/A"
   }
 
+  formatName(name: string): string {
+    if (name) {
+      return name;
+    }
+    return "N/A"
+  }
+
+  formatMemory(memory: string): string {
+    if (memory) {
+      const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
+      return memoryInGigabytes.toFixed(2).toString() + " GB";
+    }
+    return "N/A"
+  }
+
   formatOsName(osName: string): string {
-    if (osName) {
-      return osName;
+    if (osName && osName != "UNKNOWN") {
+      return osName
     }
     return "N/A"
   }
