@@ -32,7 +32,7 @@ export class AppComponent {
   constructor(breakpointObserver: BreakpointObserver,
               private readonly keycloakService: KeycloakService,
               private applicationLoadedService: ApplicationLoadedService,
-              private changeDetector : ChangeDetectorRef) {
+              private changeDetector: ChangeDetectorRef) {
     this.breakpointObserver = breakpointObserver;
     this.applicationLoadedService.initFinished.subscribe((isFinished) => {
       if (isFinished) {
