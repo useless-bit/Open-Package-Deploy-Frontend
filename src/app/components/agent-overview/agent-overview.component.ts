@@ -28,6 +28,7 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {PlaceholderComponent} from "../placeholder/placeholder.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatPaginator} from "@angular/material/paginator";
+import {MatSort, MatSortHeader} from "@angular/material/sort";
 
 @Component({
   selector: 'app-agent-overview',
@@ -61,7 +62,9 @@ import {MatPaginator} from "@angular/material/paginator";
     MatProgressBar,
     MatButton,
     MatTooltip,
-    MatPaginator
+    MatPaginator,
+    MatSort,
+    MatSortHeader
   ],
   templateUrl: './agent-overview.component.html',
   styleUrl: './agent-overview.component.scss'
@@ -72,6 +75,12 @@ export class AgentOverviewComponent implements OnInit {
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
       this.dataSource.paginator = paginator;
+    }
+  }
+
+  @ViewChild(MatSort) set tableSort(sort: MatSort) {
+    if (sort) {
+      this.dataSource.sort = sort;
     }
   }
 
