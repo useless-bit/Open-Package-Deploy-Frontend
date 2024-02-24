@@ -75,23 +75,23 @@ export class AgentOverviewComponent implements OnInit {
     }
   }
 
-  dataSource: MatTableDataSource<AgentEntity>;
+  private localStorageNameSelectedColumns: string = "selectedColumns_AgentOverview";
+  private agentInstance: AgentEntity = new AgentEntity(0);
 
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];
-  public agentInstance: AgentEntity = new AgentEntity(2);
   public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
   public searchLoadingBar: boolean = false;
 
-  constructor(dataSource: MatTableDataSource<AgentEntity>,
-              private apiService: ApiService,
-              private dialog: MatDialog) {
+  constructor(private apiService: ApiService,
+              private dialog: MatDialog,
+              public dataSource: MatTableDataSource<AgentEntity>) {
     this.dataSource = dataSource;
     this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   ngOnInit() {
-    const storedSelectedColumns = localStorage.getItem('selectedColumns');
+    const storedSelectedColumns = localStorage.getItem(this.localStorageNameSelectedColumns);
     if (storedSelectedColumns) {
       this.selectedColumns = JSON.parse(storedSelectedColumns);
       this.selectedColumns = this.selectedColumns.filter(col => this.agentKeys.includes(col as keyof AgentEntity));
@@ -102,28 +102,27 @@ export class AgentOverviewComponent implements OnInit {
         this.dataSource.filter = "";
         this.dataLoaded = true;
         this.searchLoadingBar = false;
-
       }
     });
   }
 
-  applyFilter(event: Event) {
+  applySearch(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onAgentSelect(agent: String): void {
+  changeSelectedColumns(agent: String): void {
     const index = this.selectedColumns.indexOf(agent);
     if (index === -1) {
       this.selectedColumns.push(agent);
     } else {
       this.selectedColumns.splice(index, 1);
     }
-    localStorage.setItem('selectedColumns', JSON.stringify(this.selectedColumns));
+    localStorage.setItem(this.localStorageNameSelectedColumns, JSON.stringify(this.selectedColumns));
     this.dataSource.filter = this.dataSource.filter;
   }
 
-  public isSelected(agent: string): boolean {
+  public isColumnSelected(agent: string): boolean {
     return this.selectedColumns.includes(agent);
   }
 
@@ -134,11 +133,11 @@ export class AgentOverviewComponent implements OnInit {
     });
   }
 
-  public showAgentInfo(agentUUID: string): void {
+  public showDetailInfoPopup(agentUUID: string): void {
     this.dialog.open(TestContentComponent, {data: {agentUUID}, panelClass: "main-popup"});
   }
 
-  public convertString(str: string): string {
+  public convertStringChipName(str: string): string {
     const convertedString = str.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
     return convertedString.split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -156,15 +155,13 @@ export class AgentOverviewComponent implements OnInit {
   }
 
   clearTextField(): void {
-
     if (this.searchField) {
       this.searchField.nativeElement.value = "";
     }
     this.dataSource.filter = "";
   }
 
-  openAddAgentPopup() {
+  openAddNewPopup() {
     this.dialog.open(PlaceholderComponent);
-
   }
 }
