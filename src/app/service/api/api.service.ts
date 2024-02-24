@@ -4,6 +4,7 @@ import {VariableService} from "../variable/variable.service";
 import {AgentListResponse} from "./reponse/agentListResponse";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {ApiErrorResponse} from "./reponse/apiErrorResponse";
+import {AgentEntity} from "./entity/agentEntity";
 
 @Injectable({
   providedIn: 'root'
@@ -48,4 +49,19 @@ export class ApiService {
       });
     });
   }
+
+  public getAgent(agentUUID: string): Promise<AgentEntity | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/agent/" + agentUUID).subscribe({
+        next: value => {
+          resolve(new AgentEntity(value));
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
 }

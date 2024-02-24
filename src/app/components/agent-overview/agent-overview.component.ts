@@ -21,7 +21,6 @@ import {MatInput} from "@angular/material/input";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatChip, MatChipListbox, MatChipOption, MatChipSet} from "@angular/material/chips";
 import {MatDialog} from "@angular/material/dialog";
-import {TestContentComponent} from "../test-content/test-content.component";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
@@ -29,6 +28,7 @@ import {PlaceholderComponent} from "../placeholder/placeholder.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
+import {AgentDetailPopupComponent} from "../agent-detail-popup/agent-detail-popup.component";
 
 @Component({
   selector: 'app-agent-overview',
@@ -143,7 +143,7 @@ export class AgentOverviewComponent implements OnInit {
   }
 
   public showDetailInfoPopup(agentUUID: string): void {
-    this.dialog.open(TestContentComponent, {data: {agentUUID}, panelClass: "main-popup"});
+    this.dialog.open(AgentDetailPopupComponent, {data: {agentUUID}, panelClass: "main-popup"});
   }
 
   public convertStringChipName(str: string): string {
