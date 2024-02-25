@@ -63,7 +63,7 @@ export class AppComponent {
           this.isLoggedIn = this.keycloakService.isLoggedIn();
         }
         if (event.type == KeycloakEventType.OnTokenExpired) {
-          this.keycloakService.updateToken(20);
+          this.keycloakService.updateToken(30);
         }
       }
     });

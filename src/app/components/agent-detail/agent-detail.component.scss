@@ -1,4 +1,24 @@
 .main-content {
+  height: 100%;
   width: calc(100% - 20px);
   margin: 10px;
+  display: flex;
 }
+
+.card-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.card-container-content {
+  height: 100%;
+  width: 100%;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+

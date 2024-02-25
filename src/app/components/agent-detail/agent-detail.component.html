@@ -1,4 +1,41 @@
-<app-loading-fullscreen *ngIf="this.dataLoaded"></app-loading-fullscreen>
+<app-loading-fullscreen *ngIf="!this.dataLoaded"></app-loading-fullscreen>
 
 <div *ngIf="dataLoaded" class="main-content">
+  <div class="card-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Device Information</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="info-row"><span class="label">UUID:</span> {{ uuid }}</div>
+        <div class="info-row"><span class="label">Name:</span> {{ name }}</div>
+        <!-- add other fields here... -->
+      </mat-card-content>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Advanced Details
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <span class="label">Last Connection Time:</span> {{ lastConnectionTime }}
+      </mat-expansion-panel>
+    </mat-card>
+  </div>
 </div>
+
+<!--
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Device Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div><b>UUID:</b> {{uuid}}</div>
+      <div><b>Name:</b> {{name}}</div>
+      <div><b>Last Connection Time:</b> {{lastConnectionTime}}</div>
+      <div><b>Registration Completed:</b> {{registrationCompleted ? 'Yes' : 'No'}}</div>
+</mat-card-content>
+</mat-card>
+-->

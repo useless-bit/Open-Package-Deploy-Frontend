@@ -2,6 +2,8 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .navigation-bar {
@@ -12,4 +14,9 @@
   width: 100%;
   justify-content: center;
   overflow-x: auto;
+}
+
+.component {
+  height: 100%;
+  overflow: hidden;
 }
