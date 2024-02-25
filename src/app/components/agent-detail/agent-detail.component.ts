@@ -24,6 +24,8 @@ import {MatButton} from "@angular/material/button";
 import {AgentEntity} from "../../service/api/entity/agentEntity";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../dialog-text-input/dialog-text-input.component";
+import {DialogTextInputData} from "../dialog-text-input/dialogTextInputData";
+import {AgentUpdateRequest} from "../../service/api/request/AgentUpdateRequest";
 
 @Component({
   selector: 'app-agent-detail',
@@ -63,7 +65,6 @@ export class AgentDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataLoaded = false;
     this.apiService.getAgent(this.agentUUID).then(response => {
       if (response) {
         this.agentEntity = response;
@@ -74,10 +75,14 @@ export class AgentDetailComponent implements OnInit {
 
   updateAgentName() {
     const dialogRef = this.dialog.open(DialogTextInputComponent, {
-      data: {agentName: this.agentEntity?.name, agentUUID: this.agentUUID},
+      data: new DialogTextInputData("Update name for Agent: " + this.agentEntity?.name,
+        "Enter new name:", "Cancel", "Update")
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
+    dialogRef.afterClosed().subscribe((result) => {
+      this.dataLoaded = false
+      this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequest(result)).then(() => {
+        this.ngOnInit();
+      })
     });
   }
 }

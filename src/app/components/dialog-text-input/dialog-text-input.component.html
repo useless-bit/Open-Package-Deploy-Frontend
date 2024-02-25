@@ -1,14 +1,14 @@
-<h2 mat-dialog-title>Update Name for Agent: {{ this.data.agentName }}</h2>
+<h2 mat-dialog-title>{{ dialogTextInputData.dialogTitle }}</h2>
 <mat-dialog-content>
-  <p>Enter new name:</p>
+  <p>{{ dialogTextInputData.dialogMessage }}</p>
   <mat-form-field>
     <input cdkFocusInitial [errorStateMatcher]="errorStateMatcher" [formControl]="formControl" matInput>
-    @if (formControl.hasError('required')) {
-      <mat-error>Name is <strong>required</strong></mat-error>
+    @if (formControl.hasError('pattern') || formControl.hasError('required')) {
+      <mat-error>Cannot be empty</mat-error>
     }
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="cancelUpdate()">Cancel</button>
-  <button mat-button (click)="updateName()">Update</button>
+  <button mat-button (click)="cancelButton()">Cancel</button>
+  <button mat-button (click)="acceptButton()">Update</button>
 </mat-dialog-actions>

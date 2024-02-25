@@ -11,10 +11,9 @@ import {MatError, MatFormField} from "@angular/material/form-field";
 import {FormControl, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {ApiService} from "../../service/api/api.service";
 import {NgIf} from "@angular/common";
 import {ErrorStateMatcher} from "@angular/material/core";
-import {AgentUpdateRequest} from "../../service/api/request/AgentUpdateRequest";
+import {DialogTextInputData} from "./dialogTextInputData";
 
 @Component({
   selector: 'app-dialog-text-input',
@@ -36,25 +35,22 @@ import {AgentUpdateRequest} from "../../service/api/request/AgentUpdateRequest";
   styleUrl: './dialog-text-input.component.scss'
 })
 export class DialogTextInputComponent {
-  formControl = new FormControl('', [Validators.required]);
+  formControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
   errorStateMatcher = new CustomErrorStateMatcher();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef: MatDialogRef<DialogTextInputComponent>,
-              private apiService: ApiService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public dialogTextInputData: DialogTextInputData,
+              public dialogRef: MatDialogRef<DialogTextInputComponent>) {
   }
 
-  cancelUpdate(): void {
+  cancelButton(): void {
     this.dialogRef.close();
   }
 
-  updateName() {
+  acceptButton(): void {
     this.formControl.markAllAsTouched();
     let name = this.formControl.value;
     if (this.formControl.valid && name) {
-      this.apiService.updateAgent(this.data.agentUUID, new AgentUpdateRequest(name)).then(() => {
-        this.dialogRef.close()
-      })
+      this.dialogRef.close(name);
     }
   }
 }
