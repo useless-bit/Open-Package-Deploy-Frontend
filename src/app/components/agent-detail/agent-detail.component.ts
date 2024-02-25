@@ -25,7 +25,7 @@ import {AgentEntity} from "../../service/api/entity/agentEntity";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../dialog-text-input/dialogTextInputData";
-import {AgentUpdateRequest} from "../../service/api/request/AgentUpdateRequest";
+import {AgentUpdateRequests} from "../../service/api/request/agentUpdateRequest";
 
 @Component({
   selector: 'app-agent-detail',
@@ -81,7 +81,7 @@ export class AgentDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequest(result)).then(() => {
+        this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequests(result)).then(() => {
           this.ngOnInit();
         })
       }

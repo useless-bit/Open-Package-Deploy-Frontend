@@ -5,7 +5,7 @@ import {AgentListResponse} from "./reponse/agentListResponse";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {ApiErrorResponse} from "./reponse/apiErrorResponse";
 import {AgentEntity} from "./entity/agentEntity";
-import {AgentUpdateRequest} from "./request/AgentUpdateRequest";
+import {AgentUpdateRequests} from "./request/agentUpdateRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +65,7 @@ export class ApiService {
     });
   }
 
-  public updateAgent(agentUUID: string, agentUpdateRequest: AgentUpdateRequest): Promise<void | null> {
+  public updateAgent(agentUUID: string, agentUpdateRequest: AgentUpdateRequests): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/agent/" + agentUUID, agentUpdateRequest).subscribe({
         next: () => {

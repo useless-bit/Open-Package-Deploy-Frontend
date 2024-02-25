@@ -1,4 +1,4 @@
-export class AgentUpdateRequest {
+export class AgentUpdateRequests {
   name: string;
 
 
