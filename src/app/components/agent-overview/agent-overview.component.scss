@@ -11,6 +11,11 @@
   overflow: auto;
 }
 
+.mat-mdc-row:hover {
+  background-color: var(--table-hover);
+}
+
+
 .table-row {
   cursor: pointer;
 }
@@ -20,7 +25,7 @@
   display: flex;
 
   mat-accordion {
-    width: 0%;
+    width: 0;
     flex: 1;
   }
 
