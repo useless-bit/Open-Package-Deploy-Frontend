@@ -34,6 +34,7 @@ import {NgSwitch, NgSwitchCase} from "@angular/common";
 })
 export class AgentDetailPopupComponent {
   fontStyleControl = new FormControl("page_one");
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
   }
 }

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogTextInputComponent } from './dialog-text-input.component';
+import {DialogTextInputComponent} from './dialog-text-input.component';
 
 describe('DialogTextInputComponent', () => {
   let component: DialogTextInputComponent;
@@ -10,8 +10,8 @@ describe('DialogTextInputComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DialogTextInputComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(DialogTextInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

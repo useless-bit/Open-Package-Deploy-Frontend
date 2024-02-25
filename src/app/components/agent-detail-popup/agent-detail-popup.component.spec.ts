@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AgentDetailPopupComponent } from './agent-detail-popup.component';
+import {AgentDetailPopupComponent} from './agent-detail-popup.component';
 
 describe('AgentDetailComponent', () => {
   let component: AgentDetailPopupComponent;
@@ -10,7 +10,7 @@ describe('AgentDetailComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AgentDetailPopupComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AgentDetailPopupComponent);
     component = fixture.componentInstance;

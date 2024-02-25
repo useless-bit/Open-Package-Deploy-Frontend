@@ -5,10 +5,12 @@
   margin-right: 10px;
   display: flex;
 }
+
 .card-container {
   height: 100%;
   width: 100%;
   overflow: auto;
+
   mat-expansion-panel {
     border: var(--popup-border);
   }
