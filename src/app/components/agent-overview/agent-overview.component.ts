@@ -143,7 +143,12 @@ export class AgentOverviewComponent implements OnInit {
   }
 
   public showDetailInfoPopup(agentUUID: string): void {
-    this.dialog.open(AgentDetailPopupComponent, {data: {agentUUID}, panelClass: "main-popup"});
+    this.dialog.open(AgentDetailPopupComponent, {
+      data: {agentUUID},
+      panelClass: "main-popup"
+    }).afterClosed().subscribe(() => {
+      this.refreshData();
+    });
   }
 
   public convertStringChipName(str: string): string {
@@ -171,6 +176,6 @@ export class AgentOverviewComponent implements OnInit {
   }
 
   openAddNewPopup() {
-    this.dialog.open(PlaceholderComponent);
+    this.dialog.open(PlaceholderComponent)
   }
 }

@@ -76,7 +76,7 @@ export class AgentDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogTextInputComponent, {
       data: {agentName: this.agentEntity?.name, agentUUID: this.agentUUID},
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.ngOnInit();
     });
   }
