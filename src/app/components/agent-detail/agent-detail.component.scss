@@ -32,3 +32,13 @@
   font-size: xx-large;
   margin: 10px;
 }
+
+.entries {
+  mat-list-item {
+    height: auto;
+  }
+
+  mat-divider {
+    margin-bottom: 20px;
+  }
+}

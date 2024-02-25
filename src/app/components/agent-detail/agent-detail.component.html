@@ -24,7 +24,30 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <span class="label">Last Connection Time:</span> {{ agentEntity.lastConnectionTime }}
+      <div class="entries">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>UUID</h4>
+            <p matLine>{{ agentEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Last time Agent connected</h4>
+            <p matLine>{{ agentEntity.lastConnectionTime }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Operating System</h4>
+            <p matLine>{{ agentEntity.operatingSystem + ": " + agentEntity.operatingSystemFamily + " " + agentEntity.operatingSystemVersion }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>CPU</h4>
+            <p matLine>{{ agentEntity.cpuName + " (" + agentEntity.cpuPhysicalCores + "/" + agentEntity.cpuLogicalCores + ")" }}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
     </mat-expansion-panel>
   </div>
 </div>

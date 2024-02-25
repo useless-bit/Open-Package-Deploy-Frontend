@@ -26,6 +26,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../dialog-text-input/dialogTextInputData";
 import {AgentUpdateRequests} from "../../service/api/request/agentUpdateRequest";
+import {MatLine} from "@angular/material/core";
 
 @Component({
   selector: 'app-agent-detail',
@@ -49,7 +50,8 @@ import {AgentUpdateRequests} from "../../service/api/request/agentUpdateRequest"
     MatButton,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
-    MatExpansionPanelContent
+    MatExpansionPanelContent,
+    MatLine
   ],
   templateUrl: './agent-detail.component.html',
   styleUrl: './agent-detail.component.scss'
