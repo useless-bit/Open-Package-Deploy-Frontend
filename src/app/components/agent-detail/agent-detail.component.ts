@@ -79,10 +79,12 @@ export class AgentDetailComponent implements OnInit {
         "Enter new name:", "Cancel", "Update")
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.dataLoaded = false
-      this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequest(result)).then(() => {
-        this.ngOnInit();
-      })
+      if (result) {
+        this.dataLoaded = false
+        this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequest(result)).then(() => {
+          this.ngOnInit();
+        })
+      }
     });
   }
 }
