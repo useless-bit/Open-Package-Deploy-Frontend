@@ -27,7 +27,7 @@ export class AgentEntity {
     this.operatingSystemVersion = this.formatName(agentData.operatingSystemVersion);
     this.operatingSystemCodeName = this.formatName(agentData.operatingSystemCodeName);
     this.operatingSystemBuildNumber = this.formatName(agentData.operatingSystemBuildNumber);
-    this.memory = this.formatMemory(agentData.memory);
+    this.memory = this.formatStorage(agentData.memory);
     this.cpuName = this.formatName(agentData.cpuName);
     this.cpuArchitecture = this.formatName(agentData.cpuArchitecture);
     this.cpuLogicalCores = this.formatName(agentData.cpuLogicalCores);
@@ -59,7 +59,7 @@ export class AgentEntity {
     return "N/A"
   }
 
-  formatMemory(memory: string): string {
+  formatStorage(memory: string): string {
     if (memory) {
       const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
       return memoryInGigabytes.toFixed(2).toString() + " GB";

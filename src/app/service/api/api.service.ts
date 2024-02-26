@@ -6,6 +6,8 @@ import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {ApiErrorResponse} from "./reponse/apiErrorResponse";
 import {AgentEntity} from "./entity/agentEntity";
 import {AgentUpdateRequests} from "./request/agentUpdateRequest";
+import {PackageListResponse} from "./reponse/packageListResponse";
+import {PackageEntity} from "./entity/packageEntity";
 
 @Injectable({
   providedIn: 'root'
@@ -93,4 +95,31 @@ export class ApiService {
     });
   }
 
+  public getAllPackages(): Promise<PackageListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/package").subscribe({
+        next: value => {
+          resolve(new PackageListResponse(value));
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public getPackage(packageUUID: string): Promise<PackageEntity | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/package/" + packageUUID).subscribe({
+        next: value => {
+          resolve(new PackageEntity(value));
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
 }

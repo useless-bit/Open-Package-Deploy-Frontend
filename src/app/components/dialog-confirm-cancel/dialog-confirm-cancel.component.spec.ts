@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogConfirmCancelComponent } from './dialog-confirm-cancel.component';
+import {DialogConfirmCancelComponent} from './dialog-confirm-cancel.component';
 
 describe('DialogConfirmCancelComponent', () => {
   let component: DialogConfirmCancelComponent;
@@ -10,8 +10,8 @@ describe('DialogConfirmCancelComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DialogConfirmCancelComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(DialogConfirmCancelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

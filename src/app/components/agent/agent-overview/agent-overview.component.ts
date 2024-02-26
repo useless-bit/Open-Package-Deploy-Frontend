@@ -12,10 +12,10 @@ import {
   MatTable,
   MatTableDataSource
 } from "@angular/material/table";
-import {AgentEntity} from "../../service/api/entity/agentEntity";
-import {ApiService} from "../../service/api/api.service";
+import {AgentEntity} from "../../../service/api/entity/agentEntity";
+import {ApiService} from "../../../service/api/api.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {LoadingFullscreenComponent} from "../loading-fullscreen/loading-fullscreen.component";
+import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
@@ -24,7 +24,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {PlaceholderComponent} from "../placeholder/placeholder.component";
+import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";

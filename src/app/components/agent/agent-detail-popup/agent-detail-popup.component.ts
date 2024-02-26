@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {AgentDetailComponent} from "../agent-detail/agent-detail.component";
-import {PlaceholderComponent} from "../placeholder/placeholder.component";
+import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {MatStep, MatStepContent, MatStepLabel, MatStepper, MatStepperNext} from "@angular/material/stepper";
 import {MatButton} from "@angular/material/button";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";

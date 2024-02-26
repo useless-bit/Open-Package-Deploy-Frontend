@@ -1,0 +1,41 @@
+<app-loading-fullscreen *ngIf="!this.dataLoaded"></app-loading-fullscreen>
+
+<div *ngIf="dataLoaded && packageEntity" class="main-content">
+  <div class="card-container">
+    <div class="package-name">
+      {{ packageEntity.name }}
+    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="package-options-buttons">
+        <button mat-raised-button (click)="updatePackageName()">Rename</button>
+        <button mat-raised-button (click)="deletePackage()">Delete</button>
+      </div>
+    </mat-expansion-panel>
+
+    <!--  general infos  -->
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="entries">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>UUID</h4>
+            <p matLine>{{ packageEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+
+    </mat-expansion-panel>
+
+  </div>
+</div>

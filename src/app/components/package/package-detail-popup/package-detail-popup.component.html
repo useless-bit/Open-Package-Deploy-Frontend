@@ -1,0 +1,16 @@
+<div class="main-content">
+
+  <div class="navigation-bar">
+    <mat-button-toggle-group class="navigation-bar-options" [formControl]="fontStyleControl">
+      <mat-button-toggle value="page_one">Details</mat-button-toggle>
+      <mat-button-toggle value="page_two">Agents</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="component">
+    <ng-container [ngSwitch]="fontStyleControl.value">
+      <app-package-detail *ngSwitchCase="'page_one'" [packageUUID]=this.data.packageUUID></app-package-detail>
+      <app-placeholder *ngSwitchCase="'page_two'"></app-placeholder>
+    </ng-container>
+  </div>
+</div>
