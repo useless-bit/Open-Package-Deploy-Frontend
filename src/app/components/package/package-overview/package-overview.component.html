@@ -25,6 +25,10 @@
                            [selected]="isColumnSelected(option)">{{ this.convertStringChipName(option) }}
           </mat-chip-option>
         </mat-chip-listbox>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-slide-toggle (change)="hideDeletedPackagesSliderChange($event)" [ngModel]="isHideDeletedPackagesSliderChecked">Hide packages marked as deleted</mat-slide-toggle>
       </mat-expansion-panel>
     </mat-accordion>
     <button mat-raised-button (click)="openAddNewPopup()">

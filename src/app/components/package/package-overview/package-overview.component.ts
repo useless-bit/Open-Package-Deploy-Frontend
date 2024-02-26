@@ -30,6 +30,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageDetailPopupComponent} from "../package-detail-popup/package-detail-popup.component";
+import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-package-overview',
@@ -65,7 +67,9 @@ import {PackageDetailPopupComponent} from "../package-detail-popup/package-detai
     NgForOf,
     MatColumnDef,
     MatSortHeader,
-    MatSuffix
+    MatSuffix,
+    MatSlideToggle,
+    FormsModule
   ],
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss'
@@ -87,11 +91,13 @@ export class PackageOverviewComponent {
 
   private localStorageNameSelectedColumns: string = "selectedColumns_PackageOverview";
   private packageInstance: PackageEntity = new PackageEntity(0);
+  private packageResponse: PackageEntity[] | null = null;
 
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];
   public packageKeys = Object.keys(this.packageInstance) as Array<keyof PackageEntity>
   public searchLoadingBar: boolean = false;
+  public isHideDeletedPackagesSliderChecked: boolean = true;
 
   constructor(private apiService: ApiService,
               private dialog: MatDialog,
@@ -108,12 +114,25 @@ export class PackageOverviewComponent {
     }
     this.apiService.getAllPackages().then(response => {
       if (response) {
-        this.dataSource.data = response.packages;
+        this.packageResponse = response.packages;
+        this.filterData();
         this.dataSource.filter = "";
         this.dataLoaded = true;
         this.searchLoadingBar = false;
       }
     });
+  }
+
+  filterData() {
+    if (this.packageResponse) {
+      let filteredPackages = this.packageResponse;
+
+      if (this.isHideDeletedPackagesSliderChecked) {
+        filteredPackages = filteredPackages.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
+      }
+
+      this.dataSource.data = filteredPackages;
+    }
   }
 
   applySearch(event: Event) {
@@ -180,4 +199,8 @@ export class PackageOverviewComponent {
     this.dialog.open(PlaceholderComponent)
   }
 
+  hideDeletedPackagesSliderChange(event: MatSlideToggleChange) {
+    this.isHideDeletedPackagesSliderChecked = event.checked;
+    this.filterData();
+  }
 }
