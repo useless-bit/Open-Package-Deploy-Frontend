@@ -36,7 +36,11 @@
 .entries {
   mat-list-item {
     height: auto;
+    p {
+      overflow: auto;
+    }
   }
+
 
   mat-divider {
     margin-bottom: 20px;
