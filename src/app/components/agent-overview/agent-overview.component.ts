@@ -29,6 +29,7 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {AgentDetailPopupComponent} from "../agent-detail-popup/agent-detail-popup.component";
+import {MatDivider} from "@angular/material/divider";
 
 @Component({
   selector: 'app-agent-overview',
@@ -64,7 +65,8 @@ import {AgentDetailPopupComponent} from "../agent-detail-popup/agent-detail-popu
     MatTooltip,
     MatPaginator,
     MatSort,
-    MatSortHeader
+    MatSortHeader,
+    MatDivider
   ],
   templateUrl: './agent-overview.component.html',
   styleUrl: './agent-overview.component.scss'
