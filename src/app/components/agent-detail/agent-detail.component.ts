@@ -22,11 +22,13 @@ import {
 } from "@angular/material/expansion";
 import {MatButton} from "@angular/material/button";
 import {AgentEntity} from "../../service/api/entity/agentEntity";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../dialog-text-input/dialogTextInputData";
 import {AgentUpdateRequests} from "../../service/api/request/agentUpdateRequest";
 import {MatLine} from "@angular/material/core";
+import {DialogConfirmCancelComponent} from "../dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {DialogConfirmCancelInput} from "../dialog-confirm-cancel/dialogConfirmCancelInput";
 
 @Component({
   selector: 'app-agent-detail',
@@ -63,7 +65,8 @@ export class AgentDetailComponent implements OnInit {
   public agentEntity: AgentEntity | null = null;
 
   constructor(private apiService: ApiService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              public dialogRef: MatDialogRef<AgentDetailComponent>) {
   }
 
   ngOnInit() {
@@ -85,6 +88,21 @@ export class AgentDetailComponent implements OnInit {
         this.dataLoaded = false
         this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequests(result)).then(() => {
           this.ngOnInit();
+        })
+      }
+    });
+  }
+
+  deleteAgent() {
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Delete Agent: " + this.agentEntity?.name,
+        "Do you really want to delete the agent? The Agent needs to be enrolled again", "Cancel", "Delete")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false
+        this.apiService.deleteAgent(this.agentUUID).then(() => {
+          this.dialogRef.close()
         })
       }
     });
