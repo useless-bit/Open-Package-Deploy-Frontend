@@ -75,9 +75,9 @@ export class PackageDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        //this.apiService.deleteAgent(this.packageUUID).then(() => {
-        //  this.dialogRef.close()
-        //})
+        this.apiService.deletePackage(this.packageUUID).then(() => {
+          this.dialogRef.close()
+        })
       }
     });
   }

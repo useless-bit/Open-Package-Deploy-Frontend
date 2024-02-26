@@ -122,4 +122,18 @@ export class ApiService {
       });
     });
   }
+
+  public deletePackage(packageUUID: string): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/package/" + packageUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
 }
