@@ -24,8 +24,6 @@ export class AgentEntity {
     this.lastConnectionTime = this.formatDate(agentData.lastConnectionTime);
     this.registrationCompleted = agentData.registrationCompleted;
     this.operatingSystem = agentData.operatingSystem;
-    console.log(this.name)
-    console.log(this.operatingSystem == OperatingSystem.Linux)
     this.operatingSystemFamily = this.formatName(agentData.operatingSystemFamily);
     this.operatingSystemArchitecture = this.formatName(agentData.operatingSystemArchitecture);
     this.operatingSystemVersion = this.formatName(agentData.operatingSystemVersion);

@@ -27,11 +27,11 @@ import {MatDivider} from "@angular/material/divider";
 import {MatPaginator} from "@angular/material/paginator";
 import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageDetailPopupComponent} from "../package-detail-popup/package-detail-popup.component";
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
+import {PackageUploadComponent} from "../package-upload/package-upload.component";
 
 @Component({
   selector: 'app-package-overview',
@@ -182,7 +182,8 @@ export class PackageOverviewComponent {
     this.searchLoadingBar = true;
     this.apiService.getAllPackages().then(response => {
       if (response) {
-        this.dataSource.data = response.packages;
+        this.packageResponse = response.packages;
+        this.filterData();
         this.searchLoadingBar = false;
       }
     });
@@ -196,7 +197,10 @@ export class PackageOverviewComponent {
   }
 
   openAddNewPopup() {
-    this.dialog.open(PlaceholderComponent)
+    this.dialog.open(PackageUploadComponent, {panelClass: "main-popup"})
+      .afterClosed().subscribe(() => {
+      this.refreshData();
+    });
   }
 
   hideDeletedPackagesSliderChange(event: MatSlideToggleChange) {
