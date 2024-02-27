@@ -8,8 +8,7 @@ import {AgentEntity} from "./entity/agentEntity";
 import {AgentUpdateRequests} from "./request/agentUpdateRequest";
 import {PackageListResponse} from "./reponse/packageListResponse";
 import {PackageEntity} from "./entity/packageEntity";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
-import {catchError, Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -140,11 +139,9 @@ export class ApiService {
   }
 
   public addNewPackage(formData: FormData): Observable<Object | null> {
-    return this.httpClient.post<Object|null>(this.variableService.backendURL + "/api/package", formData, {reportProgress: true, observe: "events"})
-      .pipe(
-        catchError((error) => {
-          this.errorHandling(error);
-          return of(null);
-        })
-      );
-  }}
+    return this.httpClient.post<Object | null>(this.variableService.backendURL + "/api/package", formData, {
+      reportProgress: true,
+      observe: "events"
+    });
+  }
+}

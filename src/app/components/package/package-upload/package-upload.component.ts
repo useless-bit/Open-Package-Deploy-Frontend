@@ -38,18 +38,18 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class PackageUploadComponent implements OnInit {
   public uploadProgress: number | null = null;
-  public fileSelected: boolean = false;
   public uploadSub: Subscription | null = null;
-  public file: File | null = null;
+  public uploadErrorMessage: string | null = null;
 
+  public file: File | null = null;
   formControlNameInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
   formControlChecksumInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
   formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+
+
   formControlFileInput: FormControl = new FormControl({
     value: '', disabled: true
   }, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-
-
   protected readonly OperatingSystem = OperatingSystem;
   protected readonly Object = Object;
 
@@ -73,6 +73,7 @@ export class PackageUploadComponent implements OnInit {
   }
 
   startUpload() {
+    this.uploadErrorMessage = null;
     this.formControlNameInput.markAllAsTouched();
     this.formControlChecksumInput.markAllAsTouched();
     this.formControlOsSelect.markAllAsTouched();
@@ -87,11 +88,17 @@ export class PackageUploadComponent implements OnInit {
       formData.append("multipartFile", this.file)
       let upload = this.apiService.addNewPackage(formData);
 
-      this.uploadSub = upload.subscribe((event: any) => {
-        if (event.type == HttpEventType.UploadProgress) {
-          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-        } else if (event.type == HttpEventType.ResponseHeader && event.status == HttpStatusCode.Ok) {
-          this.dialogRef.close();
+      this.uploadSub = upload.subscribe({
+        next: (value: any) => {
+          if (value.type == HttpEventType.UploadProgress) {
+            this.uploadProgress = Math.round(100 * (value.loaded / value.total));
+          } else if (value.type == HttpEventType.ResponseHeader && value.status == HttpStatusCode.Ok) {
+            this.dialogRef.close();
+          }
+        },
+        error: (error: any) => {
+          this.uploadErrorMessage = error.error.message;
+          this.cancelUpload();
         }
       });
 

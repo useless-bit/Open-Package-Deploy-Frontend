@@ -26,19 +26,28 @@
         <mat-error>Cannot be empty</mat-error>
       }
     </mat-form-field>
-    <button mat-flat-button [disabled]="uploadSub" (click)="fileUpload.click()">Select File</button>
-    <mat-form-field>
-      <input [hidden]="true" accept=".zip" type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-      <input matInput [formControl]="formControlFileInput">
-      <mat-hint *ngIf="!file">Cannot be empty</mat-hint>
-    </mat-form-field>
+    <div class="file-upload">
+      <button mat-flat-button [disabled]="uploadSub" (click)="fileUpload.click()">Select File</button>
+      <mat-form-field>
+        <input [hidden]="true" accept=".zip" type="file" class="file-input" (change)="onFileSelected($event)"
+               #fileUpload>
+        <input matInput [formControl]="formControlFileInput">
+        <mat-hint *ngIf="!file">Cannot be empty</mat-hint>
+      </mat-form-field>
+    </div>
   </div>
-  <button mat-raised-button [disabled]="uploadSub" (click)="startUpload()">Upload</button>
-  <button mat-raised-button [disabled]="!uploadSub" (click)="cancelUpload()">Cancel Upload</button>
-  <div>
-    <mat-progress-bar class="progress-bar" mode="determinate"
-                      [value]="uploadProgress" *ngIf="uploadProgress">
-
-    </mat-progress-bar>
+  @if (uploadErrorMessage) {
+    <mat-hint>Error: {{ uploadErrorMessage }}</mat-hint>
+  }  <div class="buttons">
+    <button mat-raised-button [disabled]="uploadSub" (click)="startUpload()">Upload</button>
+    <button mat-raised-button [disabled]="!uploadSub" (click)="cancelUpload()">Cancel Upload</button>
+  </div>
+  <div *ngIf="uploadProgress">
+    @if (uploadProgress == 100) {
+      <mat-progress-bar class="progress-bar" mode="indeterminate"/>
+    } @else {
+      <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"/>
+    }
+    {{ uploadProgress }} / 100 %
   </div>
 </div>
