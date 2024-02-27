@@ -1,0 +1,51 @@
+<app-loading-fullscreen *ngIf="!this.dataLoaded"></app-loading-fullscreen>
+
+<div *ngIf="dataLoaded" class="main-content">
+  <mat-form-field class="search-field">
+    <mat-label>Search</mat-label>
+    <input #searchInputField matInput autofocus (keyup)="applySearch($event)">
+    <button matSuffix mat-icon-button matTooltip="Clear search" (click)="clearTextField()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button matSuffix mat-icon-button matTooltip="Reload data" (click)="refreshData()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
+  </mat-form-field>
+
+  <div class="option-bar">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Filter Options
+        </mat-expansion-panel-header>
+        <mat-chip-listbox multiple>
+          <mat-chip-option *ngFor="let option of this.deploymentKeys" [value]="option"
+                           (click)="changeSelectedColumns(option)"
+                           [selected]="isColumnSelected(option)">{{ this.convertStringChipName(option) }}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <button mat-raised-button (click)="openAddNewPopup()">
+      Add Deployment
+    </button>
+  </div>
+  <br>
+
+  <div class="table-container">
+    <table mat-table matSort [dataSource]="dataSource">
+      <ng-container *ngFor="let column of this.deploymentKeys" [matColumnDef]="column">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> {{ this.convertStringChipName(column) }}</th>
+        <td mat-cell *matCellDef="let deployment">{{ deployment[column] }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: selectedColumns;" (click)="showDetailInfoPopup(row.uuid)"
+          class="table-row"></tr>
+    </table>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-paginator #tablePaginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+                 showFirstLastButtons=""></mat-paginator>
+</div>

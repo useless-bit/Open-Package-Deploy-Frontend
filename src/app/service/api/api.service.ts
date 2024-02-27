@@ -10,6 +10,7 @@ import {PackageListResponse} from "./reponse/packageListResponse";
 import {PackageEntity} from "./entity/packageEntity";
 import {Observable} from "rxjs";
 import {PackageUpdateRequest} from "./request/packageUpdateRequest";
+import {DeploymentListResponse} from "./reponse/deploymentListResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -151,6 +152,20 @@ export class ApiService {
       this.httpClient.patch(this.variableService.backendURL + "/api/package/" + packageUUID, packageUpdateRequest).subscribe({
         next: () => {
           resolve();
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public getAllDeployments(): Promise<DeploymentListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/deployment").subscribe({
+        next: value => {
+          resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
           this.errorHandling(error);
