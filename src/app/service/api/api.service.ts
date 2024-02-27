@@ -9,6 +9,7 @@ import {AgentUpdateRequests} from "./request/agentUpdateRequest";
 import {PackageListResponse} from "./reponse/packageListResponse";
 import {PackageEntity} from "./entity/packageEntity";
 import {Observable} from "rxjs";
+import {PackageUpdateRequest} from "./request/packageUpdateRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -144,4 +145,19 @@ export class ApiService {
       observe: "events"
     });
   }
+
+  public updatePackage(packageUUID: string, packageUpdateRequest: PackageUpdateRequest): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/package/" + packageUUID, packageUpdateRequest).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
 }

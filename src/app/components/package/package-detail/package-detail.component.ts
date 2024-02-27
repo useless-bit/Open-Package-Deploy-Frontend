@@ -13,6 +13,7 @@ import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
+import {PackageUpdateRequest} from "../../../service/api/request/packageUpdateRequest";
 
 @Component({
   selector: 'app-package-detail',
@@ -60,9 +61,9 @@ export class PackageDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        //this.apiService.updateAgent(this.packageUUID, new AgentUpdateRequests(result)).then(() => {
-        //  this.ngOnInit();
-        //})
+        this.apiService.updatePackage(this.packageUUID, new PackageUpdateRequest(result)).then(() => {
+          this.ngOnInit();
+        })
       }
     });
   }
