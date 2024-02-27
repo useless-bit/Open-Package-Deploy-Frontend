@@ -1,9 +1,11 @@
+import {OperatingSystem} from "./operatingSystem";
+
 export class AgentEntity {
   uuid: string;
   name: string;
   lastConnectionTime: string;
   registrationCompleted: boolean;
-  operatingSystem: string;
+  operatingSystem: OperatingSystem;
   operatingSystemFamily: string;
   operatingSystemArchitecture: string;
   operatingSystemVersion: string;
@@ -21,7 +23,9 @@ export class AgentEntity {
     this.name = agentData.name;
     this.lastConnectionTime = this.formatDate(agentData.lastConnectionTime);
     this.registrationCompleted = agentData.registrationCompleted;
-    this.operatingSystem = this.formatOsName(agentData.operatingSystem);
+    this.operatingSystem = agentData.operatingSystem;
+    console.log(this.name)
+    console.log(this.operatingSystem == OperatingSystem.Linux)
     this.operatingSystemFamily = this.formatName(agentData.operatingSystemFamily);
     this.operatingSystemArchitecture = this.formatName(agentData.operatingSystemArchitecture);
     this.operatingSystemVersion = this.formatName(agentData.operatingSystemVersion);
@@ -63,13 +67,6 @@ export class AgentEntity {
     if (memory) {
       const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
       return memoryInGigabytes.toFixed(2).toString() + " GB";
-    }
-    return "N/A"
-  }
-
-  formatOsName(osName: string): string {
-    if (osName && osName != "UNKNOWN") {
-      return osName
     }
     return "N/A"
   }
