@@ -76,6 +76,21 @@ import {PackageUploadComponent} from "../package-upload/package-upload.component
 })
 export class PackageOverviewComponent {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
+  public dataLoaded: boolean = false;
+  public selectedColumns: String[] = ['name'];
+  public searchLoadingBar: boolean = false;
+  public isHideDeletedPackagesSliderChecked: boolean = true;
+  private localStorageNameSelectedColumns: string = "selectedColumns_PackageOverview";
+  private packageInstance: PackageEntity = new PackageEntity(0);
+  public packageKeys = Object.keys(this.packageInstance) as Array<keyof PackageEntity>
+  private packageResponse: PackageEntity[] | null = null;
+
+  constructor(private apiService: ApiService,
+              private dialog: MatDialog,
+              public dataSource: MatTableDataSource<PackageEntity>) {
+    this.dataSource = dataSource;
+    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
+  }
 
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
@@ -87,23 +102,6 @@ export class PackageOverviewComponent {
     if (sort) {
       this.dataSource.sort = sort;
     }
-  }
-
-  private localStorageNameSelectedColumns: string = "selectedColumns_PackageOverview";
-  private packageInstance: PackageEntity = new PackageEntity(0);
-  private packageResponse: PackageEntity[] | null = null;
-
-  public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['name'];
-  public packageKeys = Object.keys(this.packageInstance) as Array<keyof PackageEntity>
-  public searchLoadingBar: boolean = false;
-  public isHideDeletedPackagesSliderChecked: boolean = true;
-
-  constructor(private apiService: ApiService,
-              private dialog: MatDialog,
-              public dataSource: MatTableDataSource<PackageEntity>) {
-    this.dataSource = dataSource;
-    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   ngOnInit() {

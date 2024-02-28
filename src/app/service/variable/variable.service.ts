@@ -6,34 +6,38 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class VariableService {
+  constructor(private httpClient: HttpClient) {
+    this.loadVariables().then()
+  }
+
   private _backendURL!: string
-  private _frontendURL!: string
-  private _keycloakRealm!: string
-  private _keycloakUrl!: string
-  private _keycloakClientId!: string
 
   get backendURL() {
     return this._backendURL;
   }
 
+  private _frontendURL!: string
+
   get frontendURL() {
     return this._frontendURL;
   }
+
+  private _keycloakRealm!: string
 
   get keycloakRealm() {
     return this._keycloakRealm;
   }
 
+  private _keycloakUrl!: string
+
   get keycloakUrl() {
     return this._keycloakUrl;
   }
 
+  private _keycloakClientId!: string
+
   get keycloakClientId() {
     return this._keycloakClientId;
-  }
-
-  constructor(private httpClient: HttpClient) {
-    this.loadVariables().then()
   }
 
   public async loadVariables(): Promise<void> {

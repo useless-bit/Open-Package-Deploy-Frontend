@@ -3,11 +3,11 @@
 <div *ngIf="dataLoaded" class="main-content">
   <mat-form-field class="search-field">
     <mat-label>Search</mat-label>
-    <input #searchInputField matInput autofocus (keyup)="applySearch($event)">
-    <button matSuffix mat-icon-button matTooltip="Clear search" (click)="clearTextField()">
+    <input #searchInputField (keyup)="applySearch($event)" autofocus matInput>
+    <button (click)="clearTextField()" mat-icon-button matSuffix matTooltip="Clear search">
       <mat-icon>close</mat-icon>
     </button>
-    <button matSuffix mat-icon-button matTooltip="Reload data" (click)="refreshData()">
+    <button (click)="refreshData()" mat-icon-button matSuffix matTooltip="Reload data">
       <mat-icon>refresh</mat-icon>
     </button>
     <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
@@ -20,29 +20,29 @@
           Filter Options
         </mat-expansion-panel-header>
         <mat-chip-listbox multiple>
-          <mat-chip-option *ngFor="let option of this.deploymentKeys" [value]="option"
-                           (click)="changeSelectedColumns(option)"
-                           [selected]="isColumnSelected(option)">{{ this.convertStringChipName(option) }}
+          <mat-chip-option (click)="changeSelectedColumns(option)" *ngFor="let option of this.deploymentKeys"
+                           [selected]="isColumnSelected(option)"
+                           [value]="option">{{ this.convertStringChipName(option) }}
           </mat-chip-option>
         </mat-chip-listbox>
       </mat-expansion-panel>
     </mat-accordion>
-    <button mat-raised-button (click)="openAddNewPopup()">
+    <button (click)="openAddNewPopup()" mat-raised-button>
       Add Deployment
     </button>
   </div>
   <br>
 
   <div class="table-container">
-    <table mat-table matSort [dataSource]="dataSource">
+    <table [dataSource]="dataSource" mat-table matSort>
       <ng-container *ngFor="let column of this.deploymentKeys" [matColumnDef]="column">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> {{ this.convertStringChipName(column) }}</th>
-        <td mat-cell *matCellDef="let deployment">{{ deployment[column] }}</td>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ this.convertStringChipName(column) }}</th>
+        <td *matCellDef="let deployment" mat-cell>{{ deployment[column] }}</td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: selectedColumns;" (click)="showDetailInfoPopup(row.uuid)"
-          class="table-row"></tr>
+      <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
+      <tr (click)="showDetailInfoPopup(row.uuid)" *matRowDef="let row; columns: selectedColumns;" class="table-row"
+          mat-row></tr>
     </table>
   </div>
   <mat-divider></mat-divider>

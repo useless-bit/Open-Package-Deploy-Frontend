@@ -1,11 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
-import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {ApiService} from "../../../service/api/api.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
-import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
-import {AgentUpdateRequests} from "../../../service/api/request/agentUpdateRequest";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";

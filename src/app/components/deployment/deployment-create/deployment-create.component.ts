@@ -41,9 +41,6 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
   styleUrl: './deployment-create.component.scss'
 })
 export class DeploymentCreateComponent implements OnInit {
-  protected readonly OperatingSystem = OperatingSystem;
-  protected readonly Object = Object;
-
   public dataLoaded: boolean = false;
   public agentList: AgentEntity[] | null = null;
   public filteredAgents: AgentEntity[] | null = null;
@@ -56,6 +53,8 @@ export class DeploymentCreateComponent implements OnInit {
   formControlAgentSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
   formControlAgentSelectSearch: FormControl = new FormControl('');
   formControlExpectedReturnValueInput: FormControl = new FormControl('');
+  protected readonly OperatingSystem = OperatingSystem;
+  protected readonly Object = Object;
 
   constructor(private apiService: ApiService,
               public dialogRef: MatDialogRef<DeploymentCreateComponent>) {
@@ -75,8 +74,12 @@ export class DeploymentCreateComponent implements OnInit {
         }
       });
     });
-    this.formControlAgentSelectSearch.valueChanges.subscribe(() => {this.filterAgents();})
-    this.formControlPackageSelectSearch.valueChanges.subscribe(() => {this.filterPackages();})
+    this.formControlAgentSelectSearch.valueChanges.subscribe(() => {
+      this.filterAgents();
+    })
+    this.formControlPackageSelectSearch.valueChanges.subscribe(() => {
+      this.filterPackages();
+    })
   }
 
   createDeployment() {

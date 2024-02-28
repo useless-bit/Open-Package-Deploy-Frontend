@@ -72,6 +72,19 @@ import {DeploymentCreateComponent} from "../deployment-create/deployment-create.
 })
 export class DeploymentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
+  public dataLoaded: boolean = false;
+  public selectedColumns: String[] = ['agentUuid', 'packageUuid'];
+  public searchLoadingBar: boolean = false;
+  private localStorageNameSelectedColumns: string = "selectedColumns_DeploymentOverview";
+  private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);
+  public deploymentKeys = Object.keys(this.deploymentInstance) as Array<keyof DeploymentEntity>
+
+  constructor(private apiService: ApiService,
+              private dialog: MatDialog,
+              public dataSource: MatTableDataSource<DeploymentEntity>) {
+    this.dataSource = dataSource;
+    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
+  }
 
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
@@ -83,21 +96,6 @@ export class DeploymentOverviewComponent implements OnInit {
     if (sort) {
       this.dataSource.sort = sort;
     }
-  }
-
-  private localStorageNameSelectedColumns: string = "selectedColumns_DeploymentOverview";
-  private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);
-
-  public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['agentUuid', 'packageUuid'];
-  public deploymentKeys = Object.keys(this.deploymentInstance) as Array<keyof DeploymentEntity>
-  public searchLoadingBar: boolean = false;
-
-  constructor(private apiService: ApiService,
-              private dialog: MatDialog,
-              public dataSource: MatTableDataSource<DeploymentEntity>) {
-    this.dataSource = dataSource;
-    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   ngOnInit() {

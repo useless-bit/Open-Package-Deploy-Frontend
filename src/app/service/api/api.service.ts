@@ -24,25 +24,6 @@ export class ApiService {
               private snackbar: MatSnackBar) {
   }
 
-  private errorHandling(data: HttpErrorResponse) {
-    const snackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
-    snackBarConfig.verticalPosition = 'top';
-    snackBarConfig.horizontalPosition = 'right';
-    snackBarConfig.duration = 5000;
-    snackBarConfig.panelClass = ["notification", "error"]
-    if (data.status == 0) {
-      this.snackbar.open("Server connection Error", "", {duration: 5000, panelClass: "notification-error"});
-    } else if (data.status == 400) {
-      const apiErrorResponse = data.error as ApiErrorResponse;
-      this.snackbar.open(apiErrorResponse.message, "", {
-        duration: 5000,
-        panelClass: "notification-error"
-      });
-    } else {
-      this.snackbar.open("Error: " + data.status, "", snackBarConfig);
-    }
-  }
-
   // Agent
   public getAllAgents(): Promise<AgentListResponse | null> {
     return new Promise((resolve, reject) => {
@@ -217,5 +198,24 @@ export class ApiService {
         }
       });
     });
+  }
+
+  private errorHandling(data: HttpErrorResponse) {
+    const snackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
+    snackBarConfig.verticalPosition = 'top';
+    snackBarConfig.horizontalPosition = 'right';
+    snackBarConfig.duration = 5000;
+    snackBarConfig.panelClass = ["notification", "error"]
+    if (data.status == 0) {
+      this.snackbar.open("Server connection Error", "", {duration: 5000, panelClass: "notification-error"});
+    } else if (data.status == 400) {
+      const apiErrorResponse = data.error as ApiErrorResponse;
+      this.snackbar.open(apiErrorResponse.message, "", {
+        duration: 5000,
+        panelClass: "notification-error"
+      });
+    } else {
+      this.snackbar.open("Error: " + data.status, "", snackBarConfig);
+    }
   }
 }

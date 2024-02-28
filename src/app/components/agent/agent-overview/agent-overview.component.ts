@@ -73,6 +73,19 @@ import {MatDivider} from "@angular/material/divider";
 })
 export class AgentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
+  public dataLoaded: boolean = false;
+  public selectedColumns: String[] = ['name'];
+  public searchLoadingBar: boolean = false;
+  private localStorageNameSelectedColumns: string = "selectedColumns_AgentOverview";
+  private agentInstance: AgentEntity = new AgentEntity(0);
+  public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
+
+  constructor(private apiService: ApiService,
+              private dialog: MatDialog,
+              public dataSource: MatTableDataSource<AgentEntity>) {
+    this.dataSource = dataSource;
+    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
+  }
 
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
@@ -84,21 +97,6 @@ export class AgentOverviewComponent implements OnInit {
     if (sort) {
       this.dataSource.sort = sort;
     }
-  }
-
-  private localStorageNameSelectedColumns: string = "selectedColumns_AgentOverview";
-  private agentInstance: AgentEntity = new AgentEntity(0);
-
-  public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['name'];
-  public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
-  public searchLoadingBar: boolean = false;
-
-  constructor(private apiService: ApiService,
-              private dialog: MatDialog,
-              public dataSource: MatTableDataSource<AgentEntity>) {
-    this.dataSource = dataSource;
-    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   ngOnInit() {

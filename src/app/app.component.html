@@ -1,13 +1,13 @@
-<mat-drawer-container [class.hide]="appLoaded && isLoggedIn" class="container" autosize>
+<mat-drawer-container [class.hide]="appLoaded && isLoggedIn" autosize class="container">
   <app-loading-fullscreen></app-loading-fullscreen>
 </mat-drawer-container>
 
-<mat-drawer-container [class.hide]="!appLoaded || !isLoggedIn" class="container" autosize>
-  <mat-drawer #matDrawer class="mat-drawer" [mode]="sidenavMode">
+<mat-drawer-container [class.hide]="!appLoaded || !isLoggedIn" autosize class="container">
+  <mat-drawer #matDrawer [mode]="sidenavMode" class="mat-drawer">
     <app-sidenav></app-sidenav>
   </mat-drawer>
   <div class="menu-button">
-    <button mat-icon-button *ngIf="!matDrawer?.opened" (click)="openSideNav()">
+    <button (click)="openSideNav()" *ngIf="!matDrawer?.opened" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
   </div>

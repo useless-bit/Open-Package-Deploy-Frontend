@@ -3,14 +3,14 @@
   <div class="form">
     <mat-form-field>
       <mat-label>Package Name</mat-label>
-      <input matInput [formControl]="formControlNameInput">
+      <input [formControl]="formControlNameInput" matInput>
       @if (formControlNameInput.hasError('pattern') || formControlNameInput.hasError('required')) {
         <mat-error>Cannot be empty</mat-error>
       }
     </mat-form-field>
     <mat-form-field>
       <mat-label>Package Checksum</mat-label>
-      <input matInput [formControl]="formControlChecksumInput">
+      <input [formControl]="formControlChecksumInput" matInput>
       @if (formControlChecksumInput.hasError('pattern') || formControlChecksumInput.hasError('required')) {
         <mat-error>Cannot be empty</mat-error>
       }
@@ -27,20 +27,21 @@
       }
     </mat-form-field>
     <div class="file-upload">
-      <button mat-flat-button [disabled]="uploadSub" (click)="fileUpload.click()">Select File</button>
+      <button (click)="fileUpload.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
       <mat-form-field>
-        <input [hidden]="true" accept=".zip" type="file" class="file-input" (change)="onFileSelected($event)"
-               #fileUpload>
-        <input matInput [formControl]="formControlFileInput">
+        <input #fileUpload (change)="onFileSelected($event)" [hidden]="true" accept=".zip" class="file-input"
+               type="file">
+        <input [formControl]="formControlFileInput" matInput>
         <mat-hint *ngIf="!file">Cannot be empty</mat-hint>
       </mat-form-field>
     </div>
   </div>
   @if (uploadErrorMessage) {
     <mat-hint>Error: {{ uploadErrorMessage }}</mat-hint>
-  }  <div class="buttons">
-    <button mat-raised-button [disabled]="uploadSub" (click)="startUpload()">Upload</button>
-    <button mat-raised-button [disabled]="!uploadSub" (click)="cancelUpload()">Cancel Upload</button>
+  }
+  <div class="buttons">
+    <button (click)="startUpload()" [disabled]="uploadSub" mat-raised-button>Upload</button>
+    <button (click)="cancelUpload()" [disabled]="!uploadSub" mat-raised-button>Cancel Upload</button>
   </div>
   <div *ngIf="uploadProgress">
     @if (uploadProgress == 100) {
