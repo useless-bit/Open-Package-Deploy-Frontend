@@ -11,6 +11,8 @@ import {PackageEntity} from "./entity/packageEntity";
 import {Observable} from "rxjs";
 import {PackageUpdateRequest} from "./request/packageUpdateRequest";
 import {DeploymentListResponse} from "./reponse/deploymentListResponse";
+import {DeploymentEntity} from "./entity/deploymentEntity";
+import {CreateDeploymentRequest} from "./request/createDeploymentRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -175,4 +177,45 @@ export class ApiService {
     });
   }
 
+  public getDeployment(deploymentUUID: string): Promise<DeploymentEntity | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/deployment/" + deploymentUUID).subscribe({
+        next: value => {
+          resolve(new DeploymentEntity(value));
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public deleteDeployment(deploymentUUID: string): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/deployment/" + deploymentUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public createDeployment(createDeploymentRequest: CreateDeploymentRequest): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.variableService.backendURL + "/api/deployment", createDeploymentRequest).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
 }

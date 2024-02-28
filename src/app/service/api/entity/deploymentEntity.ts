@@ -1,9 +1,9 @@
-import {OperatingSystem} from "./operatingSystem";
-
 export class DeploymentEntity {
   uuid: string;
-  agentUUID: string;
-  packageUUID: string;
+  agentUuid: string;
+  agentName: string;
+  packageUuid: string;
+  packageName: string;
   isDeployed: boolean;
   expectedReturnValue: string;
   returnValue: string;
@@ -11,8 +11,10 @@ export class DeploymentEntity {
 
   constructor(packageData: any) {
     this.uuid = packageData.uuid;
-    this.agentUUID = packageData.agentUUID;
-    this.packageUUID = packageData.packageUUID
+    this.agentUuid = packageData.agentUUID;
+    this.agentName = this.formatName(packageData.agentName);
+    this.packageUuid = packageData.packageUUID;
+    this.packageName = this.formatName(packageData.packageName);
     this.isDeployed = packageData.deployed;
     this.expectedReturnValue = this.formatName(packageData.expectedReturnValue);
     this.returnValue = this.formatName(packageData.returnValue);

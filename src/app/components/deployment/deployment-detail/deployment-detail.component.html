@@ -1,0 +1,39 @@
+<app-loading-fullscreen *ngIf="!this.dataLoaded"></app-loading-fullscreen>
+
+<div *ngIf="dataLoaded && deploymentEntity" class="main-content">
+  <div class="card-container">
+    <div class="agent-name">
+      {{ deploymentEntity.packageName }} <mat-icon>arrow_forward</mat-icon> {{ deploymentEntity.agentName }}
+    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="agent-options-buttons">
+        <button mat-raised-button (click)="deleteDeployment()">Delete</button>
+      </div>
+    </mat-expansion-panel>
+
+    <!--  general infos  -->
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="entries">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>UUID</h4>
+            <p matLine>{{ deploymentEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+</div>

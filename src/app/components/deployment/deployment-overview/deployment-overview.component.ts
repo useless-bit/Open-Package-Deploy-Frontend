@@ -4,8 +4,10 @@ import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {
   MatCell,
-  MatCellDef, MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
   MatRow,
@@ -25,8 +27,9 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {NgForOf, NgIf} from "@angular/common";
 import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
+import {DeploymentDetailPopupComponent} from "../deployment-detail-popup/deployment-detail-popup.component";
+import {DeploymentCreateComponent} from "../deployment-create/deployment-create.component";
 
 @Component({
   selector: 'app-deployment-overview',
@@ -86,7 +89,7 @@ export class DeploymentOverviewComponent implements OnInit {
   private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);
 
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['agentUUID', 'packageUUID'];
+  public selectedColumns: String[] = ['agentUuid', 'packageUuid'];
   public deploymentKeys = Object.keys(this.deploymentInstance) as Array<keyof DeploymentEntity>
   public searchLoadingBar: boolean = false;
 
@@ -141,12 +144,12 @@ export class DeploymentOverviewComponent implements OnInit {
   }
 
   public showDetailInfoPopup(deploymentUUID: string): void {
-    //this.dialog.open(AgentDetailPopupComponent, {
-    //data: {deploymentUUID: deploymentUUID},
-    //  panelClass: "main-popup"
-    //}).afterClosed().subscribe(() => {
-    //  this.refreshData();
-    //});
+    this.dialog.open(DeploymentDetailPopupComponent, {
+      data: {deploymentUUID: deploymentUUID},
+      panelClass: "main-popup"
+    }).afterClosed().subscribe(() => {
+      this.refreshData();
+    });
   }
 
   public convertStringChipName(str: string): string {
@@ -174,6 +177,9 @@ export class DeploymentOverviewComponent implements OnInit {
   }
 
   openAddNewPopup() {
-    this.dialog.open(PlaceholderComponent)
+    this.dialog.open(DeploymentCreateComponent, {panelClass: "main-popup"})
+      .afterClosed().subscribe(() => {
+      this.refreshData();
+    });
   }
 }

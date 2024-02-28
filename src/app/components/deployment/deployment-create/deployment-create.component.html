@@ -1,0 +1,61 @@
+<app-loading-fullscreen *ngIf="!this.dataLoaded"></app-loading-fullscreen>
+
+<div class="main-content" *ngIf="this.dataLoaded">
+  <h2>Create new deployment</h2>
+  <div class="form">
+    <mat-form-field>
+      <mat-label>Target OS</mat-label>
+      <mat-select (selectionChange)="osTargetChange($event)" [formControl]="formControlOsSelect">
+        <ng-container *ngFor="let key of Object.keys(OperatingSystem)">
+          <mat-option *ngIf="key !== 'Unknown'" [value]="key">{{ key }}</mat-option>
+        </ng-container>
+      </mat-select>
+      @if (formControlOsSelect.hasError('pattern') || formControlOsSelect.hasError('required')) {
+        <mat-error>Cannot be empty</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Package</mat-label>
+      <mat-select [formControl]="formControlPackageSelect">
+        <mat-option>
+          <ngx-mat-select-search [formControl]="formControlPackageSelectSearch" placeholderLabel="Search..."
+                                 noEntriesFoundLabel="No package found"></ngx-mat-select-search>
+        </mat-option>
+        <ng-container *ngFor="let key of filteredPackages">
+          <mat-option *ngIf="key.targetOperatingSystem == targetOs" [value]="key.uuid">{{ key.name }}</mat-option>
+        </ng-container>
+      </mat-select>
+      @if (formControlPackageSelect.hasError('pattern') || formControlPackageSelect.hasError('required')) {
+        <mat-error>Cannot be empty</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Agent</mat-label>
+      <mat-select [formControl]="formControlAgentSelect">
+        <mat-option>
+          <ngx-mat-select-search [formControl]="formControlAgentSelectSearch" placeholderLabel="Search..."
+                                 noEntriesFoundLabel="No agent found"></ngx-mat-select-search>
+        </mat-option>
+        <ng-container *ngFor="let key of filteredAgents">
+          <mat-option *ngIf="key.operatingSystem == targetOs" [value]="key.uuid">{{ key.name }}</mat-option>
+        </ng-container>
+      </mat-select>
+      @if (formControlAgentSelect.hasError('pattern') || formControlAgentSelect.hasError('required')) {
+        <mat-error>Cannot be empty</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Expected Return Value</mat-label>
+      <input matInput [formControl]="formControlExpectedReturnValueInput">
+      <mat-hint>Can be empty</mat-hint>
+    </mat-form-field>
+
+  </div>
+  <div class="buttons">
+    <button mat-raised-button (click)="createDeployment()">Create</button>
+  </div>
+
+</div>
