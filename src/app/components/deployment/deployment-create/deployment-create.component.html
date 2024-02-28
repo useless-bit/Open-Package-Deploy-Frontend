@@ -23,7 +23,8 @@
                                  noEntriesFoundLabel="No package found"></ngx-mat-select-search>
         </mat-option>
         <ng-container *ngFor="let key of filteredPackages">
-          <mat-option *ngIf="key.targetOperatingSystem == targetOs" [value]="key.uuid">{{ key.name }}</mat-option>
+          <mat-option *ngIf="key.targetOperatingSystem == targetOs" [value]="key.uuid">{{ key.name }} | {{ key.uuid }}
+          </mat-option>
         </ng-container>
       </mat-select>
       @if (formControlPackageSelect.hasError('pattern') || formControlPackageSelect.hasError('required')) {
@@ -39,7 +40,9 @@
                                  noEntriesFoundLabel="No agent found"></ngx-mat-select-search>
         </mat-option>
         <ng-container *ngFor="let key of filteredAgents">
-          <mat-option *ngIf="key.operatingSystem == targetOs" [value]="key.uuid">{{ key.name }}</mat-option>
+          <mat-option *ngIf="key.operatingSystem == targetOs" [value]="key.uuid">{{ key.name }}
+            | {{ key.operatingSystemFamily }} {{ key.operatingSystemVersion }} | {{ key.uuid }}
+          </mat-option>
         </ng-container>
       </mat-select>
       @if (formControlAgentSelect.hasError('pattern') || formControlAgentSelect.hasError('required')) {

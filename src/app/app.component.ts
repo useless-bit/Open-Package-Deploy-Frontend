@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {TestContentComponent} from "./components/test-content/test-content.component";
 import {MatDrawer, MatDrawerContainer, MatDrawerMode} from "@angular/material/sidenav";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
@@ -17,7 +16,7 @@ import {LoadingFullscreenComponent} from "./components/loading-fullscreen/loadin
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestContentComponent, MatDrawerContainer, MatDrawer, SidenavComponent, MatIconButton, NgIf, MatIcon, MatProgressSpinner, LoadingFullscreenComponent],
+  imports: [RouterOutlet, MatDrawerContainer, MatDrawer, SidenavComponent, MatIconButton, NgIf, MatIcon, MatProgressSpinner, LoadingFullscreenComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

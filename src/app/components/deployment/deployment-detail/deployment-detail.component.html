@@ -3,7 +3,9 @@
 <div *ngIf="dataLoaded && deploymentEntity" class="main-content">
   <div class="card-container">
     <div class="agent-name">
-      {{ deploymentEntity.packageName }} <mat-icon>arrow_forward</mat-icon> {{ deploymentEntity.agentName }}
+      {{ deploymentEntity.packageName }}
+      <mat-icon>arrow_forward</mat-icon>
+      {{ deploymentEntity.agentName }}
     </div>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -29,6 +31,16 @@
           <mat-list-item>
             <h4 matLine>UUID</h4>
             <p matLine>{{ deploymentEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Agent</h4>
+            <p matLine>{{ deploymentEntity.agentName }} | {{ deploymentEntity.agentUuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Package</h4>
+            <p matLine>{{ deploymentEntity.packageName }} | {{ deploymentEntity.packageUuid }}</p>
           </mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
