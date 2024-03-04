@@ -73,7 +73,7 @@ export class VariableService {
       } else {
         this._backendURL = "http://localhost:8080"
         this._frontendURL = "http://localhost:4200"
-        this._keycloakRealm = 'master'
+        this._keycloakRealm = 'OPD'
         this._keycloakUrl = 'http://localhost:8888/'
         this._keycloakClientId = 'OPD'
         resolve()

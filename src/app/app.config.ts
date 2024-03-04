@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, ApplicationConfig} from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, NgModule, Provider} from '@angular/core';
 import {
   provideRouter,
   Router,
@@ -11,11 +11,12 @@ import {routes} from './app.routes';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {VariableService} from "./service/variable/variable.service";
 import {ApplicationLoadedService} from "./service/application-loaded/application-loaded.service";
-import {KeycloakService} from "keycloak-angular";
-import {provideHttpClient} from "@angular/common/http";
+import {KeycloakAngularModule, KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {Location} from "@angular/common";
 import {CustomRouteReuseStrategy} from "./strategy/CustomRouteReuseStrategy";
 import {MatTableDataSource} from "@angular/material/table";
+import {BrowserModule} from "@angular/platform-browser";
 
 async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService) {
   return new Promise<void>(async (resolve) => {
@@ -27,11 +28,20 @@ async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService
       },
       initOptions: {
         onLoad: 'check-sso',
-      }
+      },enableBearerInterceptor: true,
+      // Prefix for the Bearer token
+      bearerPrefix: 'Bearer',
+
     });
     resolve();
   });
 }
+
+const KeycloakBearerInterceptorProvider: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: KeycloakBearerInterceptor,
+  multi: true
+};
 
 export const appConfig: ApplicationConfig = {
 
@@ -39,7 +49,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withDisabledInitialNavigation(), withHashLocation()),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
+    KeycloakBearerInterceptorProvider,
     MatTableDataSource,
     ApplicationLoadedService,
     KeycloakService,
