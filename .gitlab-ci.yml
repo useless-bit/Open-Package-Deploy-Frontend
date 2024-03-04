@@ -1,0 +1,55 @@
+stages:
+  - build
+  - test
+  - publish
+
+build:
+  image: $CI_REGISTRY/node-js/node:slim
+  stage: build
+  script:
+    - npm install
+    - npm run build -c production
+  except:
+    - master
+
+test-sonar:
+  image:
+    name: $CI_REGISTRY/sonar/sonar-scanner-cli:latest
+    entrypoint: [""]
+  stage: test
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner
+  allow_failure: true
+  except:
+    - master
+  needs:
+    - build
+
+build-image-dev:
+  image: $CI_REGISTRY/docker/docker:latest
+  stage: publish
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build . -t $CI_REGISTRY/opd/frontend:dev
+    - docker push $CI_REGISTRY/opd/frontend:dev
+  only:
+    - dev
+  needs:
+    - test-sonar
+
+build-image-master:
+  image: $CI_REGISTRY/docker/docker:latest
+  stage: publish
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build . -t $CI_REGISTRY/opd/frontend:latest
+    - docker push $CI_REGISTRY/opd/frontend:latest
+  only:
+    - master
