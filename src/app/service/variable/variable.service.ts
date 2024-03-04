@@ -50,10 +50,10 @@ export class VariableService {
               if (!line) continue; // Skip empty lines
               const [key, value] = line.split('=');
               switch (key) {
-                case 'TASKFLARE_BACKEND_URL':
+                case 'BACKEND_URL':
                   this._backendURL = value;
                   break;
-                case 'TASKFLARE_FRONTEND_URL':
+                case 'FRONTEND_URL':
                   this._frontendURL = value;
                   break;
                 case 'KEYCLOAK_REALM':
