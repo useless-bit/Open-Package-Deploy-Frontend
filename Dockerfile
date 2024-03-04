@@ -16,7 +16,7 @@ RUN npm run build -c production
 FROM harbor.codesystem.org/webserver/nginx:stable
 
 
-COPY --from=build-stage /source/dist/taskflare-frontend /usr/share/nginx/html
+COPY --from=build-stage /source/dist/opd/browser /usr/share/nginx/html
 COPY docker/create_file.sh /docker-entrypoint.d/
 RUN ["chmod", "+x", "/docker-entrypoint.d/create_file.sh"]
 
