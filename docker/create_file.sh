@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir /usr/share/nginx/html/assets
 env > /tmp/env-variables.txt
 
 pattern='^KEYCLOAK_URL'
