@@ -53,12 +53,10 @@ export class PackageUpdateContentComponent implements OnInit {
     value: '',
     disabled: true
   }, [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
-  protected readonly OperatingSystem = OperatingSystem;
-  protected readonly Object = Object;
 
   constructor(@Inject(MAT_DIALOG_DATA) public packageUpdateContentComponentInput: PackageUpdateContentComponentInput,
               private packageApiService: PackageApiService,
-              public dialogRef: MatDialogRef<PackageUpdateContentComponent>) {
+              public packageUpdateContentComponentMatDialogRef: MatDialogRef<PackageUpdateContentComponent>) {
     this.packageEntity = packageUpdateContentComponentInput.packageEntity;
     console.log(this.packageEntity.targetOperatingSystem);
   }
@@ -80,11 +78,11 @@ export class PackageUpdateContentComponent implements OnInit {
     }
   }
 
-  startUpload() {
+  startUploadNewContent() {
     this.uploadErrorMessage = null;
     this.formControlChecksumInput.markAllAsTouched();
     if (this.formControlChecksumInput.valid && this.file) {
-      this.dialogRef.disableClose = true;
+      this.packageUpdateContentComponentMatDialogRef.disableClose = true;
       this.formControlChecksumInput.disable();
       let formData: FormData = new FormData();
       let updatePackageContentRequest: UpdatePackageContentRequest = new UpdatePackageContentRequest(this.formControlChecksumInput.value)
@@ -97,7 +95,7 @@ export class PackageUpdateContentComponent implements OnInit {
           if (value.type == HttpEventType.UploadProgress) {
             this.uploadProgress = Math.round(100 * (value.loaded / value.total));
           } else if (value.type == HttpEventType.ResponseHeader && value.status == HttpStatusCode.Ok) {
-            this.dialogRef.close();
+            this.packageUpdateContentComponentMatDialogRef.close();
           }
         },
         error: (error: any) => {
@@ -115,7 +113,7 @@ export class PackageUpdateContentComponent implements OnInit {
       this.uploadProgress = null;
       this.uploadSub = null;
     }
-    this.dialogRef.disableClose = false;
+    this.packageUpdateContentComponentMatDialogRef.disableClose = false;
     this.formControlChecksumInput.enable();
   }
 }

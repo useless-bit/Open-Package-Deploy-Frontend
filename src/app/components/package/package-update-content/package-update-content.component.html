@@ -30,7 +30,7 @@
     <mat-hint>Error: {{ uploadErrorMessage }}</mat-hint>
   }
   <div class="buttons">
-    <button (click)="startUpload()" [disabled]="uploadSub" mat-raised-button>Upload</button>
+    <button (click)="startUploadNewContent()" [disabled]="uploadSub" mat-raised-button>Upload</button>
     <button (click)="cancelUpload()" [disabled]="!uploadSub" mat-raised-button>Cancel Upload</button>
   </div>
   <div *ngIf="uploadProgress">
