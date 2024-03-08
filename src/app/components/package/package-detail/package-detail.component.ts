@@ -14,6 +14,7 @@ import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfir
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageUpdateRequest} from "../../../service/api/request/packageUpdateRequest";
 import {PackageApiService} from "../../../service/api/package.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-package-detail',
@@ -40,6 +41,7 @@ export class PackageDetailComponent {
   public packageEntity: PackageEntity | null = null;
 
   constructor(private packageApiService: PackageApiService,
+              private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<PackageDetailComponent>) {
   }
@@ -81,5 +83,21 @@ export class PackageDetailComponent {
         })
       }
     });
+  }
+
+  resetAllDeployments() {
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Reset all deployments for: " + this.packageEntity?.name,
+        "Do you want to reset all deployments for this package?", "Cancel", "Reset")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false
+        this.deploymentApiService.resetForPackage(this.packageUUID).then(() => {
+          this.ngOnInit();
+        })
+      }
+    });
+
   }
 }

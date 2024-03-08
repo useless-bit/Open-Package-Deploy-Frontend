@@ -29,6 +29,7 @@ import {MatLine} from "@angular/material/core";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {AgentApiService} from "../../../service/api/agent.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-agent-detail',
@@ -65,6 +66,7 @@ export class AgentDetailComponent implements OnInit {
   public agentEntity: AgentEntity | null = null;
 
   constructor(private agentApiService: AgentApiService,
+              private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<AgentDetailComponent>) {
   }
@@ -106,6 +108,22 @@ export class AgentDetailComponent implements OnInit {
         })
       }
     });
+  }
+
+  resetAllDeployments() {
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Reset all deployments for: " + this.agentEntity?.name,
+        "Do you want to reset all deployments for this agent?", "Cancel", "Reset")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false
+        this.deploymentApiService.resetForAgent(this.agentUUID).then(() => {
+          this.ngOnInit();
+        })
+      }
+    });
+
   }
 }
 
