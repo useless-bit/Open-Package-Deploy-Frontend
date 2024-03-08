@@ -16,7 +16,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {PackageApiService} from "../../../service/api/package.api.service";
-import {DeploymentApiService} from "../../../service/deployment.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-create',

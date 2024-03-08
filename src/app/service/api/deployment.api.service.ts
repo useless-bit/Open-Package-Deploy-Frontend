@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ApiService} from "./api/api.service";
-import {VariableService} from "./variable/variable.service";
-import {DeploymentListResponse} from "./api/reponse/deploymentListResponse";
-import {DeploymentEntity} from "./api/entity/deploymentEntity";
-import {CreateDeploymentRequest} from "./api/request/createDeploymentRequest";
+import {ApiService} from "./api.service";
+import {VariableService} from "../variable/variable.service";
+import {DeploymentListResponse} from "./reponse/deploymentListResponse";
+import {DeploymentEntity} from "./entity/deploymentEntity";
+import {CreateDeploymentRequest} from "./request/createDeploymentRequest";
 
 @Injectable({
   providedIn: 'root'

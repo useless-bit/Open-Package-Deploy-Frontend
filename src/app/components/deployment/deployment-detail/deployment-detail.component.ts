@@ -11,7 +11,7 @@ import {MatDivider} from "@angular/material/divider";
 import {MatLine} from "@angular/material/core";
 import {NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {DeploymentApiService} from "../../../service/deployment.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-detail',

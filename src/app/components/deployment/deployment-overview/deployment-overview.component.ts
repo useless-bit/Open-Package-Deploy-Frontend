@@ -29,7 +29,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 import {DeploymentDetailPopupComponent} from "../deployment-detail-popup/deployment-detail-popup.component";
 import {DeploymentCreateComponent} from "../deployment-create/deployment-create.component";
-import {DeploymentApiService} from "../../../service/deployment.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-overview',
