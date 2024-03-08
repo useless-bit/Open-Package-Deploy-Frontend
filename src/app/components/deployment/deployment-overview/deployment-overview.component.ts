@@ -25,7 +25,6 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatTooltip} from "@angular/material/tooltip";
 import {NgForOf, NgIf} from "@angular/common";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 import {DeploymentDetailPopupComponent} from "../deployment-detail-popup/deployment-detail-popup.component";

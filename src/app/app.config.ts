@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, ApplicationConfig, NgModule, Provider} from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, Provider} from '@angular/core';
 import {
   provideRouter,
   Router,
@@ -11,12 +11,11 @@ import {routes} from './app.routes';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {VariableService} from "./service/variable/variable.service";
 import {ApplicationLoadedService} from "./service/application-loaded/application-loaded.service";
-import {KeycloakAngularModule, KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
+import {KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {Location} from "@angular/common";
 import {CustomRouteReuseStrategy} from "./strategy/CustomRouteReuseStrategy";
 import {MatTableDataSource} from "@angular/material/table";
-import {BrowserModule} from "@angular/platform-browser";
 
 async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService) {
   return new Promise<void>(async (resolve) => {
@@ -28,7 +27,7 @@ async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService
       },
       initOptions: {
         onLoad: 'check-sso',
-      },enableBearerInterceptor: true,
+      }, enableBearerInterceptor: true,
       // Prefix for the Bearer token
       bearerPrefix: 'Bearer',
 

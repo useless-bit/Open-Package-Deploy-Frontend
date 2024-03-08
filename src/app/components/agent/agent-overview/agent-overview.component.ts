@@ -13,7 +13,6 @@ import {
   MatTableDataSource
 } from "@angular/material/table";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
-import {ApiService} from "../../../service/api/api.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";

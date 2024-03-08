@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../service/api/api.service";
 import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
 import {NgIf} from "@angular/common";
 import {

@@ -15,7 +15,7 @@ build:
 test-sonar:
   image:
     name: $CI_REGISTRY/sonar/sonar-scanner-cli:latest
-    entrypoint: [""]
+    entrypoint: [ "" ]
   stage: test
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache

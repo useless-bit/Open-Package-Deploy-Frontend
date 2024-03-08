@@ -6,7 +6,6 @@ import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from
 import {MatLine} from "@angular/material/core";
 import {MatList, MatListItem} from "@angular/material/list";
 import {NgIf} from "@angular/common";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";

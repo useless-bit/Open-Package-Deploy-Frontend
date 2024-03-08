@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";

@@ -25,7 +25,6 @@ import {
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatDivider} from "@angular/material/divider";
 import {MatPaginator} from "@angular/material/paginator";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageDetailPopupComponent} from "../package-detail-popup/package-detail-popup.component";

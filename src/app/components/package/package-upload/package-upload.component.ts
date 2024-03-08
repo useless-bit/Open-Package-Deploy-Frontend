@@ -11,7 +11,6 @@ import {MatButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatIcon} from "@angular/material/icon";
 import {Subscription} from "rxjs";
-import {ApiService} from "../../../service/api/api.service";
 import {AddNewPackageRequest} from "../../../service/api/request/addNewPackageRequest";
 import {HttpEventType, HttpStatusCode} from "@angular/common/http";
 import {MatDialogRef} from "@angular/material/dialog";
