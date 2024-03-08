@@ -6,7 +6,6 @@ import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from
 import {MatLine} from "@angular/material/core";
 import {MatList, MatListItem} from "@angular/material/list";
 import {NgIf} from "@angular/common";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
@@ -14,6 +13,8 @@ import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-c
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageUpdateRequest} from "../../../service/api/request/packageUpdateRequest";
+import {PackageApiService} from "../../../service/api/package.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-package-detail',
@@ -39,13 +40,14 @@ export class PackageDetailComponent {
   public dataLoaded: boolean = false;
   public packageEntity: PackageEntity | null = null;
 
-  constructor(private apiService: ApiService,
+  constructor(private packageApiService: PackageApiService,
+              private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<PackageDetailComponent>) {
   }
 
   ngOnInit() {
-    this.apiService.getPackage(this.packageUUID).then(response => {
+    this.packageApiService.get(this.packageUUID).then(response => {
       if (response) {
         this.packageEntity = response;
         this.dataLoaded = true;
@@ -61,7 +63,7 @@ export class PackageDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.updatePackage(this.packageUUID, new PackageUpdateRequest(result)).then(() => {
+        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(result)).then(() => {
           this.ngOnInit();
         })
       }
@@ -76,10 +78,26 @@ export class PackageDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.deletePackage(this.packageUUID).then(() => {
+        this.packageApiService.delete(this.packageUUID).then(() => {
           this.dialogRef.close()
         })
       }
     });
+  }
+
+  resetAllDeployments() {
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Reset all deployments for: " + this.packageEntity?.name,
+        "Do you want to reset all deployments for this package?", "Cancel", "Reset")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false
+        this.deploymentApiService.resetForPackage(this.packageUUID).then(() => {
+          this.ngOnInit();
+        })
+      }
+    });
+
   }
 }

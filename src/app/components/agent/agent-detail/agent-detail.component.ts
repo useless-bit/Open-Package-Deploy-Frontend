@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../service/api/api.service";
 import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
 import {NgIf} from "@angular/common";
 import {
@@ -29,6 +28,8 @@ import {AgentUpdateRequests} from "../../../service/api/request/agentUpdateReque
 import {MatLine} from "@angular/material/core";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
+import {AgentApiService} from "../../../service/api/agent.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-agent-detail',
@@ -64,13 +65,14 @@ export class AgentDetailComponent implements OnInit {
   public dataLoaded: boolean = false;
   public agentEntity: AgentEntity | null = null;
 
-  constructor(private apiService: ApiService,
+  constructor(private agentApiService: AgentApiService,
+              private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<AgentDetailComponent>) {
   }
 
   ngOnInit() {
-    this.apiService.getAgent(this.agentUUID).then(response => {
+    this.agentApiService.get(this.agentUUID).then(response => {
       if (response) {
         this.agentEntity = response;
         this.dataLoaded = true;
@@ -86,7 +88,7 @@ export class AgentDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.updateAgent(this.agentUUID, new AgentUpdateRequests(result)).then(() => {
+        this.agentApiService.update(this.agentUUID, new AgentUpdateRequests(result)).then(() => {
           this.ngOnInit();
         })
       }
@@ -101,11 +103,27 @@ export class AgentDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.deleteAgent(this.agentUUID).then(() => {
+        this.agentApiService.delete(this.agentUUID).then(() => {
           this.dialogRef.close()
         })
       }
     });
+  }
+
+  resetAllDeployments() {
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Reset all deployments for: " + this.agentEntity?.name,
+        "Do you want to reset all deployments for this agent?", "Cancel", "Reset")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false
+        this.deploymentApiService.resetForAgent(this.agentUUID).then(() => {
+          this.ngOnInit();
+        })
+      }
+    });
+
   }
 }
 

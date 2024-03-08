@@ -5,6 +5,7 @@ export class AgentEntity {
   name: string;
   lastConnectionTime: string;
   registrationCompleted: boolean;
+  checksum: string;
   operatingSystem: OperatingSystem;
   operatingSystemFamily: string;
   operatingSystemArchitecture: string;
@@ -23,6 +24,7 @@ export class AgentEntity {
     this.name = agentData.name;
     this.lastConnectionTime = this.formatDate(agentData.lastConnectionTime);
     this.registrationCompleted = agentData.registrationCompleted;
+    this.checksum = this.formatName(agentData.checksum)
     this.operatingSystem = agentData.operatingSystem;
     this.operatingSystemFamily = this.formatName(agentData.operatingSystemFamily);
     this.operatingSystemArchitecture = this.formatName(agentData.operatingSystemArchitecture);

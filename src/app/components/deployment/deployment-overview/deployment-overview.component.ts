@@ -25,11 +25,11 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatTooltip} from "@angular/material/tooltip";
 import {NgForOf, NgIf} from "@angular/common";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 import {DeploymentDetailPopupComponent} from "../deployment-detail-popup/deployment-detail-popup.component";
 import {DeploymentCreateComponent} from "../deployment-create/deployment-create.component";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-overview',
@@ -79,7 +79,7 @@ export class DeploymentOverviewComponent implements OnInit {
   private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);
   public deploymentKeys = Object.keys(this.deploymentInstance) as Array<keyof DeploymentEntity>
 
-  constructor(private apiService: ApiService,
+  constructor(private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
               public dataSource: MatTableDataSource<DeploymentEntity>) {
     this.dataSource = dataSource;
@@ -104,7 +104,7 @@ export class DeploymentOverviewComponent implements OnInit {
       this.selectedColumns = JSON.parse(storedSelectedColumns);
       this.selectedColumns = this.selectedColumns.filter(col => this.deploymentKeys.includes(col as keyof DeploymentEntity));
     }
-    this.apiService.getAllDeployments().then(response => {
+    this.deploymentApiService.getAll().then(response => {
       if (response) {
         this.dataSource.data = response.deployments;
         this.dataSource.filter = "";
@@ -159,7 +159,7 @@ export class DeploymentOverviewComponent implements OnInit {
 
   refreshData(): void {
     this.searchLoadingBar = true;
-    this.apiService.getAllDeployments().then(response => {
+    this.deploymentApiService.getAll().then(response => {
       if (response) {
         this.dataSource.data = response.deployments;
         this.searchLoadingBar = false;

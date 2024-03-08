@@ -11,10 +11,10 @@ import {MatButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatIcon} from "@angular/material/icon";
 import {Subscription} from "rxjs";
-import {ApiService} from "../../../service/api/api.service";
 import {AddNewPackageRequest} from "../../../service/api/request/addNewPackageRequest";
 import {HttpEventType, HttpStatusCode} from "@angular/common/http";
 import {MatDialogRef} from "@angular/material/dialog";
+import {PackageApiService} from "../../../service/api/package.api.service";
 
 @Component({
   selector: 'app-package-upload',
@@ -42,18 +42,18 @@ export class PackageUploadComponent implements OnInit {
   public uploadErrorMessage: string | null = null;
 
   public file: File | null = null;
-  formControlNameInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-  formControlChecksumInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControlNameInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlChecksumInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
 
 
   formControlFileInput: FormControl = new FormControl({
     value: '', disabled: true
-  }, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  }, [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   protected readonly OperatingSystem = OperatingSystem;
   protected readonly Object = Object;
 
-  constructor(private apiService: ApiService,
+  constructor(private packageApiService: PackageApiService,
               public dialogRef: MatDialogRef<PackageUploadComponent>) {
   }
 
@@ -86,7 +86,7 @@ export class PackageUploadComponent implements OnInit {
       let addNewPackageRequest: AddNewPackageRequest = new AddNewPackageRequest(this.formControlNameInput.value, this.formControlChecksumInput.value, this.formControlOsSelect.value.toUpperCase())
       formData.append("addNewPackageRequest", new Blob([JSON.stringify(addNewPackageRequest)], {type: 'application/json'}));
       formData.append("multipartFile", this.file)
-      let upload = this.apiService.addNewPackage(formData);
+      let upload = this.packageApiService.addNew(formData);
 
       this.uploadSub = upload.subscribe({
         next: (value: any) => {

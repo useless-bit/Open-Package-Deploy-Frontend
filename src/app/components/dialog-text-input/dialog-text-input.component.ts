@@ -35,7 +35,7 @@ import {DialogTextInputData} from "./dialogTextInputData";
   styleUrl: './dialog-text-input.component.scss'
 })
 export class DialogTextInputComponent {
-  formControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   errorStateMatcher = new CustomErrorStateMatcher();
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogTextInputData: DialogTextInputData,
