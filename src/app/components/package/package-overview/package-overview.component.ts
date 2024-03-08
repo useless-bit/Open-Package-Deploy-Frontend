@@ -32,6 +32,7 @@ import {PackageDetailPopupComponent} from "../package-detail-popup/package-detai
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
 import {PackageUploadComponent} from "../package-upload/package-upload.component";
+import {PackageApiService} from "../../../service/api/package.api.service";
 
 @Component({
   selector: 'app-package-overview',
@@ -85,7 +86,7 @@ export class PackageOverviewComponent {
   public packageKeys = Object.keys(this.packageInstance) as Array<keyof PackageEntity>
   private packageResponse: PackageEntity[] | null = null;
 
-  constructor(private apiService: ApiService,
+  constructor(private packageApiService: PackageApiService,
               private dialog: MatDialog,
               public dataSource: MatTableDataSource<PackageEntity>) {
     this.dataSource = dataSource;
@@ -110,7 +111,7 @@ export class PackageOverviewComponent {
       this.selectedColumns = JSON.parse(storedSelectedColumns);
       this.selectedColumns = this.selectedColumns.filter(col => this.packageKeys.includes(col as keyof PackageEntity));
     }
-    this.apiService.getAllPackages().then(response => {
+    this.packageApiService.getAll().then(response => {
       if (response) {
         this.packageResponse = response.packages;
         this.filterData();
@@ -178,7 +179,7 @@ export class PackageOverviewComponent {
 
   refreshData(): void {
     this.searchLoadingBar = true;
-    this.apiService.getAllPackages().then(response => {
+    this.packageApiService.getAll().then(response => {
       if (response) {
         this.packageResponse = response.packages;
         this.filterData();

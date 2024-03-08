@@ -30,6 +30,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {AgentDetailPopupComponent} from "../agent-detail-popup/agent-detail-popup.component";
 import {MatDivider} from "@angular/material/divider";
+import {AgentApiService} from "../../../service/api/agent.api.service";
 
 @Component({
   selector: 'app-agent-overview',
@@ -80,7 +81,7 @@ export class AgentOverviewComponent implements OnInit {
   private agentInstance: AgentEntity = new AgentEntity(0);
   public agentKeys = Object.keys(this.agentInstance) as Array<keyof AgentEntity>
 
-  constructor(private apiService: ApiService,
+  constructor(private agentApiService: AgentApiService,
               private dialog: MatDialog,
               public dataSource: MatTableDataSource<AgentEntity>) {
     this.dataSource = dataSource;
@@ -105,7 +106,7 @@ export class AgentOverviewComponent implements OnInit {
       this.selectedColumns = JSON.parse(storedSelectedColumns);
       this.selectedColumns = this.selectedColumns.filter(col => this.agentKeys.includes(col as keyof AgentEntity));
     }
-    this.apiService.getAllAgents().then(response => {
+    this.agentApiService.getAll().then(response => {
       if (response) {
         this.dataSource.data = response.agents;
         this.dataSource.filter = "";
@@ -160,7 +161,7 @@ export class AgentOverviewComponent implements OnInit {
 
   refreshData(): void {
     this.searchLoadingBar = true;
-    this.apiService.getAllAgents().then(response => {
+    this.agentApiService.getAll().then(response => {
       if (response) {
         this.dataSource.data = response.agents;
         this.searchLoadingBar = false;

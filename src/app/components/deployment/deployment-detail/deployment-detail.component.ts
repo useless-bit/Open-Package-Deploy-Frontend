@@ -12,6 +12,7 @@ import {MatDivider} from "@angular/material/divider";
 import {MatLine} from "@angular/material/core";
 import {NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
+import {DeploymentApiService} from "../../../service/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-detail',
@@ -38,13 +39,13 @@ export class DeploymentDetailComponent implements OnInit {
   public dataLoaded: boolean = false;
   public deploymentEntity: DeploymentEntity | null = null;
 
-  constructor(private apiService: ApiService,
+  constructor(private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<DeploymentDetailComponent>) {
   }
 
   ngOnInit() {
-    this.apiService.getDeployment(this.deploymentUUID).then(response => {
+    this.deploymentApiService.get(this.deploymentUUID).then(response => {
       if (response) {
         this.deploymentEntity = response;
         this.dataLoaded = true;
@@ -60,7 +61,7 @@ export class DeploymentDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.deleteDeployment(this.deploymentUUID).then(() => {
+        this.deploymentApiService.delete(this.deploymentUUID).then(() => {
           this.dialogRef.close()
         })
       }

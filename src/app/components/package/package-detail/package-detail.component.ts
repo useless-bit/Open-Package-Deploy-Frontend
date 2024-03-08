@@ -14,6 +14,7 @@ import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-c
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageUpdateRequest} from "../../../service/api/request/packageUpdateRequest";
+import {PackageApiService} from "../../../service/api/package.api.service";
 
 @Component({
   selector: 'app-package-detail',
@@ -39,13 +40,13 @@ export class PackageDetailComponent {
   public dataLoaded: boolean = false;
   public packageEntity: PackageEntity | null = null;
 
-  constructor(private apiService: ApiService,
+  constructor(private packageApiService: PackageApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<PackageDetailComponent>) {
   }
 
   ngOnInit() {
-    this.apiService.getPackage(this.packageUUID).then(response => {
+    this.packageApiService.get(this.packageUUID).then(response => {
       if (response) {
         this.packageEntity = response;
         this.dataLoaded = true;
@@ -61,7 +62,7 @@ export class PackageDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.updatePackage(this.packageUUID, new PackageUpdateRequest(result)).then(() => {
+        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(result)).then(() => {
           this.ngOnInit();
         })
       }
@@ -76,7 +77,7 @@ export class PackageDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.apiService.deletePackage(this.packageUUID).then(() => {
+        this.packageApiService.delete(this.packageUUID).then(() => {
           this.dialogRef.close()
         })
       }

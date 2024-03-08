@@ -9,12 +9,14 @@ import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from "@angular/mater
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatSelect, MatSelectChange} from "@angular/material/select";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ApiService} from "../../../service/api/api.service";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {AgentApiService} from "../../../service/api/agent.api.service";
+import {PackageApiService} from "../../../service/api/package.api.service";
+import {DeploymentApiService} from "../../../service/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-create',
@@ -56,15 +58,17 @@ export class DeploymentCreateComponent implements OnInit {
   protected readonly OperatingSystem = OperatingSystem;
   protected readonly Object = Object;
 
-  constructor(private apiService: ApiService,
+  constructor(private agentApiService: AgentApiService,
+              private packageApiService: PackageApiService,
+              private deploymentApiService: DeploymentApiService,
               public dialogRef: MatDialogRef<DeploymentCreateComponent>) {
   }
 
   ngOnInit() {
     this.formControlPackageSelect.disable();
     this.formControlAgentSelect.disable();
-    this.apiService.getAllAgents().then(agentResponse => {
-      this.apiService.getAllPackages().then(packageResponse => {
+    this.agentApiService.getAll().then(agentResponse => {
+      this.packageApiService.getAll().then(packageResponse => {
         if (agentResponse && packageResponse) {
           this.agentList = agentResponse.agents;
           this.filteredAgents = this.agentList;
@@ -88,7 +92,7 @@ export class DeploymentCreateComponent implements OnInit {
     this.formControlAgentSelect.markAllAsTouched();
 
     if (this.formControlOsSelect.valid && this.formControlPackageSelect.valid && this.formControlAgentSelect.valid) {
-      this.apiService.createDeployment(new CreateDeploymentRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value, this.formControlExpectedReturnValueInput.value.trim())).then(() => {
+      this.deploymentApiService.create(new CreateDeploymentRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value, this.formControlExpectedReturnValueInput.value.trim())).then(() => {
         this.dialogRef.close();
       })
     }
