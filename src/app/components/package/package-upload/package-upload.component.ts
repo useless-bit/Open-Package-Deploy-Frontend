@@ -42,14 +42,14 @@ export class PackageUploadComponent implements OnInit {
   public uploadErrorMessage: string | null = null;
 
   public file: File | null = null;
-  formControlNameInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-  formControlChecksumInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControlNameInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlChecksumInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
 
 
   formControlFileInput: FormControl = new FormControl({
     value: '', disabled: true
-  }, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  }, [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   protected readonly OperatingSystem = OperatingSystem;
   protected readonly Object = Object;
 

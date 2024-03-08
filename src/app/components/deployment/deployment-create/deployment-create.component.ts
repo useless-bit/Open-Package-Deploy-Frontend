@@ -49,10 +49,10 @@ export class DeploymentCreateComponent implements OnInit {
   public packageList: PackageEntity[] | null = null;
   public filteredPackages: PackageEntity[] | null = null;
   public targetOs: OperatingSystem = OperatingSystem.Unknown;
-  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-  formControlPackageSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlPackageSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlPackageSelectSearch: FormControl = new FormControl('');
-  formControlAgentSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControlAgentSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlAgentSelectSearch: FormControl = new FormControl('');
   formControlExpectedReturnValueInput: FormControl = new FormControl('');
   protected readonly OperatingSystem = OperatingSystem;
