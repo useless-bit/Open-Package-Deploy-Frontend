@@ -72,4 +72,46 @@ export class DeploymentApiService {
     });
   }
 
+  public reset(deploymentUUID: string): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/deployment/reset/deployment/" + deploymentUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public resetForAgent(agentUUID: string): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/deployment/reset/agent/" + agentUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public resetForPackage(packageUUID: string): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/deployment/reset/package/" + packageUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
 }
