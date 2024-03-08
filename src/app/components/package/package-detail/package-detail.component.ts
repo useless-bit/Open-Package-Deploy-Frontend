@@ -15,6 +15,8 @@ import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageUpdateRequest} from "../../../service/api/request/packageUpdateRequest";
 import {PackageApiService} from "../../../service/api/package.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
+import {PackageUpdateContentComponent} from "../package-update-content/package-update-content.component";
+import {PackageUpdateContentComponentInput} from "../package-update-content/packageUpdateContentComponentInput";
 
 @Component({
   selector: 'app-package-detail',
@@ -100,4 +102,18 @@ export class PackageDetailComponent {
     });
 
   }
+
+  updatePackageContent() {
+    if (this.packageEntity) {
+      this.dialog.open(PackageUpdateContentComponent, {
+        data: new PackageUpdateContentComponentInput(this.packageEntity),
+        panelClass: "main-popup"
+      })
+        .afterClosed().subscribe(() => {
+        this.dataLoaded = false;
+        this.ngOnInit();
+      });
+    }
+  }
+
 }

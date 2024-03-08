@@ -1,0 +1,44 @@
+<div class="main-content">
+  <h2>Upload new content for: {{ packageEntity.name }}</h2>
+  <div class="form">
+    <mat-form-field>
+      <mat-label>Package Name</mat-label>
+      <input disabled [value]="packageEntity.name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Package Checksum</mat-label>
+      <input [formControl]="formControlChecksumInput" matInput>
+      @if (formControlChecksumInput.hasError('pattern') || formControlChecksumInput.hasError('required')) {
+        <mat-error>Cannot be empty</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Target OS</mat-label>
+      <input disabled [value]="getKeyForOperatingSystem(packageEntity.targetOperatingSystem)" matInput>
+    </mat-form-field>
+    <div class="file-upload">
+      <button (click)="fileUploadInput.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
+      <mat-form-field>
+        <input #fileUploadInput (change)="onFileSelected($event)" [hidden]="true" accept=".zip" class="file-input"
+               type="file">
+        <input [formControl]="formControlFileInput" matInput>
+        <mat-hint *ngIf="!file">Cannot be empty</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+  @if (uploadErrorMessage) {
+    <mat-hint>Error: {{ uploadErrorMessage }}</mat-hint>
+  }
+  <div class="buttons">
+    <button (click)="startUploadNewContent()" [disabled]="uploadSub" mat-raised-button>Upload</button>
+    <button (click)="cancelUpload()" [disabled]="!uploadSub" mat-raised-button>Cancel Upload</button>
+  </div>
+  <div *ngIf="uploadProgress">
+    @if (uploadProgress == 100) {
+      <mat-progress-bar class="progress-bar" mode="indeterminate"/>
+    } @else {
+      <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"/>
+    }
+    {{ uploadProgress }} / 100 %
+  </div>
+</div>
