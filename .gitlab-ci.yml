@@ -26,7 +26,6 @@ test-sonar:
       - .sonar/cache
   script:
     - sonar-scanner
-  allow_failure: true
   except:
     - master
   needs:
