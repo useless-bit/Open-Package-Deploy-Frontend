@@ -17,9 +17,9 @@
       <input disabled [value]="getKeyForOperatingSystem(packageEntity.targetOperatingSystem)" matInput>
     </mat-form-field>
     <div class="file-upload">
-      <button (click)="fileUpload.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
+      <button (click)="fileUploadInput.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
       <mat-form-field>
-        <input #fileUpload (change)="onFileSelected($event)" [hidden]="true" accept=".zip" class="file-input"
+        <input #fileUploadInput (change)="onFileSelected($event)" [hidden]="true" accept=".zip" class="file-input"
                type="file">
         <input [formControl]="formControlFileInput" matInput>
         <mat-hint *ngIf="!file">Cannot be empty</mat-hint>
