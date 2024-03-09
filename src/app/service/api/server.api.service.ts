@@ -16,7 +16,7 @@ export class ServerApiService {
               private apiService: ApiService) {
   }
 
-  public getRegistrationToken(): Promise<string | null> {
+  public getRegistrationToken(): Promise<string> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/registrationToken").subscribe({
         next: value => {
@@ -25,13 +25,13 @@ export class ServerApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject();
         }
       });
     });
   }
 
-  public generateNewRegistrationToken(): Promise<void | null> {
+  public generateNewRegistrationToken(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/server/registrationToken", null).subscribe({
         next: () => {
@@ -39,13 +39,13 @@ export class ServerApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject();
         }
       });
     });
   }
 
-  public getAgentUpdateInterval(): Promise<number | null> {
+  public getAgentUpdateInterval(): Promise<number> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/updateInterval").subscribe({
         next: value => {
@@ -54,13 +54,13 @@ export class ServerApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject();
         }
       });
     });
   }
 
-  public changeAgentUpdateInterval(changeAgentUpdateInterval1: ChangeAgentUpdateInterval): Promise<void | null> {
+  public changeAgentUpdateInterval(changeAgentUpdateInterval1: ChangeAgentUpdateInterval): Promise<void > {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/updateInterval", changeAgentUpdateInterval1).subscribe({
         next: () => {
@@ -68,7 +68,7 @@ export class ServerApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject();
         }
       });
     });
