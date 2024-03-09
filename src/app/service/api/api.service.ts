@@ -21,10 +21,17 @@ export class ApiService {
       this.snackbar.open("Server connection Error", "", {duration: 5000, panelClass: "notification-error"});
     } else if (data.status == 400) {
       const apiErrorResponse = data.error as ApiErrorResponse;
-      this.snackbar.open(apiErrorResponse.message, "", {
-        duration: 5000,
-        panelClass: "notification-error"
-      });
+      if (apiErrorResponse.message) {
+        this.snackbar.open(apiErrorResponse.message, "", {
+          duration: 5000,
+          panelClass: "notification-error"
+        });
+      } else {
+        this.snackbar.open(apiErrorResponse.error, "", {
+          duration: 5000,
+          panelClass: "notification-error"
+        });
+      }
     } else {
       this.snackbar.open("Error: " + data.status, "", snackBarConfig);
     }

@@ -2,7 +2,7 @@
   <h2>Registration Token</h2>
   <mat-divider></mat-divider>
   @if (!dataLoaded) {
-    <app-loading *ngIf="!this.dataLoaded"></app-loading>
+    <app-loading></app-loading>
   } @else {
     <mat-form-field>
       <input disabled matInput >{{registrationToken}}

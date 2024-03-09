@@ -41,7 +41,7 @@ export class SettingRegistrationTokenComponent implements OnInit {
         this.registrationToken = response;
         this.dataLoaded = true;
       }
-    })
+    });
   }
 
   generateNewRegistrationToken() {
