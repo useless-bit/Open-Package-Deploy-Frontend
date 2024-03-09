@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {SettingOverviewComponent} from './setting-overview.component';
+import {AgentAddNewComponent} from './agent-add-new.component';
 
-describe('SettingOverviewComponent', () => {
-  let component: SettingOverviewComponent;
-  let fixture: ComponentFixture<SettingOverviewComponent>;
+describe('AgentAddNewComponent', () => {
+  let component: AgentAddNewComponent;
+  let fixture: ComponentFixture<AgentAddNewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SettingOverviewComponent]
+      imports: [AgentAddNewComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(SettingOverviewComponent);
+    fixture = TestBed.createComponent(AgentAddNewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

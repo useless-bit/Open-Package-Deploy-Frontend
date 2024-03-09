@@ -68,18 +68,18 @@ export class DeploymentDetailComponent implements OnInit {
   }
 
   resetDeployment() {
-      const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
-        data: new DialogConfirmCancelInput("Reset deployment: " + this.deploymentEntity?.packageName + " -> " + this.deploymentEntity?.agentName,
-          "Do you want to reset this deployment?", "Cancel", "Reset")
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.dataLoaded = false;
-          this.deploymentApiService.reset(this.deploymentUUID).then(() => {
-            this.ngOnInit();
-          })
-        }
-      });
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Reset deployment: " + this.deploymentEntity?.packageName + " -> " + this.deploymentEntity?.agentName,
+        "Do you want to reset this deployment?", "Cancel", "Reset")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false;
+        this.deploymentApiService.reset(this.deploymentUUID).then(() => {
+          this.ngOnInit();
+        })
+      }
+    });
   }
 
 }

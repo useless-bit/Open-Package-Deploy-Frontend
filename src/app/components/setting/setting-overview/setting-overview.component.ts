@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatCard} from "@angular/material/card";
 import {SettingRegistrationTokenComponent} from "../setting-registration-token/setting-registration-token.component";
 import {SettingUpdateIntervalComponent} from "../setting-update-interval/setting-update-interval.component";

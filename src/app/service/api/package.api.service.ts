@@ -6,7 +6,6 @@ import {PackageEntity} from "./entity/packageEntity";
 import {Observable} from "rxjs";
 import {PackageUpdateRequest} from "./request/packageUpdateRequest";
 import {ApiService} from "./api.service";
-import {UpdatePackageContentRequest} from "./request/updatePackageContentRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +80,7 @@ export class PackageApiService {
     });
   }
 
-  public updateContent(packageUUID: string ,formData: FormData): Observable<Object | null> {
+  public updateContent(packageUUID: string, formData: FormData): Observable<Object | null> {
     return this.httpClient.patch<Object | null>(this.variableService.backendURL + "/api/package/" + packageUUID + "/content", formData, {
       reportProgress: true,
       observe: "events"

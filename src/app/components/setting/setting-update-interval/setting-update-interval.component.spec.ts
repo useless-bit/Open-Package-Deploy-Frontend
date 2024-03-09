@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SettingUpdateIntervalComponent } from './setting-update-interval.component';
+import {SettingUpdateIntervalComponent} from './setting-update-interval.component';
 
 describe('SettingUpdateCheckTimeoutComponent', () => {
   let component: SettingUpdateIntervalComponent;
@@ -10,7 +10,7 @@ describe('SettingUpdateCheckTimeoutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SettingUpdateIntervalComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SettingUpdateIntervalComponent);
     component = fixture.componentInstance;

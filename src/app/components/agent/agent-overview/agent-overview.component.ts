@@ -23,13 +23,13 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {AgentDetailPopupComponent} from "../agent-detail-popup/agent-detail-popup.component";
 import {MatDivider} from "@angular/material/divider";
 import {AgentApiService} from "../../../service/api/agent.api.service";
+import {AgentAddNewComponent} from "../agent-add-new/agent-add-new.component";
 
 @Component({
   selector: 'app-agent-overview',
@@ -176,6 +176,6 @@ export class AgentOverviewComponent implements OnInit {
   }
 
   openAddNewPopup() {
-    this.dialog.open(PlaceholderComponent)
+    this.dialog.open(AgentAddNewComponent, {panelClass: "main-popup"})
   }
 }

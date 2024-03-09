@@ -1,0 +1,21 @@
+<div class="main-content">
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <h2>Add new Agent</h2>
+    <mat-divider></mat-divider>
+    <div class="os-selector">
+      <mat-radio-group (change)="osSelectionChanged($event)">
+        @for (operatingSystem of OperatingSystem | keyvalue; track operatingSystem) {
+          @if (operatingSystem.value != "UNKNOWN") {
+            <mat-radio-button class="example-radio-button" [value]="operatingSystem.key">{{ operatingSystem.key }}
+            </mat-radio-button>
+          }
+        }
+      </mat-radio-group>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-raised-button (click)="copyCodeToClipboard()">Copy to clipboard</button>
+    <pre><code [highlight]="installCode" [lineNumbers]="true"></code></pre>
+  }
+</div>

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SettingRegistrationTokenComponent } from './setting-registration-token.component';
+import {SettingRegistrationTokenComponent} from './setting-registration-token.component';
 
 describe('SettingRegistrationTokenComponent', () => {
   let component: SettingRegistrationTokenComponent;
@@ -10,8 +10,8 @@ describe('SettingRegistrationTokenComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SettingRegistrationTokenComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SettingRegistrationTokenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
