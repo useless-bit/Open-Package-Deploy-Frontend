@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {OperatingSystem} from "../../../service/api/entity/operatingSystem";
 import {MatButton} from "@angular/material/button";
@@ -22,7 +22,7 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
   selector: 'app-deployment-create',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     NgIf,
     MatButton,
     MatError,

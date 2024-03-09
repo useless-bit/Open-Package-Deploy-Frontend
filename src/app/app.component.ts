@@ -10,13 +10,13 @@ import {ApplicationLoadedService} from "./service/application-loaded/application
 import {KeycloakEventType, KeycloakService} from "keycloak-angular";
 import {KeycloakProfile} from "keycloak-js";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import {LoadingFullscreenComponent} from "./components/loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "./components/loading/loading.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatDrawerContainer, MatDrawer, SidenavComponent, MatIconButton, NgIf, MatIcon, MatProgressSpinner, LoadingFullscreenComponent],
+  imports: [RouterOutlet, MatDrawerContainer, MatDrawer, SidenavComponent, MatIconButton, NgIf, MatIcon, MatProgressSpinner, LoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -14,7 +14,7 @@ import {
 } from "@angular/material/table";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {NgForOf, NgIf} from "@angular/common";
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
@@ -46,7 +46,7 @@ import {AgentApiService} from "../../../service/api/agent.api.service";
     MatRowDef,
     MatHeaderRowDef,
     NgIf,
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatFormField,
     MatInput,
     MatAccordion,

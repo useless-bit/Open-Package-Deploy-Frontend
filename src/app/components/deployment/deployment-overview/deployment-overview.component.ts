@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {
@@ -35,7 +35,7 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
   selector: 'app-deployment-overview',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatAccordion,
     MatButton,
     MatCell,
