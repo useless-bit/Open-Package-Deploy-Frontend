@@ -10,6 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {MatDialog} from "@angular/material/dialog";
+import {MatSnackbarOptions} from "../../../configuration/mat-snackbar/matSnackbarOptions";
 
 @Component({
   selector: 'app-setting-registration-token',
@@ -62,7 +63,7 @@ export class SettingRegistrationTokenComponent implements OnInit {
 
   copyRegistrationTokenIntoClipboard() {
     navigator.clipboard.writeText(this.registrationToken).then(() => {
-      this.matSnackBar.open("Copied to clipboard")
+      this.matSnackBar.open("Copied to clipboard", "", MatSnackbarOptions.InfoNotification)
     });
   }
 }

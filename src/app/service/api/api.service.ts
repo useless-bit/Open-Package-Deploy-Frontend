@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {ApiErrorResponse} from "./reponse/apiErrorResponse";
+import {MatSnackbarOptions} from "../../configuration/mat-snackbar/matSnackbarOptions";
 
 @Injectable({
   providedIn: 'root'
@@ -13,27 +14,17 @@ export class ApiService {
 
   public errorHandling(data: HttpErrorResponse) {
     const snackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
-    snackBarConfig.verticalPosition = 'top';
-    snackBarConfig.horizontalPosition = 'right';
-    snackBarConfig.duration = 5000;
-    snackBarConfig.panelClass = ["notification", "error"]
     if (data.status == 0) {
-      this.snackbar.open("Server connection Error", "", {duration: 5000, panelClass: "notification-error"});
+      this.snackbar.open("Server connection Error", "", MatSnackbarOptions.ErrorNotification);
     } else if (data.status == 400) {
       const apiErrorResponse = data.error as ApiErrorResponse;
       if (apiErrorResponse.message) {
-        this.snackbar.open(apiErrorResponse.message, "", {
-          duration: 5000,
-          panelClass: "notification-error"
-        });
+        this.snackbar.open(apiErrorResponse.message, "", MatSnackbarOptions.ErrorNotification);
       } else {
-        this.snackbar.open(apiErrorResponse.error, "", {
-          duration: 5000,
-          panelClass: "notification-error"
-        });
+        this.snackbar.open(apiErrorResponse.error, "", MatSnackbarOptions.ErrorNotification);
       }
     } else {
-      this.snackbar.open("Error: " + data.status, "", snackBarConfig);
+      this.snackbar.open("Error: " + data.status, "", MatSnackbarOptions.ErrorNotification);
     }
   }
 }
