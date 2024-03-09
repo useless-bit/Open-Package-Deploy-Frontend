@@ -74,7 +74,7 @@ export class DeploymentDetailComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          this.dataLoaded = false
+          this.dataLoaded = false;
           this.deploymentApiService.reset(this.deploymentUUID).then(() => {
             this.ngOnInit();
           })
