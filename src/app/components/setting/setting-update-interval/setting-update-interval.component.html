@@ -1,0 +1,14 @@
+<div class="main-content">
+  <h2>Update Interval</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <mat-form-field>
+      <input disabled matInput>Update Interval: {{ agentUpdateInterval }} seconds
+    </mat-form-field>
+    <div class="buttons">
+      <button mat-raised-button (click)="changeAgentUpdateInterval()">Change interval</button>
+    </div>
+  }
+</div>

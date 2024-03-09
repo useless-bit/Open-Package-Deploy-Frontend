@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from "@angular/material/expansion";
@@ -22,7 +22,7 @@ import {PackageUpdateContentComponentInput} from "../package-update-content/pack
   selector: 'app-package-detail',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatButton,
     MatDivider,
     MatExpansionPanel,

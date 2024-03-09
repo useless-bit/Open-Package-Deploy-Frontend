@@ -16,6 +16,7 @@ import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@ang
 import {Location} from "@angular/common";
 import {CustomRouteReuseStrategy} from "./strategy/CustomRouteReuseStrategy";
 import {MatTableDataSource} from "@angular/material/table";
+import {HIGHLIGHT_OPTIONS} from "ngx-highlightjs";
 
 async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService) {
   return new Promise<void>(async (resolve) => {
@@ -82,6 +83,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy
+    },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {fullLibraryLoader: () => import('highlight.js')}
     }
   ]
 };

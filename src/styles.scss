@@ -1,6 +1,7 @@
 @use "@angular/material" as mat;
 
 @import 'material-icons/iconfont/material-icons.css';
+@import 'highlight.js/styles/dark.css';
 
 @include mat.core();
 
@@ -30,15 +31,21 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.error {
-  --mdc-snackbar-container-color: red;
-  --mdc-snackbar-supporting-text-color: white;
-}
-
 .notification {
   text-align: center;
   --mdc-snackbar-supporting-text-weight: bold;
 }
+
+.snackbar-info {
+  @extend .notification;
+}
+
+.snackbar-error {
+  @extend .notification;
+  --mdc-snackbar-container-color: red;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
 
 .main-popup {
   height: 80%;

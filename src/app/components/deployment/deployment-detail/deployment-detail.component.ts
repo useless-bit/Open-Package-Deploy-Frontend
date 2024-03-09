@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
@@ -17,7 +17,7 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
   selector: 'app-deployment-detail',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatExpansionPanel,
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
@@ -68,18 +68,18 @@ export class DeploymentDetailComponent implements OnInit {
   }
 
   resetDeployment() {
-      const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
-        data: new DialogConfirmCancelInput("Reset deployment: " + this.deploymentEntity?.packageName + " -> " + this.deploymentEntity?.agentName,
-          "Do you want to reset this deployment?", "Cancel", "Reset")
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.dataLoaded = false
-          this.deploymentApiService.reset(this.deploymentUUID).then(() => {
-            this.ngOnInit();
-          })
-        }
-      });
+    const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+      data: new DialogConfirmCancelInput("Reset deployment: " + this.deploymentEntity?.packageName + " -> " + this.deploymentEntity?.agentName,
+        "Do you want to reset this deployment?", "Cancel", "Reset")
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataLoaded = false;
+        this.deploymentApiService.reset(this.deploymentUUID).then(() => {
+          this.ngOnInit();
+        })
+      }
+    });
   }
 
 }

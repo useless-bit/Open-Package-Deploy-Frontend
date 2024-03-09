@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {NgIf} from "@angular/common";
 import {
   MatCard,
@@ -35,7 +35,7 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
   selector: 'app-agent-detail',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     NgIf,
     MatCard,
     MatCardTitle,

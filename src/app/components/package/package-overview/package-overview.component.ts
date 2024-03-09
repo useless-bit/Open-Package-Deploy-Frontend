@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressBar} from "@angular/material/progress-bar";
@@ -37,7 +37,7 @@ import {PackageApiService} from "../../../service/api/package.api.service";
   selector: 'app-package-overview',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatFormField,
     MatLabel,
     MatIcon,

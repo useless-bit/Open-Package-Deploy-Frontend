@@ -6,7 +6,7 @@ import {RouterLink} from "@angular/router";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
-  selector: 'app-loading-fullscreen',
+  selector: 'app-loading',
   standalone: true,
   imports: [
     MatButton,
@@ -17,9 +17,9 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     RouterLink,
     MatProgressSpinner
   ],
-  templateUrl: './loading-fullscreen.component.html',
-  styleUrl: './loading-fullscreen.component.scss'
+  templateUrl: './loading.component.html',
+  styleUrl: './loading.component.scss'
 })
-export class LoadingFullscreenComponent {
+export class LoadingComponent {
 
 }
