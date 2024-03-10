@@ -31,7 +31,7 @@ import {CreateDeploymentRequest} from "../../../service/api/request/createDeploy
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
 
 @Component({
-  selector: 'app-agent-deployment-list',
+  selector: 'app-agent-create-deployment',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -66,10 +66,10 @@ import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
     MatListItem,
     MatProgressBar
   ],
-  templateUrl: './agent-deployment-list.component.html',
-  styleUrl: './agent-deployment-list.component.scss'
+  templateUrl: './agent-create-deployment.component.html',
+  styleUrl: './agent-create-deployment.component.scss'
 })
-export class AgentDeploymentListComponent implements OnInit {
+export class AgentCreateDeploymentComponent implements OnInit {
   @Input() public agentUUID: string = "";
 
   public dataLoaded: boolean = false;
@@ -84,7 +84,7 @@ export class AgentDeploymentListComponent implements OnInit {
   constructor(private deploymentApiService: DeploymentApiService,
               private packageApiService: PackageApiService,
               private agentApiService: AgentApiService,
-              public agentDeploymentListComponentMatDialogRef: MatDialogRef<AgentDeploymentListComponent>) {
+              public agentDeploymentListComponentMatDialogRef: MatDialogRef<AgentCreateDeploymentComponent>) {
   }
 
   ngOnInit() {
@@ -128,14 +128,15 @@ export class AgentDeploymentListComponent implements OnInit {
     for (let selectedPackage of this.selectedPackages) {
       this.deploymentApiService.create(new CreateDeploymentRequest(this.agentUUID, selectedPackage.uuid), true).then(response => {
           this.createdDeploymentStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> Created")
+          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedPackages.length));
 
         },
         error => {
           let errorResponse = error.error as ApiErrorResponse;
           this.createdDeploymentStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> " + errorResponse.message)
+          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedPackages.length));
         });
 
-      this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedPackages.length));
     }
     this.agentDeploymentListComponentMatDialogRef.disableClose = false;
     this.deploymentCreationProcessStarted = false;

@@ -10,7 +10,7 @@
   <div class="component">
     <ng-container [ngSwitch]="fontStyleControl.value">
       <app-package-detail *ngSwitchCase="'page_one'" [packageUUID]=this.data.packageUUID></app-package-detail>
-      <app-placeholder *ngSwitchCase="'page_two'"></app-placeholder>
+      <app-package-create-deployment *ngSwitchCase="'page_two'" [packageUUID]=this.data.packageUUID></app-package-create-deployment>
     </ng-container>
   </div>
 </div>

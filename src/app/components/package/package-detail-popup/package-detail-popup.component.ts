@@ -6,6 +6,7 @@ import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {PackageDetailComponent} from "../package-detail/package-detail.component";
+import {PackageCreateDeploymentComponent} from "../package-create-deployment/package-create-deployment.component";
 
 @Component({
   selector: 'app-package-detail-popup',
@@ -18,7 +19,8 @@ import {PackageDetailComponent} from "../package-detail/package-detail.component
     PlaceholderComponent,
     NgSwitch,
     ReactiveFormsModule,
-    PackageDetailComponent
+    PackageDetailComponent,
+    PackageCreateDeploymentComponent
   ],
   templateUrl: './package-detail-popup.component.html',
   styleUrl: './package-detail-popup.component.scss'

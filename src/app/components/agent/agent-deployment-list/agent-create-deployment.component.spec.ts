@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgentDeploymentListComponent } from './agent-deployment-list.component';
+import { AgentCreateDeploymentComponent } from './agent-create-deploymentomponent.component';
 
 describe('AgentDeploymentListComponent', () => {
-  let component: AgentDeploymentListComponent;
-  let fixture: ComponentFixture<AgentDeploymentListComponent>;
+  let component: AgentCreateDeploymentComponent;
+  let fixture: ComponentFixture<AgentCreateDeploymentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AgentDeploymentListComponent]
+      imports: [AgentCreateDeploymentComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(AgentDeploymentListComponent);
+
+    fixture = TestBed.createComponent(AgentCreateDeploymentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
