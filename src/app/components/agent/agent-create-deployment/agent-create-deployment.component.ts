@@ -94,8 +94,8 @@ export class AgentCreateDeploymentComponent implements OnInit {
         if (agentResponse && packageResponse) {
           this.agentEntity = agentResponse;
           this.packageResponse = packageResponse.packages;
-          this.packageSelectList = this.packageResponse;
           this.filterPackages();
+          this.packageSelectList = this.packageResponse;
           this.dataLoaded = true;
         }
       });
