@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from "@angular/common/http";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiErrorResponse} from "./reponse/apiErrorResponse";
 import {MatSnackbarOptions} from "../../configuration/mat-snackbar/matSnackbarOptions";
 

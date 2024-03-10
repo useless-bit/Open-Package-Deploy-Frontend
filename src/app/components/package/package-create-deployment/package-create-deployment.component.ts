@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
 import {MatList, MatListItem, MatListOption, MatSelectionList} from "@angular/material/list";
 import {MatProgressBar} from "@angular/material/progress-bar";
@@ -14,6 +14,10 @@ import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {MatIcon} from "@angular/material/icon";
+import {MatInput} from "@angular/material/input";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-package-create-deployment',
@@ -32,17 +36,25 @@ import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
     MatStepper,
     MatStepperNext,
     MatStepperPrevious,
-    NgIf
+    NgIf,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatSuffix,
+    MatTooltip
   ],
   templateUrl: './package-create-deployment.component.html',
   styleUrl: './package-create-deployment.component.scss'
 })
-export class PackageCreateDeploymentComponent implements OnInit{
+export class PackageCreateDeploymentComponent implements OnInit {
   @Input() public packageUUID: string = "";
 
   public dataLoaded: boolean = false;
   public packageEntity: PackageEntity | null = null;
   public agentResponse: AgentEntity[] | null = null;
+  public agentSelectList: AgentEntity[] = [];
   public selectedAgents: AgentEntity[] = [];
   public deploymentCreationProcessStarted: boolean = false;
   public deploymentCreationProgress: number = 0;
@@ -61,18 +73,12 @@ export class PackageCreateDeploymentComponent implements OnInit{
         if (packageResponse && agentResponse) {
           this.packageEntity = packageResponse;
           this.agentResponse = agentResponse.agents;
+          this.agentSelectList = this.agentResponse;
           this.filterAgents();
           this.dataLoaded = true;
         }
       });
     });
-  }
-
-  private filterAgents(): void {
-    if (this.agentResponse) {
-      this.agentResponse = this.agentResponse.filter(item => item.registrationCompleted);
-      this.agentResponse = this.agentResponse.filter(item => item.operatingSystem === this.packageEntity?.targetOperatingSystem);
-    }
   }
 
   changeSelectedPackages(event: boolean, packageUUID: string) {
@@ -109,4 +115,19 @@ export class PackageCreateDeploymentComponent implements OnInit{
     this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
     this.deploymentCreationProcessStarted = false;
   }
+
+  applySearch(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (this.agentResponse) {
+      this.agentSelectList = this.agentResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+    }
+  }
+
+  private filterAgents(): void {
+    if (this.agentResponse) {
+      this.agentResponse = this.agentResponse.filter(item => item.registrationCompleted);
+      this.agentResponse = this.agentResponse.filter(item => item.operatingSystem === this.packageEntity?.targetOperatingSystem);
+    }
+  }
+
 }

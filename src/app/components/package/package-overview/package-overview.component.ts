@@ -74,7 +74,7 @@ import {PackageApiService} from "../../../service/api/package.api.service";
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss'
 })
-export class PackageOverviewComponent implements OnInit{
+export class PackageOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];

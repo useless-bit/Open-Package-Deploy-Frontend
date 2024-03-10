@@ -8,8 +8,13 @@
 mat-stepper {
   height: 100%;
   overflow: auto;
+
   mat-divider {
     margin-top: 10px;
     margin-bottom: 10px;
   }
+}
+
+.search-field {
+  width: 100%;
 }

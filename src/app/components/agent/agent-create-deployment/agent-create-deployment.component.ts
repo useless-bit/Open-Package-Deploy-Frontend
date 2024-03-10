@@ -29,6 +29,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-agent-create-deployment',
@@ -75,6 +76,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
   public dataLoaded: boolean = false;
   public agentEntity: AgentEntity | null = null;
   public packageResponse: PackageEntity[] | null = null;
+  public packageSelectList: PackageEntity[] = [];
   public selectedPackages: PackageEntity[] = [];
   public deploymentCreationProcessStarted: boolean = false;
   public deploymentCreationProgress: number = 0;
@@ -93,18 +95,12 @@ export class AgentCreateDeploymentComponent implements OnInit {
         if (agentResponse && packageResponse) {
           this.agentEntity = agentResponse;
           this.packageResponse = packageResponse.packages;
+          this.packageSelectList = this.packageResponse;
           this.filterPackages();
           this.dataLoaded = true;
         }
       });
     });
-  }
-
-  private filterPackages(): void {
-    if (this.packageResponse) {
-      this.packageResponse = this.packageResponse.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
-      this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
-    }
   }
 
   changeSelectedPackages(event: boolean, packageUUID: string) {
@@ -140,5 +136,19 @@ export class AgentCreateDeploymentComponent implements OnInit {
     }
     this.agentDeploymentListComponentMatDialogRef.disableClose = false;
     this.deploymentCreationProcessStarted = false;
+  }
+
+  applySearch(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (this.packageResponse) {
+      this.packageSelectList = this.packageResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+    }
+  }
+
+  private filterPackages(): void {
+    if (this.packageResponse) {
+      this.packageResponse = this.packageResponse.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
+      this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
+    }
   }
 }

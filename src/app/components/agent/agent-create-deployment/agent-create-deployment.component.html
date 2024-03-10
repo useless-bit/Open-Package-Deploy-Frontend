@@ -5,13 +5,18 @@
     <mat-step>
       <ng-template matStepLabel>Select packages</ng-template>
       <div>
-        <button mat-button disabled matStepperPrevious>Back</button>
+        <button disabled mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
 
+      <mat-form-field class="search-field">
+        <mat-label>Search</mat-label>
+        <input (keyup)="applySearch($event)" autofocus matInput>
+      </mat-form-field>
+
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (package_item of packageResponse; track package_item) {
+        @for (package_item of packageSelectList; track package_item) {
           <mat-list-option
             (selectedChange)="changeSelectedPackages($event, package_item.uuid)">{{ package_item.name }}
             | {{ package_item.uuid }}
@@ -44,16 +49,16 @@
     <mat-step>
       <ng-template matStepLabel>Creating deployments</ng-template>
       <div>
-        <button mat-button [disabled]="deploymentCreationProcessStarted" matStepperPrevious>Back</button>
-        <button mat-button [disabled]="deploymentCreationProcessStarted" (click)="createDeployments()">Create</button>
+        <button [disabled]="deploymentCreationProcessStarted" mat-button matStepperPrevious>Back</button>
+        <button (click)="createDeployments()" [disabled]="deploymentCreationProcessStarted" mat-button>Create</button>
       </div>
       <mat-divider></mat-divider>
       <div *ngIf="deploymentCreationProgress > 0">
-        <mat-progress-bar class="progress-bar" mode="determinate" [value]="deploymentCreationProgress"/>
+        <mat-progress-bar [value]="deploymentCreationProgress" class="progress-bar" mode="determinate"/>
         {{ deploymentCreationProgress }} / 100 %
       </div>
       <div>
-        Status:
+        Package -> Deployment status:
         <mat-list>
           @for (selectedPackage of createdDeploymentStatus; track createdDeploymentStatus) {
             <mat-list-item>{{ selectedPackage }}</mat-list-item>

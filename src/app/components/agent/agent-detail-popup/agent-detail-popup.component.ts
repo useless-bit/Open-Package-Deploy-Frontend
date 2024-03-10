@@ -8,7 +8,7 @@ import {MatButton} from "@angular/material/button";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {NgSwitch, NgSwitchCase} from "@angular/common";
-import {AgentCreateDeploymentComponent} from "../agent-deployment-list/agent-create-deployment.component";
+import {AgentCreateDeploymentComponent} from "../agent-create-deployment/agent-create-deployment.component";
 
 @Component({
   selector: 'app-agent-detail-popup',

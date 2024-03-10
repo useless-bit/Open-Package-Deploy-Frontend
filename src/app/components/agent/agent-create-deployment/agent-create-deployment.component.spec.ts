@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AgentCreateDeploymentComponent } from './agent-create-deploymentomponent.component';
+import {AgentCreateDeploymentComponent} from './agent-create-deploymentomponent.component';
 
 describe('AgentDeploymentListComponent', () => {
   let component: AgentCreateDeploymentComponent;
@@ -10,7 +10,7 @@ describe('AgentDeploymentListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AgentCreateDeploymentComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AgentCreateDeploymentComponent);
     component = fixture.componentInstance;
