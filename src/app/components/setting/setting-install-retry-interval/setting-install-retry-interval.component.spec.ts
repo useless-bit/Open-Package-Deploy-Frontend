@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SettingInstallRetryIntervalComponent } from './setting-install-retry-interval.component';
+import {SettingInstallRetryIntervalComponent} from './setting-install-retry-interval.component';
 
 describe('SettingInstallRetryIntervalComponent', () => {
   let component: SettingInstallRetryIntervalComponent;
@@ -10,8 +10,8 @@ describe('SettingInstallRetryIntervalComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SettingInstallRetryIntervalComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SettingInstallRetryIntervalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

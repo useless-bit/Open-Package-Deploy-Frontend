@@ -44,7 +44,9 @@
       <ng-template matStepLabel>Creating deployments</ng-template>
       <div>
         <button [disabled]="deploymentCreationProcessStarted" mat-button matStepperPrevious>Back</button>
-        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" mat-button>Create</button>
+        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" mat-button>
+          Create
+        </button>
       </div>
       <mat-divider></mat-divider>
       <div *ngIf="deploymentCreationProgress > 0">

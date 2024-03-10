@@ -29,7 +29,6 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-agent-create-deployment',
