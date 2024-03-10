@@ -9,12 +9,10 @@
         <button mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
-
       <mat-form-field class="search-field">
         <mat-label>Search</mat-label>
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
-
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
         @for (package_item of agentSelectList; track package_item) {
           <mat-list-option
@@ -24,7 +22,6 @@
         }
       </mat-selection-list>
     </mat-step>
-
 
     <mat-step>
       <ng-template matStepLabel>Summary</ng-template>
@@ -41,15 +38,13 @@
           }
         </mat-list>
       </div>
-
     </mat-step>
-
 
     <mat-step>
       <ng-template matStepLabel>Creating deployments</ng-template>
       <div>
         <button [disabled]="deploymentCreationProcessStarted" mat-button matStepperPrevious>Back</button>
-        <button (click)="createDeployments()" [disabled]="deploymentCreationProcessStarted" mat-button>Create</button>
+        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" mat-button>Create</button>
       </div>
       <mat-divider></mat-divider>
       <div *ngIf="deploymentCreationProgress > 0">

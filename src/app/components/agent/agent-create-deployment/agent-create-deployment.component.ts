@@ -116,7 +116,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
     }
   }
 
-  createDeployments() {
+  createDeploymentsForAgent() {
     this.agentDeploymentListComponentMatDialogRef.disableClose = true;
     this.deploymentCreationProgress = 0;
     this.deploymentCreationProcessStarted = true;

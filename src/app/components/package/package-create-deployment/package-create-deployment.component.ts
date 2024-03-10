@@ -94,7 +94,7 @@ export class PackageCreateDeploymentComponent implements OnInit {
     }
   }
 
-  createDeployments() {
+  createDeploymentsForPackage() {
     this.packageCreateDeploymentComponentMatDialogRef.disableClose = true;
     this.deploymentCreationProgress = 0;
     this.deploymentCreationProcessStarted = true;
