@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from "@angular/common/http";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiErrorResponse} from "./reponse/apiErrorResponse";
 import {MatSnackbarOptions} from "../../configuration/mat-snackbar/matSnackbarOptions";
 
@@ -13,7 +13,6 @@ export class ApiService {
   }
 
   public errorHandling(data: HttpErrorResponse) {
-    const snackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
     if (data.status == 0) {
       this.snackbar.open("Server connection Error", "", MatSnackbarOptions.ErrorNotification);
     } else if (data.status == 400) {

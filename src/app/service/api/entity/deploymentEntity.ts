@@ -17,7 +17,7 @@ export class DeploymentEntity {
     this.packageUuid = packageData.packageUUID;
     this.packageName = this.formatName(packageData.packageName);
     this.isDeployed = packageData.deployed;
-    this.expectedReturnValue = this.formatName(packageData.expectedReturnValue);
+    this.expectedReturnValue = packageData.expectedReturnValue;
     this.returnValue = this.formatName(packageData.returnValue);
     this.lastDeploymentTime = this.formatDate(packageData.lastDeploymentTimestamp);
   }

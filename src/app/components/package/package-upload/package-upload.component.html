@@ -26,6 +26,12 @@
         <mat-error>Cannot be empty</mat-error>
       }
     </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Expected Return Value</mat-label>
+      <input [formControl]="formControlExpectedReturnValueInput" matInput>
+    </mat-form-field>
+
     <div class="file-upload">
       <button (click)="fileUpload.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
       <mat-form-field>
