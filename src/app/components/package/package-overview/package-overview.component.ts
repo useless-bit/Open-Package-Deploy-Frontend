@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
@@ -74,7 +74,7 @@ import {PackageApiService} from "../../../service/api/package.api.service";
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss'
 })
-export class PackageOverviewComponent {
+export class PackageOverviewComponent implements OnInit{
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
   public selectedColumns: String[] = ['name'];

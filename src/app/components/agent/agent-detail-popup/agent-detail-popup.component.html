@@ -10,7 +10,7 @@
   <div class="component">
     <ng-container [ngSwitch]="fontStyleControl.value">
       <app-agent-detail *ngSwitchCase="'page_one'" [agentUUID]=this.data.agentUUID></app-agent-detail>
-      <app-placeholder *ngSwitchCase="'page_two'"></app-placeholder>
+      <app-agent-deployment-list *ngSwitchCase="'page_two'" [agentUUID]=this.data.agentUUID></app-agent-deployment-list>
     </ng-container>
   </div>
 </div>

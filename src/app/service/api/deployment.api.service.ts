@@ -44,6 +44,34 @@ export class DeploymentApiService {
     });
   }
 
+  public getDeploymentsForAgent(agentUUID: string): Promise<DeploymentListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/deployment/agent/" + agentUUID).subscribe({
+        next: value => {
+          resolve(new DeploymentListResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
+  public getDeploymentsForPackage(packageUUID: string): Promise<DeploymentListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/deployment/package/" + packageUUID).subscribe({
+        next: value => {
+          resolve(new DeploymentListResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(null);
+        }
+      });
+    });
+  }
+
   public delete(deploymentUUID: string): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.delete(this.variableService.backendURL + "/api/deployment/" + deploymentUUID).subscribe({
@@ -58,15 +86,17 @@ export class DeploymentApiService {
     });
   }
 
-  public create(createDeploymentRequest: CreateDeploymentRequest): Promise<void | null> {
+  public create(createDeploymentRequest: CreateDeploymentRequest, bypassError: boolean): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/deployment", createDeploymentRequest).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(null);
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(error);
         }
       });
     });
@@ -78,9 +108,9 @@ export class DeploymentApiService {
         next: () => {
           resolve();
         },
-        error: (error) => {
+        error: error => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error);
         }
       });
     });

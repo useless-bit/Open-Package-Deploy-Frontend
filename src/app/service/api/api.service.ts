@@ -13,7 +13,6 @@ export class ApiService {
   }
 
   public errorHandling(data: HttpErrorResponse) {
-    const snackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
     if (data.status == 0) {
       this.snackbar.open("Server connection Error", "", MatSnackbarOptions.ErrorNotification);
     } else if (data.status == 400) {

@@ -54,7 +54,6 @@ export class DeploymentCreateComponent implements OnInit {
   formControlPackageSelectSearch: FormControl = new FormControl('');
   formControlAgentSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlAgentSelectSearch: FormControl = new FormControl('');
-  formControlExpectedReturnValueInput: FormControl = new FormControl('');
   protected readonly OperatingSystem = OperatingSystem;
   protected readonly Object = Object;
 
@@ -92,7 +91,7 @@ export class DeploymentCreateComponent implements OnInit {
     this.formControlAgentSelect.markAllAsTouched();
 
     if (this.formControlOsSelect.valid && this.formControlPackageSelect.valid && this.formControlAgentSelect.valid) {
-      this.deploymentApiService.create(new CreateDeploymentRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value, this.formControlExpectedReturnValueInput.value.trim())).then(() => {
+      this.deploymentApiService.create(new CreateDeploymentRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value), false).then(() => {
         this.dialogRef.close();
       })
     }

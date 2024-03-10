@@ -3,6 +3,7 @@ import {OperatingSystem} from "./operatingSystem";
 export class PackageEntity {
   uuid: string;
   name: string;
+  expectedReturnValue: string;
   packageStatus: string;
   checksumPlaintext: string;
   checksumEncrypted: string;
@@ -14,6 +15,7 @@ export class PackageEntity {
   constructor(packageData: any) {
     this.uuid = packageData.uuid;
     this.name = packageData.name;
+    this.expectedReturnValue = packageData.expectedReturnValue;
     this.packageStatus = this.formatName(packageData.packageStatusInternal);
     this.checksumPlaintext = this.formatName(packageData.checksumPlaintext);
     this.checksumEncrypted = this.formatName(packageData.checksumEncrypted);

@@ -45,6 +45,7 @@ export class PackageUploadComponent implements OnInit {
   formControlNameInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlChecksumInput: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlExpectedReturnValueInput: FormControl = new FormControl('');
 
 
   formControlFileInput: FormControl = new FormControl({
@@ -83,7 +84,7 @@ export class PackageUploadComponent implements OnInit {
       this.formControlChecksumInput.disable();
       this.formControlOsSelect.disable();
       let formData: FormData = new FormData();
-      let addNewPackageRequest: AddNewPackageRequest = new AddNewPackageRequest(this.formControlNameInput.value, this.formControlChecksumInput.value, this.formControlOsSelect.value.toUpperCase())
+      let addNewPackageRequest: AddNewPackageRequest = new AddNewPackageRequest(this.formControlNameInput.value, this.formControlExpectedReturnValueInput.value, this.formControlChecksumInput.value, this.formControlOsSelect.value.toUpperCase())
       formData.append("addNewPackageRequest", new Blob([JSON.stringify(addNewPackageRequest)], {type: 'application/json'}));
       formData.append("multipartFile", this.file)
       let upload = this.packageApiService.addNew(formData);
