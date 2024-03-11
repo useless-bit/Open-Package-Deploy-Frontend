@@ -4,23 +4,28 @@
   </div>
 
   <div class="main-buttons">
-    <button color="primary" mat-flat-button routerLink="/">
+    <button color="primary" [style.background-color]="currentUrl === '/' ? 'var(--sidenav-button-selected)' : ''"
+            mat-flat-button routerLink="/">
       <mat-icon>home</mat-icon>
       Home
     </button>
-    <button color="primary" mat-flat-button routerLink="/agent">
+    <button color="primary" [style.background-color]="currentUrl === '/agent' ? 'var(--sidenav-button-selected)' : ''"
+            mat-flat-button routerLink="/agent">
       <mat-icon>computer</mat-icon>
       Agents
     </button>
-    <button color="primary" mat-flat-button routerLink="/package">
+    <button color="primary" [style.background-color]="currentUrl === '/package' ? 'var(--sidenav-button-selected)' : ''"
+            mat-flat-button routerLink="/package">
       <mat-icon>inventory</mat-icon>
       Packages
     </button>
-    <button color="primary" mat-flat-button routerLink="/deployment">
+    <button color="primary" [style.background-color]="currentUrl === '/deployment' ? 'var(--sidenav-button-selected)' : ''"
+            mat-flat-button routerLink="/deployment">
       <mat-icon>archive</mat-icon>
       Deployments
     </button>
-    <button color="primary" mat-flat-button routerLink="/settings">
+    <button color="primary" [style.background-color]="currentUrl === '/settings' ? 'var(--sidenav-button-selected)' : ''"
+            mat-flat-button routerLink="/settings">
       <mat-icon>settings</mat-icon>
       Settings
     </button>
