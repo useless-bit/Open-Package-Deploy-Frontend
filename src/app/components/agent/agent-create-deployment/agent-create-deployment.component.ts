@@ -145,13 +145,6 @@ export class AgentCreateDeploymentComponent implements OnInit {
     }
   }
 
-  private filterPackages(): void {
-    if (this.packageResponse) {
-      this.packageResponse = this.packageResponse.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
-      this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
-    }
-  }
-
   addVisiblePackages() {
     let packagesToAdd: PackageEntity[] = this.packageSelectList.filter(item => !this.selectedPackages.includes(item));
     this.selectedPackages = this.selectedPackages.concat(packagesToAdd);
@@ -165,5 +158,12 @@ export class AgentCreateDeploymentComponent implements OnInit {
   removeVisiblePackages() {
     this.selectedPackages = this.selectedPackages.filter(item => !this.packageSelectList.includes(item));
     this.changeDetector.detectChanges();
+  }
+
+  private filterPackages(): void {
+    if (this.packageResponse) {
+      this.packageResponse = this.packageResponse.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
+      this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
+    }
   }
 }

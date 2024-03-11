@@ -20,7 +20,7 @@ import {LoadingComponent} from "./components/loading/loading.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('matDrawer') matDrawer: MatDrawer | null = null;
   public sidenavMode: MatDrawerMode = "over";
   public appLoaded: boolean = false;

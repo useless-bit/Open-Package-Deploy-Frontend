@@ -14,8 +14,8 @@
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
       <div>
-        <button mat-flat-button (click)="addVisiblePackages()">Select All</button>
-        <button mat-flat-button (click)="removeVisiblePackages()">Deselect All</button>
+        <button (click)="addVisiblePackages()" mat-flat-button>Select All</button>
+        <button (click)="removeVisiblePackages()" mat-flat-button>Deselect All</button>
       </div>
 
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">

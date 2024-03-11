@@ -86,7 +86,7 @@ export class PackageCreateDeploymentComponent implements OnInit {
     if (this.agentResponse) {
       if (event) {
         let packageEntity = this.agentResponse.filter(item => item.uuid == agentUUID).at(0);
-        if (packageEntity  && this.selectedAgents.filter(item => item.uuid == agentUUID).length == 0) {
+        if (packageEntity && this.selectedAgents.filter(item => item.uuid == agentUUID).length == 0) {
           this.selectedAgents?.push(packageEntity);
         }
       } else {
@@ -124,13 +124,6 @@ export class PackageCreateDeploymentComponent implements OnInit {
     }
   }
 
-  private filterAgents(): void {
-    if (this.agentResponse) {
-      this.agentResponse = this.agentResponse.filter(item => item.registrationCompleted);
-      this.agentResponse = this.agentResponse.filter(item => item.operatingSystem === this.packageEntity?.targetOperatingSystem);
-    }
-  }
-
   addVisibleAgents() {
     let agentsToAdd: AgentEntity[] = this.agentSelectList.filter(item => !this.selectedAgents.includes(item));
     this.selectedAgents = this.selectedAgents.concat(agentsToAdd);
@@ -146,5 +139,12 @@ export class PackageCreateDeploymentComponent implements OnInit {
 
   isAgentInSelectedAgentList(agentUUID: string): boolean {
     return this.selectedAgents.filter(item => item.uuid === agentUUID).length > 0;
+  }
+
+  private filterAgents(): void {
+    if (this.agentResponse) {
+      this.agentResponse = this.agentResponse.filter(item => item.registrationCompleted);
+      this.agentResponse = this.agentResponse.filter(item => item.operatingSystem === this.packageEntity?.targetOperatingSystem);
+    }
   }
 }
