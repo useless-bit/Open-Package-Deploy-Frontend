@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
@@ -85,6 +85,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
   constructor(private deploymentApiService: DeploymentApiService,
               private packageApiService: PackageApiService,
               private agentApiService: AgentApiService,
+              private changeDetector: ChangeDetectorRef,
               public agentDeploymentListComponentMatDialogRef: MatDialogRef<AgentCreateDeploymentComponent>) {
   }
 
@@ -106,7 +107,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
     if (this.packageResponse) {
       if (event) {
         let packageEntity = this.packageResponse.filter(item => item.uuid == packageUUID).at(0);
-        if (packageEntity) {
+        if (packageEntity && this.selectedPackages.filter(item => item.uuid == packageUUID).length == 0) {
           this.selectedPackages?.push(packageEntity);
         }
       } else {
@@ -149,5 +150,21 @@ export class AgentCreateDeploymentComponent implements OnInit {
       this.packageResponse = this.packageResponse.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
       this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
     }
+  }
+
+  addVisiblePackages() {
+    let packagesToAdd: PackageEntity[] = this.packageSelectList.filter(item => !this.selectedPackages.includes(item));
+    this.selectedPackages = this.selectedPackages.concat(packagesToAdd);
+    this.changeDetector.detectChanges();
+  }
+
+  isAgentInSelectedAgentList(packageUUID: string): boolean {
+    return this.selectedPackages.filter(item => item.uuid === packageUUID).length > 0;
+  }
+
+  removeVisiblePackages() {
+    this.selectedPackages = this.selectedPackages.filter(item => !this.packageSelectList.includes(item));
+    console.log(this.selectedPackages);
+    this.changeDetector.detectChanges();
   }
 }

@@ -13,11 +13,15 @@
         <mat-label>Search</mat-label>
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
+      <div>
+        <button mat-flat-button (click)="addVisiblePackages()">Select All</button>
+        <button mat-flat-button (click)="removeVisiblePackages()">Deselect All</button>
+      </div>
 
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
         @for (package_item of packageSelectList; track package_item) {
-          <mat-list-option
-            (selectedChange)="changeSelectedPackages($event, package_item.uuid)">{{ package_item.name }}
+          <mat-list-option [selected]="isAgentInSelectedAgentList(package_item.uuid)"
+                           (selectedChange)="changeSelectedPackages($event, package_item.uuid)">{{ package_item.name }}
             | {{ package_item.uuid }}
           </mat-list-option>
         }
