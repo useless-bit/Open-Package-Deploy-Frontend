@@ -1,5 +1,12 @@
 :root {
-  --primary-color: #009688;
+  #--primary-color: #009688;
+  --primary-color: rgba(255, 255, 255, .12);
+  #--button-selected: #026158;
+  --button-disabled: red;
+  --button-selected: #8c8c8c;
+  --popup-background: #575757;
+  --popup-border: #373737 3px solid;
+  --table-hover: #282828;
 }
 
 .mat-ripple {
