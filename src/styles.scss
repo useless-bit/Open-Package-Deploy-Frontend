@@ -2,6 +2,7 @@
 
 @import 'material-icons/iconfont/material-icons.css';
 @import 'highlight.js/styles/dark.css';
+@import "app/assets/dark-theme.css";
 
 @include mat.core();
 
@@ -19,7 +20,15 @@ $my-app-theme: mat.define-dark-theme(
     )
 );
 
-@include mat.all-component-themes($my-app-theme);
+
+:root {
+  --button-deafult: #009688;
+  --button-selected: #026158;
+  --popup-background: #575757;
+  --popup-border: #373737 3px solid;
+  --table-hover: #282828;
+}
+
 
 html, body {
   height: 100%;
@@ -29,6 +38,13 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-button-toggle-group {
+  mat-button-toggle {
+    background-color: red;
+    --mat-standard-button-toggle-background-color: red;
+  }
 }
 
 .notification {
@@ -46,15 +62,14 @@ body {
   --mdc-snackbar-supporting-text-color: white;
 }
 
+.mat-button-toggle-checked {
+  background-color: red;
+}
 
 .main-popup {
   height: 80%;
   width: 80%;
 }
 
-:root {
-  --sidenav-button-selected: #026158;
-  --popup-background: #575757;
-  --popup-border: #373737 3px solid;
-  --table-hover: #282828;
-}
+
+
