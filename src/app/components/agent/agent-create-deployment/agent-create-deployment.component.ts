@@ -158,13 +158,12 @@ export class AgentCreateDeploymentComponent implements OnInit {
     this.changeDetector.detectChanges();
   }
 
-  isAgentInSelectedAgentList(packageUUID: string): boolean {
+  isPackageInSelectedPackageList(packageUUID: string): boolean {
     return this.selectedPackages.filter(item => item.uuid === packageUUID).length > 0;
   }
 
   removeVisiblePackages() {
     this.selectedPackages = this.selectedPackages.filter(item => !this.packageSelectList.includes(item));
-    console.log(this.selectedPackages);
     this.changeDetector.detectChanges();
   }
 }

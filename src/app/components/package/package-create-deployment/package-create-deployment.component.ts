@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
@@ -64,6 +64,7 @@ export class PackageCreateDeploymentComponent implements OnInit {
   constructor(private deploymentApiService: DeploymentApiService,
               private packageApiService: PackageApiService,
               private agentApiService: AgentApiService,
+              private changeDetector: ChangeDetectorRef,
               public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<PackageCreateDeploymentComponent>) {
   }
 
@@ -81,15 +82,15 @@ export class PackageCreateDeploymentComponent implements OnInit {
     });
   }
 
-  changeSelectedPackages(event: boolean, packageUUID: string) {
+  changeSelectedAgents(event: boolean, agentUUID: string) {
     if (this.agentResponse) {
       if (event) {
-        let packageEntity = this.agentResponse.filter(item => item.uuid == packageUUID).at(0);
-        if (packageEntity) {
+        let packageEntity = this.agentResponse.filter(item => item.uuid == agentUUID).at(0);
+        if (packageEntity  && this.selectedAgents.filter(item => item.uuid == agentUUID).length == 0) {
           this.selectedAgents?.push(packageEntity);
         }
       } else {
-        this.selectedAgents = this.selectedAgents.filter(item => item.uuid !== packageUUID);
+        this.selectedAgents = this.selectedAgents.filter(item => item.uuid !== agentUUID);
       }
     }
   }
@@ -130,4 +131,20 @@ export class PackageCreateDeploymentComponent implements OnInit {
     }
   }
 
+  addVisibleAgents() {
+    let agentsToAdd: AgentEntity[] = this.agentSelectList.filter(item => !this.selectedAgents.includes(item));
+    this.selectedAgents = this.selectedAgents.concat(agentsToAdd);
+    this.changeDetector.detectChanges();
+
+  }
+
+  removeVisibleAgents() {
+    this.selectedAgents = this.selectedAgents.filter(item => !this.agentSelectList.includes(item));
+    this.changeDetector.detectChanges();
+
+  }
+
+  isAgentInSelectedAgentList(agentUUID: string): boolean {
+    return this.selectedAgents.filter(item => item.uuid === agentUUID).length > 0;
+  }
 }
