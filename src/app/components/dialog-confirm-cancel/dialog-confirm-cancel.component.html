@@ -3,6 +3,8 @@
   <p>{{ dialogConfirmCancelInput.dialogMessage }}</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button color="primary" (click)="cancelButton()" mat-button>{{ dialogConfirmCancelInput.cancelButtonMessage }}</button>
-  <button color="primary" (click)="acceptButton()" mat-button>{{ dialogConfirmCancelInput.acceptButtonMessage }}</button>
+  <button (click)="cancelButton()" color="primary" mat-button>{{ dialogConfirmCancelInput.cancelButtonMessage }}
+  </button>
+  <button (click)="acceptButton()" color="primary" mat-button>{{ dialogConfirmCancelInput.acceptButtonMessage }}
+  </button>
 </mat-dialog-actions>

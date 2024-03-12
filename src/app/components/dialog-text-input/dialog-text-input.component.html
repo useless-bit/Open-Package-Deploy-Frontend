@@ -9,6 +9,6 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button color="primary" (click)="cancelButton()" mat-button>{{ dialogTextInputData.cancelButtonMessage }}</button>
-  <button color="primary" (click)="acceptButton()" mat-button>{{ dialogTextInputData.acceptButtonMessage }}</button>
+  <button (click)="cancelButton()" color="primary" mat-button>{{ dialogTextInputData.cancelButtonMessage }}</button>
+  <button (click)="acceptButton()" color="primary" mat-button>{{ dialogTextInputData.acceptButtonMessage }}</button>
 </mat-dialog-actions>

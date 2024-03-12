@@ -5,7 +5,6 @@ import {MatButton, MatFabButton} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {KeycloakService} from "keycloak-angular";
 import {NgClass} from "@angular/common";
-import {routes} from "../../app.routes";
 
 @Component({
   selector: 'app-sidenav',
@@ -21,7 +20,7 @@ import {routes} from "../../app.routes";
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
-export class SidenavComponent implements OnInit{
+export class SidenavComponent implements OnInit {
   public currentUrl: string = "";
 
   constructor(private readonly keycloakService: KeycloakService,
@@ -30,7 +29,7 @@ export class SidenavComponent implements OnInit{
 
   ngOnInit() {
     this.router.events.subscribe((route: any) => {
-      if(route.url){
+      if (route.url) {
         this.currentUrl = "/" + route.url.split("/")[1];
       }
     });

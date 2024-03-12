@@ -14,6 +14,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+mat-list-option, mat-list-item {
+  .mdc-list-item__content {
+    overflow: auto;
+    text-overflow: unset;
+  }
+}
+
 .notification {
   text-align: center;
   --mdc-snackbar-supporting-text-weight: bold;

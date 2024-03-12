@@ -4,10 +4,10 @@
   <mat-form-field class="search-field">
     <mat-label>Search</mat-label>
     <input #searchInputField (keyup)="applySearch($event)" autofocus matInput>
-    <button color="primary" (click)="clearTextField()" mat-icon-button matSuffix matTooltip="Clear search">
+    <button (click)="clearTextField()" color="primary" mat-icon-button matSuffix matTooltip="Clear search">
       <mat-icon>close</mat-icon>
     </button>
-    <button color="primary" (click)="refreshData()" mat-icon-button matSuffix matTooltip="Reload data">
+    <button (click)="refreshData()" color="primary" mat-icon-button matSuffix matTooltip="Reload data">
       <mat-icon>refresh</mat-icon>
     </button>
     <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
@@ -27,7 +27,7 @@
         </mat-chip-listbox>
       </mat-expansion-panel>
     </mat-accordion>
-    <button color="primary" (click)="openAddNewPopup()" mat-raised-button>
+    <button (click)="openAddNewPopup()" color="primary" mat-raised-button>
       Add Deployment
     </button>
   </div>
