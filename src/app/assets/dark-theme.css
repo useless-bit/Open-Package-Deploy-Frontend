@@ -7,6 +7,13 @@
   --table-hover: rgba(7, 201, 184, 0.18);
 }
 
+
+mat-button-toggle-group {
+  mat-button-toggle {
+    border-radius: var(--mdc-filled-button-container-shape);
+  }
+}
+
 .mat-ripple {
   overflow: hidden;
   position: relative;

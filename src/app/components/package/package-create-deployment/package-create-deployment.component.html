@@ -5,17 +5,17 @@
     <mat-step>
       <ng-template matStepLabel>Select agents</ng-template>
       <div>
-        <button disabled mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button color="primary" disabled mat-button matStepperPrevious>Back</button>
+        <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
         <mat-label>Search</mat-label>
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
-      <div>
-        <button (click)="addVisibleAgents()" mat-flat-button>Select All</button>
-        <button (click)="removeVisibleAgents()" mat-flat-button>Deselect All</button>
+      <div class="simple-button-row">
+        <button color="primary" (click)="addVisibleAgents()" mat-flat-button>Select All</button>
+        <button color="primary" (click)="removeVisibleAgents()" mat-flat-button>Deselect All</button>
       </div>
 
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
@@ -31,8 +31,8 @@
     <mat-step>
       <ng-template matStepLabel>Summary</ng-template>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button color="primary" mat-button matStepperPrevious>Back</button>
+        <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <div>
@@ -48,8 +48,8 @@
     <mat-step>
       <ng-template matStepLabel>Creating deployments</ng-template>
       <div>
-        <button [disabled]="deploymentCreationProcessStarted" mat-button matStepperPrevious>Back</button>
-        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" mat-button>
+        <button color="primary" [disabled]="deploymentCreationProcessStarted" mat-button matStepperPrevious>Back</button>
+        <button  color="primary"(click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" mat-button>
           Create
         </button>
       </div>

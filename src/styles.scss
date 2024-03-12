@@ -29,6 +29,13 @@ body {
   --mdc-snackbar-supporting-text-color: white;
 }
 
+.simple-button-row {
+  button {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
 .main-popup {
   height: 80%;
   width: 80%;
