@@ -14,13 +14,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-mat-button-toggle-group {
-  mat-button-toggle {
-    background-color: red;
-    --mat-standard-button-toggle-background-color: red;
-  }
-}
-
 .notification {
   text-align: center;
   --mdc-snackbar-supporting-text-weight: bold;
