@@ -35,11 +35,15 @@ import {DialogTextInputData} from "./dialogTextInputData";
   styleUrl: './dialog-text-input.component.scss'
 })
 export class DialogTextInputComponent {
-  formControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControl: FormControl;
   errorStateMatcher = new CustomErrorStateMatcher();
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogTextInputData: DialogTextInputData,
               public dialogRef: MatDialogRef<DialogTextInputComponent>) {
+    if (!dialogTextInputData.allowEmptyValue) {
+      this.formControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)])
+    } else
+      this.formControl = new FormControl();
   }
 
   cancelButton(): void {
@@ -48,8 +52,8 @@ export class DialogTextInputComponent {
 
   acceptButton(): void {
     this.formControl.markAllAsTouched();
-    let name = this.formControl.value;
-    if (this.formControl.valid && name) {
+    let name = this.formControl.value?.trim();
+    if (this.formControl.valid && (this.dialogTextInputData.allowEmptyValue || name)) {
       this.dialogRef.close(name);
     }
   }

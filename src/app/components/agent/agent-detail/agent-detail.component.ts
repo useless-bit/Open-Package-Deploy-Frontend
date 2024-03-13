@@ -83,7 +83,7 @@ export class AgentDetailComponent implements OnInit {
   updateAgentName() {
     const dialogRef = this.dialog.open(DialogTextInputComponent, {
       data: new DialogTextInputData("Update name for Agent: " + this.agentEntity?.name,
-        "Enter new name:", "Cancel", "Update")
+        "Enter new name:", "Cancel", "Update", false)
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

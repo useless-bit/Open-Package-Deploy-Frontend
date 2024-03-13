@@ -60,15 +60,28 @@ export class PackageDetailComponent {
   updatePackageName() {
     const dialogRef = this.dialog.open(DialogTextInputComponent, {
       data: new DialogTextInputData("Update name for Package: " + this.packageEntity?.name,
-        "Enter new name:", "Cancel", "Update")
+        "Enter new name:", "Cancel", "Update", false)
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(result)).then(() => {
+        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(result, null)).then(() => {
           this.ngOnInit();
         })
       }
+    });
+  }
+
+  updatePackageExpectedReturnValue() {
+    const dialogRef = this.dialog.open(DialogTextInputComponent, {
+      data: new DialogTextInputData("Update expected return value for Package: " + this.packageEntity?.name,
+        "Enter new expected return value: (Wont affect completed deployments, until redeployed)", "Cancel", "Update", true)
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+        this.dataLoaded = false
+        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(null, result)).then(() => {
+          this.ngOnInit();
+        })
     });
   }
 

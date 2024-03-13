@@ -42,7 +42,7 @@ export class SettingInstallRetryIntervalComponent implements OnInit {
 
   changeAgentInstallRetryInterval() {
     const dialogRef = this.matDialog.open(DialogTextInputComponent, {
-      data: new DialogTextInputData("Change agent install retry interval", "Set the new install retry interval (in seconds):", "Cancel", "Update")
+      data: new DialogTextInputData("Change agent install retry interval", "Set the new install retry interval (in seconds):", "Cancel", "Update", false)
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
