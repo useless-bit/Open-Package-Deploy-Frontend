@@ -122,10 +122,11 @@ export class PackageCreateDeploymentComponent implements OnInit {
     if (this.agentResponse) {
       this.agentSelectList = this.agentResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
+    this.changeDetector.detectChanges();
   }
 
   addVisibleAgents() {
-    let agentsToAdd: AgentEntity[] = this.agentSelectList.filter(item => !this.selectedAgents.includes(item));
+    let agentsToAdd = this.agentSelectList.filter(item => !this.selectedAgents.includes(item));
     this.selectedAgents = this.selectedAgents.concat(agentsToAdd);
     this.changeDetector.detectChanges();
 

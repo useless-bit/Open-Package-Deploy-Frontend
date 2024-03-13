@@ -19,9 +19,10 @@
       </div>
 
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (package_item of packageSelectList; track package_item) {
+        @for (package_item of packageSelectList; track package_item.uuid) {
           <mat-list-option [selected]="isPackageInSelectedPackageList(package_item.uuid)"
-                           (selectedChange)="changeSelectedPackages($event, package_item.uuid)">{{ package_item.name }}
+                           (selectedChange)="changeSelectedPackages($event, package_item.uuid)"
+                           [value]="package_item.uuid">{{ package_item.name }}
             | {{ package_item.uuid }}
           </mat-list-option>
         }

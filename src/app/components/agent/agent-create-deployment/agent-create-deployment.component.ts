@@ -143,10 +143,11 @@ export class AgentCreateDeploymentComponent implements OnInit {
     if (this.packageResponse) {
       this.packageSelectList = this.packageResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
+    this.changeDetector.detectChanges();
   }
 
   addVisiblePackages() {
-    let packagesToAdd: PackageEntity[] = this.packageSelectList.filter(item => !this.selectedPackages.includes(item));
+    let packagesToAdd = this.packageSelectList.filter(item => !this.selectedPackages.includes(item));
     this.selectedPackages = this.selectedPackages.concat(packagesToAdd);
     this.changeDetector.detectChanges();
   }
@@ -166,4 +167,5 @@ export class AgentCreateDeploymentComponent implements OnInit {
       this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
     }
   }
+
 }

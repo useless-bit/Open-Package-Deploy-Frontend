@@ -19,10 +19,11 @@
       </div>
 
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (package_item of agentSelectList; track package_item) {
-          <mat-list-option [selected]="isAgentInSelectedAgentList(package_item.uuid)"
-                           (selectedChange)="changeSelectedAgents($event, package_item.uuid)">{{ package_item.name }}
-            | {{ package_item.uuid }}
+        @for (agent_item of agentSelectList; track agent_item.uuid) {
+          <mat-list-option [selected]="isAgentInSelectedAgentList(agent_item.uuid)"
+                           (selectedChange)="changeSelectedAgents($event, agent_item.uuid)"
+                           [value]="agent_item.uuid">{{ agent_item.name }}
+            | {{ agent_item.uuid }}
           </mat-list-option>
         }
       </mat-selection-list>
