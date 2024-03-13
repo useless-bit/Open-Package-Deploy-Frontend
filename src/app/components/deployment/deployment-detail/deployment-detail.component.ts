@@ -55,7 +55,7 @@ export class DeploymentDetailComponent implements OnInit {
   deleteDeployment() {
     const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
       data: new DialogConfirmCancelInput("Delete deployment",
-        "Do you really want to delete the agent? The Agent needs to be enrolled again", "Cancel", "Delete")
+        "Do you really want to delete the deployment?", "Cancel", "Delete")
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
