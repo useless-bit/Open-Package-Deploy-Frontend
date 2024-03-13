@@ -98,7 +98,7 @@ export class AgentDetailComponent implements OnInit {
   deleteAgent() {
     const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
       data: new DialogConfirmCancelInput("Delete Agent: " + this.agentEntity?.name,
-        "Do you really want to delete the agent? The Agent needs to be enrolled again", "Cancel", "Delete")
+        "Do you really want to delete the agent? The Agent needs to be enrolled again.", "Cancel", "Delete")
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
