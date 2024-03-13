@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>{{ dialogTextInputData.dialogTitle }}</h2>
 <mat-dialog-content>
   <p>{{ dialogTextInputData.dialogMessage }}</p>
-  <mat-form-field>
+  <mat-form-field class="input-field">
     <input [errorStateMatcher]="errorStateMatcher" [formControl]="formControl" cdkFocusInitial matInput>
     @if (formControl.hasError('pattern') || formControl.hasError('required')) {
       <mat-error>Cannot be empty</mat-error>
     }
   </mat-form-field>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="buttons">
   <button (click)="cancelButton()" color="primary" mat-button>{{ dialogTextInputData.cancelButtonMessage }}</button>
   <button (click)="acceptButton()" color="primary" mat-button>{{ dialogTextInputData.acceptButtonMessage }}</button>
 </mat-dialog-actions>
