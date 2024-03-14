@@ -1,1 +1,14 @@
-<p>home-outdated-agents works!</p>
+<div class="main-content">
+  <h2>Outdated Agents</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <mat-form-field>
+      <input disabled matInput>Total agents: {{ agentCount }}
+    </mat-form-field>
+    <mat-form-field>
+      <input disabled matInput>Outdated agents: {{ outdatedAgentCount }}
+    </mat-form-field>
+  }
+</div>
