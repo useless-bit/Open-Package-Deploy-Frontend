@@ -5,10 +5,12 @@
     <app-loading></app-loading>
   } @else {
     <mat-form-field>
-      <input disabled matInput>Total agents: {{ agentCount }}
+      Total agents:
+      <input disabled matInput>{{ agentCount }}
     </mat-form-field>
     <mat-form-field>
-      <input disabled matInput>Outdated agents: {{ outdatedAgentCount }}
+      Outdated agents:
+      <input disabled matInput>{{ outdatedAgentCount }}
     </mat-form-field>
   }
 </div>
