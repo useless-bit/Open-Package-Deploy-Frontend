@@ -5,7 +5,8 @@
     <app-loading></app-loading>
   } @else {
     <mat-form-field>
-      <input disabled matInput>Update interval: {{ agentUpdateInterval }} seconds
+      Update interval:
+      <input disabled matInput>{{ agentUpdateInterval }} seconds
     </mat-form-field>
     <div class="buttons">
       <button color="primary" mat-raised-button (click)="changeAgentUpdateInterval()">Change interval</button>
