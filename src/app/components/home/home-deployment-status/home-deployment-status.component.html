@@ -1,0 +1,28 @@
+<div class="main-content">
+  <h2>Deployment Status</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <div class="label-container">
+      <mat-form-field>
+        Total:
+        <input disabled matInput>{{ deploymentCount }}
+      </mat-form-field>
+      <mat-form-field>
+        Completed:
+        <input disabled matInput>{{ deploymentCompletedCount }}
+      </mat-form-field>
+    </div>
+    <div class="label-container">
+      <mat-form-field>
+        Outstanding:
+        <input disabled matInput>{{ deploymentOutstandingCount }}
+      </mat-form-field>
+      <mat-form-field>
+        Error:
+        <input disabled matInput>{{ deploymentErrorCount }}
+      </mat-form-field>
+    </div>
+  }
+</div>

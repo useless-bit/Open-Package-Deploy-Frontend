@@ -17,7 +17,8 @@
       <input [value]="getKeyForOperatingSystem(packageEntity.targetOperatingSystem)" disabled matInput>
     </mat-form-field>
     <div class="file-upload">
-      <button (click)="fileUploadInput.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
+      <button (click)="fileUploadInput.click()" [disabled]="uploadSub" color="primary" mat-flat-button>Select File
+      </button>
       <mat-form-field>
         <input #fileUploadInput (change)="onFileSelected($event)" [hidden]="true" accept=".zip" class="file-input"
                type="file">
@@ -30,8 +31,8 @@
     <mat-hint>Error: {{ uploadErrorMessage }}</mat-hint>
   }
   <div class="buttons">
-    <button (click)="startUploadNewContent()" [disabled]="uploadSub" mat-raised-button>Upload</button>
-    <button (click)="cancelUpload()" [disabled]="!uploadSub" mat-raised-button>Cancel Upload</button>
+    <button (click)="startUploadNewContent()" [disabled]="uploadSub" color="primary" mat-raised-button>Upload</button>
+    <button (click)="cancelUpload()" [disabled]="!uploadSub" color="primary" mat-raised-button>Cancel Upload</button>
   </div>
   <div *ngIf="uploadProgress">
     @if (uploadProgress == 100) {

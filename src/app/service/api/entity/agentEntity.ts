@@ -3,7 +3,7 @@ import {OperatingSystem} from "./operatingSystem";
 export class AgentEntity {
   uuid: string;
   name: string;
-  lastConnectionTime: string;
+  lastConnectionTime: string | Date;
   registrationCompleted: boolean;
   checksum: string;
   operatingSystem: OperatingSystem;
@@ -39,19 +39,10 @@ export class AgentEntity {
     this.cpuSockets = this.formatName(agentData.cpuSockets);
   }
 
-  formatDate(timestamp: number): string {
+  formatDate(timestamp: number): string | Date {
     if (timestamp) {
       let dateObj = new Date(timestamp * 1000);
-      return dateObj.toLocaleString("en-US", {
-        month: '2-digit',
-        day: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-        localeMatcher: "best fit"
-      });
+      return dateObj;
     }
     return "N/A"
   }

@@ -44,7 +44,7 @@ export class SettingUpdateIntervalComponent implements OnInit {
 
   changeAgentUpdateInterval() {
     const dialogRef = this.matDialog.open(DialogTextInputComponent, {
-      data: new DialogTextInputData("Change agent update interval", "Set the new update interval (in seconds):", "Cancel", "Update")
+      data: new DialogTextInputData("Change agent update interval", "Set the new update interval (in seconds):", "Cancel", "Update", false)
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

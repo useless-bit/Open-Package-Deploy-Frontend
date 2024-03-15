@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
@@ -29,7 +29,6 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-agent-create-deployment',
@@ -86,6 +85,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
   constructor(private deploymentApiService: DeploymentApiService,
               private packageApiService: PackageApiService,
               private agentApiService: AgentApiService,
+              private changeDetector: ChangeDetectorRef,
               public agentDeploymentListComponentMatDialogRef: MatDialogRef<AgentCreateDeploymentComponent>) {
   }
 
@@ -95,8 +95,8 @@ export class AgentCreateDeploymentComponent implements OnInit {
         if (agentResponse && packageResponse) {
           this.agentEntity = agentResponse;
           this.packageResponse = packageResponse.packages;
-          this.packageSelectList = this.packageResponse;
           this.filterPackages();
+          this.packageSelectList = this.packageResponse;
           this.dataLoaded = true;
         }
       });
@@ -107,7 +107,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
     if (this.packageResponse) {
       if (event) {
         let packageEntity = this.packageResponse.filter(item => item.uuid == packageUUID).at(0);
-        if (packageEntity) {
+        if (packageEntity && this.selectedPackages.filter(item => item.uuid == packageUUID).length == 0) {
           this.selectedPackages?.push(packageEntity);
         }
       } else {
@@ -143,6 +143,22 @@ export class AgentCreateDeploymentComponent implements OnInit {
     if (this.packageResponse) {
       this.packageSelectList = this.packageResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
+    this.changeDetector.detectChanges();
+  }
+
+  addVisiblePackages() {
+    let packagesToAdd = this.packageSelectList.filter(item => !this.selectedPackages.includes(item));
+    this.selectedPackages = this.selectedPackages.concat(packagesToAdd);
+    this.changeDetector.detectChanges();
+  }
+
+  isPackageInSelectedPackageList(packageUUID: string): boolean {
+    return this.selectedPackages.filter(item => item.uuid === packageUUID).length > 0;
+  }
+
+  removeVisiblePackages() {
+    this.selectedPackages = this.selectedPackages.filter(item => !this.packageSelectList.includes(item));
+    this.changeDetector.detectChanges();
   }
 
   private filterPackages(): void {
@@ -151,4 +167,5 @@ export class AgentCreateDeploymentComponent implements OnInit {
       this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.agentEntity?.operatingSystem);
     }
   }
+
 }

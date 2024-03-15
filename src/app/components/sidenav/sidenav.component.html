@@ -4,23 +4,28 @@
   </div>
 
   <div class="main-buttons">
-    <button color="primary" mat-flat-button routerLink="/">
+    <button [style.background-color]="currentUrl === '/' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/">
       <mat-icon>home</mat-icon>
       Home
     </button>
-    <button color="primary" mat-flat-button routerLink="/agent">
+    <button [style.background-color]="currentUrl === '/agent' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/agent">
       <mat-icon>computer</mat-icon>
       Agents
     </button>
-    <button color="primary" mat-flat-button routerLink="/package">
+    <button [style.background-color]="currentUrl === '/package' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/package">
       <mat-icon>inventory</mat-icon>
       Packages
     </button>
-    <button color="primary" mat-flat-button routerLink="/deployment">
+    <button [style.background-color]="currentUrl === '/deployment' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/deployment">
       <mat-icon>archive</mat-icon>
       Deployments
     </button>
-    <button color="primary" mat-flat-button routerLink="/settings">
+    <button [style.background-color]="currentUrl === '/settings' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/settings">
       <mat-icon>settings</mat-icon>
       Settings
     </button>

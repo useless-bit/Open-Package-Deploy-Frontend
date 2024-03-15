@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {MatDrawer, MatDrawerContainer, MatDrawerMode} from "@angular/material/sidenav";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
@@ -20,7 +20,7 @@ import {LoadingComponent} from "./components/loading/loading.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('matDrawer') matDrawer: MatDrawer | null = null;
   public sidenavMode: MatDrawerMode = "over";
   public appLoaded: boolean = false;

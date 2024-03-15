@@ -58,7 +58,6 @@ export class PackageUpdateContentComponent implements OnInit {
               private packageApiService: PackageApiService,
               public packageUpdateContentComponentMatDialogRef: MatDialogRef<PackageUpdateContentComponent>) {
     this.packageEntity = packageUpdateContentComponentInput.packageEntity;
-    console.log(this.packageEntity.targetOperatingSystem);
   }
 
   ngOnInit() {

@@ -118,7 +118,7 @@ export class DeploymentCreateComponent implements OnInit {
       return;
     }
     let search = this.formControlAgentSelectSearch.value;
-    this.filteredAgents = this.agentList.filter(agent => agent.name.includes(search));
+    this.filteredAgents = this.agentList.filter(agent => agent.name.includes(search) || agent.uuid.includes(search));
   }
 
   protected filterPackages() {
@@ -126,6 +126,6 @@ export class DeploymentCreateComponent implements OnInit {
       return;
     }
     let search = this.formControlPackageSelectSearch.value;
-    this.filteredPackages = this.packageList.filter(package_item => package_item.name.includes(search));
+    this.filteredPackages = this.packageList.filter(package_item => package_item.name.includes(search) || package_item.uuid.includes(search));
   }
 }

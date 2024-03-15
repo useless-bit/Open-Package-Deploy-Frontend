@@ -5,19 +5,24 @@
     <mat-step>
       <ng-template matStepLabel>Select packages</ng-template>
       <div>
-        <button disabled mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button color="primary" disabled mat-button matStepperPrevious>Back</button>
+        <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
         <mat-label>Search</mat-label>
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
+      <div class="simple-button-row">
+        <button (click)="addVisiblePackages()" color="primary" mat-flat-button>Select All</button>
+        <button (click)="removeVisiblePackages()" color="primary" mat-flat-button>Deselect All</button>
+      </div>
 
       <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (package_item of packageSelectList; track package_item) {
-          <mat-list-option
-            (selectedChange)="changeSelectedPackages($event, package_item.uuid)">{{ package_item.name }}
+        @for (package_item of packageSelectList; track package_item.uuid) {
+          <mat-list-option [selected]="isPackageInSelectedPackageList(package_item.uuid)"
+                           (selectedChange)="changeSelectedPackages($event, package_item.uuid)"
+                           [value]="package_item.uuid">{{ package_item.name }}
             | {{ package_item.uuid }}
           </mat-list-option>
         }
@@ -27,8 +32,8 @@
     <mat-step>
       <ng-template matStepLabel>Summary</ng-template>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button color="primary" mat-button matStepperPrevious>Back</button>
+        <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
 
@@ -45,8 +50,11 @@
     <mat-step>
       <ng-template matStepLabel>Creating deployments</ng-template>
       <div>
-        <button [disabled]="deploymentCreationProcessStarted" mat-button matStepperPrevious>Back</button>
-        <button (click)="createDeploymentsForAgent()" [disabled]="deploymentCreationProcessStarted" mat-button>Create</button>
+        <button [disabled]="deploymentCreationProcessStarted" color="primary" mat-button matStepperPrevious>Back
+        </button>
+        <button (click)="createDeploymentsForAgent()" [disabled]="deploymentCreationProcessStarted" color="primary"
+                mat-button>Create
+        </button>
       </div>
       <mat-divider></mat-divider>
       <div *ngIf="deploymentCreationProgress > 0">

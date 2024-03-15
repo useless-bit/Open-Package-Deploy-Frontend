@@ -73,7 +73,7 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
 export class DeploymentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['agentUuid', 'packageUuid'];
+  public selectedColumns: String[] = ['packageName', 'agentName'];
   public searchLoadingBar: boolean = false;
   private localStorageNameSelectedColumns: string = "selectedColumns_DeploymentOverview";
   private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);

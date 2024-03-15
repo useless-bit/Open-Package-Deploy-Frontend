@@ -1,0 +1,14 @@
+.main-content {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width: 100%;
+  display: flex;
+}

@@ -5,11 +5,11 @@ import {keycloakGuard} from "./guard/keycloak.guard";
 import {AgentOverviewComponent} from "./components/agent/agent-overview/agent-overview.component";
 import {PackageOverviewComponent} from "./components/package/package-overview/package-overview.component";
 import {DeploymentOverviewComponent} from "./components/deployment/deployment-overview/deployment-overview.component";
-import {PlaceholderComponent} from "./components/placeholder/placeholder.component";
 import {SettingOverviewComponent} from "./components/setting/setting-overview/setting-overview.component";
+import {HomeOverviewComponent} from "./components/home/home-overview/home-overview.component";
 
 export const routes: Routes = [
-  {path: '', pathMatch: 'full', component: PlaceholderComponent, canActivate: [keycloakGuard]},
+  {path: '', pathMatch: 'full', component: HomeOverviewComponent, canActivate: [keycloakGuard]},
   {path: 'agent', pathMatch: 'full', component: AgentOverviewComponent, canActivate: [keycloakGuard]},
   {path: 'package', pathMatch: 'full', component: PackageOverviewComponent, canActivate: [keycloakGuard]},
   {path: 'deployment', pathMatch: 'full', component: DeploymentOverviewComponent, canActivate: [keycloakGuard]},
