@@ -50,7 +50,7 @@ export class HomeAgentOutdatedComponent implements OnInit {
     });
   }
 
-  calculateOutdatedAgents():void {
+  calculateOutdatedAgents(): void {
     this.agentCount = this.agentEntities.length;
     this.outdatedAgentEntities = this.agentEntities.filter(item => item.checksum != this.agentChecksum);
     this.outdatedAgentCount = this.outdatedAgentEntities.length;

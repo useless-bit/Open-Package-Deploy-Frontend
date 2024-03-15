@@ -10,7 +10,7 @@ describe('HomeOutdatedAgentsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeAgentOutdatedComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HomeAgentOutdatedComponent);
     component = fixture.componentInstance;

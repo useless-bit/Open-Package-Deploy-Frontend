@@ -52,9 +52,11 @@
           <mat-list-item>
             <h4 matLine>Status (Deployed/Expected return/Actual return)</h4>
             @if (deploymentEntity.expectedReturnValue) {
-              <p matLine>{{ deploymentEntity.isDeployed }} / {{ deploymentEntity.expectedReturnValue }} / {{ deploymentEntity.returnValue }}</p>
+              <p matLine>{{ deploymentEntity.isDeployed }} / {{ deploymentEntity.expectedReturnValue }}
+                / {{ deploymentEntity.returnValue }}</p>
             } @else {
-              <p matLine>{{ deploymentEntity.isDeployed }} / <em><i> No value set </i></em> / {{ deploymentEntity.returnValue }}</p>
+              <p matLine>{{ deploymentEntity.isDeployed }} / <em><i> No value set </i></em>
+                / {{ deploymentEntity.returnValue }}</p>
 
             }
           </mat-list-item>

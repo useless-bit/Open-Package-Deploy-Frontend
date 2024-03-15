@@ -10,7 +10,7 @@ describe('HomeDeploymentStatusComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeDeploymentStatusComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HomeDeploymentStatusComponent);
     component = fixture.componentInstance;

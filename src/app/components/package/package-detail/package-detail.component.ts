@@ -78,10 +78,10 @@ export class PackageDetailComponent {
         "Enter new expected return value: (Wont affect completed deployments, until redeployed)", "Cancel", "Update", true)
     });
     dialogRef.afterClosed().subscribe((result) => {
-        this.dataLoaded = false
-        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(null, result)).then(() => {
-          this.ngOnInit();
-        })
+      this.dataLoaded = false
+      this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(null, result)).then(() => {
+        this.ngOnInit();
+      })
     });
   }
 

@@ -9,12 +9,12 @@ import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 @Component({
   selector: 'app-home-deployment-status',
   standalone: true,
-    imports: [
-        LoadingComponent,
-        MatDivider,
-        MatFormField,
-        MatInput
-    ],
+  imports: [
+    LoadingComponent,
+    MatDivider,
+    MatFormField,
+    MatInput
+  ],
   templateUrl: './home-deployment-status.component.html',
   styleUrl: './home-deployment-status.component.scss'
 })

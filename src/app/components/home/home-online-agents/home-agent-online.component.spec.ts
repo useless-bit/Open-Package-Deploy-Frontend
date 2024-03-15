@@ -10,7 +10,7 @@ describe('HomeOnlineAgentsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeAgentOnlineComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HomeAgentOnlineComponent);
     component = fixture.componentInstance;
