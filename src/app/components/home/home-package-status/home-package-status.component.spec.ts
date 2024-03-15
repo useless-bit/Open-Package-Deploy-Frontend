@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomePackageStatusComponent } from './home-package-status.component';
+import {HomePackageStatusComponent} from './home-package-status.component';
 
 describe('HomePackageStatusComponent', () => {
   let component: HomePackageStatusComponent;

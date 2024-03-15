@@ -3,8 +3,6 @@ import {LoadingComponent} from "../../loading/loading.component";
 import {MatDivider} from "@angular/material/divider";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {PackageEntity} from "../../../service/api/entity/packageEntity";
-import {PackageApiService} from "../../../service/api/package.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 

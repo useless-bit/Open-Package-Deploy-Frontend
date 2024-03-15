@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeAgentOutdatedComponent } from './home-agent-outdated.component';
+import {HomeAgentOutdatedComponent} from './home-agent-outdated.component';
 
 describe('HomeOutdatedAgentsComponent', () => {
   let component: HomeAgentOutdatedComponent;

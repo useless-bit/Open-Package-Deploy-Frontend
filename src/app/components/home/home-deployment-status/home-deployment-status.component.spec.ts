@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeDeploymentStatusComponent } from './home-deployment-status.component';
+import {HomeDeploymentStatusComponent} from './home-deployment-status.component';
 
 describe('HomeDeploymentStatusComponent', () => {
   let component: HomeDeploymentStatusComponent;
@@ -11,7 +11,7 @@ describe('HomeDeploymentStatusComponent', () => {
       imports: [HomeDeploymentStatusComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(HomeDeploymentStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
