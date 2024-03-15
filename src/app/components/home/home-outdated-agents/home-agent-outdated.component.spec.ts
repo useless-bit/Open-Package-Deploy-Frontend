@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeOutdatedAgentsComponent } from './home-outdated-agents.component';
+import { HomeAgentOutdatedComponent } from './home-agent-outdated.component';
 
 describe('HomeOutdatedAgentsComponent', () => {
-  let component: HomeOutdatedAgentsComponent;
-  let fixture: ComponentFixture<HomeOutdatedAgentsComponent>;
+  let component: HomeAgentOutdatedComponent;
+  let fixture: ComponentFixture<HomeAgentOutdatedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeOutdatedAgentsComponent]
+      imports: [HomeAgentOutdatedComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(HomeOutdatedAgentsComponent);
+
+    fixture = TestBed.createComponent(HomeAgentOutdatedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

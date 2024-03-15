@@ -10,7 +10,7 @@ import {AgentApiService} from "../../../service/api/agent.api.service";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 
 @Component({
-  selector: 'app-home-outdated-agents',
+  selector: 'app-home-agent-outdated',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -20,10 +20,10 @@ import {AgentEntity} from "../../../service/api/entity/agentEntity";
     MatInput,
     MatLabel
   ],
-  templateUrl: './home-outdated-agents.component.html',
-  styleUrl: './home-outdated-agents.component.scss'
+  templateUrl: './home-agent-outdated.component.html',
+  styleUrl: './home-agent-outdated.component.scss'
 })
-export class HomeOutdatedAgentsComponent implements OnInit {
+export class HomeAgentOutdatedComponent implements OnInit {
   public dataLoaded: boolean = false;
   public agentCount: number = 0;
   public outdatedAgentCount: number = 0;

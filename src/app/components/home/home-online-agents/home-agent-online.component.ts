@@ -8,7 +8,7 @@ import {ServerApiService} from "../../../service/api/server.api.service";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 
 @Component({
-  selector: 'app-home-online-agents',
+  selector: 'app-home-agent-online',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -16,10 +16,10 @@ import {AgentApiService} from "../../../service/api/agent.api.service";
     MatFormField,
     MatInput
   ],
-  templateUrl: './home-online-agents.component.html',
-  styleUrl: './home-online-agents.component.scss'
+  templateUrl: './home-agent-online.component.html',
+  styleUrl: './home-agent-online.component.scss'
 })
-export class HomeOnlineAgentsComponent implements OnInit {
+export class HomeAgentOnlineComponent implements OnInit {
   public dataLoaded: boolean = false;
   public agentCount: number = 0;
   public activeAgentCount: number = 0;
