@@ -28,10 +28,9 @@ async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService
       },
       initOptions: {
         onLoad: 'check-sso',
-      }, enableBearerInterceptor: true,
-      // Prefix for the Bearer token
-      bearerPrefix: 'Bearer',
-
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      }
     });
     resolve();
   });
