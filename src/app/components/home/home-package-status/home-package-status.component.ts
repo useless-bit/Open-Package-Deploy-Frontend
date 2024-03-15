@@ -7,7 +7,7 @@ import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageApiService} from "../../../service/api/package.api.service";
 
 @Component({
-  selector: 'app-home-package-processing',
+  selector: 'app-home-package-status',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -15,10 +15,10 @@ import {PackageApiService} from "../../../service/api/package.api.service";
     MatFormField,
     MatInput
   ],
-  templateUrl: './home-package-processing.component.html',
-  styleUrl: './home-package-processing.component.scss'
+  templateUrl: './home-package-status.component.html',
+  styleUrl: './home-package-status.component.scss'
 })
-export class HomePackageProcessingComponent implements OnInit {
+export class HomePackageStatusComponent implements OnInit {
   public dataLoaded: boolean = false;
   public packageCount: number = 0;
   public packageAwaitingProcessingCount: number = 0;

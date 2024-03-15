@@ -3,7 +3,8 @@ import {MatCard} from "@angular/material/card";
 import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {HomeAgentOnlineComponent} from "../home-online-agents/home-agent-online.component";
 import {HomeAgentOutdatedComponent} from "../home-outdated-agents/home-agent-outdated.component";
-import {HomePackageProcessingComponent} from "../home-package-processing/home-package-processing.component";
+import {HomePackageStatusComponent} from "../home-package-status/home-package-status.component";
+import {HomeDeploymentStatusComponent} from "../home-deployment-status/home-deployment-status.component";
 
 @Component({
   selector: 'app-home-overview',
@@ -13,7 +14,8 @@ import {HomePackageProcessingComponent} from "../home-package-processing/home-pa
     PlaceholderComponent,
     HomeAgentOnlineComponent,
     HomeAgentOutdatedComponent,
-    HomePackageProcessingComponent,
+    HomePackageStatusComponent,
+    HomeDeploymentStatusComponent,
   ],
   templateUrl: './home-overview.component.html',
   styleUrl: './home-overview.component.scss'
