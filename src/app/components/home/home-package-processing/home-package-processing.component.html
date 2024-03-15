@@ -1,0 +1,20 @@
+<div class="main-content">
+  <h2>Package Status</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <mat-form-field>
+      Total packages:
+      <input disabled matInput>{{ packageCount }}
+    </mat-form-field>
+    <mat-form-field>
+      Awaiting processing:
+      <input disabled matInput>{{ packageAwaitingProcessingCount }}
+    </mat-form-field>
+    <mat-form-field>
+      Error:
+      <input disabled matInput>{{ packageErrorCount }}
+    </mat-form-field>
+  }
+</div>
