@@ -107,8 +107,13 @@ export class AgentOverviewComponent implements OnInit {
     }
     this.agentApiService.getAll().then(response => {
       if (response) {
-        this.dataSource.data = response.agents;
+        let agentEntities: AgentEntity[] = response.agents
+        for (let agentEntity of agentEntities) {
+          agentEntity.lastConnectionTime = this.formatDate(agentEntity.lastConnectionTime)
+        }
+        this.dataSource.data = agentEntities;
         this.dataSource.filter = "";
+
         this.dataLoaded = true;
         this.searchLoadingBar = false;
       }
@@ -162,7 +167,11 @@ export class AgentOverviewComponent implements OnInit {
     this.searchLoadingBar = true;
     this.agentApiService.getAll().then(response => {
       if (response) {
-        this.dataSource.data = response.agents;
+        let agentEntities: AgentEntity[] = response.agents
+        for (let agentEntity of agentEntities) {
+          agentEntity.lastConnectionTime = this.formatDate(agentEntity.lastConnectionTime)
+        }
+        this.dataSource.data = agentEntities;
         this.searchLoadingBar = false;
       }
     });
@@ -177,5 +186,21 @@ export class AgentOverviewComponent implements OnInit {
 
   openAddNewPopup() {
     this.dialog.open(AgentAddNewComponent, {panelClass: "main-popup"})
+  }
+
+  formatDate(dateObj: Date | string): string {
+    if (dateObj && typeof dateObj != "string") {
+      return dateObj.toLocaleString("en-US", {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+        localeMatcher: "best fit"
+      });
+    }
+    return "N/A"
   }
 }

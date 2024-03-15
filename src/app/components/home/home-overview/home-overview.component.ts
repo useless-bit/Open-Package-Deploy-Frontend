@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MatCard} from "@angular/material/card";
 import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {HomeOutdatedAgentsComponent} from "../home-outdated-agents/home-outdated-agents.component";
+import {HomeOnlineAgentsComponent} from "../home-online-agents/home-online-agents.component";
 
 @Component({
   selector: 'app-home-overview',
@@ -9,7 +10,8 @@ import {HomeOutdatedAgentsComponent} from "../home-outdated-agents/home-outdated
   imports: [
     MatCard,
     PlaceholderComponent,
-    HomeOutdatedAgentsComponent
+    HomeOutdatedAgentsComponent,
+    HomeOnlineAgentsComponent
   ],
   templateUrl: './home-overview.component.html',
   styleUrl: './home-overview.component.scss'
