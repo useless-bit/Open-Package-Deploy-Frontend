@@ -30,6 +30,7 @@ Requires=network-online.target
 
 [Service]
 WorkingDirectory=/etc/OPD-Agent
+ExecStartPre=/bin/sh -c 'if [ ! -e Agent.jar ]; then cp Agent_backup.jar Agent.jar; fi && if [ -e Agent_update.jar ]; then java -jar Agent_update.jar; fi'
 ExecStart=java -jar Agent.jar
 Restart=always
 RestartSec=10
