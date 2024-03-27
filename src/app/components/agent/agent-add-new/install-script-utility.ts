@@ -22,7 +22,7 @@ echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
 apt-get update
 apt-get install -y openjdk-19-jre-headless
 
-bash -c 'cat > /etc/systemd/system/opd-agent.service <<EOF
+bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
 [Unit]
 Description=OPD Agent
 After=network.target network-online.target
@@ -37,7 +37,7 @@ RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
-EOF'
+EOF"
 
 sudo systemctl daemon-reload
 sudo systemctl start opd-agent
