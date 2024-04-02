@@ -18,9 +18,9 @@ import {CustomRouteReuseStrategy} from "./strategy/CustomRouteReuseStrategy";
 import {MatTableDataSource} from "@angular/material/table";
 import {HIGHLIGHT_OPTIONS} from "ngx-highlightjs";
 
-async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService) {
-  return new Promise<void>(async (resolve) => {
-    await keycloak.init({
+function initializeKeycloak(keycloak: KeycloakService, vs: VariableService): Promise<void> {
+  return new Promise((resolve, reject) => {
+    keycloak.init({
       config: {
         realm: vs.keycloakRealm,
         url: vs.keycloakUrl,
@@ -31,8 +31,7 @@ async function initializeKeycloak(keycloak: KeycloakService, vs: VariableService
         silentCheckSsoRedirectUri:
           window.location.origin + '/assets/silent-check-sso.html'
       }
-    });
-    resolve();
+    }).then(() => resolve()).catch((error) => reject(error));
   });
 }
 
@@ -59,7 +58,7 @@ export const appConfig: ApplicationConfig = {
         return () => new Promise<void>((resolve) => {
           variableService.loadVariables().then(() => {
             initializeKeycloak(keycloakService, variableService).then(() => {
-              // Navigate back to the original URL while removing url parameters (from Keycloak)
+              // Navigate back to the original URL
               router.navigateByUrl(location.path(true)).then(() => {
               });
               sharedService.emitInitFinished(true);

@@ -77,7 +77,7 @@ import {PackageApiService} from "../../../service/api/package.api.service";
 export class PackageOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['name'];
+  public selectedColumns: string[] = ['name'];
   public searchLoadingBar: boolean = false;
   public isHideDeletedPackagesSliderChecked: boolean = true;
   private localStorageNameSelectedColumns: string = "selectedColumns_PackageOverview";
@@ -138,7 +138,7 @@ export class PackageOverviewComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  changeSelectedColumns(package_item: String): void {
+  changeSelectedColumns(package_item: string): void {
     const index = this.selectedColumns.indexOf(package_item);
     if (index === -1) {
       this.selectedColumns.push(package_item);
@@ -146,7 +146,6 @@ export class PackageOverviewComponent implements OnInit {
       this.selectedColumns.splice(index, 1);
     }
     localStorage.setItem(this.localStorageNameSelectedColumns, JSON.stringify(this.selectedColumns));
-    this.dataSource.filter = this.dataSource.filter;
   }
 
   public isColumnSelected(package_item: string): boolean {

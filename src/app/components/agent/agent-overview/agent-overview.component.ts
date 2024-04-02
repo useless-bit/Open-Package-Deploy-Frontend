@@ -74,7 +74,7 @@ import {AgentAddNewComponent} from "../agent-add-new/agent-add-new.component";
 export class AgentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['name'];
+  public selectedColumns: string[] = ['name'];
   public searchLoadingBar: boolean = false;
   private localStorageNameSelectedColumns: string = "selectedColumns_AgentOverview";
   private agentInstance: AgentEntity = new AgentEntity(0);
@@ -125,7 +125,7 @@ export class AgentOverviewComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  changeSelectedColumns(agent: String): void {
+  changeSelectedColumns(agent: string): void {
     const index = this.selectedColumns.indexOf(agent);
     if (index === -1) {
       this.selectedColumns.push(agent);
@@ -133,7 +133,6 @@ export class AgentOverviewComponent implements OnInit {
       this.selectedColumns.splice(index, 1);
     }
     localStorage.setItem(this.localStorageNameSelectedColumns, JSON.stringify(this.selectedColumns));
-    this.dataSource.filter = this.dataSource.filter;
   }
 
   public isColumnSelected(agent: string): boolean {

@@ -25,7 +25,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error);
         }
       });
     });
@@ -39,7 +39,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error);
         }
       });
     });
@@ -53,7 +53,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error);
         }
       });
     });
@@ -74,7 +74,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error);
         }
       });
     });
