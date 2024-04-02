@@ -73,7 +73,7 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
 export class DeploymentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['packageName', 'agentName'];
+  public selectedColumns: string[] = ['packageName', 'agentName'];
   public searchLoadingBar: boolean = false;
   private localStorageNameSelectedColumns: string = "selectedColumns_DeploymentOverview";
   private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);
@@ -119,7 +119,7 @@ export class DeploymentOverviewComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  changeSelectedColumns(deployment: String): void {
+  changeSelectedColumns(deployment: string): void {
     const index = this.selectedColumns.indexOf(deployment);
     if (index === -1) {
       this.selectedColumns.push(deployment);
@@ -127,7 +127,6 @@ export class DeploymentOverviewComponent implements OnInit {
       this.selectedColumns.splice(index, 1);
     }
     localStorage.setItem(this.localStorageNameSelectedColumns, JSON.stringify(this.selectedColumns));
-    this.dataSource.filter = this.dataSource.filter;
   }
 
   public isColumnSelected(deployment: string): boolean {

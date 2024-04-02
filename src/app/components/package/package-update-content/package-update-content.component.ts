@@ -69,7 +69,7 @@ export class PackageUpdateContentComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    if (event.target && event.target.files && event.target.files[0]) {
+    if (event?.target?.files && event?.target?.files[0]) {
       this.file = event.target.files[0];
       if (this.file) {
         this.formControlFileInput.setValue(this.file.name)
