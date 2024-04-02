@@ -58,6 +58,14 @@ export class AgentAddNewComponent implements OnInit {
         this.installCode = this.installScriptUtility.getLinuxInstallScript(this.registrationToken, this.variableService.backendURL);
         break;
       }
+      case 'Windows': {
+        this.installCode = this.installScriptUtility.getWindowsInstallScript(this.registrationToken, this.variableService.backendURL);
+        break;
+      }
+      case 'macOS': {
+        this.installCode = this.installScriptUtility.getMacOSInstallScript(this.registrationToken, this.variableService.backendURL);
+        break;
+      }
       default: {
         this.installCode = "Select a OS";
         break;
