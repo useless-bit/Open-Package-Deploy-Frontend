@@ -65,7 +65,7 @@ export class PackageUploadComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    if (event.target?.files[0]) {
+    if (event?.target?.files[0]) {
       this.file = event.target.files[0];
       if (this.file) {
         this.formControlFileInput.setValue(this.file.name)
