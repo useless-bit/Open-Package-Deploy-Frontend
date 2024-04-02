@@ -1,4 +1,4 @@
-<app-loading *ngIf="!this.dataLoaded"></app-loading>
+  <app-loading *ngIf="!this.dataLoaded"></app-loading>
 
 <div *ngIf="dataLoaded" class="main-content">
   <mat-form-field class="search-field">
@@ -34,7 +34,7 @@
   <br>
 
   <div class="table-container">
-    <table [dataSource]="dataSource" class="agent-table" mat-table matSort>
+    <table aria-label="Overview of all Agents" [dataSource]="dataSource" class="agent-table" mat-table matSort>
       <ng-container *ngFor="let column of this.agentKeys" [matColumnDef]="column">
         <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ this.convertStringChipName(column) }}</th>
         <td *matCellDef="let agent" mat-cell>{{ agent[column] }}</td>
