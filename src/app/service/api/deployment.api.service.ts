@@ -24,7 +24,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error)
         }
       });
     });
@@ -38,7 +38,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error)
         }
       });
     });
@@ -52,7 +52,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error)
         }
       });
     });
@@ -66,7 +66,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error)
         }
       });
     });
@@ -80,7 +80,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error);
         }
       });
     });
@@ -124,7 +124,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error)
         }
       });
     });
@@ -138,7 +138,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(null);
+          reject(error)
         }
       });
     });
