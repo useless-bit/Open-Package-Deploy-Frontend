@@ -85,4 +85,10 @@ Remove-Item -Path .\\temp-opd-agent -Recurse
 `
   }
 
+
+  public getMacOSInstallScript(registrationToken: string, backendURL: string): string {
+    return `
+`
+  }
+
 }
