@@ -1,4 +1,6 @@
 export enum OperatingSystem {
   Unknown = "UNKNOWN",
-  Linux = "LINUX"
+  Linux = "LINUX",
+  macOS = "MACOS",
+  Windows = "WINDOWS"
 }
