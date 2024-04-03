@@ -1,5 +1,8 @@
 <div class="main-content">
   <h2>Agent Status</h2>
+  @if (refreshingData) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
   <mat-divider></mat-divider>
   @if (!dataLoaded) {
     <app-loading></app-loading>

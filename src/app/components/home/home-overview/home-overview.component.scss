@@ -5,6 +5,20 @@
   flex-wrap: wrap;
 }
 
+.settings {
+  margin: 10px;
+  display: flex;
+
+  button {
+    margin: 10px;
+    height: auto;
+  }
+  mat-form-field {
+    margin: 10px;
+    height: 100%;
+  }
+}
+
 mat-card {
   margin: 10px;
 }

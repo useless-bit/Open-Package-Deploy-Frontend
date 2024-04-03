@@ -6,6 +6,7 @@ import {MatInput} from "@angular/material/input";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {ServerApiService} from "../../../service/api/server.api.service";
 import {AgentApiService} from "../../../service/api/agent.api.service";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 @Component({
   selector: 'app-home-agent-status',
@@ -14,13 +15,15 @@ import {AgentApiService} from "../../../service/api/agent.api.service";
     LoadingComponent,
     MatDivider,
     MatFormField,
-    MatInput
+    MatInput,
+    MatProgressBar
   ],
   templateUrl: './home-agent-status.component.html',
   styleUrl: './home-agent-status.component.scss'
 })
 export class HomeAgentStatusComponent implements OnInit {
   public dataLoaded: boolean = false;
+  public refreshingData: boolean = false;
   public agentCount: number = 0;
   public inactiveAgentCount: number = 0;
   public outdatedAgentCount: number = 0;
@@ -46,6 +49,7 @@ export class HomeAgentStatusComponent implements OnInit {
             this.calculateInactiveAgents()
             this.calculateOutdatedAgents()
             this.dataLoaded = true;
+            this.refreshingData = false;
           }
         })
       })
@@ -64,6 +68,11 @@ export class HomeAgentStatusComponent implements OnInit {
   calculateOutdatedAgents(): void {
     this.outdatedAgentEntities = this.agentEntities.filter(item => item.checksum != this.agentChecksum);
     this.outdatedAgentCount = this.outdatedAgentEntities.length;
+  }
+
+  refreshData(): void {
+    this.refreshingData = true;
+    this.ngOnInit();
   }
 
 }
