@@ -1,0 +1,24 @@
+<div class="main-content">
+  <h2>Agent Status</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <div class="label-container">
+      <mat-form-field>
+        Total:
+        <input disabled matInput>{{ agentCount }}
+      </mat-form-field>
+      <mat-form-field>
+        Inactive:
+        <input disabled matInput>{{ inactiveAgentCount }}
+      </mat-form-field>
+    </div>
+    <div class="label-container">
+      <mat-form-field>
+        Outdated:
+        <input disabled matInput>{{ outdatedAgentCount }}
+      </mat-form-field>
+    </div>
+  }
+</div>

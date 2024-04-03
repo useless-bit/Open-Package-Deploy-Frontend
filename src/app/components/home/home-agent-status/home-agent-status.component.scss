@@ -3,12 +3,21 @@
   margin: 10px;
 }
 
+label-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+label {
+  flex: 50%
+}
+
 h2 {
   text-align: center;
   font-weight: bold;
 }
 
-mat-form-field {
-  width: 100%;
-  display: flex;
-}
