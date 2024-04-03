@@ -87,7 +87,72 @@ Remove-Item -Path .\\temp-opd-agent -Recurse
 
 
   public getMacOSInstallScript(registrationToken: string, backendURL: string): string {
-    return `
+    return `cd ~
+mkdir temp-opd-agent
+cd temp-opd-agent
+
+Token='${registrationToken}'
+Host='${backendURL}'
+
+arch=$(uname -m)
+if [ "$arch" == "arm64" ]; then
+   echo "Installing Java for ARM"
+   curl https://cdn.azul.com/zulu/bin/zulu21.32.17-ca-jdk21.0.2-macosx_aarch64.dmg -o java.dmg
+elif [ "$arch" == "x86_64" ]; then
+   echo "Installing Java for x86"
+   curl https://cdn.azul.com/zulu/bin/zulu21.32.17-ca-jdk21.0.2-macosx_x64.dmg -o java.dmg
+fi
+
+hdiutil mount java.dmg -mountpoint /Volumes/opd-java-installer
+cd /Volumes/opd-java-installer
+sudo installer -pkg *.pkg -target "/"
+
+cd ~
+cd temp-opd-agent
+
+hdiutil detach /Volumes/opd-java-installer
+
+curl -X GET -H "Authentication: $Token" -o Agent.jar $Host/download/agent
+
+mkdir -p /etc/OPD-Agent
+cp Agent.jar /etc/OPD-Agent/Agent.jar
+echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
+echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
+
+content=$(cat <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+   <key>Label</key>
+   <string>org.codesystem.opd-agent</string>
+   <key>ProgramArguments</key>
+   <array>
+     <string>/bin/sh</string>
+     <string>-c</string>
+     <string>if [ ! -e Agent.jar ]; then cp Agent_backup.jar Agent.jar; fi &amp;&amp; if [ -e Agent_update.jar ]; then java -jar Agent_update.jar; fi; java -jar Agent.jar</string>
+   </array>
+   <key>RunAtLoad</key>
+   <true/>
+   <key>KeepAlive</key>
+   <true/>
+   <key>WorkingDirectory</key>
+   <string>/etc/OPD-Agent</string>
+   <key>StartInterval</key>
+   <integer>15</integer>
+</dict>
+</plist>
+EOF
+)
+echo "$content" > /Library/LaunchDaemons/opd-agent.plist
+
+launchctl unload -w /Library/LaunchDaemons/opd-agent.plist
+launchctl stop -w /Library/LaunchDaemons/opd-agent.plist
+launchctl load -w /Library/LaunchDaemons/opd-agent.plist
+launchctl start -w /Library/LaunchDaemons/opd-agent.plist
+
+cd ~
+rm -r temp-opd-agent
 `
   }
 
