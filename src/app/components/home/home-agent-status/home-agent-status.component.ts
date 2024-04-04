@@ -85,9 +85,10 @@ export class HomeAgentStatusComponent implements OnInit {
 
   showInactiveAgentPopup():void {
     this.dialogRef = this.dialog.open(ArrayPopupComponent, {
-      data: new ArrayPopupInput("test", this.inactiveAgentEntities.map(item => item.name)),
+      data: new ArrayPopupInput("Inactive Agents", this.inactiveAgentEntities.map(item => item.name)),
       panelClass: "main-popup"
     });
+    this.dialogRef.afterClosed().subscribe(() => this.dialogRef = undefined)
   }
 
   updatePopupData(): void{
