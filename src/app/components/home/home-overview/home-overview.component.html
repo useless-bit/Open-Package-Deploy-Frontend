@@ -1,5 +1,5 @@
 <div class="settings">
-  <button mat-flat-button (click)="changeRefreshInterval()">Change refresh Interval</button>
+  <button (click)="changeRefreshInterval()" mat-flat-button>Change refresh Interval</button>
   <mat-form-field>
     <mat-label>Refresh in seconds</mat-label>
     <input [formControl]="formControlRefreshIntervalInput" matInput type="number">

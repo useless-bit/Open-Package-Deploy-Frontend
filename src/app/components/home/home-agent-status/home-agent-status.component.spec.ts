@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeAgentStatusComponent } from './home-agent-status.component';
+import {HomeAgentStatusComponent} from './home-agent-status.component';
 
 describe('HomeAgentStatusComponent', () => {
   let component: HomeAgentStatusComponent;
@@ -10,8 +10,8 @@ describe('HomeAgentStatusComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeAgentStatusComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(HomeAgentStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
