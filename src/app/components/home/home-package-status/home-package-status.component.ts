@@ -5,6 +5,7 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageApiService} from "../../../service/api/package.api.service";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 @Component({
   selector: 'app-home-package-status',
@@ -13,13 +14,15 @@ import {PackageApiService} from "../../../service/api/package.api.service";
     LoadingComponent,
     MatDivider,
     MatFormField,
-    MatInput
+    MatInput,
+    MatProgressBar
   ],
   templateUrl: './home-package-status.component.html',
   styleUrl: './home-package-status.component.scss'
 })
 export class HomePackageStatusComponent implements OnInit {
   public dataLoaded: boolean = false;
+  public refreshingData: boolean = false;
   public packageCount: number = 0;
   public packageAwaitingProcessingCount: number = 0;
   public packageErrorCount: number = 0;
@@ -38,6 +41,7 @@ export class HomePackageStatusComponent implements OnInit {
         this.packageEntities = packageResponse.packages;
         this.calculatePackages()
         this.dataLoaded = true;
+        this.refreshingData = false;
       }
     });
   }
@@ -49,5 +53,8 @@ export class HomePackageStatusComponent implements OnInit {
     this.packageEntitiesAwaitingProcessing = this.packageEntities.filter(item => item.packageStatus === "UPLOADED");
     this.packageAwaitingProcessingCount = this.packageEntitiesAwaitingProcessing.length;
   }
-
+  refreshData(): void {
+    this.refreshingData = true;
+    this.ngOnInit();
+  }
 }

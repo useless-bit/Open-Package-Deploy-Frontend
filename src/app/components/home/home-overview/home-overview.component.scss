@@ -8,14 +8,20 @@
 .settings {
   margin: 10px;
   display: flex;
+  height: 80px;
 
-  button {
-    margin: 10px;
-    height: auto;
+  .buttons {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin: 5px 10px;
+    }
   }
 
   mat-form-field {
-    margin: 10px;
+    margin: 5px 10px;
     height: 100%;
   }
 }

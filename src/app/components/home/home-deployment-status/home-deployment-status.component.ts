@@ -5,6 +5,7 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 @Component({
   selector: 'app-home-deployment-status',
@@ -13,13 +14,15 @@ import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
     LoadingComponent,
     MatDivider,
     MatFormField,
-    MatInput
+    MatInput,
+    MatProgressBar
   ],
   templateUrl: './home-deployment-status.component.html',
   styleUrl: './home-deployment-status.component.scss'
 })
 export class HomeDeploymentStatusComponent implements OnInit {
   public dataLoaded: boolean = false;
+  public refreshingData: boolean = false;
   public deploymentCount: number = 0;
   public deploymentOutstandingCount: number = 0;
   public deploymentErrorCount: number = 0;
@@ -40,6 +43,7 @@ export class HomeDeploymentStatusComponent implements OnInit {
         this.deploymentEntities = deploymentResponse.deployments;
         this.calculateDeployments()
         this.dataLoaded = true;
+        this.refreshingData = false;
       }
     });
   }
@@ -52,6 +56,10 @@ export class HomeDeploymentStatusComponent implements OnInit {
     this.deploymentOutstandingCount = this.deploymentEntitiesOutstanding.length;
     this.deploymentEntitiesCompleted = this.deploymentEntities.filter(item => item.isDeployed);
     this.deploymentCompletedCount = this.deploymentEntitiesCompleted.length;
+  }
+  refreshData(): void {
+    this.refreshingData = true;
+    this.ngOnInit();
   }
 
 }
