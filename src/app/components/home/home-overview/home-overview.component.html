@@ -1,18 +1,25 @@
-<div class="settings">
-  <div class="buttons">
-    <button color="primary" (click)="changeRefreshInterval()" mat-flat-button>Change refresh Interval</button>
-    <button color="primary" (click)="refreshComponents()" mat-flat-button>Refresh now</button>
-  </div>
-  <mat-form-field>
-    <mat-label>Refresh in seconds</mat-label>
-    <input [formControl]="formControlRefreshIntervalInput" matInput type="number">
-    @if (formControlRefreshIntervalInput.hasError('min') || formControlRefreshIntervalInput.hasError('required')) {
-      <mat-error>Must be a positive number</mat-error>
-    }
-  </mat-form-field>
+<div class="option-bar">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Options</mat-expansion-panel-header>
+      <div class="settings">
+        <div class="buttons">
+          <button color="primary" (click)="changeRefreshInterval()" mat-flat-button>Change refresh Interval</button>
+          <button color="primary" (click)="refreshComponents()" mat-flat-button>Refresh now</button>
+        </div>
+        <mat-form-field>
+          <mat-label>Refresh in seconds</mat-label>
+          <input [formControl]="formControlRefreshIntervalInput" matInput type="number">
+          @if (formControlRefreshIntervalInput.hasError('min') || formControlRefreshIntervalInput.hasError('required')) {
+            <mat-error>Must be at least 10s</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-progress-bar mode="determinate"
+                    [value]="((refreshIntervalSeconds - refreshIntervalRemainingSeconds) / refreshIntervalSeconds) * 100"></mat-progress-bar>
 </div>
-<mat-progress-bar mode="determinate" [value]="((refreshIntervalSeconds - refreshIntervalRemainingSeconds) / refreshIntervalSeconds) * 100"></mat-progress-bar>
-<mat-divider></mat-divider>
 <div class="main-content">
   <mat-card>
     <app-home-agent-status #homeAgentStatusComponent></app-home-agent-status>

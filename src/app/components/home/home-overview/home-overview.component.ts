@@ -11,6 +11,7 @@ import {MatDivider} from "@angular/material/divider";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-home-overview',
@@ -29,7 +30,10 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     MatError,
     MatLabel,
     MatProgressBar,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader
   ],
   templateUrl: './home-overview.component.html',
   styleUrl: './home-overview.component.scss'
@@ -43,7 +47,8 @@ export class HomeOverviewComponent implements OnInit {
   defaultRefreshIntervalSeconds: number = 30;
   refreshIntervalSeconds: number = 0;
   refreshIntervalRemainingSeconds: number = 0;
-  formControlRefreshIntervalInput: FormControl = new FormControl('', [Validators.required, Validators.min(Number.MIN_VALUE)]);
+  minRefreshIntervalSeconds: number = 10;
+  formControlRefreshIntervalInput: FormControl = new FormControl('', [Validators.required, Validators.min(this.minRefreshIntervalSeconds)]);
 
   changeRefreshInterval(): void {
     this.formControlRefreshIntervalInput.markAllAsTouched();
@@ -76,7 +81,7 @@ export class HomeOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     const storedRefreshInterval = localStorage.getItem(this.localStorageNameRefreshInterval);
-    if (storedRefreshInterval && !isNaN(Number(storedRefreshInterval))) {
+    if (storedRefreshInterval && !isNaN(Number(storedRefreshInterval)) && Number(storedRefreshInterval) >= this.minRefreshIntervalSeconds) {
       this.refreshIntervalSeconds = Number(storedRefreshInterval);
     } else {
       this.refreshIntervalSeconds = this.defaultRefreshIntervalSeconds;
