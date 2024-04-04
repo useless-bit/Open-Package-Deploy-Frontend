@@ -14,7 +14,6 @@ import {ApplicationLoadedService} from "./service/application-loaded/application
 import {KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {Location} from "@angular/common";
-import {CustomRouteReuseStrategy} from "./strategy/CustomRouteReuseStrategy";
 import {MatTableDataSource} from "@angular/material/table";
 import {HIGHLIGHT_OPTIONS} from "ngx-highlightjs";
 
@@ -69,10 +68,6 @@ export const appConfig: ApplicationConfig = {
       },
       deps: [VariableService, KeycloakService, Router, ApplicationLoadedService, Location],
       multi: true
-    },
-    {
-      provide: RouteReuseStrategy,
-      useClass: CustomRouteReuseStrategy
     },
     {
       provide: HIGHLIGHT_OPTIONS,
