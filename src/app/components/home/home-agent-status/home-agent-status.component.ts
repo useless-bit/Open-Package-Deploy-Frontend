@@ -7,6 +7,10 @@ import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {ServerApiService} from "../../../service/api/server.api.service";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatProgressBar} from "@angular/material/progress-bar";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ArrayPopupComponent} from "../../array-popup/array-popup.component";
+import {MatButton} from "@angular/material/button";
+import {ArrayPopupInput} from "../../array-popup/arrayPopupInput";
 
 @Component({
   selector: 'app-home-agent-status',
@@ -16,7 +20,8 @@ import {MatProgressBar} from "@angular/material/progress-bar";
     MatDivider,
     MatFormField,
     MatInput,
-    MatProgressBar
+    MatProgressBar,
+    MatButton
   ],
   templateUrl: './home-agent-status.component.html',
   styleUrl: './home-agent-status.component.scss'
@@ -33,10 +38,12 @@ export class HomeAgentStatusComponent implements OnInit {
   private agentEntities: AgentEntity[] = [];
   private inactiveAgentEntities: AgentEntity[] = [];
   private outdatedAgentEntities: AgentEntity[] = [];
+  private dialogRef: MatDialogRef<ArrayPopupComponent> | undefined;
 
 
   constructor(private serverApiService: ServerApiService,
-              private agentApiService: AgentApiService) {
+              private agentApiService: AgentApiService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -50,6 +57,7 @@ export class HomeAgentStatusComponent implements OnInit {
             this.calculateOutdatedAgents()
             this.dataLoaded = true;
             this.refreshingData = false;
+            this.updatePopupData();
           }
         })
       })
@@ -75,4 +83,16 @@ export class HomeAgentStatusComponent implements OnInit {
     this.ngOnInit();
   }
 
+  showInactiveAgentPopup():void {
+    this.dialogRef = this.dialog.open(ArrayPopupComponent, {
+      data: new ArrayPopupInput("test", this.inactiveAgentEntities.map(item => item.name)),
+      panelClass: "main-popup"
+    });
+  }
+
+  updatePopupData(): void{
+    if (this.dialogRef) {
+      this.dialogRef.componentInstance.arrayPopupInput.entries = this.inactiveAgentEntities.map(item => item.name);
+    }
+  }
 }

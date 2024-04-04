@@ -10,17 +10,20 @@
     <div class="label-container">
       <mat-form-field>
         Total:
-        <input disabled matInput>{{ agentCount }}
+        <div>{{agentCount}}</div>
+        <input matInput [hidden]="true">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="clickable-container" (click)="showInactiveAgentPopup()">
         Inactive:
-        <input disabled matInput>{{ inactiveAgentCount }}
+        <div>{{ inactiveAgentCount }}</div>
+        <input matInput [hidden]="true">
       </mat-form-field>
     </div>
     <div class="label-container">
       <mat-form-field>
         Outdated:
-        <input disabled matInput>{{ outdatedAgentCount }}
+        <div>{{ outdatedAgentCount }}</div>
+        <input matInput [hidden]="true">
       </mat-form-field>
     </div>
   }
