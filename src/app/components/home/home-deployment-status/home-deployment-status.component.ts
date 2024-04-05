@@ -49,6 +49,7 @@ export class HomeDeploymentStatusComponent implements OnInit {
         this.calculateDeployments()
         this.dataLoaded = true;
         this.refreshingData = false;
+        this.updatePopupData();
       }
     });
   }
