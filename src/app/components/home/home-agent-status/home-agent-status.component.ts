@@ -53,6 +53,7 @@ export class HomeAgentStatusComponent implements OnInit {
           if (serverResponse && agentChecksumResponse && agentResponse) {
             this.agentUpdateInterval = serverResponse;
             this.agentEntities = agentResponse.agents;
+            this.agentChecksum = agentChecksumResponse;
             this.calculateInactiveAgents()
             this.calculateOutdatedAgents()
             this.dataLoaded = true;
