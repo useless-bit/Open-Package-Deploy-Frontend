@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ArrayPopupComponent } from './array-popup.component';
+import {ArrayPopupComponent} from './array-popup.component';
 
 describe('ArrayPopupComponent', () => {
   let component: ArrayPopupComponent;
@@ -10,8 +10,8 @@ describe('ArrayPopupComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ArrayPopupComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ArrayPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

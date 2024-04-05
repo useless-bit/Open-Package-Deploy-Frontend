@@ -4,8 +4,8 @@
       <mat-expansion-panel-header>Options</mat-expansion-panel-header>
       <div class="settings">
         <div class="buttons">
-          <button color="primary" (click)="changeRefreshInterval()" mat-flat-button>Change refresh Interval</button>
-          <button color="primary" (click)="refreshComponents()" mat-flat-button>Refresh now</button>
+          <button (click)="changeRefreshInterval()" color="primary" mat-flat-button>Change refresh Interval</button>
+          <button (click)="refreshComponents()" color="primary" mat-flat-button>Refresh now</button>
         </div>
         <mat-form-field>
           <mat-label>Refresh in seconds</mat-label>
@@ -17,8 +17,8 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-  <mat-progress-bar mode="determinate"
-                    [value]="((refreshIntervalSeconds - refreshIntervalRemainingSeconds) / refreshIntervalSeconds) * 100"></mat-progress-bar>
+  <mat-progress-bar [value]="((refreshIntervalSeconds - refreshIntervalRemainingSeconds) / refreshIntervalSeconds) * 100"
+                    mode="determinate"></mat-progress-bar>
 </div>
 <div class="main-content">
   <mat-card>

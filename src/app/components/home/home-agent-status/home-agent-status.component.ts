@@ -83,17 +83,30 @@ export class HomeAgentStatusComponent implements OnInit {
     this.ngOnInit();
   }
 
-  showInactiveAgentPopup():void {
+  showInactiveAgentPopup(): void {
     this.dialogRef = this.dialog.open(ArrayPopupComponent, {
-      data: new ArrayPopupInput("Inactive Agents", this.inactiveAgentEntities.map(item => item.name)),
+      data: new ArrayPopupInput("Inactive Agents", this.inactiveAgentEntities.map(item => item.name + " | " + item.uuid)),
       panelClass: "main-popup"
     });
     this.dialogRef.afterClosed().subscribe(() => this.dialogRef = undefined)
   }
 
-  updatePopupData(): void{
+  showOutdatedAgentPopup(): void {
+    this.dialogRef = this.dialog.open(ArrayPopupComponent, {
+      data: new ArrayPopupInput("Outdated Agents", this.outdatedAgentEntities.map(item => item.name + " | " + item.uuid)),
+      panelClass: "main-popup"
+    });
+    this.dialogRef.afterClosed().subscribe(() => this.dialogRef = undefined)
+  }
+
+  updatePopupData(): void {
     if (this.dialogRef) {
-      this.dialogRef.componentInstance.arrayPopupInput.entries = this.inactiveAgentEntities.map(item => item.name);
+      if (this.dialogRef.componentInstance.arrayPopupInput.title == "Inactive Agents") {
+        this.dialogRef.componentInstance.arrayPopupInput.entries = this.inactiveAgentEntities.map(item => item.name + " | " + item.uuid);
+      } else if (this.dialogRef.componentInstance.arrayPopupInput.title == "Outdated Agents") {
+        this.dialogRef.componentInstance.arrayPopupInput.entries = this.outdatedAgentEntities.map(item => item.name + " | " + item.uuid);
+
+      }
     }
   }
 }

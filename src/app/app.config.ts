@@ -1,11 +1,5 @@
 import {APP_INITIALIZER, ApplicationConfig, Provider} from '@angular/core';
-import {
-  provideRouter,
-  Router,
-  RouteReuseStrategy,
-  withDisabledInitialNavigation,
-  withHashLocation
-} from '@angular/router';
+import {provideRouter, Router, withDisabledInitialNavigation, withHashLocation} from '@angular/router';
 
 import {routes} from './app.routes';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';

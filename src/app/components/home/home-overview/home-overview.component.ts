@@ -42,13 +42,13 @@ export class HomeOverviewComponent implements OnInit, OnDestroy {
   @ViewChild('homeAgentStatusComponent') homeAgentStatusComponent: HomeAgentStatusComponent | undefined;
   @ViewChild('homePackageStatusComponent') homePackageStatusComponent: HomePackageStatusComponent | undefined;
   @ViewChild('homeDeploymentStatusComponent') homeDeploymentStatusComponent: HomeDeploymentStatusComponent | undefined;
-  private localStorageNameRefreshInterval: string = "refreshInterval_Home";
   intervalLoop: number | undefined;
   defaultRefreshIntervalSeconds: number = 30;
   refreshIntervalSeconds: number = 0;
   refreshIntervalRemainingSeconds: number = 0;
   minRefreshIntervalSeconds: number = 10;
   formControlRefreshIntervalInput: FormControl = new FormControl('', [Validators.required, Validators.min(this.minRefreshIntervalSeconds)]);
+  private localStorageNameRefreshInterval: string = "refreshInterval_Home";
 
   changeRefreshInterval(): void {
     this.formControlRefreshIntervalInput.markAllAsTouched();

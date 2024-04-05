@@ -9,18 +9,21 @@
   } @else {
     <div class="label-container">
       <mat-form-field>
-        Total packages:
-        <input disabled matInput>{{ packageCount }}
+        Total:
+        <div>{{ packageCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
     </div>
     <div class="label-container">
-      <mat-form-field>
+      <mat-form-field class="clickable-container" (click)="showAwaitingProcessingPackagesPopup()">
         Awaiting processing:
-        <input disabled matInput>{{ packageAwaitingProcessingCount }}
+        <div>{{ packageAwaitingProcessingCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="clickable-container" (click)="showErrorPackagesPopup()">
         Error:
-        <input disabled matInput>{{ packageErrorCount }}
+        <div>{{ packageErrorCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
     </div>
   }

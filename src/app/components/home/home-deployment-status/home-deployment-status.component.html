@@ -10,21 +10,25 @@
     <div class="label-container">
       <mat-form-field>
         Total:
-        <input disabled matInput>{{ deploymentCount }}
+        <div>{{ deploymentCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
       <mat-form-field>
         Completed:
-        <input disabled matInput>{{ deploymentCompletedCount }}
+        <div>{{ deploymentCompletedCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
     </div>
     <div class="label-container">
-      <mat-form-field>
+      <mat-form-field class="clickable-container" (click)="showOutstandingDeploymentPopup()">
         Outstanding:
-        <input disabled matInput>{{ deploymentOutstandingCount }}
+        <div>{{ deploymentOutstandingCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="clickable-container" (click)="showFailedDeploymentsPopup()">
         Error:
-        <input disabled matInput>{{ deploymentErrorCount }}
+        <div>{{ deploymentErrorCount }}</div>
+        <input [hidden]="true" matInput>
       </mat-form-field>
     </div>
   }
