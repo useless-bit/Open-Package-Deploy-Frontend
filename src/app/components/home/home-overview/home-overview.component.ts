@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatCard} from "@angular/material/card";
 import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {HomePackageStatusComponent} from "../home-package-status/home-package-status.component";
@@ -38,7 +38,7 @@ import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular
   templateUrl: './home-overview.component.html',
   styleUrl: './home-overview.component.scss'
 })
-export class HomeOverviewComponent implements OnInit {
+export class HomeOverviewComponent implements OnInit, OnDestroy {
   @ViewChild('homeAgentStatusComponent') homeAgentStatusComponent: HomeAgentStatusComponent | undefined;
   @ViewChild('homePackageStatusComponent') homePackageStatusComponent: HomePackageStatusComponent | undefined;
   @ViewChild('homeDeploymentStatusComponent') homeDeploymentStatusComponent: HomeDeploymentStatusComponent | undefined;
@@ -89,5 +89,9 @@ export class HomeOverviewComponent implements OnInit {
     this.formControlRefreshIntervalInput.setValue(this.refreshIntervalSeconds);
     localStorage.setItem(this.localStorageNameRefreshInterval, String(this.refreshIntervalSeconds));
     this.refreshLoop();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalLoop);
   }
 }
