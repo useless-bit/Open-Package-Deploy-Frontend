@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {HomeAgentOnlineComponent} from './home-agent-online.component';
+import {HomeAgentStatusComponent} from './home-agent-status.component';
 
-describe('HomeOnlineAgentsComponent', () => {
-  let component: HomeAgentOnlineComponent;
-  let fixture: ComponentFixture<HomeAgentOnlineComponent>;
+describe('HomeAgentStatusComponent', () => {
+  let component: HomeAgentStatusComponent;
+  let fixture: ComponentFixture<HomeAgentStatusComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeAgentOnlineComponent]
+      imports: [HomeAgentStatusComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(HomeAgentOnlineComponent);
+    fixture = TestBed.createComponent(HomeAgentStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

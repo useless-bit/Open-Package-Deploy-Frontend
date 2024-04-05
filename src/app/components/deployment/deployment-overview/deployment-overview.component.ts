@@ -81,20 +81,20 @@ export class DeploymentOverviewComponent implements OnInit {
 
   constructor(private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
-              public dataSource: MatTableDataSource<DeploymentEntity>) {
-    this.dataSource = dataSource;
-    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
+              public dataSourceDeploymentOverviewTable: MatTableDataSource<DeploymentEntity>) {
+    this.dataSourceDeploymentOverviewTable = dataSourceDeploymentOverviewTable;
+    this.dataSourceDeploymentOverviewTable.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
-      this.dataSource.paginator = paginator;
+      this.dataSourceDeploymentOverviewTable.paginator = paginator;
     }
   }
 
   @ViewChild(MatSort) set tableSort(sort: MatSort) {
     if (sort) {
-      this.dataSource.sort = sort;
+      this.dataSourceDeploymentOverviewTable.sort = sort;
     }
   }
 
@@ -106,8 +106,8 @@ export class DeploymentOverviewComponent implements OnInit {
     }
     this.deploymentApiService.getAll().then(response => {
       if (response) {
-        this.dataSource.data = response.deployments;
-        this.dataSource.filter = "";
+        this.dataSourceDeploymentOverviewTable.data = response.deployments;
+        this.dataSourceDeploymentOverviewTable.filter = "";
         this.dataLoaded = true;
         this.searchLoadingBar = false;
       }
@@ -116,7 +116,7 @@ export class DeploymentOverviewComponent implements OnInit {
 
   applySearch(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceDeploymentOverviewTable.filter = filterValue.trim().toLowerCase();
   }
 
   changeSelectedColumns(deployment: string): void {
@@ -149,7 +149,7 @@ export class DeploymentOverviewComponent implements OnInit {
     });
   }
 
-  public convertStringChipName(str: string): string {
+  public convertStringChipNameDeploymentEntity(str: string): string {
     const convertedString = str.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
     return convertedString.split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -160,7 +160,7 @@ export class DeploymentOverviewComponent implements OnInit {
     this.searchLoadingBar = true;
     this.deploymentApiService.getAll().then(response => {
       if (response) {
-        this.dataSource.data = response.deployments;
+        this.dataSourceDeploymentOverviewTable.data = response.deployments;
         this.searchLoadingBar = false;
       }
     });
@@ -170,7 +170,7 @@ export class DeploymentOverviewComponent implements OnInit {
     if (this.searchField) {
       this.searchField.nativeElement.value = "";
     }
-    this.dataSource.filter = "";
+    this.dataSourceDeploymentOverviewTable.filter = "";
   }
 
   openAddNewPopup() {

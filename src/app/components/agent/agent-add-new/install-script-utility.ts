@@ -61,7 +61,7 @@ cd temp-opd-agent
 
 Invoke-WebRequest -Uri "https://cdn.azul.com/zulu/bin/zulu21.32.17-ca-jdk21.0.2-win_x64.msi" -OutFile "java.msi"
 
-Start-Process -FilePath "msiexec" -ArgumentList "/i java.msi /quiet /qn /norestart ADDLOCAL=ZuluInstallation,FeatureJavaHome" -NoNewWindow -Wait
+Start-Process -FilePath "msiexec" -ArgumentList "/i java.msi /quiet /qn /norestart ADDLOCAL=ZuluInstallation,FeatureJavaHome,FeatureEnvironment" -NoNewWindow -Wait
 
 $headers = @{ Authentication = $token }
 Invoke-WebRequest -Uri "$host_url/download/agent" -Headers $headers -OutFile "Agent.jar"

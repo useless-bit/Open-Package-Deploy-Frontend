@@ -1,8 +1,8 @@
 export class DialogConfirmCancelInput {
-  dialogTitle: string
-  dialogMessage: string
-  cancelButtonMessage: string
-  acceptButtonMessage: string
+  dialogTitle: string;
+  dialogMessage: string;
+  cancelButtonMessage: string;
+  acceptButtonMessage: string;
 
 
   constructor(dialogTitle: string, dialogMessage: string, cancelButtonMessage: string, acceptButtonMessage: string) {

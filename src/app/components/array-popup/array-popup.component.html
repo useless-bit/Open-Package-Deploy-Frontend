@@ -1,0 +1,10 @@
+<div class="main-content">
+  <h2>{{ arrayPopupInput.title }}</h2>
+
+  <mat-list>
+    @for (entry of arrayPopupInput.entries; track entry) {
+      <mat-list-item>{{ entry }}</mat-list-item>
+      <mat-divider></mat-divider>
+    }
+  </mat-list>
+</div>
