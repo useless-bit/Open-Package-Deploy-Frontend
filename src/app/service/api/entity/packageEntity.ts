@@ -1,4 +1,5 @@
 import {OperatingSystem} from "./operatingSystem";
+import {UnitConversionUtility} from "../../../utility/unitConversionUtility";
 
 export class PackageEntity {
   uuid: string;
@@ -31,10 +32,9 @@ export class PackageEntity {
     return "N/A"
   }
 
-  formatStorage(memory: string): string {
+  formatStorage(memory: number): string {
     if (memory) {
-      const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
-      return memoryInGigabytes.toFixed(2).toString() + " GB";
+      return UnitConversionUtility.byteToString(memory)
     }
     return "N/A"
   }

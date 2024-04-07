@@ -8,6 +8,7 @@ import {ChangeAgentUpdateInterval} from "./request/changeAgentUpdateInterval";
 import {ChangeAgentInstallRetryInterval} from "./request/changeAgentInstallRetryInterval";
 import {GetAgentInstallRetryIntervalResponse} from "./reponse/getAgentInstallRetryIntervalResponse";
 import {GetAgentChecksumResponse} from "./reponse/getAgentChecksumResponse";
+import {GetStorageInformationResponse} from "./reponse/getStorageInformationResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -120,5 +121,21 @@ export class ServerApiService {
       });
     });
   }
+
+  public getStorageInformation(): Promise<GetStorageInformationResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/server/storage").subscribe({
+        next: value => {
+          const response = value as GetStorageInformationResponse;
+          resolve(response);
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
 
 }
