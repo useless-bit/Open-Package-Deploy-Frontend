@@ -13,6 +13,7 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {HomeServerStorageStatusComponent} from "../home-server-storage-status/home-server-storage-status.component";
+import {HomeServerStatusComponent} from "../home-server-status/home-server-status.component";
 
 @Component({
   selector: 'app-home-overview',
@@ -35,7 +36,8 @@ import {HomeServerStorageStatusComponent} from "../home-server-storage-status/ho
     MatAccordion,
     MatExpansionPanel,
     MatExpansionPanelHeader,
-    HomeServerStorageStatusComponent
+    HomeServerStorageStatusComponent,
+    HomeServerStatusComponent
   ],
   templateUrl: './home-overview.component.html',
   styleUrl: './home-overview.component.scss'
@@ -45,6 +47,7 @@ export class HomeOverviewComponent implements OnInit, OnDestroy {
   @ViewChild('homePackageStatusComponent') homePackageStatusComponent: HomePackageStatusComponent | undefined;
   @ViewChild('homeDeploymentStatusComponent') homeDeploymentStatusComponent: HomeDeploymentStatusComponent | undefined;
   @ViewChild('homeServerStorageStatusComponent') homeServerStorageStatusComponent: HomeServerStorageStatusComponent | undefined;
+  @ViewChild('homeServerStatusComponent') homeServerStatusComponent: HomeServerStatusComponent | undefined;
   intervalLoop: number | undefined;
   defaultRefreshIntervalSeconds: number = 30;
   refreshIntervalSeconds: number = 0;
@@ -68,6 +71,7 @@ export class HomeOverviewComponent implements OnInit, OnDestroy {
     this.homePackageStatusComponent?.refreshData();
     this.homeDeploymentStatusComponent?.refreshData();
     this.homeServerStorageStatusComponent?.refreshData();
+    this.homeServerStatusComponent?.refreshData();
   }
 
   refreshLoop(): void {

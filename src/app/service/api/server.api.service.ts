@@ -9,6 +9,7 @@ import {ChangeAgentInstallRetryInterval} from "./request/changeAgentInstallRetry
 import {GetAgentInstallRetryIntervalResponse} from "./reponse/getAgentInstallRetryIntervalResponse";
 import {GetAgentChecksumResponse} from "./reponse/getAgentChecksumResponse";
 import {GetStorageInformationResponse} from "./reponse/getStorageInformationResponse";
+import {SystemUsageListResponse} from "./reponse/systemUsageListResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -128,6 +129,20 @@ export class ServerApiService {
         next: value => {
           const response = value as GetStorageInformationResponse;
           resolve(response);
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public getSystemUsage(): Promise<SystemUsageListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/server/systemUsage").subscribe({
+        next: value => {
+          resolve(new SystemUsageListResponse(value));
         },
         error: (error) => {
           this.apiService.errorHandling(error);

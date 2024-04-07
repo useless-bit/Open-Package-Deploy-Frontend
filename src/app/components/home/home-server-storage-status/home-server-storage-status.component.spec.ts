@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeServerStorageStatusComponent } from './home-server-storage-status.component';
+import {HomeServerStorageStatusComponent} from './home-server-storage-status.component';
 
 describe('HomeServerStorageStatusComponent', () => {
   let component: HomeServerStorageStatusComponent;
@@ -10,8 +10,8 @@ describe('HomeServerStorageStatusComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeServerStorageStatusComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(HomeServerStorageStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
