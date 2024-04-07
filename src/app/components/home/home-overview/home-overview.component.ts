@@ -12,6 +12,7 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
+import {HomeServerStorageStatusComponent} from "../home-server-storage-status/home-server-storage-status.component";
 
 @Component({
   selector: 'app-home-overview',
@@ -33,7 +34,8 @@ import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular
     MatProgressSpinner,
     MatAccordion,
     MatExpansionPanel,
-    MatExpansionPanelHeader
+    MatExpansionPanelHeader,
+    HomeServerStorageStatusComponent
   ],
   templateUrl: './home-overview.component.html',
   styleUrl: './home-overview.component.scss'
@@ -42,6 +44,7 @@ export class HomeOverviewComponent implements OnInit, OnDestroy {
   @ViewChild('homeAgentStatusComponent') homeAgentStatusComponent: HomeAgentStatusComponent | undefined;
   @ViewChild('homePackageStatusComponent') homePackageStatusComponent: HomePackageStatusComponent | undefined;
   @ViewChild('homeDeploymentStatusComponent') homeDeploymentStatusComponent: HomeDeploymentStatusComponent | undefined;
+  @ViewChild('homeServerStorageStatusComponent') homeServerStorageStatusComponent: HomeServerStorageStatusComponent | undefined;
   intervalLoop: number | undefined;
   defaultRefreshIntervalSeconds: number = 30;
   refreshIntervalSeconds: number = 0;
@@ -64,6 +67,7 @@ export class HomeOverviewComponent implements OnInit, OnDestroy {
     this.homeAgentStatusComponent?.refreshData();
     this.homePackageStatusComponent?.refreshData();
     this.homeDeploymentStatusComponent?.refreshData();
+    this.homeServerStorageStatusComponent?.refreshData();
   }
 
   refreshLoop(): void {
