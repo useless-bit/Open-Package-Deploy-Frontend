@@ -19,6 +19,18 @@
         <mat-expansion-panel-header>
           Filter Options
         </mat-expansion-panel-header>
+        <div class="severity-container">
+          <p>Severity</p>
+          <mat-slide-toggle (change)="sliderShowLogSeverityInfoChange($event)"
+                            [ngModel]="sliderShowLogSeverityInfo">Info
+          </mat-slide-toggle>
+          <mat-slide-toggle (change)="sliderShowLogSeverityWarningChange($event)"
+                            [ngModel]="sliderShowLogSeverityWarning">Warning
+          </mat-slide-toggle>
+          <mat-slide-toggle (change)="sliderShowLogSeverityErrorChange($event)"
+                            [ngModel]="sliderShowLogSeverityError">Error
+          </mat-slide-toggle>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

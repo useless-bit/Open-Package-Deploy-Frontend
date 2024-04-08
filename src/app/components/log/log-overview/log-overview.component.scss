@@ -23,5 +23,13 @@
     width: 0;
     flex: 1;
   }
+}
 
+.severity-container {
+  display: flex;
+  flex-direction: column;
+
+  mat-slide-toggle {
+    margin-top: 5px;
+  }
 }

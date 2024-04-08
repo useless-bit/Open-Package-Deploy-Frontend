@@ -27,6 +27,8 @@ import {NgForOf, NgIf} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {LogEntity} from "../../../service/api/entity/logEntity";
 import {ServerApiService} from "../../../service/api/server.api.service";
+import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-log-overview',
@@ -63,15 +65,21 @@ import {ServerApiService} from "../../../service/api/server.api.service";
     MatLabel,
     MatIconButton,
     MatSuffix,
+    MatSlideToggle,
+    FormsModule,
   ],
   templateUrl: './log-overview.component.html',
   styleUrl: './log-overview.component.scss'
 })
 export class LogOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
+  public sliderShowLogSeverityInfo: boolean = true;
+  public sliderShowLogSeverityWarning: boolean = true;
+  public sliderShowLogSeverityError: boolean = true;
   public dataLoaded: boolean = false;
   public searchLoadingBar: boolean = false;
   public tableRows: string[] = ['timestamp', 'severity', 'message']
+  private logResponse: LogEntity[] = [];
 
   constructor(private serverApiService: ServerApiService,
               public dataSourceLogOverviewTable: MatTableDataSource<LogEntity>) {
@@ -100,8 +108,9 @@ export class LogOverviewComponent implements OnInit {
         for (let logEntity of logEntities) {
           logEntity.timestamp = this.formatDate(logEntity.timestamp)
         }
-        this.dataSourceLogOverviewTable.data = logEntities;
+        this.logResponse = logEntities;
         this.dataSourceLogOverviewTable.filter = "";
+        this.filterData();
 
         this.dataLoaded = true;
         this.searchLoadingBar = false;
@@ -122,12 +131,28 @@ export class LogOverviewComponent implements OnInit {
         for (let logEntity of logEntities) {
           logEntity.timestamp = this.formatDate(logEntity.timestamp)
         }
-        this.dataSourceLogOverviewTable.data = logEntities;
-        this.dataSourceLogOverviewTable.filter = "";
+        this.logResponse = logEntities;
+        this.filterData();
 
         this.searchLoadingBar = false;
       }
     });
+  }
+
+  filterData(): void {
+    let filteredLogs = this.logResponse;
+
+    if (!this.sliderShowLogSeverityInfo) {
+      filteredLogs = filteredLogs.filter(item => item.severity !== "INFO");
+    }
+    if (!this.sliderShowLogSeverityWarning) {
+      filteredLogs = filteredLogs.filter(item => item.severity !== "WARNING");
+    }
+    if (!this.sliderShowLogSeverityError) {
+      filteredLogs = filteredLogs.filter(item => item.severity !== "ERROR");
+    }
+
+    this.dataSourceLogOverviewTable.data = filteredLogs;
   }
 
   clearTextField(): void {
@@ -136,6 +161,22 @@ export class LogOverviewComponent implements OnInit {
     }
     this.dataSourceLogOverviewTable.filter = "";
   }
+
+  sliderShowLogSeverityInfoChange(event: MatSlideToggleChange) {
+    this.sliderShowLogSeverityInfo = event.checked;
+    this.filterData();
+  }
+
+  sliderShowLogSeverityWarningChange(event: MatSlideToggleChange) {
+    this.sliderShowLogSeverityWarning = event.checked;
+    this.filterData();
+  }
+
+  sliderShowLogSeverityErrorChange(event: MatSlideToggleChange) {
+    this.sliderShowLogSeverityError = event.checked;
+    this.filterData();
+  }
+
 
   formatDate(dateObj: Date | string): string {
     if (dateObj && typeof dateObj != "string") {
