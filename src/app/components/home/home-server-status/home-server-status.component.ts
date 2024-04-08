@@ -7,7 +7,7 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {ServerApiService} from "../../../service/api/server.api.service";
 import {SystemUsageEntity} from "../../../service/api/entity/systemUsageEntity";
 import {BaseChartDirective} from "ng2-charts";
-import {ApexChart, ApexOptions, ApexTheme, ChartComponent, NgApexchartsModule} from "ng-apexcharts";
+import {ApexChart, ApexTheme, ChartComponent, NgApexchartsModule} from "ng-apexcharts";
 
 @Component({
   selector: 'app-home-server-status',
@@ -31,10 +31,13 @@ export class HomeServerStatusComponent implements OnInit {
   public chartLabels: string[] = [];
   public chartDataCPU: any;
   public chartDataMemory: any;
-  public test: ApexOptions = {
-    labels: []
-  }
   public chartOptions: ApexChart = {
+    toolbar: {
+      show: false,
+      tools: {
+        zoom: false
+      }
+    },
     type: "line",
     height: 300,
     width: "100%"
@@ -111,7 +114,7 @@ export class HomeServerStatusComponent implements OnInit {
           }))
         })
       }
+      this.refreshingData = false;
     });
-    this.refreshingData = false;
   }
 }
