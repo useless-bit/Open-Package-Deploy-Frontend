@@ -10,6 +10,7 @@ import {GetAgentInstallRetryIntervalResponse} from "./reponse/getAgentInstallRet
 import {GetAgentChecksumResponse} from "./reponse/getAgentChecksumResponse";
 import {GetStorageInformationResponse} from "./reponse/getStorageInformationResponse";
 import {SystemUsageListResponse} from "./reponse/systemUsageListResponse";
+import {LogListResponse} from "./reponse/logListResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -152,5 +153,17 @@ export class ServerApiService {
     });
   }
 
-
+  public getLogs(): Promise<LogListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/server/log").subscribe({
+        next: value => {
+          resolve(new LogListResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
 }

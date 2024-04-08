@@ -29,6 +29,11 @@
       <mat-icon>settings</mat-icon>
       Settings
     </button>
+    <button [style.background-color]="currentUrl === '/log' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/log">
+      <mat-icon>settings</mat-icon>
+      Logs
+    </button>
     <button (click)="logoutButtonPress()" color="primary" mat-flat-button>
       <mat-icon>logout</mat-icon>
       Logout

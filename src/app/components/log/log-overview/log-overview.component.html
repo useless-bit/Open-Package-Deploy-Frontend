@@ -1,0 +1,53 @@
+<app-loading *ngIf="!this.dataLoaded"></app-loading>
+
+<div *ngIf="dataLoaded" class="main-content">
+  <mat-form-field class="search-field">
+    <mat-label>Search Log messages</mat-label>
+    <input #searchInputField (keyup)="applySearch($event)" autofocus matInput>
+    <button (click)="clearTextField()" mat-icon-button matSuffix matTooltip="Clear search">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button (click)="refreshData()" mat-icon-button matSuffix matTooltip="Reload Logs">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
+  </mat-form-field>
+
+  <div class="option-bar">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Filter Options
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br>
+
+  <div class="table-container">
+    <table [dataSource]="dataSourceLogOverviewTable" aria-label="Overview of all Logs" class="log-table" mat-table
+           matSort>
+      <ng-container matColumnDef="timestamp">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Time</th>
+        <td *matCellDef="let log" mat-cell>{{ log.timestamp }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="severity">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Severity</th>
+        <td *matCellDef="let log" mat-cell>{{ log.severity }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="message">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Message</th>
+        <td *matCellDef="let log" mat-cell>{{ log.message }}</td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="tableRows" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: tableRows;" class="table-row"
+          mat-row></tr>
+    </table>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-paginator #tablePaginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+                 showFirstLastButtons=""></mat-paginator>
+</div>
