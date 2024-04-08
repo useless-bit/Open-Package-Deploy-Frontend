@@ -1,4 +1,6 @@
 :root {
+  background-color: #303030;
+
   --primary-color: #009688;
   --primary-background: rgba(0, 150, 136, 0.24);
   --button-selected: #026158;

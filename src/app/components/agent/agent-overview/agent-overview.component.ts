@@ -64,9 +64,9 @@ import {AgentAddNewComponent} from "../agent-add-new/agent-add-new.component";
     MatButton,
     MatTooltip,
     MatPaginator,
-    MatSort,
     MatSortHeader,
-    MatDivider
+    MatDivider,
+    MatSort
   ],
   templateUrl: './agent-overview.component.html',
   styleUrl: './agent-overview.component.scss'

@@ -1,8 +1,6 @@
 .main-content {
   width: calc(100% - 20px);
   margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .settings {
@@ -32,4 +30,13 @@ mat-card {
 
 .option-bar {
   width: 100%;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chart {
+  width: calc(100% - 20px);
 }

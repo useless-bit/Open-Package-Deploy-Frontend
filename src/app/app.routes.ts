@@ -7,6 +7,7 @@ import {PackageOverviewComponent} from "./components/package/package-overview/pa
 import {DeploymentOverviewComponent} from "./components/deployment/deployment-overview/deployment-overview.component";
 import {SettingOverviewComponent} from "./components/setting/setting-overview/setting-overview.component";
 import {HomeOverviewComponent} from "./components/home/home-overview/home-overview.component";
+import {LogOverviewComponent} from "./components/log/log-overview/log-overview.component";
 
 export const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomeOverviewComponent, canActivate: [KeycloakGuard]},
@@ -14,6 +15,7 @@ export const routes: Routes = [
   {path: 'package', pathMatch: 'full', component: PackageOverviewComponent, canActivate: [KeycloakGuard]},
   {path: 'deployment', pathMatch: 'full', component: DeploymentOverviewComponent, canActivate: [KeycloakGuard]},
   {path: 'settings', pathMatch: 'full', component: SettingOverviewComponent, canActivate: [KeycloakGuard]},
+  {path: 'log', pathMatch: 'full', component: LogOverviewComponent, canActivate: [KeycloakGuard]},
   {path: '**', pathMatch: 'full', component: Error404Component, canActivate: [KeycloakGuard]}
 ];
 

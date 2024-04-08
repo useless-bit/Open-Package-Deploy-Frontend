@@ -46,12 +46,4 @@ export class DeploymentEntity {
     }
     return "N/A"
   }
-
-  formatStorage(memory: string): string {
-    if (memory) {
-      const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
-      return memoryInGigabytes.toFixed(2).toString() + " GB";
-    }
-    return "N/A"
-  }
 }
