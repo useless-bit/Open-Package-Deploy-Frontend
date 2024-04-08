@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LogOverviewComponent } from './log-overview.component';
+import {LogOverviewComponent} from './log-overview.component';
 
 describe('LogOverviewComponent', () => {
   let component: LogOverviewComponent;
@@ -10,8 +10,8 @@ describe('LogOverviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LogOverviewComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(LogOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

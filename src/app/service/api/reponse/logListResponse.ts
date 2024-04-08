@@ -1,4 +1,3 @@
-import {SystemUsageEntity} from "../entity/systemUsageEntity";
 import {LogEntity} from "../entity/logEntity";
 
 export class LogListResponse {
