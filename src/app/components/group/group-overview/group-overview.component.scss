@@ -1,0 +1,36 @@
+.main-content {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
+.search-field {
+  width: 100%;
+}
+
+.table-container {
+  overflow: auto;
+}
+
+.mat-mdc-row:hover {
+  background-color: var(--table-hover);
+}
+
+.table-row {
+  cursor: pointer;
+}
+
+.option-bar {
+  width: 100%;
+  display: flex;
+
+  mat-accordion {
+    width: 0;
+    flex: 1;
+  }
+
+  button {
+    margin-left: 20px;
+    height: auto;
+    width: min-content;
+  }
+}

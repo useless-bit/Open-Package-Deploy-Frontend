@@ -11,6 +11,9 @@ import {GetAgentChecksumResponse} from "./reponse/getAgentChecksumResponse";
 import {GetStorageInformationResponse} from "./reponse/getStorageInformationResponse";
 import {SystemUsageListResponse} from "./reponse/systemUsageListResponse";
 import {LogListResponse} from "./reponse/logListResponse";
+import {ChangeDeploymentValidationInterval} from "./request/changeDeploymentValidationInterval";
+import {GetDeploymentValidationIntervalResponse} from "./reponse/getDeploymentValidationIntervalResponse";
+import {GetLastDeploymentValidationTimestampResponse} from "./reponse/getLastDeploymentValidationTimestampResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +101,64 @@ export class ServerApiService {
   public changeAgentInstallRetryInterval(changeAgentInstallRetryInterval: ChangeAgentInstallRetryInterval): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/installRetryInterval", changeAgentInstallRetryInterval).subscribe({
+        next: () => {
+          resolve()
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public getDeploymentValidationInterval(): Promise<number | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/server/deploymentValidationInterval").subscribe({
+        next: value => {
+          const response = value as GetDeploymentValidationIntervalResponse;
+          resolve(response.deploymentValidationInterval);
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public changeDeploymentValidationInterval(changeAgentInstallRetryInterval: ChangeDeploymentValidationInterval): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/server/deploymentValidationInterval", changeAgentInstallRetryInterval).subscribe({
+        next: () => {
+          resolve()
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public getLastDeploymentValidationTimestamp(): Promise<number | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/server/deploymentValidation").subscribe({
+        next: value => {
+          const response = value as GetLastDeploymentValidationTimestampResponse;
+          resolve(response.lastDeploymentValidation);
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public resetDeploymentValidation(): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/server/deploymentValidation/reset", null).subscribe({
         next: () => {
           resolve()
         },

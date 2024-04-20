@@ -5,6 +5,9 @@ import {SettingUpdateIntervalComponent} from "../setting-update-interval/setting
 import {
   SettingInstallRetryIntervalComponent
 } from "../setting-install-retry-interval/setting-install-retry-interval.component";
+import {
+  SettingDeploymentValidationComponent
+} from "../setting-deployment-validation/setting-deployment-validation.component";
 
 @Component({
   selector: 'app-setting-overview',
@@ -13,7 +16,8 @@ import {
     MatCard,
     SettingRegistrationTokenComponent,
     SettingUpdateIntervalComponent,
-    SettingInstallRetryIntervalComponent
+    SettingInstallRetryIntervalComponent,
+    SettingDeploymentValidationComponent
   ],
   templateUrl: './setting-overview.component.html',
   styleUrl: './setting-overview.component.scss'
