@@ -6,6 +6,8 @@ import {GroupListResponse} from "./reponse/group/groupListResponse";
 import {GroupEntity} from "./entity/groupEntity";
 import {CreateEmptyGroupRequest} from "./request/group/createEmptyGroupRequest";
 import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
+import {GroupMemberResponse} from "./reponse/group/groupMemberResponse";
+import {GroupMember} from "./reponse/group/groupMember";
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +78,52 @@ export class GroupApiService {
   public create(createEmptyGroupRequest: CreateEmptyGroupRequest, bypassError: boolean): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/group", createEmptyGroupRequest).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public getMembers(groupUUID: string): Promise<GroupMemberResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group/" + groupUUID + "/member").subscribe({
+        next: value => {
+          resolve(new GroupMemberResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error)
+        }
+      });
+    });
+  }
+
+  public addMember(groupUUID: string, agentUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.variableService.backendURL + "/api/group/" + groupUUID + "/member/" + agentUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public removeMember(groupUUID: string, agentUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/group/" + groupUUID + "/member/" + agentUUID).subscribe({
         next: () => {
           resolve();
         },

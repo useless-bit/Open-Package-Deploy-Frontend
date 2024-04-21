@@ -4,15 +4,17 @@
     <mat-button-toggle-group [formControl]="fontStyleControl" class="navigation-bar-options">
       <mat-button-toggle value="page_one">Details</mat-button-toggle>
       <mat-button-toggle value="page_two">Agents</mat-button-toggle>
-      <mat-button-toggle value="page_two">Packages</mat-button-toggle>
+      <mat-button-toggle value="page_three">Add Agent</mat-button-toggle>
+      <mat-button-toggle value="page_four">Packages</mat-button-toggle>
+      <mat-button-toggle value="page_five">Add Package</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <div class="component">
     <ng-container [ngSwitch]="fontStyleControl.value">
       <app-group-detail *ngSwitchCase="'page_one'" [groupUUID]=this.data.groupUUID></app-group-detail>
-      <app-package-create-deployment *ngSwitchCase="'page_two'"
-                                     [packageUUID]=this.data.packageUUID></app-package-create-deployment>
+      <app-group-show-agents *ngSwitchCase="'page_two'" [groupUUID]=this.data.groupUUID></app-group-show-agents>
+      <app-group-add-agent *ngSwitchCase="'page_three'" [groupUUID]=this.data.groupUUID></app-group-add-agent>
     </ng-container>
   </div>
 </div>

@@ -51,3 +51,11 @@ mat-list-option, mat-list-item {
 .clickable-container {
   cursor: pointer;
 }
+
+.navigation-bar {
+  width: 100%;
+  mat-button-toggle-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

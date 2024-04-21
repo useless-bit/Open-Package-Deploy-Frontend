@@ -8,6 +8,10 @@ import {PackageDetailComponent} from "../../package/package-detail/package-detai
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {GroupDetailComponent} from "../group-detail/group-detail.component";
+import {ArrayPopupComponent} from "../../array-popup/array-popup.component";
+import {GroupAddAgentComponent} from "../group-add-agent/group-add-agent.component";
+import {GroupAddPackageComponent} from "../group-add-package/group-add-package.component";
+import {GroupShowAgentsComponent} from "../group-show-agents/group-show-agents.component";
 
 @Component({
   selector: 'app-group-detail-popup',
@@ -20,7 +24,11 @@ import {GroupDetailComponent} from "../group-detail/group-detail.component";
     PackageDetailComponent,
     ReactiveFormsModule,
     NgSwitch,
-    GroupDetailComponent
+    GroupDetailComponent,
+    ArrayPopupComponent,
+    GroupAddAgentComponent,
+    GroupAddPackageComponent,
+    GroupShowAgentsComponent
   ],
   templateUrl: './group-detail-popup.component.html',
   styleUrl: './group-detail-popup.component.scss'
