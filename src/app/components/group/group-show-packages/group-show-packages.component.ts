@@ -12,6 +12,7 @@ import {GroupMember} from "../../../service/api/reponse/group/groupMember";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {ServerApiService} from "../../../service/api/server.api.service";
 
 @Component({
   selector: 'app-group-show-packages',
@@ -51,6 +52,7 @@ export class GroupShowPackagesComponent implements OnInit {
 
 
   constructor(private groupApiService: GroupApiService,
+              private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
               public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupShowPackagesComponent>) {
   }
@@ -95,6 +97,7 @@ export class GroupShowPackagesComponent implements OnInit {
           this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedMembers.length));
         });
     }
+    this.serverApiService.resetDeploymentValidation().then();
     this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
     this.deploymentCreationProcessStarted = false;
   }

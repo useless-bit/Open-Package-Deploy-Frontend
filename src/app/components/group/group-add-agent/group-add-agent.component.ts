@@ -14,6 +14,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
+import {ServerApiService} from "../../../service/api/server.api.service";
 
 @Component({
   selector: 'app-group-add-agent',
@@ -55,6 +56,7 @@ export class GroupAddAgentComponent implements OnInit {
 
   constructor(private groupApiService: GroupApiService,
               private agentApiService: AgentApiService,
+              private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
               public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupAddAgentComponent>) {
   }
@@ -103,6 +105,7 @@ export class GroupAddAgentComponent implements OnInit {
           this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
         });
     }
+    this.serverApiService.resetDeploymentValidation().then();
     this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
     this.deploymentCreationProcessStarted = false;
   }

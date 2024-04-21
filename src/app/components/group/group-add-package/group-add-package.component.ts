@@ -14,6 +14,7 @@ import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} f
 import {NgIf} from "@angular/common";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageApiService} from "../../../service/api/package.api.service";
+import {ServerApiService} from "../../../service/api/server.api.service";
 
 @Component({
   selector: 'app-group-add-package',
@@ -55,6 +56,7 @@ export class GroupAddPackageComponent implements OnInit {
 
   constructor(private groupApiService: GroupApiService,
               private packageApiService: PackageApiService,
+              private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
               public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupAddPackageComponent>) {
   }
@@ -103,6 +105,7 @@ export class GroupAddPackageComponent implements OnInit {
           this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
         });
     }
+    this.serverApiService.resetDeploymentValidation().then();
     this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
     this.deploymentCreationProcessStarted = false;
   }
