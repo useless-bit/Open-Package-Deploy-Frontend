@@ -52,10 +52,11 @@ mat-list-option, mat-list-item {
   cursor: pointer;
 }
 
-.navigation-bar {
+.detail-popup_navigation-bar {
   width: 100%;
 
   mat-button-toggle-group {
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
   }
