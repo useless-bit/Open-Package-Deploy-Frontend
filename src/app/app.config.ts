@@ -37,7 +37,6 @@ function initializeApplication(variableService: VariableService, keycloakService
       applicationLoadedService.emitInitFinished(true);
     });
   });
-
 }
 
 const KeycloakBearerInterceptorProvider: Provider = {
