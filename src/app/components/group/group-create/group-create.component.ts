@@ -3,7 +3,6 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {MatFormField, MatOption, MatSelect, MatSelectChange} from "@angular/material/select";
 import {OperatingSystem} from '../../../service/api/entity/operatingSystem';
-import {DeploymentCreateComponent} from "../../deployment/deployment-create/deployment-create.component";
 import {LoadingComponent} from "../../loading/loading.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
@@ -42,7 +41,7 @@ export class GroupCreateComponent {
   protected readonly Object = Object;
 
   constructor(private groupApiService: GroupApiService,
-              public dialogRef: MatDialogRef<DeploymentCreateComponent>) {
+              public dialogRef: MatDialogRef<GroupCreateComponent>) {
   }
 
 
