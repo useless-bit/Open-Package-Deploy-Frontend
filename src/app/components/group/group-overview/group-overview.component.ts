@@ -29,7 +29,6 @@ import {MatDivider} from "@angular/material/divider";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {GroupCreateComponent} from "../group-create/group-create.component";
-import {GroupDetailComponent} from "../group-detail/group-detail.component";
 import {GroupDetailPopupComponent} from "../group-detail-popup/group-detail-popup.component";
 
 @Component({

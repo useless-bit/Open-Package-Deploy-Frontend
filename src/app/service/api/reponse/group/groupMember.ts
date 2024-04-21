@@ -1,4 +1,3 @@
-
 export class GroupMember {
   uuid: string;
   name: string;

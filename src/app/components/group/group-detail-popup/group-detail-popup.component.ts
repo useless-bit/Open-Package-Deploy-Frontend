@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {NgSwitch, NgSwitchCase} from "@angular/common";
 import {
-    PackageCreateDeploymentComponent
+  PackageCreateDeploymentComponent
 } from "../../package/package-create-deployment/package-create-deployment.component";
 import {PackageDetailComponent} from "../../package/package-detail/package-detail.component";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";

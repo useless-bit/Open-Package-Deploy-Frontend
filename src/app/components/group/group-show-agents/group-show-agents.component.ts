@@ -8,10 +8,8 @@ import {MatList, MatListItem, MatListOption, MatSelectionList} from "@angular/ma
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import {NgIf} from "@angular/common";
-import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
-import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {GroupMember} from "../../../service/api/reponse/group/groupMember";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
@@ -19,25 +17,25 @@ import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
 @Component({
   selector: 'app-group-show-agents',
   standalone: true,
-    imports: [
-        LoadingComponent,
-        MatButton,
-        MatDivider,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        MatList,
-        MatListItem,
-        MatListOption,
-        MatProgressBar,
-        MatSelectionList,
-        MatStep,
-        MatStepLabel,
-        MatStepper,
-        MatStepperNext,
-        MatStepperPrevious,
-        NgIf
-    ],
+  imports: [
+    LoadingComponent,
+    MatButton,
+    MatDivider,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatList,
+    MatListItem,
+    MatListOption,
+    MatProgressBar,
+    MatSelectionList,
+    MatStep,
+    MatStepLabel,
+    MatStepper,
+    MatStepperNext,
+    MatStepperPrevious,
+    NgIf
+  ],
   templateUrl: './group-show-agents.component.html',
   styleUrl: './group-show-agents.component.scss'
 })

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GroupShowAgentsComponent } from './group-show-agents.component';
+import {GroupShowAgentsComponent} from './group-show-agents.component';
 
 describe('GroupShowAgentsComponent', () => {
   let component: GroupShowAgentsComponent;
@@ -10,8 +10,8 @@ describe('GroupShowAgentsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [GroupShowAgentsComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(GroupShowAgentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

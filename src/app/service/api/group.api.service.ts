@@ -7,7 +7,6 @@ import {GroupEntity} from "./entity/groupEntity";
 import {CreateEmptyGroupRequest} from "./request/group/createEmptyGroupRequest";
 import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
 import {GroupMemberResponse} from "./reponse/group/groupMemberResponse";
-import {GroupMember} from "./reponse/group/groupMember";
 
 @Injectable({
   providedIn: 'root'

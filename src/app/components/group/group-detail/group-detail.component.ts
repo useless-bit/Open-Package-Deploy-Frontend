@@ -14,29 +14,28 @@ import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-c
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
-import {AgentUpdateRequests} from "../../../service/api/request/agentUpdateRequest";
 import {GroupUpdateRequest} from "../../../service/api/request/group/groupUpdateRequest";
 
 @Component({
   selector: 'app-group-detail',
   standalone: true,
-    imports: [
-        LoadingComponent,
-        MatButton,
-        MatDivider,
-        MatExpansionPanel,
-        MatExpansionPanelHeader,
-        MatExpansionPanelTitle,
-        MatIcon,
-        MatLine,
-        MatList,
-        MatListItem,
-        NgIf
-    ],
+  imports: [
+    LoadingComponent,
+    MatButton,
+    MatDivider,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatIcon,
+    MatLine,
+    MatList,
+    MatListItem,
+    NgIf
+  ],
   templateUrl: './group-detail.component.html',
   styleUrl: './group-detail.component.scss'
 })
-export class GroupDetailComponent  implements OnInit {
+export class GroupDetailComponent implements OnInit {
   @Input() public groupUUID: string = "";
 
   public dataLoaded: boolean = false;
@@ -77,10 +76,10 @@ export class GroupDetailComponent  implements OnInit {
         "Enter new description:", "Cancel", "Update", true)
     });
     dialogRef.afterClosed().subscribe((result) => {
-        this.dataLoaded = false
-        this.groupApiService.update(this.groupUUID, new GroupUpdateRequest(null, result)).then(() => {
-          this.ngOnInit();
-        });
+      this.dataLoaded = false
+      this.groupApiService.update(this.groupUUID, new GroupUpdateRequest(null, result)).then(() => {
+        this.ngOnInit();
+      });
     });
 
   }

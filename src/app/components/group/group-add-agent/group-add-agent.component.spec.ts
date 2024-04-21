@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GroupAddAgentComponent } from './group-add-agent.component';
+import {GroupAddAgentComponent} from './group-add-agent.component';
 
 describe('GroupAddAgentComponent', () => {
   let component: GroupAddAgentComponent;
@@ -10,8 +10,8 @@ describe('GroupAddAgentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [GroupAddAgentComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(GroupAddAgentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
