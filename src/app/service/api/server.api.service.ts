@@ -34,7 +34,7 @@ export class ServerApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
