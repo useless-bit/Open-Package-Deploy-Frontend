@@ -1,8 +1,6 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
-import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
 import {LoadingComponent} from "../../loading/loading.component";

@@ -9,7 +9,6 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import {NgIf} from "@angular/common";
 import {GroupMember} from "../../../service/api/reponse/group/groupMember";
-import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
@@ -17,25 +16,25 @@ import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
 @Component({
   selector: 'app-group-show-packages',
   standalone: true,
-    imports: [
-        LoadingComponent,
-        MatButton,
-        MatDivider,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        MatList,
-        MatListItem,
-        MatListOption,
-        MatProgressBar,
-        MatSelectionList,
-        MatStep,
-        MatStepLabel,
-        MatStepper,
-        MatStepperNext,
-        MatStepperPrevious,
-        NgIf
-    ],
+  imports: [
+    LoadingComponent,
+    MatButton,
+    MatDivider,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatList,
+    MatListItem,
+    MatListOption,
+    MatProgressBar,
+    MatSelectionList,
+    MatStep,
+    MatStepLabel,
+    MatStepper,
+    MatStepperNext,
+    MatStepperPrevious,
+    NgIf
+  ],
   templateUrl: './group-show-packages.component.html',
   styleUrl: './group-show-packages.component.scss'
 })
