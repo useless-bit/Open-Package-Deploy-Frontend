@@ -15,6 +15,8 @@
       <app-group-detail *ngSwitchCase="'page_one'" [groupUUID]=this.data.groupUUID></app-group-detail>
       <app-group-show-agents *ngSwitchCase="'page_two'" [groupUUID]=this.data.groupUUID></app-group-show-agents>
       <app-group-add-agent *ngSwitchCase="'page_three'" [groupUUID]=this.data.groupUUID></app-group-add-agent>
+      <app-group-show-packages *ngSwitchCase="'page_four'" [groupUUID]=this.data.groupUUID></app-group-show-packages>
+      <app-group-add-package *ngSwitchCase="'page_five'" [groupUUID]=this.data.groupUUID></app-group-add-package>
     </ng-container>
   </div>
 </div>

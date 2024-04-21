@@ -12,6 +12,7 @@ import {ArrayPopupComponent} from "../../array-popup/array-popup.component";
 import {GroupAddAgentComponent} from "../group-add-agent/group-add-agent.component";
 import {GroupAddPackageComponent} from "../group-add-package/group-add-package.component";
 import {GroupShowAgentsComponent} from "../group-show-agents/group-show-agents.component";
+import {GroupShowPackagesComponent} from "../group-show-packages/group-show-packages.component";
 
 @Component({
   selector: 'app-group-detail-popup',
@@ -28,7 +29,8 @@ import {GroupShowAgentsComponent} from "../group-show-agents/group-show-agents.c
     ArrayPopupComponent,
     GroupAddAgentComponent,
     GroupAddPackageComponent,
-    GroupShowAgentsComponent
+    GroupShowAgentsComponent,
+    GroupShowPackagesComponent
   ],
   templateUrl: './group-detail-popup.component.html',
   styleUrl: './group-detail-popup.component.scss'

@@ -7,6 +7,7 @@ import {GroupEntity} from "./entity/groupEntity";
 import {CreateEmptyGroupRequest} from "./request/group/createEmptyGroupRequest";
 import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
 import {GroupMemberResponse} from "./reponse/group/groupMemberResponse";
+import {GroupPackageResponse} from "./reponse/group/groupPackageResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,20 @@ export class GroupApiService {
       this.httpClient.get(this.variableService.backendURL + "/api/group/" + groupUUID + "/member").subscribe({
         next: value => {
           resolve(new GroupMemberResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public getPackages(groupUUID: string): Promise<GroupPackageResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group/" + groupUUID + "/package").subscribe({
+        next: value => {
+          resolve(new GroupPackageResponse(value));
         },
         error: (error) => {
           this.apiService.errorHandling(error);
