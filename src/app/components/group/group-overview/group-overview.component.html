@@ -7,7 +7,7 @@
     <button (click)="clearTextField()" mat-icon-button matSuffix matTooltip="Clear search">
       <mat-icon>close</mat-icon>
     </button>
-    <button (click)="refreshData()" mat-icon-button matSuffix matTooltip="Reload Agents">
+    <button (click)="refreshData()" mat-icon-button matSuffix matTooltip="Reload Groups">
       <mat-icon>refresh</mat-icon>
     </button>
     <mat-progress-bar *ngIf="searchLoadingBar" mode="indeterminate"></mat-progress-bar>
@@ -20,9 +20,9 @@
           Filter Options
         </mat-expansion-panel-header>
         <mat-chip-listbox multiple>
-          <mat-chip-option (click)="changeSelectedColumns(option)" *ngFor="let option of this.agentKeys"
+          <mat-chip-option (click)="changeSelectedColumns(option)" *ngFor="let option of this.groupKeys"
                            [selected]="isColumnSelected(option)"
-                           [value]="option">{{ this.convertStringChipNameAgentEntity(option) }}
+                           [value]="option">{{ this.convertStringChipNameGroupEntity(option) }}
           </mat-chip-option>
         </mat-chip-listbox>
       </mat-expansion-panel>
@@ -34,11 +34,11 @@
   <br>
 
   <div class="table-container">
-    <table [dataSource]="dataSourceAgentOverviewTable" aria-label="Overview of all Agents" class="agent-table" mat-table
+    <table [dataSource]="dataSourceGroupOverviewTable" aria-label="Overview of all Groups" class="group-table" mat-table
            matSort>
-      <ng-container *ngFor="let column of this.agentKeys" [matColumnDef]="column">
-        <th *matHeaderCellDef mat-header-cell> {{ this.convertStringChipNameAgentEntity(column) }}</th>
-        <td *matCellDef="let agent" mat-cell>{{ agent[column] }}</td>
+      <ng-container *ngFor="let column of this.groupKeys" [matColumnDef]="column">
+        <th *matHeaderCellDef mat-header-cell> {{ this.convertStringChipNameGroupEntity(column) }}</th>
+        <td *matCellDef="let group" mat-cell>{{ group[column] }}</td>
       </ng-container>
 
       <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
