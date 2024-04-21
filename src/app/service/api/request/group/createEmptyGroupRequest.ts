@@ -6,7 +6,6 @@ export class CreateEmptyGroupRequest {
   operatingSystem: OperatingSystem;
 
 
-
   constructor(name: string, description: string, operatingSystem: OperatingSystem) {
     this.name = name;
     this.description = description;

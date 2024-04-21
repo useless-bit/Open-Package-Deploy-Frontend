@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "./api.service";
 import {VariableService} from "../variable/variable.service";
-import {CreateDeploymentRequest} from "./request/createDeploymentRequest";
 import {GroupListResponse} from "./reponse/group/groupListResponse";
 import {GroupEntity} from "./entity/groupEntity";
 import {CreateEmptyGroupRequest} from "./request/group/createEmptyGroupRequest";

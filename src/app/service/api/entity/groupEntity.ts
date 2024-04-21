@@ -19,7 +19,6 @@ export class GroupEntity {
   }
 
 
-
   formatName(name: string): string {
     if (name) {
       return name;

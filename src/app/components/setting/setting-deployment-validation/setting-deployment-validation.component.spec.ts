@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SettingDeploymentValidationComponent } from './setting-deployment-validation.component';
+import {SettingDeploymentValidationComponent} from './setting-deployment-validation.component';
 
 describe('SettingDeploymentValidationComponent', () => {
   let component: SettingDeploymentValidationComponent;
@@ -10,8 +10,8 @@ describe('SettingDeploymentValidationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SettingDeploymentValidationComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SettingDeploymentValidationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
