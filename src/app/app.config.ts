@@ -28,6 +28,18 @@ function initializeKeycloak(keycloak: KeycloakService, vs: VariableService): Pro
   });
 }
 
+function initializeApplication(variableService: VariableService, keycloakService: KeycloakService, router: Router, applicationLoadedService: ApplicationLoadedService, location: Location) {
+  variableService.loadVariables().then(() => {
+    initializeKeycloak(keycloakService, variableService).then(() => {
+      // Navigate back to the original URL
+      router.navigateByUrl(location.path(true)).then(() => {
+      });
+      applicationLoadedService.emitInitFinished(true);
+    });
+  });
+
+}
+
 const KeycloakBearerInterceptorProvider: Provider = {
   provide: HTTP_INTERCEPTORS,
   useClass: KeycloakBearerInterceptor,
@@ -50,14 +62,7 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: (variableService: VariableService, keycloakService: KeycloakService, router: Router, applicationLoadedService: ApplicationLoadedService, location: Location) => {
         return () => {
-          variableService.loadVariables().then(() => {
-            initializeKeycloak(keycloakService, variableService).then(() => {
-              // Navigate back to the original URL
-              router.navigateByUrl(location.path(true)).then(() => {
-              });
-              applicationLoadedService.emitInitFinished(true);
-            });
-          });
+          initializeApplication(variableService, keycloakService, router, applicationLoadedService, location)
         };
       },
       deps: [VariableService, KeycloakService, Router, ApplicationLoadedService, Location],
