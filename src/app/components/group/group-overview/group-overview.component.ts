@@ -175,6 +175,8 @@ export class GroupOverviewComponent implements OnInit {
   }
 
   openAddNewPopup() {
-    this.dialog.open(GroupCreateComponent, {panelClass: "main-popup"})
+    this.dialog.open(GroupCreateComponent, {panelClass: "main-popup"}).afterClosed().subscribe(() => {
+      this.refreshData();
+    })
   }
 }
