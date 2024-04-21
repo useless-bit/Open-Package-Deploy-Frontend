@@ -24,7 +24,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -38,7 +38,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -52,7 +52,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -66,7 +66,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -80,7 +80,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -96,7 +96,7 @@ export class DeploymentApiService {
           if (!bypassError) {
             this.apiService.errorHandling(error);
           }
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -110,7 +110,7 @@ export class DeploymentApiService {
         },
         error: error => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -124,7 +124,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -138,7 +138,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });

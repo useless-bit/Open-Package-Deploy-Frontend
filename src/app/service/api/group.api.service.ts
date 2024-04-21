@@ -26,7 +26,7 @@ export class GroupApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -40,7 +40,7 @@ export class GroupApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -54,7 +54,7 @@ export class GroupApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -68,7 +68,7 @@ export class GroupApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -84,7 +84,7 @@ export class GroupApiService {
           if (!bypassError) {
             this.apiService.errorHandling(error);
           }
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -98,7 +98,7 @@ export class GroupApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -114,7 +114,7 @@ export class GroupApiService {
           if (!bypassError) {
             this.apiService.errorHandling(error);
           }
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -130,7 +130,39 @@ export class GroupApiService {
           if (!bypassError) {
             this.apiService.errorHandling(error);
           }
-          reject(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public addPackage(groupUUID: string, packageUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.variableService.backendURL + "/api/group/" + groupUUID + "/package/" + packageUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public removePackage(groupUUID: string, packageUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/group/" + groupUUID + "/package/" + packageUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
         }
       });
     });

@@ -24,7 +24,7 @@ export class AgentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -38,7 +38,7 @@ export class AgentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -52,7 +52,7 @@ export class AgentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -66,7 +66,7 @@ export class AgentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
