@@ -24,7 +24,7 @@ function initializeKeycloak(keycloak: KeycloakService, vs: VariableService): Pro
         silentCheckSsoRedirectUri:
           window.location.origin + '/assets/silent-check-sso.html'
       }
-    }).then(() => resolve()).catch((error) => reject(error));
+    }).then(() => resolve()).catch((error) => reject(new Error(error)));
   });
 }
 
@@ -33,6 +33,7 @@ const KeycloakBearerInterceptorProvider: Provider = {
   useClass: KeycloakBearerInterceptor,
   multi: true
 };
+
 
 export const appConfig: ApplicationConfig = {
 
@@ -47,18 +48,17 @@ export const appConfig: ApplicationConfig = {
     KeycloakService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (variableService: VariableService, keycloakService: KeycloakService, router: Router, sharedService: ApplicationLoadedService, location: Location) => {
-        return () => new Promise<void>((resolve) => {
+      useFactory: (variableService: VariableService, keycloakService: KeycloakService, router: Router, applicationLoadedService: ApplicationLoadedService, location: Location) => {
+        return () => {
           variableService.loadVariables().then(() => {
             initializeKeycloak(keycloakService, variableService).then(() => {
               // Navigate back to the original URL
               router.navigateByUrl(location.path(true)).then(() => {
               });
-              sharedService.emitInitFinished(true);
+              applicationLoadedService.emitInitFinished(true);
             });
           });
-          resolve();
-        });
+        };
       },
       deps: [VariableService, KeycloakService, Router, ApplicationLoadedService, Location],
       multi: true
