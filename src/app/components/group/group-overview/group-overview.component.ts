@@ -11,10 +11,10 @@ import {
   MatRow,
   MatRowDef,
   MatTable,
-  MatTableDataSource
+  MatTableDataSource,
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
+import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {LoadingComponent} from "../../loading/loading.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
@@ -29,6 +29,7 @@ import {MatDivider} from "@angular/material/divider";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {PlaceholderComponent} from "../../placeholder/placeholder.component";
+import {GroupCreateComponent} from "../group-create/group-create.component";
 
 @Component({
   selector: 'app-group-overview',
@@ -63,7 +64,8 @@ import {PlaceholderComponent} from "../../placeholder/placeholder.component";
     MatPaginator,
     MatExpansionPanelHeader,
     MatLabel,
-    MatSuffix
+    MatSuffix,
+    MatSortHeader
   ],
   templateUrl: './group-overview.component.html',
   styleUrl: './group-overview.component.scss'
@@ -173,6 +175,6 @@ export class GroupOverviewComponent implements OnInit {
   }
 
   openAddNewPopup() {
-    this.dialog.open(PlaceholderComponent, {panelClass: "main-popup"})
+    this.dialog.open(GroupCreateComponent, {panelClass: "main-popup"})
   }
 }

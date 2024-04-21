@@ -1,0 +1,33 @@
+<div class="main-content">
+  <h2>Create new group</h2>
+  <div class="form">
+    <mat-form-field>
+      <mat-label>Target OS</mat-label>
+      <mat-select (selectionChange)="osTargetChange($event)" [formControl]="formControlOsSelect">
+        <ng-container *ngFor="let key of Object.keys(OperatingSystem)">
+          <mat-option *ngIf="key !== 'Unknown'" [value]="key">{{ key }}</mat-option>
+        </ng-container>
+      </mat-select>
+      @if (formControlOsSelect.hasError('pattern') || formControlOsSelect.hasError('required')) {
+        <mat-error>Cannot be empty</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input [formControl]="formControlGroupName" matInput>
+      @if (formControlGroupName.hasError('pattern') || formControlGroupName.hasError('required')) {
+        <mat-error>Cannot be empty</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input [formControl]="formControlGroupDescription" matInput>
+    </mat-form-field>
+  </div>
+  <div class="buttons">
+    <button (click)="createGroup()" color="primary" mat-raised-button>Create</button>
+  </div>
+
+</div>

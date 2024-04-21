@@ -34,10 +34,9 @@
   <br>
 
   <div class="table-container">
-    <table [dataSource]="dataSourceGroupOverviewTable" aria-label="Overview of all Groups" class="group-table" mat-table
-           matSort>
+    <table [dataSource]="dataSourceGroupOverviewTable" aria-label="Overview of all Groups" mat-table matSort>
       <ng-container *ngFor="let column of this.groupKeys" [matColumnDef]="column">
-        <th *matHeaderCellDef mat-header-cell> {{ this.convertStringChipNameGroupEntity(column) }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ this.convertStringChipNameGroupEntity(column) }}</th>
         <td *matCellDef="let group" mat-cell>{{ group[column] }}</td>
       </ng-container>
 
