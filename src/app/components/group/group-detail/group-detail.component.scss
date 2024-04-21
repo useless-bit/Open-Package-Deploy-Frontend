@@ -1,0 +1,49 @@
+.main-content {
+  height: 100%;
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+}
+
+.card-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+
+  mat-expansion-panel {
+    border: var(--popup-border);
+  }
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.agent-options-buttons {
+  button {
+    margin: 10px;
+  }
+}
+
+.agent-name {
+  text-align: center;
+  font-size: xx-large;
+  margin: 10px;
+}
+
+.entries {
+  mat-list-item {
+    height: auto;
+
+    p {
+      overflow: auto;
+    }
+  }
+
+
+  mat-divider {
+    margin-bottom: 20px;
+  }
+}

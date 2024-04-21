@@ -28,8 +28,9 @@ import {MatChipListbox, MatChipOption} from "@angular/material/chips";
 import {MatDivider} from "@angular/material/divider";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
-import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {GroupCreateComponent} from "../group-create/group-create.component";
+import {GroupDetailComponent} from "../group-detail/group-detail.component";
+import {GroupDetailPopupComponent} from "../group-detail-popup/group-detail-popup.component";
 
 @Component({
   selector: 'app-group-overview',
@@ -142,8 +143,8 @@ export class GroupOverviewComponent implements OnInit {
   }
 
   public showDetailInfoPopup(groupUUID: string): void {
-    this.dialog.open(PlaceholderComponent, {
-      data: {groupUUID},
+    this.dialog.open(GroupDetailPopupComponent, {
+      data: {groupUUID: groupUUID},
       panelClass: "main-popup"
     }).afterClosed().subscribe(() => {
       this.refreshData();

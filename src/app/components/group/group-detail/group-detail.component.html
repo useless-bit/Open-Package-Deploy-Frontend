@@ -1,0 +1,60 @@
+<app-loading *ngIf="!this.dataLoaded"></app-loading>
+
+<div *ngIf="dataLoaded && groupEntity" class="main-content">
+  <div class="card-container">
+    <div class="agent-name">
+      {{ groupEntity.name }}
+    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="agent-options-buttons">
+        <button (click)="renameGroup()" color="primary" mat-raised-button>Rename</button>
+        <button (click)="changeGroupDescription()" color="primary" mat-raised-button>Update Description</button>
+        <button (click)="deleteGroup()" color="primary" mat-raised-button>Delete</button>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="entries">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>UUID</h4>
+            <p matLine>{{ groupEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Name</h4>
+            <p matLine>{{ groupEntity.name }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>OS</h4>
+            <p matLine>{{ groupEntity.operatingSystem }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Members</h4>
+            <p matLine>{{ groupEntity.memberCount }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Deployed Packages</h4>
+            <p matLine>{{ groupEntity.packageCount }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+</div>

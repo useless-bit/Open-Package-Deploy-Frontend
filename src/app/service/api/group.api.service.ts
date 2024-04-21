@@ -5,6 +5,7 @@ import {VariableService} from "../variable/variable.service";
 import {GroupListResponse} from "./reponse/group/groupListResponse";
 import {GroupEntity} from "./entity/groupEntity";
 import {CreateEmptyGroupRequest} from "./request/group/createEmptyGroupRequest";
+import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,20 @@ export class GroupApiService {
   public delete(groupUUID: string): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.delete(this.variableService.backendURL + "/api/group/" + groupUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public update(groupUUID: string, groupUpdateRequest: GroupUpdateRequest): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/group/" + groupUUID, groupUpdateRequest).subscribe({
         next: () => {
           resolve();
         },

@@ -2,7 +2,7 @@
   <h2>Create new group</h2>
   <div class="form">
     <mat-form-field>
-      <mat-label>Target OS</mat-label>
+      <mat-label>Operating System</mat-label>
       <mat-select (selectionChange)="osTargetChange($event)" [formControl]="formControlOsSelect">
         <ng-container *ngFor="let key of Object.keys(OperatingSystem)">
           <mat-option *ngIf="key !== 'Unknown'" [value]="key">{{ key }}</mat-option>

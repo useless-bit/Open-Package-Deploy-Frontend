@@ -12,17 +12,9 @@ export class GroupEntity {
   constructor(packageData: any) {
     this.uuid = packageData.uuid;
     this.name = packageData.name;
-    this.description = this.formatName(packageData.description);
+    this.description = packageData.description;
     this.operatingSystem = packageData.operatingSystem;
     this.memberCount = packageData.memberCount;
     this.packageCount = packageData.packageCount;
-  }
-
-
-  formatName(name: string): string {
-    if (name) {
-      return name;
-    }
-    return "N/A"
   }
 }
