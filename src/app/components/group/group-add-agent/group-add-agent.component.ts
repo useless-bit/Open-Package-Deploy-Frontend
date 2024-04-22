@@ -110,7 +110,7 @@ export class GroupAddAgentComponent implements OnInit {
     this.memberAddingProcessStarted = false;
   }
 
-  applySearch(event: Event) {
+  applySearchForAgentsToAdd(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.agentResponse) {
       this.agentSelectListToAdd = this.agentResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))

@@ -11,7 +11,7 @@
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
         <mat-label>Search Packages</mat-label>
-        <input (keyup)="applySearch($event)" autofocus matInput>
+        <input (keyup)="applySearchForPackagesToAdd($event)" autofocus matInput>
       </mat-form-field>
       <div class="simple-button-row">
         <button (click)="addVisiblePackages()" color="primary" mat-flat-button>Select All</button>

@@ -110,7 +110,7 @@ export class GroupAddPackageComponent implements OnInit {
     this.packageAddingProcessStarted = false;
   }
 
-  applySearch(event: Event) {
+  applySearchForPackagesToAdd(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.packageResponse) {
       this.packageSelectListToAdd = this.packageResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
