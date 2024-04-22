@@ -8,7 +8,7 @@ import {ServerApiService} from "../../../service/api/server.api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
-import {ChangeDeploymentValidationInterval} from "../../../service/api/request/changeDeploymentValidationInterval";
+import {ServerDeploymentValidationRequest} from "../../../service/api/request/server/serverDeploymentValidationRequest";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 
 @Component({
@@ -57,7 +57,7 @@ export class SettingDeploymentValidationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.serverApiService.changeDeploymentValidationInterval(new ChangeDeploymentValidationInterval(result)).finally(() => {
+        this.serverApiService.changeDeploymentValidationInterval(new ServerDeploymentValidationRequest(result)).finally(() => {
           this.ngOnInit();
         })
       }

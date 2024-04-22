@@ -4,7 +4,7 @@ import {VariableService} from "../variable/variable.service";
 import {PackageListResponse} from "./reponse/package/packageListResponse";
 import {PackageEntity} from "./entity/packageEntity";
 import {Observable} from "rxjs";
-import {PackageUpdateRequest} from "./request/packageUpdateRequest";
+import {PackageUpdateRequest} from "./request/package/packageUpdateRequest";
 import {ApiService} from "./api.service";
 
 @Injectable({

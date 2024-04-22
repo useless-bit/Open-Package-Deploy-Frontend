@@ -12,7 +12,7 @@ import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
-import {PackageUpdateRequest} from "../../../service/api/request/packageUpdateRequest";
+import {PackageUpdateRequest} from "../../../service/api/request/package/packageUpdateRequest";
 import {PackageApiService} from "../../../service/api/package.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 import {PackageUpdateContentComponent} from "../package-update-content/package-update-content.component";

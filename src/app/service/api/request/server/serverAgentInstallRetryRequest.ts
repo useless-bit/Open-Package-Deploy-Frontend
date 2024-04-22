@@ -1,4 +1,4 @@
-export class ChangeAgentInstallRetryInterval {
+export class ServerAgentInstallRetryRequest {
   installRetryInterval: number;
 
 

@@ -24,7 +24,7 @@ import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
-import {AgentUpdateRequests} from "../../../service/api/request/agentUpdateRequest";
+import {AgentUpdateRequests} from "../../../service/api/request/agent/agentUpdateRequest";
 import {MatLine} from "@angular/material/core";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";

@@ -4,14 +4,14 @@ import {VariableService} from "../variable/variable.service";
 import {ApiService} from "./api.service";
 import {ServerRegistrationTokenResponse} from "./reponse/server/serverRegistrationTokenResponse";
 import {ServerAgentUpdateIntervalResponse} from "./reponse/server/serverAgentUpdateIntervalResponse";
-import {ChangeAgentUpdateInterval} from "./request/changeAgentUpdateInterval";
-import {ChangeAgentInstallRetryInterval} from "./request/changeAgentInstallRetryInterval";
+import {ServerAgentUpdateIntervalRequest} from "./request/server/serverAgentUpdateIntervalRequest";
+import {ServerAgentInstallRetryRequest} from "./request/server/serverAgentInstallRetryRequest";
 import {ServerAgentInstallRetryIntervalResponse} from "./reponse/server/serverAgentInstallRetryIntervalResponse";
 import {ServerAgentChecksumResponse} from "./reponse/server/serverAgentChecksumResponse";
 import {ServerStorageInformationResponse} from "./reponse/server/serverStorageInformationResponse";
 import {ServerSystemUsageResponse} from "./reponse/server/serverSystemUsageResponse";
 import {ServerLogListResponse} from "./reponse/server/serverLogListResponse";
-import {ChangeDeploymentValidationInterval} from "./request/changeDeploymentValidationInterval";
+import {ServerDeploymentValidationRequest} from "./request/server/serverDeploymentValidationRequest";
 import {ServerDeploymentValidationIntervalResponse} from "./reponse/server/serverDeploymentValidationIntervalResponse";
 import {ServerLastDeploymentValidationResponse} from "./reponse/server/serverLastDeploymentValidationResponse";
 
@@ -69,7 +69,7 @@ export class ServerApiService {
     });
   }
 
-  public changeAgentUpdateInterval(changeAgentUpdateInterval: ChangeAgentUpdateInterval): Promise<void | null> {
+  public changeAgentUpdateInterval(changeAgentUpdateInterval: ServerAgentUpdateIntervalRequest): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/updateInterval", changeAgentUpdateInterval).subscribe({
         next: () => {
@@ -98,7 +98,7 @@ export class ServerApiService {
     });
   }
 
-  public changeAgentInstallRetryInterval(changeAgentInstallRetryInterval: ChangeAgentInstallRetryInterval): Promise<void | null> {
+  public changeAgentInstallRetryInterval(changeAgentInstallRetryInterval: ServerAgentInstallRetryRequest): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/installRetryInterval", changeAgentInstallRetryInterval).subscribe({
         next: () => {
@@ -127,7 +127,7 @@ export class ServerApiService {
     });
   }
 
-  public changeDeploymentValidationInterval(changeAgentInstallRetryInterval: ChangeDeploymentValidationInterval): Promise<void | null> {
+  public changeDeploymentValidationInterval(changeAgentInstallRetryInterval: ServerDeploymentValidationRequest): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/deploymentValidationInterval", changeAgentInstallRetryInterval).subscribe({
         next: () => {

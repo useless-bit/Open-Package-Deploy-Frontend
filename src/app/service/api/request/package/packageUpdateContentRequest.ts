@@ -1,4 +1,4 @@
-export class UpdatePackageContentRequest {
+export class PackageUpdateContentRequest {
   packageChecksum: string;
 
 

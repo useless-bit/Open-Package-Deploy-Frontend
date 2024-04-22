@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {VariableService} from "../variable/variable.service";
 import {AgentListResponse} from "./reponse/agent/agentListResponse";
 import {AgentEntity} from "./entity/agentEntity";
-import {AgentUpdateRequests} from "./request/agentUpdateRequest";
+import {AgentUpdateRequests} from "./request/agent/agentUpdateRequest";
 import {ApiService} from "./api.service";
 
 @Injectable({

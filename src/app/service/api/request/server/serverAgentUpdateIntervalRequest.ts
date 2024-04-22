@@ -1,4 +1,4 @@
-export class ChangeAgentUpdateInterval {
+export class ServerAgentUpdateIntervalRequest {
   updateInterval: number;
 
 

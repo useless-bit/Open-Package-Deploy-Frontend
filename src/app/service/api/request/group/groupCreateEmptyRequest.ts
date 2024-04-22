@@ -1,6 +1,6 @@
 import {OperatingSystem} from "../../entity/operatingSystem";
 
-export class CreateEmptyGroupRequest {
+export class GroupCreateEmptyRequest {
   name: string;
   description: string;
   operatingSystem: OperatingSystem;

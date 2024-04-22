@@ -8,7 +8,7 @@ import {ServerApiService} from "../../../service/api/server.api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
-import {ChangeAgentInstallRetryInterval} from "../../../service/api/request/changeAgentInstallRetryInterval";
+import {ServerAgentInstallRetryRequest} from "../../../service/api/request/server/serverAgentInstallRetryRequest";
 
 @Component({
   selector: 'app-setting-install-retry-interval',
@@ -47,7 +47,7 @@ export class SettingInstallRetryIntervalComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.serverApiService.changeAgentInstallRetryInterval(new ChangeAgentInstallRetryInterval(result)).finally(() => {
+        this.serverApiService.changeAgentInstallRetryInterval(new ServerAgentInstallRetryRequest(result)).finally(() => {
           this.ngOnInit();
         })
       }

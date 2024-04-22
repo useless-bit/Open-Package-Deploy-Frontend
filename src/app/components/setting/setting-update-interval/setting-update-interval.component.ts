@@ -9,7 +9,7 @@ import {ServerApiService} from "../../../service/api/server.api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
-import {ChangeAgentUpdateInterval} from "../../../service/api/request/changeAgentUpdateInterval";
+import {ServerAgentUpdateIntervalRequest} from "../../../service/api/request/server/serverAgentUpdateIntervalRequest";
 
 @Component({
   selector: 'app-setting-update-interval',
@@ -49,7 +49,7 @@ export class SettingUpdateIntervalComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.serverApiService.changeAgentUpdateInterval(new ChangeAgentUpdateInterval(result)).finally(() => {
+        this.serverApiService.changeAgentUpdateInterval(new ServerAgentUpdateIntervalRequest(result)).finally(() => {
           this.ngOnInit();
         })
       }

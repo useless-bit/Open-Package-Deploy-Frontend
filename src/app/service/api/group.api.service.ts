@@ -4,7 +4,7 @@ import {ApiService} from "./api.service";
 import {VariableService} from "../variable/variable.service";
 import {GroupListResponse} from "./reponse/group/groupListResponse";
 import {GroupEntity} from "./entity/groupEntity";
-import {CreateEmptyGroupRequest} from "./request/group/createEmptyGroupRequest";
+import {GroupCreateEmptyRequest} from "./request/group/groupCreateEmptyRequest";
 import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
 import {GroupMemberResponse} from "./reponse/group/groupMemberResponse";
 import {GroupPackageResponse} from "./reponse/group/groupPackageResponse";
@@ -75,7 +75,7 @@ export class GroupApiService {
     });
   }
 
-  public create(createEmptyGroupRequest: CreateEmptyGroupRequest, bypassError: boolean): Promise<void | null> {
+  public create(createEmptyGroupRequest: GroupCreateEmptyRequest, bypassError: boolean): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/group", createEmptyGroupRequest).subscribe({
         next: () => {

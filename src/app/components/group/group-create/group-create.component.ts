@@ -10,7 +10,7 @@ import {MatButton} from "@angular/material/button";
 import {MatError, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {GroupApiService} from "../../../service/api/group.api.service";
-import {CreateEmptyGroupRequest} from "../../../service/api/request/group/createEmptyGroupRequest";
+import {GroupCreateEmptyRequest} from "../../../service/api/request/group/groupCreateEmptyRequest";
 
 @Component({
   selector: 'app-group-create',
@@ -50,7 +50,7 @@ export class GroupCreateComponent {
     this.formControlGroupName.markAllAsTouched();
 
     if (this.formControlOsSelect.valid && this.formControlGroupName.valid) {
-      this.groupApiService.create(new CreateEmptyGroupRequest(this.formControlGroupName.value, this.formControlGroupDescription.value, this.formControlOsSelect.value.toUpperCase()), false).then(() => {
+      this.groupApiService.create(new GroupCreateEmptyRequest(this.formControlGroupName.value, this.formControlGroupDescription.value, this.formControlOsSelect.value.toUpperCase()), false).then(() => {
         this.dialogRef.close();
       })
     }

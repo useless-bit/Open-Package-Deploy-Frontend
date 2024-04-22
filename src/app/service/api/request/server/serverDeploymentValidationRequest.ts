@@ -1,4 +1,4 @@
-export class ChangeDeploymentValidationInterval {
+export class ServerDeploymentValidationRequest {
   deploymentValidationInterval: number;
 
 

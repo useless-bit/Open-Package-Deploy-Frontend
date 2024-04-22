@@ -1,4 +1,4 @@
-export class CreateDeploymentRequest {
+export class DeploymentCreateRequest {
   agentUUID: string;
   packageUUID: string;
 

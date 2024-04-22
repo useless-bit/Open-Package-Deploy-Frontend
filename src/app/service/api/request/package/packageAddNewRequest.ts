@@ -1,6 +1,6 @@
-import {OperatingSystem} from "../entity/operatingSystem";
+import {OperatingSystem} from "../../entity/operatingSystem";
 
-export class AddNewPackageRequest {
+export class PackageAddNewRequest {
   packageName: string;
   expectedReturnValue: string
   packageChecksum: string;

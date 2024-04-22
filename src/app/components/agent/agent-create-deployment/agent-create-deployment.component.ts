@@ -27,7 +27,7 @@ import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatList, MatListItem, MatListOption, MatSelectionList} from "@angular/material/list";
 import {MatDialogRef} from "@angular/material/dialog";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
+import {DeploymentCreateRequest} from "../../../service/api/request/deployment/deploymentCreateRequest";
 import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 
 @Component({
@@ -122,7 +122,7 @@ export class AgentCreateDeploymentComponent implements OnInit {
     this.deploymentCreationProcessStarted = true;
     this.createdDeploymentStatus = [];
     for (let selectedPackage of this.selectedPackages) {
-      this.deploymentApiService.create(new CreateDeploymentRequest(this.agentUUID, selectedPackage.uuid), true).then(response => {
+      this.deploymentApiService.create(new DeploymentCreateRequest(this.agentUUID, selectedPackage.uuid), true).then(response => {
           this.createdDeploymentStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> Created")
           this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedPackages.length));
 
