@@ -3,27 +3,30 @@
 <div *ngIf="dataLoaded" class="main-content">
   <mat-stepper [linear]="true" style="height: 100%">
     <mat-step>
-      <ng-template matStepLabel>Select packages</ng-template>
+      <ng-template matStepLabel>Select Packages</ng-template>
       <div>
         <button color="primary" disabled mat-button matStepperPrevious>Back</button>
         <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
-        <mat-label>Search</mat-label>
+        <mat-label>Search Packages</mat-label>
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
       <div class="simple-button-row">
-        <button (click)="addVisibleAgents()" color="primary" mat-flat-button>Select All</button>
-        <button (click)="removeVisibleAgents()" color="primary" mat-flat-button>Deselect All</button>
+        <button (click)="addVisiblePackages()" color="primary" mat-flat-button>Select All</button>
+        <button (click)="removeVisiblePackages()" color="primary" mat-flat-button>Deselect All</button>
       </div>
 
-      <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (agent_item of agentSelectList; track agent_item.uuid) {
-          <mat-list-option [selected]="isAgentInSelectedAgentList(agent_item.uuid)"
-                           (selectedChange)="changeSelectedAgents($event, agent_item.uuid)"
-                           [value]="agent_item.uuid">{{ agent_item.name }}
-            | {{ agent_item.uuid }}
+      <mat-selection-list [disabled]="packageAddingProcessStarted">
+        @for (package_item of packageSelectListToAdd; track package_item.uuid) {
+          <mat-list-option [selected]="isAgentInSelectedAgentList(package_item
+         .uuid)"
+                           (selectedChange)="changeSelectedPackages($event, package_item
+                          .uuid)"
+                           [value]="package_item
+                          .uuid">{{ package_item.name }}
+            | {{ package_item.uuid }}
           </mat-list-option>
         }
       </mat-selection-list>
@@ -39,7 +42,7 @@
       <div>
         These packages will be added to the group:
         <mat-list>
-          @for (selectedPackage of selectedAgents; track selectedAgents) {
+          @for (selectedPackage of selectedPackagesToAdd; track selectedPackagesToAdd) {
             <mat-list-item>{{ selectedPackage.name }}</mat-list-item>
           }
         </mat-list>
@@ -47,24 +50,24 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Creating deployments</ng-template>
+      <ng-template matStepLabel>Adding Packages</ng-template>
       <div>
-        <button [disabled]="deploymentCreationProcessStarted" color="primary" mat-button matStepperPrevious>Back
+        <button [disabled]="packageAddingProcessStarted" color="primary" mat-button matStepperPrevious>Back
         </button>
-        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" color="primary"
+        <button (click)="addPackagesToGroup()" [disabled]="packageAddingProcessStarted" color="primary"
                 mat-button>
-          Add
+          Add to group
         </button>
       </div>
       <mat-divider></mat-divider>
-      <div *ngIf="deploymentCreationProgress > 0">
-        <mat-progress-bar [value]="deploymentCreationProgress" class="progress-bar" mode="determinate"/>
-        {{ deploymentCreationProgress }} / 100 %
+      <div *ngIf="packageAddingProgress > 0">
+        <mat-progress-bar [value]="packageAddingProgress" class="progress-bar" mode="determinate"/>
+        {{ packageAddingProgress }} / 100 %
       </div>
       <div>
         Status:
         <mat-list>
-          @for (selectedPackage of createdDeploymentStatus; track createdDeploymentStatus) {
+          @for (selectedPackage of addedPackageStatus; track addedPackageStatus) {
             <mat-list-item>{{ selectedPackage }}</mat-list-item>
           }
         </mat-list>

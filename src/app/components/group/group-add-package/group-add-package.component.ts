@@ -45,20 +45,20 @@ export class GroupAddPackageComponent implements OnInit {
   @Input() public groupUUID: string = "";
 
   public dataLoaded: boolean = false;
-  public agentResponse: PackageEntity[] | null = null;
-  public agentSelectList: PackageEntity[] = [];
-  public selectedAgents: PackageEntity[] = [];
+  public packageResponse: PackageEntity[] | null = null;
+  public packageSelectListToAdd: PackageEntity[] = [];
+  public selectedPackagesToAdd: PackageEntity[] = [];
   public groupEntity: GroupEntity | null = null;
-  public deploymentCreationProcessStarted: boolean = false;
-  public deploymentCreationProgress: number = 0;
-  public createdDeploymentStatus: string[] = [];
+  public packageAddingProcessStarted: boolean = false;
+  public packageAddingProgress: number = 0;
+  public addedPackageStatus: string[] = [];
 
 
   constructor(private groupApiService: GroupApiService,
               private packageApiService: PackageApiService,
               private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
-              public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupAddPackageComponent>) {
+              public groupAddPackageComponentMatDialogRef: MatDialogRef<GroupAddPackageComponent>) {
   }
 
   ngOnInit() {
@@ -66,78 +66,78 @@ export class GroupAddPackageComponent implements OnInit {
       this.packageApiService.getAll().then(packageResponse => {
         if (packageResponse && groupResponse) {
           this.groupEntity = groupResponse;
-          this.agentResponse = packageResponse.packages;
-          this.filterAgents();
-          this.agentSelectList = this.agentResponse;
+          this.packageResponse = packageResponse.packages;
+          this.filterPackages();
+          this.packageSelectListToAdd = this.packageResponse;
           this.dataLoaded = true;
         }
       });
     });
   }
 
-  changeSelectedAgents(event: boolean, agentUUID: string) {
-    if (this.agentResponse) {
+  changeSelectedPackages(event: boolean, agentUUID: string) {
+    if (this.packageResponse) {
       if (event) {
-        let packageEntity = this.agentResponse.filter(item => item.uuid == agentUUID).at(0);
-        if (packageEntity && this.selectedAgents.filter(item => item.uuid == agentUUID).length == 0) {
-          this.selectedAgents?.push(packageEntity);
+        let packageEntity = this.packageResponse.filter(item => item.uuid == agentUUID).at(0);
+        if (packageEntity && this.selectedPackagesToAdd.filter(item => item.uuid == agentUUID).length == 0) {
+          this.selectedPackagesToAdd?.push(packageEntity);
         }
       } else {
-        this.selectedAgents = this.selectedAgents.filter(item => item.uuid !== agentUUID);
+        this.selectedPackagesToAdd = this.selectedPackagesToAdd.filter(item => item.uuid !== agentUUID);
       }
     }
   }
 
-  createDeploymentsForPackage() {
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = true;
-    this.deploymentCreationProgress = 0;
-    this.deploymentCreationProcessStarted = true;
-    this.createdDeploymentStatus = [];
-    for (let selectedAgent of this.selectedAgents) {
-      this.groupApiService.addPackage(this.groupUUID, selectedAgent.uuid, true).then(() => {
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Added")
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
+  addPackagesToGroup() {
+    this.groupAddPackageComponentMatDialogRef.disableClose = true;
+    this.packageAddingProgress = 0;
+    this.packageAddingProcessStarted = true;
+    this.addedPackageStatus = [];
+    for (let selectedPackage of this.selectedPackagesToAdd) {
+      this.groupApiService.addPackage(this.groupUUID, selectedPackage.uuid, true).then(() => {
+          this.addedPackageStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> Added")
+          this.packageAddingProgress = Math.round(100 * (this.addedPackageStatus.length / this.selectedPackagesToAdd.length));
 
         },
         error => {
           let errorResponse = error.error as ApiErrorResponse;
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
+          this.addedPackageStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> " + errorResponse.message)
+          this.packageAddingProgress = Math.round(100 * (this.addedPackageStatus.length / this.selectedPackagesToAdd.length));
         });
     }
     this.serverApiService.resetDeploymentValidation().then();
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
-    this.deploymentCreationProcessStarted = false;
+    this.groupAddPackageComponentMatDialogRef.disableClose = false;
+    this.packageAddingProcessStarted = false;
   }
 
   applySearch(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    if (this.agentResponse) {
-      this.agentSelectList = this.agentResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+    if (this.packageResponse) {
+      this.packageSelectListToAdd = this.packageResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
     this.changeDetector.detectChanges();
   }
 
-  addVisibleAgents() {
-    let agentsToAdd = this.agentSelectList.filter(item => !this.selectedAgents.includes(item));
-    this.selectedAgents = this.selectedAgents.concat(agentsToAdd);
+  addVisiblePackages() {
+    let packagesToAdd = this.packageSelectListToAdd.filter(item => !this.selectedPackagesToAdd.includes(item));
+    this.selectedPackagesToAdd = this.selectedPackagesToAdd.concat(packagesToAdd);
     this.changeDetector.detectChanges();
 
   }
 
-  removeVisibleAgents() {
-    this.selectedAgents = this.selectedAgents.filter(item => !this.agentSelectList.includes(item));
+  removeVisiblePackages() {
+    this.selectedPackagesToAdd = this.selectedPackagesToAdd.filter(item => !this.packageSelectListToAdd.includes(item));
     this.changeDetector.detectChanges();
 
   }
 
   isAgentInSelectedAgentList(agentUUID: string): boolean {
-    return this.selectedAgents.filter(item => item.uuid === agentUUID).length > 0;
+    return this.selectedPackagesToAdd.filter(item => item.uuid === agentUUID).length > 0;
   }
 
-  private filterAgents(): void {
-    if (this.agentResponse) {
-      this.agentResponse = this.agentResponse.filter(item => item.targetOperatingSystem === this.groupEntity?.operatingSystem);
+  private filterPackages(): void {
+    if (this.packageResponse) {
+      this.packageResponse = this.packageResponse.filter(item => item.targetOperatingSystem === this.groupEntity?.operatingSystem);
     }
   }
 }

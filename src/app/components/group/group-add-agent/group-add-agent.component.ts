@@ -58,7 +58,7 @@ export class GroupAddAgentComponent implements OnInit {
               private agentApiService: AgentApiService,
               private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
-              public addAgentComponentMatDialogRef: MatDialogRef<GroupAddAgentComponent>) {
+              public groupAddAgentComponentMatDialogRef: MatDialogRef<GroupAddAgentComponent>) {
   }
 
   ngOnInit() {
@@ -78,9 +78,9 @@ export class GroupAddAgentComponent implements OnInit {
   changeSelectedAgents(event: boolean, agentUUID: string) {
     if (this.agentResponse) {
       if (event) {
-        let packageEntity = this.agentResponse.filter(item => item.uuid == agentUUID).at(0);
-        if (packageEntity && this.selectedAgentsToAdd.filter(item => item.uuid == agentUUID).length == 0) {
-          this.selectedAgentsToAdd?.push(packageEntity);
+        let agentEntity = this.agentResponse.filter(item => item.uuid == agentUUID).at(0);
+        if (agentEntity && this.selectedAgentsToAdd.filter(item => item.uuid == agentUUID).length == 0) {
+          this.selectedAgentsToAdd?.push(agentEntity);
         }
       } else {
         this.selectedAgentsToAdd = this.selectedAgentsToAdd.filter(item => item.uuid !== agentUUID);
@@ -89,7 +89,7 @@ export class GroupAddAgentComponent implements OnInit {
   }
 
   addAgentsToGroup() {
-    this.addAgentComponentMatDialogRef.disableClose = true;
+    this.groupAddAgentComponentMatDialogRef.disableClose = true;
     this.memberAddingProgress = 0;
     this.memberAddingProcessStarted = true;
     this.addingMemberStatus = [];
@@ -106,7 +106,7 @@ export class GroupAddAgentComponent implements OnInit {
         });
     }
     this.serverApiService.resetDeploymentValidation().then();
-    this.addAgentComponentMatDialogRef.disableClose = false;
+    this.groupAddAgentComponentMatDialogRef.disableClose = false;
     this.memberAddingProcessStarted = false;
   }
 
