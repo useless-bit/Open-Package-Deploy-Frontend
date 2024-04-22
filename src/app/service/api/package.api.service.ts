@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {VariableService} from "../variable/variable.service";
-import {PackageListResponse} from "./reponse/packageListResponse";
+import {PackageListResponse} from "./reponse/package/packageListResponse";
 import {PackageEntity} from "./entity/packageEntity";
 import {Observable} from "rxjs";
-import {PackageUpdateRequest} from "./request/packageUpdateRequest";
+import {PackageUpdateRequest} from "./request/package/packageUpdateRequest";
 import {ApiService} from "./api.service";
 
 @Injectable({
@@ -25,7 +25,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -39,7 +39,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -53,7 +53,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -74,7 +74,7 @@ export class PackageApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });

@@ -56,11 +56,11 @@ export class HomeDeploymentStatusComponent implements OnInit {
 
   calculateDeployments(): void {
     this.deploymentCount = this.deploymentEntities.length;
-    this.deploymentEntitiesError = this.deploymentEntities.filter(item => !item.isDeployed && item.lastDeploymentTime !== "N/A");
+    this.deploymentEntitiesError = this.deploymentEntities.filter(item => !item.deployed && item.lastDeploymentTime !== "N/A");
     this.deploymentErrorCount = this.deploymentEntitiesError.length;
-    this.deploymentEntitiesOutstanding = this.deploymentEntities.filter(item => !item.isDeployed);
+    this.deploymentEntitiesOutstanding = this.deploymentEntities.filter(item => !item.deployed);
     this.deploymentOutstandingCount = this.deploymentEntitiesOutstanding.length;
-    this.deploymentEntitiesCompleted = this.deploymentEntities.filter(item => item.isDeployed);
+    this.deploymentEntitiesCompleted = this.deploymentEntities.filter(item => item.deployed);
     this.deploymentCompletedCount = this.deploymentEntitiesCompleted.length;
   }
 

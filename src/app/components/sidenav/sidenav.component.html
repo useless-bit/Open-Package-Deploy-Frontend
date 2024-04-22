@@ -14,14 +14,19 @@
       <mat-icon>computer</mat-icon>
       Agents
     </button>
+    <button [style.background-color]="currentUrl === '/group' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/group">
+      <mat-icon>devices</mat-icon>
+      Groups
+    </button>
     <button [style.background-color]="currentUrl === '/package' ? 'var(--button-selected)' : ''" color="primary"
             mat-flat-button routerLink="/package">
-      <mat-icon>inventory</mat-icon>
+      <mat-icon>folder_copy</mat-icon>
       Packages
     </button>
     <button [style.background-color]="currentUrl === '/deployment' ? 'var(--button-selected)' : ''" color="primary"
             mat-flat-button routerLink="/deployment">
-      <mat-icon>archive</mat-icon>
+      <mat-icon>install_desktop</mat-icon>
       Deployments
     </button>
     <button [style.background-color]="currentUrl === '/settings' ? 'var(--button-selected)' : ''" color="primary"

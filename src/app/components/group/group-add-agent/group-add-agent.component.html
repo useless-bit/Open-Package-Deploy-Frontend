@@ -1,0 +1,75 @@
+<app-loading *ngIf="!this.dataLoaded"></app-loading>
+
+<div *ngIf="dataLoaded" class="main-content">
+  <mat-stepper [linear]="true" style="height: 100%">
+    <mat-step>
+      <ng-template matStepLabel>Select Agents</ng-template>
+      <div>
+        <button color="primary" disabled mat-button matStepperPrevious>Back</button>
+        <button color="primary" mat-button matStepperNext>Next</button>
+      </div>
+      <mat-divider></mat-divider>
+      <mat-form-field class="search-field">
+        <mat-label>Search Agents</mat-label>
+        <input (keyup)="applySearchForAgentsToAdd($event)" autofocus matInput>
+      </mat-form-field>
+      <div class="simple-button-row">
+        <button (click)="addVisibleAgents()" color="primary" mat-flat-button>Select All</button>
+        <button (click)="removeVisibleAgents()" color="primary" mat-flat-button>Deselect All</button>
+      </div>
+
+      <mat-selection-list [disabled]="memberAddingProcessStarted">
+        @for (agent_item of agentSelectListToAdd; track agent_item.uuid) {
+          <mat-list-option [selected]="isAgentInSelectedAgentList(agent_item.uuid)"
+                           (selectedChange)="changeSelectedAgents($event, agent_item.uuid)"
+                           [value]="agent_item.uuid">{{ agent_item.name }}
+            | {{ agent_item.uuid }}
+          </mat-list-option>
+        }
+      </mat-selection-list>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Summary</ng-template>
+      <div>
+        <button color="primary" mat-button matStepperPrevious>Back</button>
+        <button color="primary" mat-button matStepperNext>Next</button>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        These Agents will be added to the group:
+        <mat-list>
+          @for (selectedAgent of selectedAgentsToAdd; track selectedAgentsToAdd) {
+            <mat-list-item>{{ selectedAgent.name }}</mat-list-item>
+          }
+        </mat-list>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Adding members</ng-template>
+      <div>
+        <button [disabled]="memberAddingProcessStarted" color="primary" mat-button matStepperPrevious>Back
+        </button>
+        <button (click)="addAgentsToGroup()" [disabled]="memberAddingProcessStarted" color="primary"
+                mat-button>
+          Add to group
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <div *ngIf="memberAddingProgress > 0">
+        <mat-progress-bar [value]="memberAddingProgress" class="progress-bar" mode="determinate"/>
+        {{ memberAddingProgress }} / 100 %
+      </div>
+      <div>
+        Status:
+        <mat-list>
+          @for (agentStatus of addingMemberStatus; track addingMemberStatus) {
+            <mat-list-item>{{ agentStatus }}</mat-list-item>
+          }
+        </mat-list>
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+</div>

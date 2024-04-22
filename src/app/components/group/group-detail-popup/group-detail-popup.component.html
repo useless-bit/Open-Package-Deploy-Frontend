@@ -1,0 +1,22 @@
+<div class="main-content">
+
+  <div class="detail-popup_navigation-bar">
+    <mat-button-toggle-group [formControl]="fontStyleControl">
+      <mat-button-toggle value="page_one">Details</mat-button-toggle>
+      <mat-button-toggle value="page_two">Agents</mat-button-toggle>
+      <mat-button-toggle value="page_three">Add Agent</mat-button-toggle>
+      <mat-button-toggle value="page_four">Packages</mat-button-toggle>
+      <mat-button-toggle value="page_five">Add Package</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="component">
+    <ng-container [ngSwitch]="fontStyleControl.value">
+      <app-group-detail *ngSwitchCase="'page_one'" [groupUUID]=this.data.groupUUID></app-group-detail>
+      <app-group-show-agents *ngSwitchCase="'page_two'" [groupUUID]=this.data.groupUUID></app-group-show-agents>
+      <app-group-add-agent *ngSwitchCase="'page_three'" [groupUUID]=this.data.groupUUID></app-group-add-agent>
+      <app-group-show-packages *ngSwitchCase="'page_four'" [groupUUID]=this.data.groupUUID></app-group-show-packages>
+      <app-group-add-package *ngSwitchCase="'page_five'" [groupUUID]=this.data.groupUUID></app-group-add-package>
+    </ng-container>
+  </div>
+</div>

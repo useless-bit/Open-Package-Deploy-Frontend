@@ -11,7 +11,7 @@ import {MatButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatIcon} from "@angular/material/icon";
 import {Subscription} from "rxjs";
-import {AddNewPackageRequest} from "../../../service/api/request/addNewPackageRequest";
+import {PackageAddNewRequest} from "../../../service/api/request/package/packageAddNewRequest";
 import {HttpEventType, HttpStatusCode} from "@angular/common/http";
 import {MatDialogRef} from "@angular/material/dialog";
 import {PackageApiService} from "../../../service/api/package.api.service";
@@ -84,7 +84,7 @@ export class PackageUploadComponent implements OnInit {
       this.formControlChecksumInput.disable();
       this.formControlOsSelect.disable();
       let formData: FormData = new FormData();
-      let addNewPackageRequest: AddNewPackageRequest = new AddNewPackageRequest(this.formControlNameInput.value, this.formControlExpectedReturnValueInput.value, this.formControlChecksumInput.value, this.formControlOsSelect.value.toUpperCase())
+      let addNewPackageRequest: PackageAddNewRequest = new PackageAddNewRequest(this.formControlNameInput.value, this.formControlExpectedReturnValueInput.value, this.formControlChecksumInput.value, this.formControlOsSelect.value.toUpperCase())
       formData.append("addNewPackageRequest", new Blob([JSON.stringify(addNewPackageRequest)], {type: 'application/json'}));
       formData.append("multipartFile", this.file)
       let upload = this.packageApiService.addNew(formData);

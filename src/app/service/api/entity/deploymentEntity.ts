@@ -4,22 +4,24 @@ export class DeploymentEntity {
   agentName: string;
   packageUuid: string;
   packageName: string;
-  isDeployed: boolean;
+  deployed: boolean;
+  directDeployment: boolean;
   expectedReturnValue: string;
   returnValue: string;
   lastDeploymentTime: string;
 
 
-  constructor(packageData: any) {
-    this.uuid = packageData.uuid;
-    this.agentUuid = packageData.agentUUID;
-    this.agentName = this.formatName(packageData.agentName);
-    this.packageUuid = packageData.packageUUID;
-    this.packageName = this.formatName(packageData.packageName);
-    this.isDeployed = packageData.deployed;
-    this.expectedReturnValue = packageData.expectedReturnValue;
-    this.returnValue = this.formatName(packageData.returnValue);
-    this.lastDeploymentTime = this.formatDate(packageData.lastDeploymentTimestamp);
+  constructor(deploymentData: any) {
+    this.uuid = deploymentData.uuid;
+    this.agentUuid = deploymentData.agentUUID;
+    this.agentName = this.formatName(deploymentData.agentName);
+    this.packageUuid = deploymentData.packageUUID;
+    this.packageName = this.formatName(deploymentData.packageName);
+    this.deployed = deploymentData.deployed;
+    this.expectedReturnValue = deploymentData.expectedReturnValue;
+    this.returnValue = this.formatName(deploymentData.returnValue);
+    this.lastDeploymentTime = this.formatDate(deploymentData.lastDeploymentTimestamp);
+    this.directDeployment = deploymentData.directDeployment
   }
 
   formatDate(timestamp: number): string {

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "./api.service";
 import {VariableService} from "../variable/variable.service";
-import {DeploymentListResponse} from "./reponse/deploymentListResponse";
+import {DeploymentListResponse} from "./reponse/deployment/deploymentListResponse";
 import {DeploymentEntity} from "./entity/deploymentEntity";
-import {CreateDeploymentRequest} from "./request/createDeploymentRequest";
+import {DeploymentCreateRequest} from "./request/deployment/deploymentCreateRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -38,7 +38,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -52,7 +52,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -66,7 +66,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -80,13 +80,13 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
   }
 
-  public create(createDeploymentRequest: CreateDeploymentRequest, bypassError: boolean): Promise<void | null> {
+  public create(createDeploymentRequest: DeploymentCreateRequest, bypassError: boolean): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/deployment", createDeploymentRequest).subscribe({
         next: () => {
@@ -96,7 +96,7 @@ export class DeploymentApiService {
           if (!bypassError) {
             this.apiService.errorHandling(error);
           }
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -110,7 +110,7 @@ export class DeploymentApiService {
         },
         error: error => {
           this.apiService.errorHandling(error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -124,7 +124,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });
@@ -138,7 +138,7 @@ export class DeploymentApiService {
         },
         error: (error) => {
           this.apiService.errorHandling(error);
-          reject(error)
+          reject(new Error(error));
         }
       });
     });

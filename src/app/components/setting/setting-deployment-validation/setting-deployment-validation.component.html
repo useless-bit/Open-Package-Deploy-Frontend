@@ -1,0 +1,23 @@
+<div class="main-content">
+  <h2>Deployment Validation</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <mat-form-field>
+      Validation interval:
+      <input disabled matInput>{{ deploymentValidationInterval }} seconds
+    </mat-form-field>
+    <div class="buttons">
+      <button color="primary" mat-raised-button (click)="changeDeploymentValidationInterval()">Change interval</button>
+    </div>
+
+    <mat-form-field>
+      Last Validation:
+      <input disabled matInput>{{ lastDeploymentValidationTimestamp }}
+    </mat-form-field>
+    <div class="buttons">
+      <button color="primary" mat-raised-button (click)="resetDeploymentValidation()">Validate Now</button>
+    </div>
+  }
+</div>

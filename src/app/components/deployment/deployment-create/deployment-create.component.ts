@@ -11,7 +11,7 @@ import {MatSelect, MatSelectChange} from "@angular/material/select";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
-import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
+import {DeploymentCreateRequest} from "../../../service/api/request/deployment/deploymentCreateRequest";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {AgentApiService} from "../../../service/api/agent.api.service";
@@ -91,7 +91,7 @@ export class DeploymentCreateComponent implements OnInit {
     this.formControlAgentSelect.markAllAsTouched();
 
     if (this.formControlOsSelect.valid && this.formControlPackageSelect.valid && this.formControlAgentSelect.valid) {
-      this.deploymentApiService.create(new CreateDeploymentRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value), false).then(() => {
+      this.deploymentApiService.create(new DeploymentCreateRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value), false).then(() => {
         this.dialogRef.close();
       })
     }

@@ -15,7 +15,7 @@ import {HttpEventType, HttpStatusCode} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PackageApiService} from "../../../service/api/package.api.service";
 import {PackageUpdateContentComponentInput} from "./packageUpdateContentComponentInput";
-import {UpdatePackageContentRequest} from "../../../service/api/request/updatePackageContentRequest";
+import {PackageUpdateContentRequest} from "../../../service/api/request/package/packageUpdateContentRequest";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 
 @Component({
@@ -84,7 +84,7 @@ export class PackageUpdateContentComponent implements OnInit {
       this.packageUpdateContentComponentMatDialogRef.disableClose = true;
       this.formControlChecksumInput.disable();
       let formData: FormData = new FormData();
-      let updatePackageContentRequest: UpdatePackageContentRequest = new UpdatePackageContentRequest(this.formControlChecksumInput.value)
+      let updatePackageContentRequest: PackageUpdateContentRequest = new PackageUpdateContentRequest(this.formControlChecksumInput.value)
       formData.append("updatePackageContentRequest", new Blob([JSON.stringify(updatePackageContentRequest)], {type: 'application/json'}));
       formData.append("multipartFile", this.file)
       let upload = this.packageApiService.updateContent(this.packageEntity.uuid, formData);

@@ -12,8 +12,8 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
 import {PackageApiService} from "../../../service/api/package.api.service";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
-import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {DeploymentCreateRequest} from "../../../service/api/request/deployment/deploymentCreateRequest";
+import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
@@ -101,7 +101,7 @@ export class PackageCreateDeploymentComponent implements OnInit {
     this.deploymentCreationProcessStarted = true;
     this.createdDeploymentStatus = [];
     for (let selectedAgent of this.selectedAgents) {
-      this.deploymentApiService.create(new CreateDeploymentRequest(selectedAgent.uuid, this.packageUUID), true).then(response => {
+      this.deploymentApiService.create(new DeploymentCreateRequest(selectedAgent.uuid, this.packageUUID), true).then(response => {
           this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Created")
           this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
 

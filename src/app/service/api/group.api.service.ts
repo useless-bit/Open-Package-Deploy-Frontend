@@ -1,0 +1,186 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {ApiService} from "./api.service";
+import {VariableService} from "../variable/variable.service";
+import {GroupListResponse} from "./reponse/group/groupListResponse";
+import {GroupEntity} from "./entity/groupEntity";
+import {GroupCreateEmptyRequest} from "./request/group/groupCreateEmptyRequest";
+import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
+import {GroupMemberResponse} from "./reponse/group/groupMemberResponse";
+import {GroupPackageResponse} from "./reponse/group/groupPackageResponse";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GroupApiService {
+
+  constructor(private httpClient: HttpClient,
+              private variableService: VariableService,
+              private apiService: ApiService) {
+  }
+
+  public getAll(): Promise<GroupListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group").subscribe({
+        next: value => {
+          resolve(new GroupListResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public get(groupUUID: string): Promise<GroupEntity | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group/" + groupUUID).subscribe({
+        next: value => {
+          resolve(new GroupEntity(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public delete(groupUUID: string): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/group/" + groupUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public update(groupUUID: string, groupUpdateRequest: GroupUpdateRequest): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.patch(this.variableService.backendURL + "/api/group/" + groupUUID, groupUpdateRequest).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public create(createEmptyGroupRequest: GroupCreateEmptyRequest, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.variableService.backendURL + "/api/group", createEmptyGroupRequest).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public getMembers(groupUUID: string): Promise<GroupMemberResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group/" + groupUUID + "/member").subscribe({
+        next: value => {
+          resolve(new GroupMemberResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public getPackages(groupUUID: string): Promise<GroupPackageResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group/" + groupUUID + "/package").subscribe({
+        next: value => {
+          resolve(new GroupPackageResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public addMember(groupUUID: string, agentUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.variableService.backendURL + "/api/group/" + groupUUID + "/member/" + agentUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public removeMember(groupUUID: string, agentUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/group/" + groupUUID + "/member/" + agentUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public addPackage(groupUUID: string, packageUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.variableService.backendURL + "/api/group/" + groupUUID + "/package/" + packageUUID, null).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+  public removePackage(groupUUID: string, packageUUID: string, bypassError: boolean): Promise<void | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.variableService.backendURL + "/api/group/" + groupUUID + "/package/" + packageUUID).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (error) => {
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
+          reject(new Error(error));
+        }
+      });
+    });
+  }
+
+}

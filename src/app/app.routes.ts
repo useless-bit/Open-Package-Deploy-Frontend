@@ -8,10 +8,12 @@ import {DeploymentOverviewComponent} from "./components/deployment/deployment-ov
 import {SettingOverviewComponent} from "./components/setting/setting-overview/setting-overview.component";
 import {HomeOverviewComponent} from "./components/home/home-overview/home-overview.component";
 import {LogOverviewComponent} from "./components/log/log-overview/log-overview.component";
+import {GroupOverviewComponent} from "./components/group/group-overview/group-overview.component";
 
 export const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomeOverviewComponent, canActivate: [KeycloakGuard]},
   {path: 'agent', pathMatch: 'full', component: AgentOverviewComponent, canActivate: [KeycloakGuard]},
+  {path: 'group', pathMatch: 'full', component: GroupOverviewComponent, canActivate: [KeycloakGuard]},
   {path: 'package', pathMatch: 'full', component: PackageOverviewComponent, canActivate: [KeycloakGuard]},
   {path: 'deployment', pathMatch: 'full', component: DeploymentOverviewComponent, canActivate: [KeycloakGuard]},
   {path: 'settings', pathMatch: 'full', component: SettingOverviewComponent, canActivate: [KeycloakGuard]},
