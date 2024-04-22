@@ -3,14 +3,14 @@
 <div *ngIf="dataLoaded" class="main-content">
   <mat-stepper [linear]="true" style="height: 100%">
     <mat-step>
-      <ng-template matStepLabel>Select agents</ng-template>
+      <ng-template matStepLabel>Select Agents</ng-template>
       <div>
         <button color="primary" disabled mat-button matStepperPrevious>Back</button>
         <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
-        <mat-label>Search</mat-label>
+        <mat-label>Search Agents</mat-label>
         <input (keyup)="applySearch($event)" autofocus matInput>
       </mat-form-field>
       <div class="simple-button-row">
@@ -19,7 +19,7 @@
       </div>
 
       <mat-selection-list [disabled]="memberAddingProcessStarted">
-        @for (agent_item of agentSelectList; track agent_item.uuid) {
+        @for (agent_item of agentSelectListToAdd; track agent_item.uuid) {
           <mat-list-option [selected]="isAgentInSelectedAgentList(agent_item.uuid)"
                            (selectedChange)="changeSelectedAgents($event, agent_item.uuid)"
                            [value]="agent_item.uuid">{{ agent_item.name }}
@@ -37,23 +37,23 @@
       </div>
       <mat-divider></mat-divider>
       <div>
-        These will be added to the group:
+        These Agents will be added to the group:
         <mat-list>
-          @for (selectedPackage of selectedAgents; track selectedAgents) {
-            <mat-list-item>{{ selectedPackage.name }}</mat-list-item>
+          @for (selectedAgent of selectedAgentsToAdd; track selectedAgentsToAdd) {
+            <mat-list-item>{{ selectedAgent.name }}</mat-list-item>
           }
         </mat-list>
       </div>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Creating deployments</ng-template>
+      <ng-template matStepLabel>Adding members</ng-template>
       <div>
         <button [disabled]="memberAddingProcessStarted" color="primary" mat-button matStepperPrevious>Back
         </button>
         <button (click)="addAgentsToGroup()" [disabled]="memberAddingProcessStarted" color="primary"
                 mat-button>
-          Add
+          Add Agent(s)
         </button>
       </div>
       <mat-divider></mat-divider>
@@ -64,8 +64,8 @@
       <div>
         Status:
         <mat-list>
-          @for (selectedPackage of addingMemberStatus; track addingMemberStatus) {
-            <mat-list-item>{{ selectedPackage }}</mat-list-item>
+          @for (agentStatus of addingMemberStatus; track addingMemberStatus) {
+            <mat-list-item>{{ agentStatus }}</mat-list-item>
           }
         </mat-list>
       </div>

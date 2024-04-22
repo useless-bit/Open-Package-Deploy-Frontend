@@ -46,8 +46,8 @@ export class GroupAddAgentComponent implements OnInit {
 
   public dataLoaded: boolean = false;
   public agentResponse: AgentEntity[] | null = null;
-  public agentSelectList: AgentEntity[] = [];
-  public selectedAgents: AgentEntity[] = [];
+  public agentSelectListToAdd: AgentEntity[] = [];
+  public selectedAgentsToAdd: AgentEntity[] = [];
   public groupEntity: GroupEntity | null = null;
   public memberAddingProcessStarted: boolean = false;
   public memberAddingProgress: number = 0;
@@ -68,7 +68,7 @@ export class GroupAddAgentComponent implements OnInit {
           this.groupEntity = groupResponse;
           this.agentResponse = agentResponse.agents;
           this.filterAgents();
-          this.agentSelectList = this.agentResponse;
+          this.agentSelectListToAdd = this.agentResponse;
           this.dataLoaded = true;
         }
       });
@@ -79,11 +79,11 @@ export class GroupAddAgentComponent implements OnInit {
     if (this.agentResponse) {
       if (event) {
         let packageEntity = this.agentResponse.filter(item => item.uuid == agentUUID).at(0);
-        if (packageEntity && this.selectedAgents.filter(item => item.uuid == agentUUID).length == 0) {
-          this.selectedAgents?.push(packageEntity);
+        if (packageEntity && this.selectedAgentsToAdd.filter(item => item.uuid == agentUUID).length == 0) {
+          this.selectedAgentsToAdd?.push(packageEntity);
         }
       } else {
-        this.selectedAgents = this.selectedAgents.filter(item => item.uuid !== agentUUID);
+        this.selectedAgentsToAdd = this.selectedAgentsToAdd.filter(item => item.uuid !== agentUUID);
       }
     }
   }
@@ -93,16 +93,16 @@ export class GroupAddAgentComponent implements OnInit {
     this.memberAddingProgress = 0;
     this.memberAddingProcessStarted = true;
     this.addingMemberStatus = [];
-    for (let selectedAgent of this.selectedAgents) {
+    for (let selectedAgent of this.selectedAgentsToAdd) {
       this.groupApiService.addMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
           this.addingMemberStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Added")
-          this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgents.length));
+          this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgentsToAdd.length));
 
         },
         error => {
           let errorResponse = error.error as ApiErrorResponse;
           this.addingMemberStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
-          this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgents.length));
+          this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgentsToAdd.length));
         });
     }
     this.serverApiService.resetDeploymentValidation().then();
@@ -113,26 +113,26 @@ export class GroupAddAgentComponent implements OnInit {
   applySearch(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.agentResponse) {
-      this.agentSelectList = this.agentResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+      this.agentSelectListToAdd = this.agentResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
     this.changeDetector.detectChanges();
   }
 
   addVisibleAgents() {
-    let agentsToAdd = this.agentSelectList.filter(item => !this.selectedAgents.includes(item));
-    this.selectedAgents = this.selectedAgents.concat(agentsToAdd);
+    let agentsToAdd = this.agentSelectListToAdd.filter(item => !this.selectedAgentsToAdd.includes(item));
+    this.selectedAgentsToAdd = this.selectedAgentsToAdd.concat(agentsToAdd);
     this.changeDetector.detectChanges();
 
   }
 
   removeVisibleAgents() {
-    this.selectedAgents = this.selectedAgents.filter(item => !this.agentSelectList.includes(item));
+    this.selectedAgentsToAdd = this.selectedAgentsToAdd.filter(item => !this.agentSelectListToAdd.includes(item));
     this.changeDetector.detectChanges();
 
   }
 
   isAgentInSelectedAgentList(agentUUID: string): boolean {
-    return this.selectedAgents.filter(item => item.uuid === agentUUID).length > 0;
+    return this.selectedAgentsToAdd.filter(item => item.uuid === agentUUID).length > 0;
   }
 
   private filterAgents(): void {
