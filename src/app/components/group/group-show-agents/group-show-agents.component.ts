@@ -45,25 +45,24 @@ export class GroupShowAgentsComponent implements OnInit {
 
   public dataLoaded: boolean = false;
   public memberResponse: GroupMember[] | null = null;
-  public visibleMembers: GroupMember[] = [];
-  public selectedMembers: GroupMember[] = [];
-  public groupEntity: GroupEntity | null = null;
-  public deploymentCreationProcessStarted: boolean = false;
-  public deploymentCreationProgress: number = 0;
-  public createdDeploymentStatus: string[] = [];
+  public visibleMembersToRemove: GroupMember[] = [];
+  public selectedMembersToRemove: GroupMember[] = [];
+  public memberRemovingProcessStarted: boolean = false;
+  public memberRemovingProgress: number = 0;
+  public memberRemovingStatus: string[] = [];
 
 
   constructor(private groupApiService: GroupApiService,
               private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
-              public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupShowAgentsComponent>) {
+              public groupShowAgentsComponentMatDialogRef: MatDialogRef<GroupShowAgentsComponent>) {
   }
 
   ngOnInit() {
     this.groupApiService.getMembers(this.groupUUID).then(memberResponse => {
       if (memberResponse) {
         this.memberResponse = memberResponse.members;
-        this.visibleMembers = this.memberResponse;
+        this.visibleMembersToRemove = this.memberResponse;
         this.dataLoaded = true;
       }
     });
@@ -72,60 +71,60 @@ export class GroupShowAgentsComponent implements OnInit {
   changeSelectedAgents(event: boolean, agentUUID: string) {
     if (this.memberResponse) {
       if (event) {
-        let packageEntity = this.memberResponse.filter(item => item.uuid == agentUUID).at(0);
-        if (packageEntity && this.selectedMembers.filter(item => item.uuid == agentUUID).length == 0) {
-          this.selectedMembers?.push(packageEntity);
+        let agentEntity = this.memberResponse.filter(item => item.uuid == agentUUID).at(0);
+        if (agentEntity && this.selectedMembersToRemove.filter(item => item.uuid == agentUUID).length == 0) {
+          this.selectedMembersToRemove?.push(agentEntity);
         }
       } else {
-        this.selectedMembers = this.selectedMembers.filter(item => item.uuid !== agentUUID);
+        this.selectedMembersToRemove = this.selectedMembersToRemove.filter(item => item.uuid !== agentUUID);
       }
     }
   }
 
-  createDeploymentsForPackage() {
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = true;
-    this.deploymentCreationProgress = 0;
-    this.deploymentCreationProcessStarted = true;
-    this.createdDeploymentStatus = [];
-    for (let selectedAgent of this.selectedMembers) {
+  removeMembersFromGroup() {
+    this.groupShowAgentsComponentMatDialogRef.disableClose = true;
+    this.memberRemovingProgress = 0;
+    this.memberRemovingProcessStarted = true;
+    this.memberRemovingStatus = [];
+    for (let selectedAgent of this.selectedMembersToRemove) {
       this.groupApiService.removeMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Removed")
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedMembers.length));
+          this.memberRemovingStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Removed")
+          this.memberRemovingProgress = Math.round(100 * (this.memberRemovingStatus.length / this.selectedMembersToRemove.length));
 
         },
         error => {
           let errorResponse = error.error as ApiErrorResponse;
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedMembers.length));
+          this.memberRemovingStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
+          this.memberRemovingProgress = Math.round(100 * (this.memberRemovingStatus.length / this.selectedMembersToRemove.length));
         });
     }
     this.serverApiService.resetDeploymentValidation().then();
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
-    this.deploymentCreationProcessStarted = false;
+    this.groupShowAgentsComponentMatDialogRef.disableClose = false;
+    this.memberRemovingProcessStarted = false;
   }
 
-  applySearch(event: Event) {
+  applySearchForAgentsToRemove(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.memberResponse) {
-      this.visibleMembers = this.memberResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+      this.visibleMembersToRemove = this.memberResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
     this.changeDetector.detectChanges();
   }
 
   addVisibleAgents() {
-    let agentsToAdd = this.visibleMembers.filter(item => !this.selectedMembers.includes(item));
-    this.selectedMembers = this.selectedMembers.concat(agentsToAdd);
+    let agentsToAdd = this.visibleMembersToRemove.filter(item => !this.selectedMembersToRemove.includes(item));
+    this.selectedMembersToRemove = this.selectedMembersToRemove.concat(agentsToAdd);
     this.changeDetector.detectChanges();
 
   }
 
   removeVisibleAgents() {
-    this.selectedMembers = this.selectedMembers.filter(item => !this.visibleMembers.includes(item));
+    this.selectedMembersToRemove = this.selectedMembersToRemove.filter(item => !this.visibleMembersToRemove.includes(item));
     this.changeDetector.detectChanges();
 
   }
 
   isAgentInSelectedAgentList(agentUUID: string): boolean {
-    return this.selectedMembers.filter(item => item.uuid === agentUUID).length > 0;
+    return this.selectedMembersToRemove.filter(item => item.uuid === agentUUID).length > 0;
   }
 }

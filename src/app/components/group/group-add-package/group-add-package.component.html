@@ -20,7 +20,7 @@
 
       <mat-selection-list [disabled]="packageAddingProcessStarted">
         @for (package_item of packageSelectListToAdd; track package_item.uuid) {
-          <mat-list-option [selected]="isAgentInSelectedAgentList(package_item
+          <mat-list-option [selected]="isPackageInSelectedList(package_item
          .uuid)"
                            (selectedChange)="changeSelectedPackages($event, package_item
                           .uuid)"

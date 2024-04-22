@@ -3,23 +3,23 @@
 <div *ngIf="dataLoaded" class="main-content">
   <mat-stepper [linear]="true" style="height: 100%">
     <mat-step>
-      <ng-template matStepLabel>Members</ng-template>
+      <ng-template matStepLabel>Select Members</ng-template>
       <div>
         <button color="primary" disabled mat-button matStepperPrevious>Back</button>
         <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
-        <mat-label>Search</mat-label>
-        <input (keyup)="applySearch($event)" autofocus matInput>
+        <mat-label>Search Members</mat-label>
+        <input (keyup)="applySearchForAgentsToRemove($event)" autofocus matInput>
       </mat-form-field>
       <div class="simple-button-row">
         <button (click)="addVisibleAgents()" color="primary" mat-flat-button>Select All</button>
         <button (click)="removeVisibleAgents()" color="primary" mat-flat-button>Deselect All</button>
       </div>
 
-      <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (memberItem of visibleMembers; track memberItem.uuid) {
+      <mat-selection-list [disabled]="memberRemovingProcessStarted">
+        @for (memberItem of visibleMembersToRemove; track memberItem.uuid) {
           <mat-list-option [selected]="isAgentInSelectedAgentList(memberItem.uuid)"
                            (selectedChange)="changeSelectedAgents($event, memberItem.uuid)"
                            [value]="memberItem.uuid">{{ memberItem.name }}
@@ -39,33 +39,33 @@
       <div>
         These Agents will be removed from the group:
         <mat-list>
-          @for (selectedPackage of selectedMembers; track selectedMembers) {
-            <mat-list-item>{{ selectedPackage.name }}</mat-list-item>
+          @for (selectedAgent of selectedMembersToRemove; track selectedMembersToRemove) {
+            <mat-list-item>{{ selectedAgent.name }}</mat-list-item>
           }
         </mat-list>
       </div>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Remove members</ng-template>
+      <ng-template matStepLabel>Remove Members</ng-template>
       <div>
-        <button [disabled]="deploymentCreationProcessStarted" color="primary" mat-button matStepperPrevious>Back
+        <button [disabled]="memberRemovingProcessStarted" color="primary" mat-button matStepperPrevious>Back
         </button>
-        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" color="primary"
+        <button (click)="removeMembersFromGroup()" [disabled]="memberRemovingProcessStarted" color="primary"
                 mat-button>
-          Remove Agents
+          Remove from group
         </button>
       </div>
       <mat-divider></mat-divider>
-      <div *ngIf="deploymentCreationProgress > 0">
-        <mat-progress-bar [value]="deploymentCreationProgress" class="progress-bar" mode="determinate"/>
-        {{ deploymentCreationProgress }} / 100 %
+      <div *ngIf="memberRemovingProgress > 0">
+        <mat-progress-bar [value]="memberRemovingProgress" class="progress-bar" mode="determinate"/>
+        {{ memberRemovingProgress }} / 100 %
       </div>
       <div>
         Status:
         <mat-list>
-          @for (selectedPackage of createdDeploymentStatus; track createdDeploymentStatus) {
-            <mat-list-item>{{ selectedPackage }}</mat-list-item>
+          @for (selectedAgent of memberRemovingStatus; track memberRemovingStatus) {
+            <mat-list-item>{{ selectedAgent }}</mat-list-item>
           }
         </mat-list>
       </div>

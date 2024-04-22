@@ -3,27 +3,27 @@
 <div *ngIf="dataLoaded" class="main-content">
   <mat-stepper [linear]="true" style="height: 100%">
     <mat-step>
-      <ng-template matStepLabel>Packages</ng-template>
+      <ng-template matStepLabel>Select Packages</ng-template>
       <div>
         <button color="primary" disabled mat-button matStepperPrevious>Back</button>
         <button color="primary" mat-button matStepperNext>Next</button>
       </div>
       <mat-divider></mat-divider>
       <mat-form-field class="search-field">
-        <mat-label>Search</mat-label>
-        <input (keyup)="applySearch($event)" autofocus matInput>
+        <mat-label>Search Packages</mat-label>
+        <input (keyup)="applySearchForPackagesToRemove($event)" autofocus matInput>
       </mat-form-field>
       <div class="simple-button-row">
-        <button (click)="addVisibleAgents()" color="primary" mat-flat-button>Select All</button>
-        <button (click)="removeVisibleAgents()" color="primary" mat-flat-button>Deselect All</button>
+        <button (click)="addVisiblePackages()" color="primary" mat-flat-button>Select All</button>
+        <button (click)="removeVisiblePackages()" color="primary" mat-flat-button>Deselect All</button>
       </div>
 
-      <mat-selection-list [disabled]="deploymentCreationProcessStarted">
-        @for (memberItem of visibleMembers; track memberItem.uuid) {
-          <mat-list-option [selected]="isAgentInSelectedAgentList(memberItem.uuid)"
-                           (selectedChange)="changeSelectedAgents($event, memberItem.uuid)"
-                           [value]="memberItem.uuid">{{ memberItem.name }}
-            | {{ memberItem.uuid }}
+      <mat-selection-list [disabled]="packageRemovingProcessStarted">
+        @for (packageItem of visiblePackagesToRemove; track packageItem.uuid) {
+          <mat-list-option [selected]="isPackageInSelectedList(packageItem.uuid)"
+                           (selectedChange)="changeSelectedPackages($event, packageItem.uuid)"
+                           [value]="packageItem.uuid">{{ packageItem.name }}
+            | {{ packageItem.uuid }}
           </mat-list-option>
         }
       </mat-selection-list>
@@ -39,7 +39,7 @@
       <div>
         These Packages will be removed from the group:
         <mat-list>
-          @for (selectedPackage of selectedMembers; track selectedMembers) {
+          @for (selectedPackage of selectedPackagesToRemove; track selectedPackagesToRemove) {
             <mat-list-item>{{ selectedPackage.name }}</mat-list-item>
           }
         </mat-list>
@@ -47,24 +47,24 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Remove members</ng-template>
+      <ng-template matStepLabel>Remove Packages</ng-template>
       <div>
-        <button [disabled]="deploymentCreationProcessStarted" color="primary" mat-button matStepperPrevious>Back
+        <button [disabled]="packageRemovingProcessStarted" color="primary" mat-button matStepperPrevious>Back
         </button>
-        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" color="primary"
+        <button (click)="removePackagesFromGroup()" [disabled]="packageRemovingProcessStarted" color="primary"
                 mat-button>
-          Remove Agents
+          Remove from group
         </button>
       </div>
       <mat-divider></mat-divider>
-      <div *ngIf="deploymentCreationProgress > 0">
-        <mat-progress-bar [value]="deploymentCreationProgress" class="progress-bar" mode="determinate"/>
-        {{ deploymentCreationProgress }} / 100 %
+      <div *ngIf="packageRemovingProgress > 0">
+        <mat-progress-bar [value]="packageRemovingProgress" class="progress-bar" mode="determinate"/>
+        {{ packageRemovingProgress }} / 100 %
       </div>
       <div>
         Status:
         <mat-list>
-          @for (selectedPackage of createdDeploymentStatus; track createdDeploymentStatus) {
+          @for (selectedPackage of packageRemovingStatus; track packageRemovingStatus) {
             <mat-list-item>{{ selectedPackage }}</mat-list-item>
           }
         </mat-list>

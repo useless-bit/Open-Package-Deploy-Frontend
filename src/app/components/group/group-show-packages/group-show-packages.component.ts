@@ -13,6 +13,7 @@ import {GroupApiService} from "../../../service/api/group.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 import {ServerApiService} from "../../../service/api/server.api.service";
+import {GroupPackage} from "../../../service/api/reponse/group/groupPackage";
 
 @Component({
   selector: 'app-group-show-packages',
@@ -43,87 +44,87 @@ export class GroupShowPackagesComponent implements OnInit {
   @Input() public groupUUID: string = "";
 
   public dataLoaded: boolean = false;
-  public memberResponse: GroupMember[] | null = null;
-  public visibleMembers: GroupMember[] = [];
-  public selectedMembers: GroupMember[] = [];
-  public deploymentCreationProcessStarted: boolean = false;
-  public deploymentCreationProgress: number = 0;
-  public createdDeploymentStatus: string[] = [];
+  public groupPackageResponse: GroupPackage[] | null = null;
+  public visiblePackagesToRemove: GroupPackage[] = [];
+  public selectedPackagesToRemove: GroupPackage[] = [];
+  public packageRemovingProcessStarted: boolean = false;
+  public packageRemovingProgress: number = 0;
+  public packageRemovingStatus: string[] = [];
 
 
   constructor(private groupApiService: GroupApiService,
               private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
-              public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupShowPackagesComponent>) {
+              public groupShowPackagesComponentMatDialogRef: MatDialogRef<GroupShowPackagesComponent>) {
   }
 
   ngOnInit() {
     this.groupApiService.getPackages(this.groupUUID).then(memberResponse => {
       if (memberResponse) {
-        this.memberResponse = memberResponse.packages;
-        this.visibleMembers = this.memberResponse;
+        this.groupPackageResponse = memberResponse.packages;
+        this.visiblePackagesToRemove = this.groupPackageResponse;
         this.dataLoaded = true;
       }
     });
   }
 
-  changeSelectedAgents(event: boolean, agentUUID: string) {
-    if (this.memberResponse) {
+  changeSelectedPackages(event: boolean, agentUUID: string) {
+    if (this.groupPackageResponse) {
       if (event) {
-        let packageEntity = this.memberResponse.filter(item => item.uuid == agentUUID).at(0);
-        if (packageEntity && this.selectedMembers.filter(item => item.uuid == agentUUID).length == 0) {
-          this.selectedMembers?.push(packageEntity);
+        let packageEntity = this.groupPackageResponse.filter(item => item.uuid == agentUUID).at(0);
+        if (packageEntity && this.selectedPackagesToRemove.filter(item => item.uuid == agentUUID).length == 0) {
+          this.selectedPackagesToRemove?.push(packageEntity);
         }
       } else {
-        this.selectedMembers = this.selectedMembers.filter(item => item.uuid !== agentUUID);
+        this.selectedPackagesToRemove = this.selectedPackagesToRemove.filter(item => item.uuid !== agentUUID);
       }
     }
   }
 
-  createDeploymentsForPackage() {
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = true;
-    this.deploymentCreationProgress = 0;
-    this.deploymentCreationProcessStarted = true;
-    this.createdDeploymentStatus = [];
-    for (let selectedAgent of this.selectedMembers) {
-      this.groupApiService.removePackage(this.groupUUID, selectedAgent.uuid, true).then(() => {
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Removed")
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedMembers.length));
+  removePackagesFromGroup() {
+    this.groupShowPackagesComponentMatDialogRef.disableClose = true;
+    this.packageRemovingProgress = 0;
+    this.packageRemovingProcessStarted = true;
+    this.packageRemovingStatus = [];
+    for (let selectedPackage of this.selectedPackagesToRemove) {
+      this.groupApiService.removePackage(this.groupUUID, selectedPackage.uuid, true).then(() => {
+          this.packageRemovingStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> Removed")
+          this.packageRemovingProgress = Math.round(100 * (this.packageRemovingStatus.length / this.selectedPackagesToRemove.length));
 
         },
         error => {
           let errorResponse = error.error as ApiErrorResponse;
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedMembers.length));
+          this.packageRemovingStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> " + errorResponse.message)
+          this.packageRemovingProgress = Math.round(100 * (this.packageRemovingStatus.length / this.selectedPackagesToRemove.length));
         });
     }
     this.serverApiService.resetDeploymentValidation().then();
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
-    this.deploymentCreationProcessStarted = false;
+    this.groupShowPackagesComponentMatDialogRef.disableClose = false;
+    this.packageRemovingProcessStarted = false;
   }
 
-  applySearch(event: Event) {
+  applySearchForPackagesToRemove(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    if (this.memberResponse) {
-      this.visibleMembers = this.memberResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+    if (this.groupPackageResponse) {
+      this.visiblePackagesToRemove = this.groupPackageResponse.filter(item => item.uuid.toLowerCase().includes(filterValue.trim().toLowerCase()) || item.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
     }
     this.changeDetector.detectChanges();
   }
 
-  addVisibleAgents() {
-    let agentsToAdd = this.visibleMembers.filter(item => !this.selectedMembers.includes(item));
-    this.selectedMembers = this.selectedMembers.concat(agentsToAdd);
+  addVisiblePackages() {
+    let agentsToAdd = this.visiblePackagesToRemove.filter(item => !this.selectedPackagesToRemove.includes(item));
+    this.selectedPackagesToRemove = this.selectedPackagesToRemove.concat(agentsToAdd);
     this.changeDetector.detectChanges();
 
   }
 
-  removeVisibleAgents() {
-    this.selectedMembers = this.selectedMembers.filter(item => !this.visibleMembers.includes(item));
+  removeVisiblePackages() {
+    this.selectedPackagesToRemove = this.selectedPackagesToRemove.filter(item => !this.visiblePackagesToRemove.includes(item));
     this.changeDetector.detectChanges();
 
   }
 
-  isAgentInSelectedAgentList(agentUUID: string): boolean {
-    return this.selectedMembers.filter(item => item.uuid === agentUUID).length > 0;
+  isPackageInSelectedList(agentUUID: string): boolean {
+    return this.selectedPackagesToRemove.filter(item => item.uuid === agentUUID).length > 0;
   }
 }

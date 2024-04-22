@@ -131,7 +131,7 @@ export class GroupAddPackageComponent implements OnInit {
 
   }
 
-  isAgentInSelectedAgentList(agentUUID: string): boolean {
+  isPackageInSelectedList(agentUUID: string): boolean {
     return this.selectedPackagesToAdd.filter(item => item.uuid === agentUUID).length > 0;
   }
 
