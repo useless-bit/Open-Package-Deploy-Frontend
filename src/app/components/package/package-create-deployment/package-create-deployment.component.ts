@@ -95,13 +95,13 @@ export class PackageCreateDeploymentComponent implements OnInit {
     }
   }
 
-  createDeploymentsForPackage() {
+  async createDeploymentsForPackage() {
     this.packageCreateDeploymentComponentMatDialogRef.disableClose = true;
     this.deploymentCreationProgress = 0;
     this.deploymentCreationProcessStarted = true;
     this.createdDeploymentStatus = [];
     for (let selectedAgent of this.selectedAgents) {
-      this.deploymentApiService.create(new DeploymentCreateRequest(selectedAgent.uuid, this.packageUUID), true).then(response => {
+      await this.deploymentApiService.create(new DeploymentCreateRequest(selectedAgent.uuid, this.packageUUID), true).then(response => {
           this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Created")
           this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
 
