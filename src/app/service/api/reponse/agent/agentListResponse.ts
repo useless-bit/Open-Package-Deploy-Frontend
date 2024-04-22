@@ -1,4 +1,4 @@
-import {AgentEntity} from "../entity/agentEntity";
+import {AgentEntity} from "../../entity/agentEntity";
 
 export class AgentListResponse {
   agents: AgentEntity[];

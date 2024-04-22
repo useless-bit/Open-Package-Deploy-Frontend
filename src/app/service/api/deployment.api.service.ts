@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "./api.service";
 import {VariableService} from "../variable/variable.service";
-import {DeploymentListResponse} from "./reponse/deploymentListResponse";
+import {DeploymentListResponse} from "./reponse/deployment/deploymentListResponse";
 import {DeploymentEntity} from "./entity/deploymentEntity";
 import {CreateDeploymentRequest} from "./request/createDeploymentRequest";
 

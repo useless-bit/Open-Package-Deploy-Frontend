@@ -11,7 +11,7 @@ import {NgIf} from "@angular/common";
 import {GroupMember} from "../../../service/api/reponse/group/groupMember";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 import {ServerApiService} from "../../../service/api/server.api.service";
 
 @Component({

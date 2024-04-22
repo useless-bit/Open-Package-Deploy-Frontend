@@ -28,7 +28,7 @@ import {MatList, MatListItem, MatListOption, MatSelectionList} from "@angular/ma
 import {MatDialogRef} from "@angular/material/dialog";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
-import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 
 @Component({
   selector: 'app-agent-create-deployment',

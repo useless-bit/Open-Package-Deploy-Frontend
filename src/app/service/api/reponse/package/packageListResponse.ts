@@ -1,4 +1,4 @@
-import {PackageEntity} from "../entity/packageEntity";
+import {PackageEntity} from "../../entity/packageEntity";
 
 export class PackageListResponse {
   packages: PackageEntity[];

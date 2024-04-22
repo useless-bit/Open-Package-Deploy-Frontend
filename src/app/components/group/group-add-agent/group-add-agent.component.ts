@@ -11,7 +11,7 @@ import {NgIf} from "@angular/common";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {ServerApiService} from "../../../service/api/server.api.service";

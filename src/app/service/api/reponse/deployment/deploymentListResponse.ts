@@ -1,4 +1,4 @@
-import {DeploymentEntity} from "../entity/deploymentEntity";
+import {DeploymentEntity} from "../../entity/deploymentEntity";
 
 export class DeploymentListResponse {
   deployments: DeploymentEntity[];

@@ -1,6 +1,6 @@
-import {LogEntity} from "../entity/logEntity";
+import {LogEntity} from "../../entity/logEntity";
 
-export class LogListResponse {
+export class ServerLogListResponse {
   logEntries: LogEntity[];
 
   constructor(data: any) {

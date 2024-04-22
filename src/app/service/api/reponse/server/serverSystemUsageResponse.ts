@@ -1,6 +1,6 @@
-import {SystemUsageEntity} from "../entity/systemUsageEntity";
+import {SystemUsageEntity} from "../../entity/systemUsageEntity";
 
-export class SystemUsageListResponse {
+export class ServerSystemUsageResponse {
   systemUsageEntries: SystemUsageEntity[];
 
   constructor(data: any) {

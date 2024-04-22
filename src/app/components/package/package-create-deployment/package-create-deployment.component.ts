@@ -13,7 +13,7 @@ import {PackageApiService} from "../../../service/api/package.api.service";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
-import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";

@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {ApiErrorResponse} from "../../../service/api/reponse/apiErrorResponse";
+import {ApiErrorResponse} from "../../../service/api/reponse/generel/apiErrorResponse";
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
