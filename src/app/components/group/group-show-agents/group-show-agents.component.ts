@@ -8,7 +8,6 @@ import {MatList, MatListItem, MatListOption, MatSelectionList} from "@angular/ma
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import {NgIf} from "@angular/common";
-import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {GroupMember} from "../../../service/api/reponse/group/groupMember";
