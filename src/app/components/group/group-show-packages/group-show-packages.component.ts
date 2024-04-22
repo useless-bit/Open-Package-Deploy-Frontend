@@ -80,13 +80,13 @@ export class GroupShowPackagesComponent implements OnInit {
     }
   }
 
-  removePackagesFromGroup() {
+  async removePackagesFromGroup() {
     this.groupShowPackagesComponentMatDialogRef.disableClose = true;
     this.packageRemovingProgress = 0;
     this.packageRemovingProcessStarted = true;
     this.packageRemovingStatus = [];
     for (let selectedPackage of this.selectedPackagesToRemove) {
-      this.groupApiService.removePackage(this.groupUUID, selectedPackage.uuid, true).then(() => {
+      await this.groupApiService.removePackage(this.groupUUID, selectedPackage.uuid, true).then(() => {
           this.packageRemovingStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> Removed")
           this.packageRemovingProgress = Math.round(100 * (this.packageRemovingStatus.length / this.selectedPackagesToRemove.length));
 

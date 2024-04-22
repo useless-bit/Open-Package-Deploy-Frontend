@@ -88,13 +88,13 @@ export class GroupAddAgentComponent implements OnInit {
     }
   }
 
-  addAgentsToGroup() {
+  async addAgentsToGroup() {
     this.groupAddAgentComponentMatDialogRef.disableClose = true;
     this.memberAddingProgress = 0;
     this.memberAddingProcessStarted = true;
     this.addingMemberStatus = [];
     for (let selectedAgent of this.selectedAgentsToAdd) {
-      this.groupApiService.addMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
+      await this.groupApiService.addMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
           this.addingMemberStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Added")
           this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgentsToAdd.length));
 
