@@ -18,7 +18,7 @@
         <button (click)="removeVisibleAgents()" color="primary" mat-flat-button>Deselect All</button>
       </div>
 
-      <mat-selection-list [disabled]="deploymentCreationProcessStarted">
+      <mat-selection-list [disabled]="memberAddingProcessStarted">
         @for (agent_item of agentSelectList; track agent_item.uuid) {
           <mat-list-option [selected]="isAgentInSelectedAgentList(agent_item.uuid)"
                            (selectedChange)="changeSelectedAgents($event, agent_item.uuid)"
@@ -49,22 +49,22 @@
     <mat-step>
       <ng-template matStepLabel>Creating deployments</ng-template>
       <div>
-        <button [disabled]="deploymentCreationProcessStarted" color="primary" mat-button matStepperPrevious>Back
+        <button [disabled]="memberAddingProcessStarted" color="primary" mat-button matStepperPrevious>Back
         </button>
-        <button (click)="createDeploymentsForPackage()" [disabled]="deploymentCreationProcessStarted" color="primary"
+        <button (click)="addAgentsToGroup()" [disabled]="memberAddingProcessStarted" color="primary"
                 mat-button>
           Add
         </button>
       </div>
       <mat-divider></mat-divider>
-      <div *ngIf="deploymentCreationProgress > 0">
-        <mat-progress-bar [value]="deploymentCreationProgress" class="progress-bar" mode="determinate"/>
-        {{ deploymentCreationProgress }} / 100 %
+      <div *ngIf="memberAddingProgress > 0">
+        <mat-progress-bar [value]="memberAddingProgress" class="progress-bar" mode="determinate"/>
+        {{ memberAddingProgress }} / 100 %
       </div>
       <div>
         Status:
         <mat-list>
-          @for (selectedPackage of createdDeploymentStatus; track createdDeploymentStatus) {
+          @for (selectedPackage of addingMemberStatus; track addingMemberStatus) {
             <mat-list-item>{{ selectedPackage }}</mat-list-item>
           }
         </mat-list>

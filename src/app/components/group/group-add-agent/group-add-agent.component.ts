@@ -49,16 +49,16 @@ export class GroupAddAgentComponent implements OnInit {
   public agentSelectList: AgentEntity[] = [];
   public selectedAgents: AgentEntity[] = [];
   public groupEntity: GroupEntity | null = null;
-  public deploymentCreationProcessStarted: boolean = false;
-  public deploymentCreationProgress: number = 0;
-  public createdDeploymentStatus: string[] = [];
+  public memberAddingProcessStarted: boolean = false;
+  public memberAddingProgress: number = 0;
+  public addingMemberStatus: string[] = [];
 
 
   constructor(private groupApiService: GroupApiService,
               private agentApiService: AgentApiService,
               private serverApiService: ServerApiService,
               private changeDetector: ChangeDetectorRef,
-              public packageCreateDeploymentComponentMatDialogRef: MatDialogRef<GroupAddAgentComponent>) {
+              public addAgentComponentMatDialogRef: MatDialogRef<GroupAddAgentComponent>) {
   }
 
   ngOnInit() {
@@ -88,26 +88,26 @@ export class GroupAddAgentComponent implements OnInit {
     }
   }
 
-  createDeploymentsForPackage() {
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = true;
-    this.deploymentCreationProgress = 0;
-    this.deploymentCreationProcessStarted = true;
-    this.createdDeploymentStatus = [];
+  addAgentsToGroup() {
+    this.addAgentComponentMatDialogRef.disableClose = true;
+    this.memberAddingProgress = 0;
+    this.memberAddingProcessStarted = true;
+    this.addingMemberStatus = [];
     for (let selectedAgent of this.selectedAgents) {
       this.groupApiService.addMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Added")
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
+          this.addingMemberStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Added")
+          this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgents.length));
 
         },
         error => {
           let errorResponse = error.error as ApiErrorResponse;
-          this.createdDeploymentStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
-          this.deploymentCreationProgress = Math.round(100 * (this.createdDeploymentStatus.length / this.selectedAgents.length));
+          this.addingMemberStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> " + errorResponse.message)
+          this.memberAddingProgress = Math.round(100 * (this.addingMemberStatus.length / this.selectedAgents.length));
         });
     }
     this.serverApiService.resetDeploymentValidation().then();
-    this.packageCreateDeploymentComponentMatDialogRef.disableClose = false;
-    this.deploymentCreationProcessStarted = false;
+    this.addAgentComponentMatDialogRef.disableClose = false;
+    this.memberAddingProcessStarted = false;
   }
 
   applySearch(event: Event) {
