@@ -88,13 +88,13 @@ export class GroupAddPackageComponent implements OnInit {
     }
   }
 
-  addPackagesToGroup() {
+  async addPackagesToGroup() {
     this.groupAddPackageComponentMatDialogRef.disableClose = true;
     this.packageAddingProgress = 0;
     this.packageAddingProcessStarted = true;
     this.addedPackageStatus = [];
     for (let selectedPackage of this.selectedPackagesToAdd) {
-      this.groupApiService.addPackage(this.groupUUID, selectedPackage.uuid, true).then(() => {
+      await this.groupApiService.addPackage(this.groupUUID, selectedPackage.uuid, true).then(() => {
           this.addedPackageStatus.push(selectedPackage.name + " | " + selectedPackage.uuid + " -> Added")
           this.packageAddingProgress = Math.round(100 * (this.addedPackageStatus.length / this.selectedPackagesToAdd.length));
 

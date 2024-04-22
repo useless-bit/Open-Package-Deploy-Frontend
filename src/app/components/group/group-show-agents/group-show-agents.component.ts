@@ -80,13 +80,13 @@ export class GroupShowAgentsComponent implements OnInit {
     }
   }
 
-  removeMembersFromGroup() {
+  async removeMembersFromGroup() {
     this.groupShowAgentsComponentMatDialogRef.disableClose = true;
     this.memberRemovingProgress = 0;
     this.memberRemovingProcessStarted = true;
     this.memberRemovingStatus = [];
     for (let selectedAgent of this.selectedMembersToRemove) {
-      this.groupApiService.removeMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
+      await this.groupApiService.removeMember(this.groupUUID, selectedAgent.uuid, true).then(() => {
           this.memberRemovingStatus.push(selectedAgent.name + " | " + selectedAgent.uuid + " -> Removed")
           this.memberRemovingProgress = Math.round(100 * (this.memberRemovingStatus.length / this.selectedMembersToRemove.length));
 
