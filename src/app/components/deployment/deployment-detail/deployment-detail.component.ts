@@ -60,7 +60,7 @@ export class DeploymentDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataLoaded = false
-        this.deploymentApiService.delete(this.deploymentUUID).then(() => {
+        this.deploymentApiService.delete(this.deploymentUUID, false).then(() => {
           this.dialogRef.close()
         })
       }

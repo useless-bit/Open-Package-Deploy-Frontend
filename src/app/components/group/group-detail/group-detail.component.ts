@@ -15,6 +15,7 @@ import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfir
 import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
 import {GroupUpdateRequest} from "../../../service/api/request/group/groupUpdateRequest";
+import {ServerApiService} from "../../../service/api/server.api.service";
 
 @Component({
   selector: 'app-group-detail',
@@ -42,6 +43,7 @@ export class GroupDetailComponent implements OnInit {
   public groupEntity: GroupEntity | null = null;
 
   constructor(private groupApiService: GroupApiService,
+              private serverApiService: ServerApiService,
               private dialog: MatDialog,
               public dialogRef: MatDialogRef<GroupDetailComponent>) {
   }
@@ -93,7 +95,9 @@ export class GroupDetailComponent implements OnInit {
       if (result) {
         this.dataLoaded = false
         this.groupApiService.delete(this.groupUUID).then(() => {
-          this.dialogRef.close()
+          this.serverApiService.resetDeploymentValidation().then(() => {
+            this.dialogRef.close()
+          })
         })
       }
     });

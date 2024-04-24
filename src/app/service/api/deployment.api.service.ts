@@ -72,14 +72,16 @@ export class DeploymentApiService {
     });
   }
 
-  public delete(deploymentUUID: string): Promise<void | null> {
+  public delete(deploymentUUID: string, bypassError: boolean): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.delete(this.variableService.backendURL + "/api/deployment/" + deploymentUUID).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
+          if (!bypassError) {
+            this.apiService.errorHandling(error);
+          }
           reject(new Error(error));
         }
       });

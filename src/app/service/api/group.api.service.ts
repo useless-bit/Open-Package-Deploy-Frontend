@@ -8,6 +8,7 @@ import {GroupCreateEmptyRequest} from "./request/group/groupCreateEmptyRequest";
 import {GroupUpdateRequest} from "./request/group/groupUpdateRequest";
 import {GroupMemberResponse} from "./reponse/group/groupMemberResponse";
 import {GroupPackageResponse} from "./reponse/group/groupPackageResponse";
+import {ApiErrorResponse} from "./reponse/generel/apiErrorResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -129,7 +130,11 @@ export class GroupApiService {
           if (!bypassError) {
             this.apiService.errorHandling(error);
           }
-          reject(new Error(error));
+          let errorResponse = error.error as ApiErrorResponse;
+          if (errorResponse.message) {
+            reject(new Error(errorResponse.message));
+          }
+          reject(new Error(errorResponse.error));
         }
       });
     });
@@ -183,4 +188,17 @@ export class GroupApiService {
     });
   }
 
+  public getJoinedGroups(agentUUID: string): Promise<GroupListResponse | null> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.variableService.backendURL + "/api/group/agent/" + agentUUID).subscribe({
+        next: value => {
+          resolve(new GroupListResponse(value));
+        },
+        error: (error) => {
+          this.apiService.errorHandling(error);
+          reject(new Error(error));
+        }
+      });
+    });
+  }
 }
