@@ -33,7 +33,7 @@ export class ServerApiService {
           resolve(response.registrationToken);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -46,7 +46,7 @@ export class ServerApiService {
           resolve()
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -60,7 +60,7 @@ export class ServerApiService {
           resolve(response.updateInterval);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -73,7 +73,7 @@ export class ServerApiService {
           resolve()
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -87,7 +87,7 @@ export class ServerApiService {
           resolve(response.installRetryInterval);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -100,7 +100,7 @@ export class ServerApiService {
           resolve()
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -114,7 +114,7 @@ export class ServerApiService {
           resolve(response.deploymentValidationInterval);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -127,7 +127,7 @@ export class ServerApiService {
           resolve()
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -141,7 +141,7 @@ export class ServerApiService {
           resolve(response.lastDeploymentValidation);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -154,7 +154,7 @@ export class ServerApiService {
           resolve()
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -168,7 +168,7 @@ export class ServerApiService {
           resolve(response.agentChecksum);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -182,7 +182,7 @@ export class ServerApiService {
           resolve(response);
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -195,7 +195,7 @@ export class ServerApiService {
           resolve(new ServerSystemUsageResponse(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -208,7 +208,7 @@ export class ServerApiService {
           resolve(new ServerLogListResponse(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });

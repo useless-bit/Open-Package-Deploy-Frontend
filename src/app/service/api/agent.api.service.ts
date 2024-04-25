@@ -23,7 +23,7 @@ export class AgentApiService {
           resolve(new AgentListResponse(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -36,7 +36,7 @@ export class AgentApiService {
           resolve(new AgentEntity(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -49,7 +49,7 @@ export class AgentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -62,7 +62,7 @@ export class AgentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });

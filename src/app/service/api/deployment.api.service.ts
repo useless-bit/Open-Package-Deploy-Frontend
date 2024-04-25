@@ -23,7 +23,7 @@ export class DeploymentApiService {
           resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -36,7 +36,7 @@ export class DeploymentApiService {
           resolve(new DeploymentEntity(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -49,7 +49,7 @@ export class DeploymentApiService {
           resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -62,7 +62,7 @@ export class DeploymentApiService {
           resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -75,7 +75,7 @@ export class DeploymentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -88,7 +88,7 @@ export class DeploymentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -101,7 +101,7 @@ export class DeploymentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -114,7 +114,7 @@ export class DeploymentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
@@ -127,7 +127,7 @@ export class DeploymentApiService {
           resolve();
         },
         error: (error) => {
-          reject(this.apiService.handleError(error, bypassError))
+          new Error(this.apiService.handleError(error, bypassError))
         }
       });
     });
