@@ -24,7 +24,7 @@ export class PackageApiService {
           resolve(new PackageListResponse(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -37,7 +37,7 @@ export class PackageApiService {
           resolve(new PackageEntity(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -50,7 +50,7 @@ export class PackageApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -70,7 +70,7 @@ export class PackageApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });

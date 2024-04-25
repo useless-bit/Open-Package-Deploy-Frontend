@@ -26,7 +26,7 @@ export class GroupApiService {
           resolve(new GroupListResponse(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -39,7 +39,7 @@ export class GroupApiService {
           resolve(new GroupEntity(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -52,7 +52,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -65,7 +65,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -78,7 +78,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -91,7 +91,7 @@ export class GroupApiService {
           resolve(new GroupMemberResponse(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -104,7 +104,7 @@ export class GroupApiService {
           resolve(new GroupPackageResponse(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -117,7 +117,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -130,7 +130,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -143,7 +143,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -156,7 +156,7 @@ export class GroupApiService {
           resolve();
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -169,7 +169,7 @@ export class GroupApiService {
           resolve(new GroupListResponse(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
@@ -182,7 +182,7 @@ export class GroupApiService {
           resolve(new GroupListResponse(value));
         },
         error: (error) => {
-          new Error(this.apiService.handleError(error, bypassError))
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
