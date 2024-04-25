@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
@@ -18,7 +18,7 @@ import {GroupUpdateRequest} from "../../../service/api/request/group/groupUpdate
 import {ServerApiService} from "../../../service/api/server.api.service";
 
 @Component({
-  selector: 'app-group-detail',
+  selector: 'app-group-information',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -33,28 +33,17 @@ import {ServerApiService} from "../../../service/api/server.api.service";
     MatListItem,
     NgIf
   ],
-  templateUrl: './group-detail.component.html',
-  styleUrl: './group-detail.component.scss'
+  templateUrl: './group-information.component.html',
+  styleUrl: './group-information.component.scss'
 })
-export class GroupDetailComponent implements OnInit {
-  @Input() public groupUUID: string = "";
-
-  public dataLoaded: boolean = false;
-  public groupEntity: GroupEntity | null = null;
+export class GroupInformationComponent {
+  @Input() public groupEntity!: GroupEntity;
+  @Output() reloadDataFunction = new EventEmitter<any>();
 
   constructor(private groupApiService: GroupApiService,
               private serverApiService: ServerApiService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<GroupDetailComponent>) {
-  }
-
-  ngOnInit() {
-    this.groupApiService.get(this.groupUUID).then(response => {
-      if (response) {
-        this.groupEntity = response;
-        this.dataLoaded = true;
-      }
-    });
+              public dialogRef: MatDialogRef<GroupInformationComponent>) {
   }
 
   renameGroup() {
@@ -64,9 +53,8 @@ export class GroupDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.groupApiService.update(this.groupUUID, new GroupUpdateRequest(result, this.groupEntity?.description)).then(() => {
-          this.ngOnInit();
+        this.groupApiService.update(this.groupEntity.uuid, new GroupUpdateRequest(result, this.groupEntity?.description)).then(() => {
+          this.reloadDataFunction.emit();
         })
       }
     });
@@ -78,9 +66,8 @@ export class GroupDetailComponent implements OnInit {
         "Enter new description:", "Cancel", "Update", true)
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.dataLoaded = false
-      this.groupApiService.update(this.groupUUID, new GroupUpdateRequest(null, result)).then(() => {
-        this.ngOnInit();
+      this.groupApiService.update(this.groupEntity.uuid, new GroupUpdateRequest(null, result)).then(() => {
+        this.reloadDataFunction.emit();
       });
     });
 
@@ -93,8 +80,7 @@ export class GroupDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.groupApiService.delete(this.groupUUID).then(() => {
+        this.groupApiService.delete(this.groupEntity.uuid).then(() => {
           this.serverApiService.resetDeploymentValidation().then(() => {
             this.dialogRef.close()
           })

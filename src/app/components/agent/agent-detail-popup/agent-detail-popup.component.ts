@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
-import {AgentDetailComponent} from "../agent-detail/agent-detail.component";
+import {AgentInformationComponent} from "../agent-information/agent-information.component";
 import {PlaceholderComponent} from "../../placeholder/placeholder.component";
 import {MatStep, MatStepContent, MatStepLabel, MatStepper, MatStepperNext} from "@angular/material/stepper";
 import {MatButton, MatIconButton} from "@angular/material/button";
@@ -33,7 +33,7 @@ import {PackageEntity} from "../../../service/api/entity/packageEntity";
   imports: [
     MatTabGroup,
     MatTab,
-    AgentDetailComponent,
+    AgentInformationComponent,
     PlaceholderComponent,
     MatStepper,
     MatStep,
@@ -250,5 +250,4 @@ export class AgentDetailPopupComponent implements OnInit {
       await this.serverApiService.resetDeploymentValidation();
     }
   }
-
 }

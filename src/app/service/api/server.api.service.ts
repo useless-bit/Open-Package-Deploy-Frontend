@@ -25,7 +25,7 @@ export class ServerApiService {
               private apiService: ApiService) {
   }
 
-  public getRegistrationToken(): Promise<string | null> {
+  public getRegistrationToken(bypassError: boolean = false): Promise<string | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/registrationToken").subscribe({
         next: value => {
@@ -33,28 +33,26 @@ export class ServerApiService {
           resolve(response.registrationToken);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public generateNewRegistrationToken(): Promise<void | null> {
+  public generateNewRegistrationToken(bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/server/registrationToken", null).subscribe({
         next: () => {
           resolve()
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getAgentUpdateInterval(): Promise<number | null> {
+  public getAgentUpdateInterval(bypassError: boolean = false): Promise<number | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/updateInterval").subscribe({
         next: value => {
@@ -62,28 +60,26 @@ export class ServerApiService {
           resolve(response.updateInterval);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public changeAgentUpdateInterval(changeAgentUpdateInterval: ServerAgentUpdateIntervalRequest): Promise<void | null> {
+  public changeAgentUpdateInterval(changeAgentUpdateInterval: ServerAgentUpdateIntervalRequest, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/updateInterval", changeAgentUpdateInterval).subscribe({
         next: () => {
           resolve()
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getAgentInstallRetryInterval(): Promise<number | null> {
+  public getAgentInstallRetryInterval(bypassError: boolean = false): Promise<number | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/installRetryInterval").subscribe({
         next: value => {
@@ -91,28 +87,26 @@ export class ServerApiService {
           resolve(response.installRetryInterval);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public changeAgentInstallRetryInterval(changeAgentInstallRetryInterval: ServerAgentInstallRetryRequest): Promise<void | null> {
+  public changeAgentInstallRetryInterval(changeAgentInstallRetryInterval: ServerAgentInstallRetryRequest, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/installRetryInterval", changeAgentInstallRetryInterval).subscribe({
         next: () => {
           resolve()
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getDeploymentValidationInterval(): Promise<number | null> {
+  public getDeploymentValidationInterval(bypassError: boolean = false): Promise<number | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/deploymentValidationInterval").subscribe({
         next: value => {
@@ -120,28 +114,26 @@ export class ServerApiService {
           resolve(response.deploymentValidationInterval);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public changeDeploymentValidationInterval(changeAgentInstallRetryInterval: ServerDeploymentValidationRequest): Promise<void | null> {
+  public changeDeploymentValidationInterval(changeAgentInstallRetryInterval: ServerDeploymentValidationRequest, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/deploymentValidationInterval", changeAgentInstallRetryInterval).subscribe({
         next: () => {
           resolve()
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getLastDeploymentValidationTimestamp(): Promise<number | null> {
+  public getLastDeploymentValidationTimestamp(bypassError: boolean = false): Promise<number | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/deploymentValidation").subscribe({
         next: value => {
@@ -149,28 +141,26 @@ export class ServerApiService {
           resolve(response.lastDeploymentValidation);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public resetDeploymentValidation(): Promise<void | null> {
+  public resetDeploymentValidation(bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/server/deploymentValidation/reset", null).subscribe({
         next: () => {
           resolve()
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getAgentChecksum(): Promise<string | null> {
+  public getAgentChecksum(bypassError: boolean = false): Promise<string | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/agentChecksum").subscribe({
         next: value => {
@@ -178,14 +168,13 @@ export class ServerApiService {
           resolve(response.agentChecksum);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getStorageInformation(): Promise<ServerStorageInformationResponse | null> {
+  public getStorageInformation(bypassError: boolean = false): Promise<ServerStorageInformationResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/storage").subscribe({
         next: value => {
@@ -193,36 +182,33 @@ export class ServerApiService {
           resolve(response);
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getSystemUsage(): Promise<ServerSystemUsageResponse | null> {
+  public getSystemUsage(bypassError: boolean = false): Promise<ServerSystemUsageResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/systemUsage").subscribe({
         next: value => {
           resolve(new ServerSystemUsageResponse(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });
   }
 
-  public getLogs(): Promise<ServerLogListResponse | null> {
+  public getLogs(bypassError: boolean = false): Promise<ServerLogListResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/server/log").subscribe({
         next: value => {
           resolve(new ServerLogListResponse(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(this.apiService.handleError(error, bypassError))
         }
       });
     });

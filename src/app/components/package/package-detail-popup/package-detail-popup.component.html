@@ -1,17 +1,42 @@
 <div class="main-content">
 
   <div class="detail-popup_navigation-bar">
-    <mat-button-toggle-group [formControl]="fontStyleControl">
+    <mat-button-toggle-group [formControl]="fontStyleControl" [hideSingleSelectionIndicator]="true">
       <mat-button-toggle value="page_one">Details</mat-button-toggle>
-      <mat-button-toggle value="page_two">Deploy to Agent</mat-button-toggle>
+      <mat-button-toggle value="page_two">Agents</mat-button-toggle>
+      <mat-button-toggle value="page_three">Deploy to Agents</mat-button-toggle>
+      <mat-button-toggle value="page_four">Groups</mat-button-toggle>
+      <mat-button-toggle value="page_five">Deploy to Groups</mat-button-toggle>
+      <button (click)="ngOnInit()" mat-icon-button matTooltip="Reload">
+        <mat-icon>refresh</mat-icon>
+      </button>
     </mat-button-toggle-group>
   </div>
 
   <div class="component">
-    <ng-container [ngSwitch]="fontStyleControl.value">
-      <app-package-detail *ngSwitchCase="'page_one'" [packageUUID]=this.data.packageUUID></app-package-detail>
-      <app-package-create-deployment *ngSwitchCase="'page_two'"
-                                     [packageUUID]=this.data.packageUUID></app-package-create-deployment>
-    </ng-container>
+    @if (dataLoaded) {
+      <ng-container [ngSwitch]="fontStyleControl.value">
+        <app-package-information *ngSwitchCase="'page_one'" [packageEntity]=packageEntity
+                                 (reloadDataFunction)="ngOnInit()"></app-package-information>
+        <app-select-list-progress [selectListProgressData]="selectListProgressDataRemoveAgents"
+                                  [progressFunction]="removeAgentFunction"
+                                  [progressCompletedFunction]="removeAgentFinishedFunction"
+                                  *ngSwitchCase="'page_two'"></app-select-list-progress>
+        <app-select-list-progress [selectListProgressData]="selectListProgressDataAddAgents"
+                                  [progressFunction]="addAgentFunction"
+                                  [progressCompletedFunction]="addAgentFinishedFunction"
+                                  *ngSwitchCase="'page_three'"></app-select-list-progress>
+        <app-select-list-progress [selectListProgressData]="selectListProgressDataRemoveFromGroups"
+                                  [progressFunction]="removeFromGroupFunction"
+                                  [progressCompletedFunction]="removeAgentFinishedFunction"
+                                  *ngSwitchCase="'page_four'"></app-select-list-progress>
+        <app-select-list-progress [selectListProgressData]="selectListProgressDataAddToGroups"
+                                  [progressFunction]="addToGroupFunction"
+                                  [progressCompletedFunction]="addAgentFinishedFunction"
+                                  *ngSwitchCase="'page_five'"></app-select-list-progress>
+      </ng-container>
+    } @else {
+      <app-loading></app-loading>
+    }
   </div>
 </div>

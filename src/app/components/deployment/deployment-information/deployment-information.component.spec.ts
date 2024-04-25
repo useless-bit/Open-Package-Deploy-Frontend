@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DeploymentDetailComponent} from './deployment-detail.component';
+import {DeploymentInformationComponent} from './deployment-information.component';
 
 describe('DeploymentDetailComponent', () => {
-  let component: DeploymentDetailComponent;
-  let fixture: ComponentFixture<DeploymentDetailComponent>;
+  let component: DeploymentInformationComponent;
+  let fixture: ComponentFixture<DeploymentInformationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeploymentDetailComponent]
+      imports: [DeploymentInformationComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DeploymentDetailComponent);
+    fixture = TestBed.createComponent(DeploymentInformationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

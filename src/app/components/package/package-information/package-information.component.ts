@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
@@ -19,7 +19,7 @@ import {PackageUpdateContentComponent} from "../package-update-content/package-u
 import {PackageUpdateContentComponentInput} from "../package-update-content/packageUpdateContentComponentInput";
 
 @Component({
-  selector: 'app-package-detail',
+  selector: 'app-package-information',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -33,40 +33,28 @@ import {PackageUpdateContentComponentInput} from "../package-update-content/pack
     MatListItem,
     NgIf
   ],
-  templateUrl: './package-detail.component.html',
-  styleUrl: './package-detail.component.scss'
+  templateUrl: './package-information.component.html',
+  styleUrl: './package-information.component.scss'
 })
-export class PackageDetailComponent {
-  @Input() public packageUUID: string = "";
-
-  public dataLoaded: boolean = false;
-  public packageEntity: PackageEntity | null = null;
+export class PackageInformationComponent {
+  @Input() public packageEntity!: PackageEntity;
+  @Output() reloadDataFunction = new EventEmitter<any>();
 
   constructor(private packageApiService: PackageApiService,
               private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<PackageDetailComponent>) {
-  }
-
-  ngOnInit() {
-    this.packageApiService.get(this.packageUUID).then(response => {
-      if (response) {
-        this.packageEntity = response;
-        this.dataLoaded = true;
-      }
-    });
+              public dialogRef: MatDialogRef<PackageInformationComponent>) {
   }
 
   updatePackageName() {
     const dialogRef = this.dialog.open(DialogTextInputComponent, {
-      data: new DialogTextInputData("Update name for Package: " + this.packageEntity?.name,
+      data: new DialogTextInputData("Update name for Package: " + this.packageEntity.name,
         "Enter new name:", "Cancel", "Update", false)
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(result, null)).then(() => {
-          this.ngOnInit();
+        this.packageApiService.update(this.packageEntity.uuid, new PackageUpdateRequest(result, null)).then(() => {
+          this.reloadDataFunction.emit();
         })
       }
     });
@@ -78,9 +66,8 @@ export class PackageDetailComponent {
         "Enter new expected return value: (Wont affect completed deployments, until redeployed)", "Cancel", "Update", true)
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.dataLoaded = false
-      this.packageApiService.update(this.packageUUID, new PackageUpdateRequest(null, result)).then(() => {
-        this.ngOnInit();
+      this.packageApiService.update(this.packageEntity.uuid, new PackageUpdateRequest(null, result)).then(() => {
+        this.reloadDataFunction.emit();
       })
     });
   }
@@ -92,8 +79,7 @@ export class PackageDetailComponent {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.packageApiService.delete(this.packageUUID).then(() => {
+        this.packageApiService.delete(this.packageEntity.uuid).then(() => {
           this.dialogRef.close()
         })
       }
@@ -107,9 +93,8 @@ export class PackageDetailComponent {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.deploymentApiService.resetForPackage(this.packageUUID).then(() => {
-          this.ngOnInit();
+        this.deploymentApiService.resetForPackage(this.packageEntity.uuid).then(() => {
+          this.reloadDataFunction.emit();
         })
       }
     });
@@ -123,8 +108,7 @@ export class PackageDetailComponent {
         panelClass: "main-popup"
       })
         .afterClosed().subscribe(() => {
-        this.dataLoaded = false;
-        this.ngOnInit();
+        this.reloadDataFunction.emit();
       });
     }
   }

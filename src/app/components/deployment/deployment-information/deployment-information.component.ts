@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
@@ -14,7 +14,7 @@ import {MatIcon} from "@angular/material/icon";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
-  selector: 'app-deployment-detail',
+  selector: 'app-deployment-information',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -29,27 +29,16 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
     NgIf,
     MatIcon
   ],
-  templateUrl: './deployment-detail.component.html',
-  styleUrl: './deployment-detail.component.scss'
+  templateUrl: './deployment-information.component.html',
+  styleUrl: './deployment-information.component.scss'
 })
-export class DeploymentDetailComponent implements OnInit {
-  @Input() public deploymentUUID: string = "";
-
-  public dataLoaded: boolean = false;
-  public deploymentEntity: DeploymentEntity | null = null;
+export class DeploymentInformationComponent {
+  @Input() public deploymentEntity!: DeploymentEntity;
+  @Output() reloadDataFunction = new EventEmitter<any>();
 
   constructor(private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<DeploymentDetailComponent>) {
-  }
-
-  ngOnInit() {
-    this.deploymentApiService.get(this.deploymentUUID).then(response => {
-      if (response) {
-        this.deploymentEntity = response;
-        this.dataLoaded = true;
-      }
-    });
+              public dialogRef: MatDialogRef<DeploymentInformationComponent>) {
   }
 
   deleteDeployment() {
@@ -59,9 +48,8 @@ export class DeploymentDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.deploymentApiService.delete(this.deploymentUUID, false).then(() => {
-          this.dialogRef.close()
+        this.deploymentApiService.delete(this.deploymentEntity.uuid, false).then(() => {
+          this.dialogRef.close();
         })
       }
     });
@@ -74,9 +62,8 @@ export class DeploymentDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false;
-        this.deploymentApiService.reset(this.deploymentUUID).then(() => {
-          this.ngOnInit();
+        this.deploymentApiService.reset(this.deploymentEntity.uuid).then(() => {
+          this.reloadDataFunction.emit();
         })
       }
     });

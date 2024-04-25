@@ -16,8 +16,8 @@
   <div class="component">
     @if (dataLoaded) {
       <ng-container [ngSwitch]="fontStyleControl.value">
-        <app-agent-detail *ngSwitchCase="'page_one'" [agentEntity]="agentEntity"
-                          (reloadDataFunction)="ngOnInit()"></app-agent-detail>
+        <app-agent-information *ngSwitchCase="'page_one'" [agentEntity]="agentEntity"
+                               (reloadDataFunction)="ngOnInit()"></app-agent-information>
         <app-select-list-progress [selectListProgressData]="selectListProgressDataRemoveDeployments"
                                   [progressFunction]="removeDeploymentFunction"
                                   [progressCompletedFunction]="removeDeploymentFinishedFunction"

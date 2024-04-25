@@ -32,7 +32,7 @@ import {AgentApiService} from "../../../service/api/agent.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
-  selector: 'app-agent-detail',
+  selector: 'app-agent-information',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -56,18 +56,17 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
     MatExpansionPanelContent,
     MatLine
   ],
-  templateUrl: './agent-detail.component.html',
-  styleUrl: './agent-detail.component.scss'
+  templateUrl: './agent-information.component.html',
+  styleUrl: './agent-information.component.scss'
 })
-export class AgentDetailComponent {
+export class AgentInformationComponent {
   @Input() public agentEntity!: AgentEntity;
   @Output() reloadDataFunction = new EventEmitter<any>();
-
 
   constructor(private agentApiService: AgentApiService,
               private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<AgentDetailComponent>) {
+              public dialogRef: MatDialogRef<AgentInformationComponent>) {
   }
 
   updateAgentName() {

@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {AgentDetailComponent} from './agent-detail.component';
+import {GroupInformationComponent} from './group-information.component';
 
-describe('AgentDetailComponent', () => {
-  let component: AgentDetailComponent;
-  let fixture: ComponentFixture<AgentDetailComponent>;
+describe('GroupDetailComponent', () => {
+  let component: GroupInformationComponent;
+  let fixture: ComponentFixture<GroupInformationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AgentDetailComponent]
+      imports: [GroupInformationComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(AgentDetailComponent);
+    fixture = TestBed.createComponent(GroupInformationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
