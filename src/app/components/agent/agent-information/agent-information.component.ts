@@ -22,12 +22,12 @@ import {
 import {MatButton} from "@angular/material/button";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
-import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
+import {DialogTextInputComponent} from "../../../shared-components/dialog-text-input/dialog-text-input.component";
+import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
 import {AgentUpdateRequests} from "../../../service/api/request/agent/agentUpdateRequest";
 import {MatLine} from "@angular/material/core";
-import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
-import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
+import {DialogConfirmCancelComponent} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {DialogConfirmCancelInput} from "../../../shared-components/dialog-confirm-cancel/dialogConfirmCancelInput";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 

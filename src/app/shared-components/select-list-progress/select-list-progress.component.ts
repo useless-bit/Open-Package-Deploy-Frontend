@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {LoadingComponent} from "../loading/loading.component";
+import {LoadingComponent} from "../../components/loading/loading.component";
 import {MatButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
 import {MatFormField, MatLabel} from "@angular/material/form-field";

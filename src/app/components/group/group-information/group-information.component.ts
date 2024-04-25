@@ -10,10 +10,10 @@ import {NgIf} from "@angular/common";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
-import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
-import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
-import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
-import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
+import {DialogConfirmCancelComponent} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {DialogConfirmCancelInput} from "../../../shared-components/dialog-confirm-cancel/dialogConfirmCancelInput";
+import {DialogTextInputComponent} from "../../../shared-components/dialog-text-input/dialog-text-input.component";
+import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
 import {GroupUpdateRequest} from "../../../service/api/request/group/groupUpdateRequest";
 import {ServerApiService} from "../../../service/api/server.api.service";
 

@@ -8,9 +8,9 @@ import {ServerApiService} from "../../../service/api/server.api.service";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ArrayPopupComponent} from "../../array-popup/array-popup.component";
+import {ArrayPopupComponent} from "../../../shared-components/array-popup/array-popup.component";
 import {MatButton} from "@angular/material/button";
-import {ArrayPopupInput} from "../../array-popup/arrayPopupInput";
+import {ArrayPopupInput} from "../../../shared-components/array-popup/arrayPopupInput";
 
 @Component({
   selector: 'app-home-agent-status',

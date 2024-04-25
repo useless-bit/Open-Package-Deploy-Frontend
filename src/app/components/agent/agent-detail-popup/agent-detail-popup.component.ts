@@ -9,11 +9,11 @@ import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-to
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {NgSwitch, NgSwitchCase} from "@angular/common";
 import {AgentCreateDeploymentComponent} from "../agent-create-deployment/agent-create-deployment.component";
-import {SelectListProgressComponent} from "../../select-list-progress/select-list-progress.component";
-import {SelectListProgressData} from "../../select-list-progress/selectListProgressData";
+import {SelectListProgressComponent} from "../../../shared-components/select-list-progress/select-list-progress.component";
+import {SelectListProgressData} from "../../../shared-components/select-list-progress/selectListProgressData";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {GroupEntity} from "../../../service/api/entity/groupEntity";
-import {SelectListItem} from "../../select-list-progress/selectListItem";
+import {SelectListItem} from "../../../shared-components/select-list-progress/selectListItem";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {ServerApiService} from "../../../service/api/server.api.service";

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
-import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
+import {DialogConfirmCancelComponent} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {DialogConfirmCancelInput} from "../../../shared-components/dialog-confirm-cancel/dialogConfirmCancelInput";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from "@angular/material/expansion";
 import {MatButton} from "@angular/material/button";
