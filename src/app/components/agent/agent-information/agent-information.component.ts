@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LoadingComponent} from "../../loading/loading.component";
 import {NgIf} from "@angular/common";
 import {
@@ -22,17 +22,19 @@ import {
 import {MatButton} from "@angular/material/button";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
-import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
+import {DialogTextInputComponent} from "../../../shared-components/dialog-text-input/dialog-text-input.component";
+import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
 import {AgentUpdateRequests} from "../../../service/api/request/agent/agentUpdateRequest";
 import {MatLine} from "@angular/material/core";
-import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
-import {DialogConfirmCancelInput} from "../../dialog-confirm-cancel/dialogConfirmCancelInput";
+import {
+  DialogConfirmCancelComponent
+} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {DialogConfirmCancelInput} from "../../../shared-components/dialog-confirm-cancel/dialogConfirmCancelInput";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
-  selector: 'app-agent-detail',
+  selector: 'app-agent-information',
   standalone: true,
   imports: [
     LoadingComponent,
@@ -56,28 +58,17 @@ import {DeploymentApiService} from "../../../service/api/deployment.api.service"
     MatExpansionPanelContent,
     MatLine
   ],
-  templateUrl: './agent-detail.component.html',
-  styleUrl: './agent-detail.component.scss'
+  templateUrl: './agent-information.component.html',
+  styleUrl: './agent-information.component.scss'
 })
-export class AgentDetailComponent implements OnInit {
-  @Input() public agentUUID: string = "";
-
-  public dataLoaded: boolean = false;
-  public agentEntity: AgentEntity | null = null;
+export class AgentInformationComponent {
+  @Input() public agentEntity!: AgentEntity;
+  @Output() reloadDataFunction = new EventEmitter<any>();
 
   constructor(private agentApiService: AgentApiService,
               private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<AgentDetailComponent>) {
-  }
-
-  ngOnInit() {
-    this.agentApiService.get(this.agentUUID).then(response => {
-      if (response) {
-        this.agentEntity = response;
-        this.dataLoaded = true;
-      }
-    });
+              public dialogRef: MatDialogRef<AgentInformationComponent>) {
   }
 
   updateAgentName() {
@@ -87,9 +78,8 @@ export class AgentDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.agentApiService.update(this.agentUUID, new AgentUpdateRequests(result)).then(() => {
-          this.ngOnInit();
+        this.agentApiService.update(this.agentEntity.uuid, new AgentUpdateRequests(result)).then(() => {
+          this.reloadDataFunction.emit();
         })
       }
     });
@@ -102,8 +92,7 @@ export class AgentDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.agentApiService.delete(this.agentUUID).then(() => {
+        this.agentApiService.delete(this.agentEntity.uuid).then(() => {
           this.dialogRef.close()
         })
       }
@@ -117,9 +106,8 @@ export class AgentDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dataLoaded = false
-        this.deploymentApiService.resetForAgent(this.agentUUID).then(() => {
-          this.ngOnInit();
+        this.deploymentApiService.resetForAgent(this.agentEntity.uuid).then(() => {
+          this.reloadDataFunction.emit();
         })
       }
     });

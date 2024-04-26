@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from '@angular/router';
 import {Error404Component} from "./components/error/error-404/error-404.component";
-import {KeycloakGuard} from "./guard/keycloak-guard.service";
 import {AgentOverviewComponent} from "./components/agent/agent-overview/agent-overview.component";
 import {PackageOverviewComponent} from "./components/package/package-overview/package-overview.component";
 import {DeploymentOverviewComponent} from "./components/deployment/deployment-overview/deployment-overview.component";
@@ -9,6 +8,7 @@ import {SettingOverviewComponent} from "./components/setting/setting-overview/se
 import {HomeOverviewComponent} from "./components/home/home-overview/home-overview.component";
 import {LogOverviewComponent} from "./components/log/log-overview/log-overview.component";
 import {GroupOverviewComponent} from "./components/group/group-overview/group-overview.component";
+import {KeycloakGuard} from "./guard/keycloak.guard";
 
 export const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomeOverviewComponent, canActivate: [KeycloakGuard]},

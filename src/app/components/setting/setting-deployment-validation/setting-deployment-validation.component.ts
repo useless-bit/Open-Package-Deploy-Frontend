@@ -6,10 +6,12 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {ServerApiService} from "../../../service/api/server.api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
-import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
+import {DialogTextInputComponent} from "../../../shared-components/dialog-text-input/dialog-text-input.component";
+import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
 import {ServerDeploymentValidationRequest} from "../../../service/api/request/server/serverDeploymentValidationRequest";
-import {DialogConfirmCancelComponent} from "../../dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {
+  DialogConfirmCancelComponent
+} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
 
 @Component({
   selector: 'app-setting-deployment-validation',

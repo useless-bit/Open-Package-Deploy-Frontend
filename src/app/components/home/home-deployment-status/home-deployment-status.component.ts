@@ -6,8 +6,8 @@ import {MatInput} from "@angular/material/input";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {ArrayPopupComponent} from "../../array-popup/array-popup.component";
-import {ArrayPopupInput} from "../../array-popup/arrayPopupInput";
+import {ArrayPopupComponent} from "../../../shared-components/array-popup/array-popup.component";
+import {ArrayPopupInput} from "../../../shared-components/array-popup/arrayPopupInput";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({

@@ -12,7 +12,7 @@ export class ApiService {
   constructor(private snackbar: MatSnackBar) {
   }
 
-  public errorHandling(data: HttpErrorResponse) {
+  public showError(data: HttpErrorResponse) {
     if (data.status == 0) {
       this.snackbar.open("Server connection Error", "", MatSnackbarOptions.ErrorNotification);
     } else if (data.status == 400) {
@@ -25,5 +25,16 @@ export class ApiService {
     } else {
       this.snackbar.open("Error: " + data.status, "", MatSnackbarOptions.ErrorNotification);
     }
+  }
+
+  public handleError(data: HttpErrorResponse, bypassError: boolean): string {
+    if (!bypassError) {
+      this.showError(data);
+    }
+    let errorResponse = data.error as ApiErrorResponse;
+    if (errorResponse.message) {
+      return errorResponse.message;
+    }
+    return errorResponse.error;
   }
 }

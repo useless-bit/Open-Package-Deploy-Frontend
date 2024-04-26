@@ -16,57 +16,53 @@ export class AgentApiService {
               private apiService: ApiService) {
   }
 
-  public getAll(): Promise<AgentListResponse | null> {
+  public getAll(bypassError: boolean = false): Promise<AgentListResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/agent").subscribe({
         next: value => {
           resolve(new AgentListResponse(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public get(agentUUID: string): Promise<AgentEntity | null> {
+  public get(agentUUID: string, bypassError: boolean = false): Promise<AgentEntity | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/agent/" + agentUUID).subscribe({
         next: value => {
           resolve(new AgentEntity(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public update(agentUUID: string, agentUpdateRequest: AgentUpdateRequests): Promise<void | null> {
+  public update(agentUUID: string, agentUpdateRequest: AgentUpdateRequests, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/agent/" + agentUUID, agentUpdateRequest).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public delete(agentUUID: string): Promise<void | null> {
+  public delete(agentUUID: string, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.delete(this.variableService.backendURL + "/api/agent/" + agentUUID).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });

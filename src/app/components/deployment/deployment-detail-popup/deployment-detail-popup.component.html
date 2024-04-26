@@ -1,15 +1,22 @@
 <div class="main-content">
 
   <div class="detail-popup_navigation-bar">
-    <mat-button-toggle-group [formControl]="fontStyleControl">
+    <mat-button-toggle-group [formControl]="fontStyleControl" [hideSingleSelectionIndicator]="true">
       <mat-button-toggle value="page_one">Details</mat-button-toggle>
+      <button (click)="ngOnInit()" mat-icon-button matTooltip="Reload">
+        <mat-icon>refresh</mat-icon>
+      </button>
     </mat-button-toggle-group>
   </div>
 
   <div class="component">
-    <ng-container [ngSwitch]="fontStyleControl.value">
-      <app-deployment-detail *ngSwitchCase="'page_one'"
-                             [deploymentUUID]=this.data.deploymentUUID></app-deployment-detail>
-    </ng-container>
+    @if (dataLoaded) {
+      <ng-container [ngSwitch]="fontStyleControl.value">
+        <app-deployment-information *ngSwitchCase="'page_one'" [deploymentEntity]=deploymentEntity
+                                    (reloadDataFunction)="ngOnInit()"></app-deployment-information>
+      </ng-container>
+    } @else {
+      <app-loading></app-loading>
+    }
   </div>
 </div>

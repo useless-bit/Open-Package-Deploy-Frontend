@@ -6,8 +6,8 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {ServerApiService} from "../../../service/api/server.api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogTextInputComponent} from "../../dialog-text-input/dialog-text-input.component";
-import {DialogTextInputData} from "../../dialog-text-input/dialogTextInputData";
+import {DialogTextInputComponent} from "../../../shared-components/dialog-text-input/dialog-text-input.component";
+import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
 import {ServerAgentInstallRetryRequest} from "../../../service/api/request/server/serverAgentInstallRetryRequest";
 
 @Component({

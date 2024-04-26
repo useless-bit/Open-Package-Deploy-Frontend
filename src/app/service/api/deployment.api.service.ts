@@ -16,129 +16,118 @@ export class DeploymentApiService {
               private apiService: ApiService) {
   }
 
-  public getAll(): Promise<DeploymentListResponse | null> {
+  public getAll(bypassError: boolean = false): Promise<DeploymentListResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/deployment").subscribe({
         next: value => {
           resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public get(deploymentUUID: string): Promise<DeploymentEntity | null> {
+  public get(deploymentUUID: string, bypassError: boolean = false): Promise<DeploymentEntity | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/deployment/" + deploymentUUID).subscribe({
         next: value => {
           resolve(new DeploymentEntity(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public getDeploymentsForAgent(agentUUID: string): Promise<DeploymentListResponse | null> {
+  public getDeploymentsForAgent(agentUUID: string, bypassError: boolean = false): Promise<DeploymentListResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/deployment/agent/" + agentUUID).subscribe({
         next: value => {
           resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public getDeploymentsForPackage(packageUUID: string): Promise<DeploymentListResponse | null> {
+  public getDeploymentsForPackage(packageUUID: string, bypassError: boolean = false): Promise<DeploymentListResponse | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.variableService.backendURL + "/api/deployment/package/" + packageUUID).subscribe({
         next: value => {
           resolve(new DeploymentListResponse(value));
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public delete(deploymentUUID: string): Promise<void | null> {
+  public delete(deploymentUUID: string, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.delete(this.variableService.backendURL + "/api/deployment/" + deploymentUUID).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public create(createDeploymentRequest: DeploymentCreateRequest, bypassError: boolean): Promise<void | null> {
+  public create(createDeploymentRequest: DeploymentCreateRequest, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.variableService.backendURL + "/api/deployment", createDeploymentRequest).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          if (!bypassError) {
-            this.apiService.errorHandling(error);
-          }
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public reset(deploymentUUID: string): Promise<void | null> {
+  public reset(deploymentUUID: string, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/deployment/reset/deployment/" + deploymentUUID, null).subscribe({
         next: () => {
           resolve();
         },
-        error: error => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+        error: (error) => {
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public resetForAgent(agentUUID: string): Promise<void | null> {
+  public resetForAgent(agentUUID: string, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/deployment/reset/agent/" + agentUUID, null).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });
   }
 
-  public resetForPackage(packageUUID: string): Promise<void | null> {
+  public resetForPackage(packageUUID: string, bypassError: boolean = false): Promise<void | null> {
     return new Promise((resolve, reject) => {
       this.httpClient.patch(this.variableService.backendURL + "/api/deployment/reset/package/" + packageUUID, null).subscribe({
         next: () => {
           resolve();
         },
         error: (error) => {
-          this.apiService.errorHandling(error);
-          reject(new Error(error));
+          reject(new Error(this.apiService.handleError(error, bypassError)))
         }
       });
     });

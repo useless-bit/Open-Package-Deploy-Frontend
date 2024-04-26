@@ -148,7 +148,7 @@ export class AgentOverviewComponent implements OnInit {
 
   public showDetailInfoPopup(agentUUID: string): void {
     this.dialog.open(AgentDetailPopupComponent, {
-      data: {agentUUID},
+      data: {agentUUID: agentUUID},
       panelClass: "main-popup"
     }).afterClosed().subscribe(() => {
       this.refreshData();
