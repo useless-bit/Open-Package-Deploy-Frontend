@@ -18,7 +18,9 @@ import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
-import {SelectListProgressComponent} from "../../../shared-components/select-list-progress/select-list-progress.component";
+import {
+  SelectListProgressComponent
+} from "../../../shared-components/select-list-progress/select-list-progress.component";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {DeploymentCreateRequest} from "../../../service/api/request/deployment/deploymentCreateRequest";
 import {GroupApiService} from "../../../service/api/group.api.service";

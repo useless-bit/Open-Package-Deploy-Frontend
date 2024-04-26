@@ -17,7 +17,9 @@ import {GroupEntity} from "../../../service/api/entity/groupEntity";
 import {GroupApiService} from "../../../service/api/group.api.service";
 import {ServerApiService} from "../../../service/api/server.api.service";
 import {GroupMember} from "../../../service/api/reponse/group/groupMember";
-import {SelectListProgressComponent} from "../../../shared-components/select-list-progress/select-list-progress.component";
+import {
+  SelectListProgressComponent
+} from "../../../shared-components/select-list-progress/select-list-progress.component";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {GroupPackage} from "../../../service/api/reponse/group/groupPackage";
 import {PackageApiService} from "../../../service/api/package.api.service";

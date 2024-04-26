@@ -9,7 +9,9 @@ import {NgIf} from "@angular/common";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogTextInputComponent} from "../../../shared-components/dialog-text-input/dialog-text-input.component";
 import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
-import {DialogConfirmCancelComponent} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {
+  DialogConfirmCancelComponent
+} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../../shared-components/dialog-confirm-cancel/dialogConfirmCancelInput";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageUpdateRequest} from "../../../service/api/request/package/packageUpdateRequest";

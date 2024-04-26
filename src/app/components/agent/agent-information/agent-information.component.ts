@@ -26,7 +26,9 @@ import {DialogTextInputComponent} from "../../../shared-components/dialog-text-i
 import {DialogTextInputData} from "../../../shared-components/dialog-text-input/dialogTextInputData";
 import {AgentUpdateRequests} from "../../../service/api/request/agent/agentUpdateRequest";
 import {MatLine} from "@angular/material/core";
-import {DialogConfirmCancelComponent} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
+import {
+  DialogConfirmCancelComponent
+} from "../../../shared-components/dialog-confirm-cancel/dialog-confirm-cancel.component";
 import {DialogConfirmCancelInput} from "../../../shared-components/dialog-confirm-cancel/dialogConfirmCancelInput";
 import {AgentApiService} from "../../../service/api/agent.api.service";
 import {DeploymentApiService} from "../../../service/api/deployment.api.service";
