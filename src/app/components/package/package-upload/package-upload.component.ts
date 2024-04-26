@@ -85,7 +85,7 @@ export class PackageUploadComponent implements OnInit {
       this.formControlOsSelect.disable();
       let formData: FormData = new FormData();
       let addNewPackageRequest: PackageAddNewRequest = new PackageAddNewRequest(this.formControlNameInput.value, this.formControlExpectedReturnValueInput.value, this.formControlChecksumInput.value, this.formControlOsSelect.value.toUpperCase())
-      formData.append("addNewPackageRequest", new Blob([JSON.stringify(addNewPackageRequest)], {type: 'application/json'}));
+      formData.append("packageAddNewRequest", new Blob([JSON.stringify(addNewPackageRequest)], {type: 'application/json'}));
       formData.append("multipartFile", this.file)
       let upload = this.packageApiService.addNew(formData);
 
