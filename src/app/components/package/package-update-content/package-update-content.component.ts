@@ -85,7 +85,7 @@ export class PackageUpdateContentComponent implements OnInit {
       this.formControlChecksumInput.disable();
       let formData: FormData = new FormData();
       let updatePackageContentRequest: PackageUpdateContentRequest = new PackageUpdateContentRequest(this.formControlChecksumInput.value)
-      formData.append("packageUpdateRequest", new Blob([JSON.stringify(updatePackageContentRequest)], {type: 'application/json'}));
+      formData.append("packageUpdateContentRequest", new Blob([JSON.stringify(updatePackageContentRequest)], {type: 'application/json'}));
       formData.append("multipartFile", this.file)
       let upload = this.packageApiService.updateContent(this.packageEntity.uuid, formData);
 
