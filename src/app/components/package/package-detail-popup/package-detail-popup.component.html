@@ -28,11 +28,11 @@
                                   *ngSwitchCase="'page_three'"></app-select-list-progress>
         <app-select-list-progress [selectListProgressData]="selectListProgressDataRemoveFromGroups"
                                   [progressFunction]="removeFromGroupFunction"
-                                  [progressCompletedFunction]="removeAgentFinishedFunction"
+                                  [progressCompletedFunction]="removeFromGroupFinishedFunction"
                                   *ngSwitchCase="'page_four'"></app-select-list-progress>
         <app-select-list-progress [selectListProgressData]="selectListProgressDataAddToGroups"
                                   [progressFunction]="addToGroupFunction"
-                                  [progressCompletedFunction]="addAgentFinishedFunction"
+                                  [progressCompletedFunction]="addToGroupFinishedFunction"
                                   *ngSwitchCase="'page_five'"></app-select-list-progress>
       </ng-container>
     } @else {
