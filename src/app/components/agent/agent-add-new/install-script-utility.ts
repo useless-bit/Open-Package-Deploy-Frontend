@@ -9,38 +9,38 @@ Token='${registrationToken}'
 Host='${backendURL}'
 
 function install_apt {
-  apt-get update
-  apt-get install -y openjdk-19-jre-headless
+apt-get update
+apt-get install -y openjdk-19-jre-headless
 
-  install_service_systemd
+install_service_systemd
 }
 
 function stop_service_systemd {
-  sudo systemctl stop opd-agent
+sudo systemctl stop opd-agent
 }
 
 function install_service_systemd {
-  bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
-  [Unit]
-  Description=OPD Agent
-  After=network.target network-online.target
-  Requires=network-online.target
+bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
+[Unit]
+Description=OPD Agent
+After=network.target network-online.target
+Requires=network-online.target
 
-  [Service]
-  WorkingDirectory=/etc/OPD-Agent
-  ExecStartPre=/bin/sh -c 'if [ ! -e Agent.jar ]; then cp Agent_backup.jar Agent.jar; fi && if [ -e Agent_update.jar ]; then java -jar Agent_update.jar; fi'
-  ExecStart=java -jar Agent.jar
-  Restart=always
-  RestartSec=10
+[Service]
+WorkingDirectory=/etc/OPD-Agent
+ExecStartPre=/bin/sh -c 'if [ ! -e Agent.jar ]; then cp Agent_backup.jar Agent.jar; fi && if [ -e Agent_update.jar ]; then java -jar Agent_update.jar; fi'
+ExecStart=java -jar Agent.jar
+Restart=always
+RestartSec=10
 
-  [Install]
-  WantedBy=multi-user.target
-  EOF"
+[Install]
+WantedBy=multi-user.target
+EOF"
 
-  sudo systemctl daemon-reload
-  sudo systemctl start opd-agent
-  sudo systemctl enable opd-agent
-  sudo systemctl status opd-agent
+sudo systemctl daemon-reload
+sudo systemctl start opd-agent
+sudo systemctl enable opd-agent
+sudo systemctl status opd-agent
 }
 
 wget --method GET --header 'Authentication: '$Token --output-document - $Host/download/agent -O 'Agent.jar'
@@ -53,7 +53,7 @@ echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
 echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
 
 if command -v apt > /dev/null; then
-  install_apt
+install_apt
 fi
 
 cd ~
