@@ -16,7 +16,7 @@ RUN npm install
 RUN npm run build -c production
 
 
-FROM BASE_IMAGE_2
+FROM $BASE_IMAGE_2
 
 
 COPY --from=build-stage /source/dist/opd/browser /usr/share/nginx/html
