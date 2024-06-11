@@ -1,4 +1,7 @@
-FROM harbor.codesystem.org/node-js/node:slim AS build-stage
+ARG BASE_IMAGE_1=node:lts-slim
+ARG BASE_IMAGE_2=nginx:stable-alpine
+
+FROM $BASE_IMAGE_1 AS build-stage
 
 WORKDIR /source
 ADD src /source/src
@@ -13,7 +16,7 @@ RUN npm install
 RUN npm run build -c production
 
 
-FROM harbor.codesystem.org/webserver/nginx:stable
+FROM BASE_IMAGE_2
 
 
 COPY --from=build-stage /source/dist/opd/browser /usr/share/nginx/html
