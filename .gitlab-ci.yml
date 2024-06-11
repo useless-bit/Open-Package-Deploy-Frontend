@@ -15,7 +15,7 @@ build:
 test-sonar:
   image:
     name: $CI_REGISTRY/sonar/sonar-scanner-cli:latest
-    entrypoint: [""]
+    entrypoint: [ "" ]
   stage: test
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
@@ -26,7 +26,6 @@ test-sonar:
       - .sonar/cache
   script:
     - sonar-scanner
-  allow_failure: true
   except:
     - master
   needs:
@@ -37,7 +36,7 @@ build-image-dev:
   stage: publish
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build . -t $CI_REGISTRY/opd/frontend:dev
+    - docker build . -t $CI_REGISTRY/opd/frontend:dev --build-arg BASE_IMAGE_1=$DOCKER_IMAGE_NODE --build-arg BASE_IMAGE_2=$DOCKER_IMAGE_NGINX
     - docker push $CI_REGISTRY/opd/frontend:dev
   only:
     - dev
@@ -49,7 +48,7 @@ build-image-master:
   stage: publish
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build . -t $CI_REGISTRY/opd/frontend:latest
+    - docker build . -t $CI_REGISTRY/opd/frontend:latest --build-arg BASE_IMAGE_1=$DOCKER_IMAGE_NODE --build-arg BASE_IMAGE_2=$DOCKER_IMAGE_NGINX
     - docker push $CI_REGISTRY/opd/frontend:latest
   only:
     - master

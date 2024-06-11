@@ -26,8 +26,14 @@
         <mat-error>Cannot be empty</mat-error>
       }
     </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Expected Return Value</mat-label>
+      <input [formControl]="formControlExpectedReturnValueInput" matInput>
+    </mat-form-field>
+
     <div class="file-upload">
-      <button (click)="fileUpload.click()" [disabled]="uploadSub" mat-flat-button>Select File</button>
+      <button (click)="fileUpload.click()" [disabled]="uploadSub" color="primary" mat-flat-button>Select File</button>
       <mat-form-field>
         <input #fileUpload (change)="onFileSelected($event)" [hidden]="true" accept=".zip" class="file-input"
                type="file">
@@ -40,8 +46,8 @@
     <mat-hint>Error: {{ uploadErrorMessage }}</mat-hint>
   }
   <div class="buttons">
-    <button (click)="startUpload()" [disabled]="uploadSub" mat-raised-button>Upload</button>
-    <button (click)="cancelUpload()" [disabled]="!uploadSub" mat-raised-button>Cancel Upload</button>
+    <button (click)="startUpload()" [disabled]="uploadSub" color="primary" mat-raised-button>Upload</button>
+    <button (click)="cancelUpload()" [disabled]="!uploadSub" color="primary" mat-raised-button>Cancel Upload</button>
   </div>
   <div *ngIf="uploadProgress">
     @if (uploadProgress == 100) {

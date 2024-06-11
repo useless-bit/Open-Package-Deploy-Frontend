@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {
@@ -25,17 +25,17 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatTooltip} from "@angular/material/tooltip";
 import {NgForOf, NgIf} from "@angular/common";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DeploymentEntity} from "../../../service/api/entity/deploymentEntity";
 import {DeploymentDetailPopupComponent} from "../deployment-detail-popup/deployment-detail-popup.component";
 import {DeploymentCreateComponent} from "../deployment-create/deployment-create.component";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-overview',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatAccordion,
     MatButton,
     MatCell,
@@ -73,28 +73,28 @@ import {DeploymentCreateComponent} from "../deployment-create/deployment-create.
 export class DeploymentOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['agentUuid', 'packageUuid'];
+  public selectedColumns: string[] = ['packageName', 'agentName'];
   public searchLoadingBar: boolean = false;
   private localStorageNameSelectedColumns: string = "selectedColumns_DeploymentOverview";
   private deploymentInstance: DeploymentEntity = new DeploymentEntity(0);
   public deploymentKeys = Object.keys(this.deploymentInstance) as Array<keyof DeploymentEntity>
 
-  constructor(private apiService: ApiService,
+  constructor(private deploymentApiService: DeploymentApiService,
               private dialog: MatDialog,
-              public dataSource: MatTableDataSource<DeploymentEntity>) {
-    this.dataSource = dataSource;
-    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
+              public dataSourceDeploymentOverviewTable: MatTableDataSource<DeploymentEntity>) {
+    this.dataSourceDeploymentOverviewTable = dataSourceDeploymentOverviewTable;
+    this.dataSourceDeploymentOverviewTable.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
-      this.dataSource.paginator = paginator;
+      this.dataSourceDeploymentOverviewTable.paginator = paginator;
     }
   }
 
   @ViewChild(MatSort) set tableSort(sort: MatSort) {
     if (sort) {
-      this.dataSource.sort = sort;
+      this.dataSourceDeploymentOverviewTable.sort = sort;
     }
   }
 
@@ -104,10 +104,10 @@ export class DeploymentOverviewComponent implements OnInit {
       this.selectedColumns = JSON.parse(storedSelectedColumns);
       this.selectedColumns = this.selectedColumns.filter(col => this.deploymentKeys.includes(col as keyof DeploymentEntity));
     }
-    this.apiService.getAllDeployments().then(response => {
+    this.deploymentApiService.getAll().then(response => {
       if (response) {
-        this.dataSource.data = response.deployments;
-        this.dataSource.filter = "";
+        this.dataSourceDeploymentOverviewTable.data = response.deployments;
+        this.dataSourceDeploymentOverviewTable.filter = "";
         this.dataLoaded = true;
         this.searchLoadingBar = false;
       }
@@ -116,10 +116,10 @@ export class DeploymentOverviewComponent implements OnInit {
 
   applySearch(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceDeploymentOverviewTable.filter = filterValue.trim().toLowerCase();
   }
 
-  changeSelectedColumns(deployment: String): void {
+  changeSelectedColumns(deployment: string): void {
     const index = this.selectedColumns.indexOf(deployment);
     if (index === -1) {
       this.selectedColumns.push(deployment);
@@ -127,7 +127,6 @@ export class DeploymentOverviewComponent implements OnInit {
       this.selectedColumns.splice(index, 1);
     }
     localStorage.setItem(this.localStorageNameSelectedColumns, JSON.stringify(this.selectedColumns));
-    this.dataSource.filter = this.dataSource.filter;
   }
 
   public isColumnSelected(deployment: string): boolean {
@@ -150,7 +149,7 @@ export class DeploymentOverviewComponent implements OnInit {
     });
   }
 
-  public convertStringChipName(str: string): string {
+  public convertStringChipNameDeploymentEntity(str: string): string {
     const convertedString = str.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
     return convertedString.split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -159,9 +158,9 @@ export class DeploymentOverviewComponent implements OnInit {
 
   refreshData(): void {
     this.searchLoadingBar = true;
-    this.apiService.getAllDeployments().then(response => {
+    this.deploymentApiService.getAll().then(response => {
       if (response) {
-        this.dataSource.data = response.deployments;
+        this.dataSourceDeploymentOverviewTable.data = response.deployments;
         this.searchLoadingBar = false;
       }
     });
@@ -171,7 +170,7 @@ export class DeploymentOverviewComponent implements OnInit {
     if (this.searchField) {
       this.searchField.nativeElement.value = "";
     }
-    this.dataSource.filter = "";
+    this.dataSourceDeploymentOverviewTable.filter = "";
   }
 
   openAddNewPopup() {

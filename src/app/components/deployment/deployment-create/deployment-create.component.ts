@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {LoadingComponent} from "../../loading/loading.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {OperatingSystem} from "../../../service/api/entity/operatingSystem";
 import {MatButton} from "@angular/material/button";
@@ -9,18 +9,20 @@ import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from "@angular/mater
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatSelect, MatSelectChange} from "@angular/material/select";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ApiService} from "../../../service/api/api.service";
 import {AgentEntity} from "../../../service/api/entity/agentEntity";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
-import {CreateDeploymentRequest} from "../../../service/api/request/createDeploymentRequest";
+import {DeploymentCreateRequest} from "../../../service/api/request/deployment/deploymentCreateRequest";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {AgentApiService} from "../../../service/api/agent.api.service";
+import {PackageApiService} from "../../../service/api/package.api.service";
+import {DeploymentApiService} from "../../../service/api/deployment.api.service";
 
 @Component({
   selector: 'app-deployment-create',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     NgIf,
     MatButton,
     MatError,
@@ -47,24 +49,25 @@ export class DeploymentCreateComponent implements OnInit {
   public packageList: PackageEntity[] | null = null;
   public filteredPackages: PackageEntity[] | null = null;
   public targetOs: OperatingSystem = OperatingSystem.Unknown;
-  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
-  formControlPackageSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControlOsSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
+  formControlPackageSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlPackageSelectSearch: FormControl = new FormControl('');
-  formControlAgentSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]);
+  formControlAgentSelect: FormControl = new FormControl('', [Validators.required, Validators.pattern(/^\s*\S.*$/)]);
   formControlAgentSelectSearch: FormControl = new FormControl('');
-  formControlExpectedReturnValueInput: FormControl = new FormControl('');
   protected readonly OperatingSystem = OperatingSystem;
   protected readonly Object = Object;
 
-  constructor(private apiService: ApiService,
+  constructor(private agentApiService: AgentApiService,
+              private packageApiService: PackageApiService,
+              private deploymentApiService: DeploymentApiService,
               public dialogRef: MatDialogRef<DeploymentCreateComponent>) {
   }
 
   ngOnInit() {
     this.formControlPackageSelect.disable();
     this.formControlAgentSelect.disable();
-    this.apiService.getAllAgents().then(agentResponse => {
-      this.apiService.getAllPackages().then(packageResponse => {
+    this.agentApiService.getAll().then(agentResponse => {
+      this.packageApiService.getAll().then(packageResponse => {
         if (agentResponse && packageResponse) {
           this.agentList = agentResponse.agents;
           this.filteredAgents = this.agentList;
@@ -88,7 +91,7 @@ export class DeploymentCreateComponent implements OnInit {
     this.formControlAgentSelect.markAllAsTouched();
 
     if (this.formControlOsSelect.valid && this.formControlPackageSelect.valid && this.formControlAgentSelect.valid) {
-      this.apiService.createDeployment(new CreateDeploymentRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value, this.formControlExpectedReturnValueInput.value.trim())).then(() => {
+      this.deploymentApiService.create(new DeploymentCreateRequest(this.formControlAgentSelect.value, this.formControlPackageSelect.value), false).then(() => {
         this.dialogRef.close();
       })
     }
@@ -115,7 +118,7 @@ export class DeploymentCreateComponent implements OnInit {
       return;
     }
     let search = this.formControlAgentSelectSearch.value;
-    this.filteredAgents = this.agentList.filter(agent => agent.name.includes(search));
+    this.filteredAgents = this.agentList.filter(agent => agent.name.includes(search) || agent.uuid.includes(search));
   }
 
   protected filterPackages() {
@@ -123,6 +126,6 @@ export class DeploymentCreateComponent implements OnInit {
       return;
     }
     let search = this.formControlPackageSelectSearch.value;
-    this.filteredPackages = this.packageList.filter(package_item => package_item.name.includes(search));
+    this.filteredPackages = this.packageList.filter(package_item => package_item.name.includes(search) || package_item.uuid.includes(search));
   }
 }

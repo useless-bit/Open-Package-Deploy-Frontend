@@ -1,0 +1,15 @@
+<div class="main-content">
+  <h2>Install Retry Interval</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <mat-form-field>
+      Install retry interval:
+      <input disabled matInput>{{ agentInstallRetryInterval }} seconds
+    </mat-form-field>
+    <div class="buttons">
+      <button color="primary" mat-raised-button (click)="changeAgentInstallRetryInterval()">Change interval</button>
+    </div>
+  }
+</div>

@@ -1,10 +1,12 @@
 import {OperatingSystem} from "./operatingSystem";
+import {UnitConversionUtility} from "../../../utility/unitConversionUtility";
 
 export class AgentEntity {
   uuid: string;
   name: string;
-  lastConnectionTime: string;
+  lastConnectionTime: string | Date;
   registrationCompleted: boolean;
+  checksum: string;
   operatingSystem: OperatingSystem;
   operatingSystemFamily: string;
   operatingSystemArchitecture: string;
@@ -23,6 +25,7 @@ export class AgentEntity {
     this.name = agentData.name;
     this.lastConnectionTime = this.formatDate(agentData.lastConnectionTime);
     this.registrationCompleted = agentData.registrationCompleted;
+    this.checksum = this.formatName(agentData.checksum)
     this.operatingSystem = agentData.operatingSystem;
     this.operatingSystemFamily = this.formatName(agentData.operatingSystemFamily);
     this.operatingSystemArchitecture = this.formatName(agentData.operatingSystemArchitecture);
@@ -37,19 +40,9 @@ export class AgentEntity {
     this.cpuSockets = this.formatName(agentData.cpuSockets);
   }
 
-  formatDate(timestamp: number): string {
+  formatDate(timestamp: number): string | Date {
     if (timestamp) {
-      let dateObj = new Date(timestamp * 1000);
-      return dateObj.toLocaleString("en-US", {
-        month: '2-digit',
-        day: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-        localeMatcher: "best fit"
-      });
+      return new Date(timestamp * 1000);
     }
     return "N/A"
   }
@@ -61,10 +54,9 @@ export class AgentEntity {
     return "N/A"
   }
 
-  formatStorage(memory: string): string {
+  formatStorage(memory: number): string {
     if (memory) {
-      const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
-      return memoryInGigabytes.toFixed(2).toString() + " GB";
+      return UnitConversionUtility.byteToString(memory);
     }
     return "N/A"
   }

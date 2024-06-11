@@ -1,8 +1,10 @@
 import {OperatingSystem} from "./operatingSystem";
+import {UnitConversionUtility} from "../../../utility/unitConversionUtility";
 
 export class PackageEntity {
   uuid: string;
   name: string;
+  expectedReturnValue: string;
   packageStatus: string;
   checksumPlaintext: string;
   checksumEncrypted: string;
@@ -14,6 +16,7 @@ export class PackageEntity {
   constructor(packageData: any) {
     this.uuid = packageData.uuid;
     this.name = packageData.name;
+    this.expectedReturnValue = packageData.expectedReturnValue;
     this.packageStatus = this.formatName(packageData.packageStatusInternal);
     this.checksumPlaintext = this.formatName(packageData.checksumPlaintext);
     this.checksumEncrypted = this.formatName(packageData.checksumEncrypted);
@@ -29,10 +32,9 @@ export class PackageEntity {
     return "N/A"
   }
 
-  formatStorage(memory: string): string {
+  formatStorage(memory: number): string {
     if (memory) {
-      const memoryInGigabytes = parseInt(memory, 10) / (1024 * 1024 * 1024);
-      return memoryInGigabytes.toFixed(2).toString() + " GB";
+      return UnitConversionUtility.byteToString(memory)
     }
     return "N/A"
   }

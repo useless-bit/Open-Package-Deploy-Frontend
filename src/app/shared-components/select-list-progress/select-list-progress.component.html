@@ -1,0 +1,75 @@
+<div class="main-content">
+  <mat-stepper [linear]="true">
+    <mat-step>
+      <ng-template matStepLabel>{{ selectListProgressData.stepOneTitle }}</ng-template>
+      <div>
+        <button color="primary" disabled mat-button matStepperPrevious>{{ selectListProgressData.stepOneButtonBack }}
+        </button>
+        <button color="primary" mat-button matStepperNext>{{ selectListProgressData.stepOneButtonForward }}</button>
+      </div>
+      <mat-divider></mat-divider>
+      <mat-form-field class="search-field">
+        <mat-label>{{ selectListProgressData.stepOneSearchBar }}</mat-label>
+        <input (keyup)="applySearch($event)" autofocus matInput>
+      </mat-form-field>
+      <div class="simple-button-row">
+        <button (click)="addVisibleEntries()" color="primary" mat-flat-button>Select All</button>
+        <button (click)="removeVisibleEntries()" color="primary" mat-flat-button>Deselect All</button>
+      </div>
+
+      <mat-selection-list [disabled]="selectedItemProcessingStarted">
+        @for (item of selectableItems; track item.uuid) {
+          <mat-list-option [selected]="isEntryInSelectedList(item.uuid)"
+                           (selectedChange)="changeSelectedItems($event, item.uuid)"
+                           [value]="item.uuid">{{ item.name }}
+            | {{ item.uuid }}
+          </mat-list-option>
+        }
+      </mat-selection-list>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>{{ selectListProgressData.stepTwoTitle }}</ng-template>
+      <div>
+        <button color="primary" mat-button matStepperPrevious>{{ selectListProgressData.stepTwoButtonBack }}</button>
+        <button color="primary" mat-button matStepperNext>{{ selectListProgressData.stepTwoButtonForward }}</button>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        {{ selectListProgressData.stepTwoInfoText }}
+        <mat-list>
+          @for (selectedItems of selectedItems; track selectedItems) {
+            <mat-list-item>{{ selectedItems.name }}</mat-list-item>
+          }
+        </mat-list>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>{{ selectListProgressData.stepThreeTitle }}</ng-template>
+      <div>
+        <button [disabled]="selectedItemProcessingStarted" color="primary" mat-button
+                matStepperPrevious>{{ selectListProgressData.stepThreeButtonBack }}
+        </button>
+        <button (click)="processSelectedItems()" [disabled]="selectedItemProcessingStarted" color="primary"
+                mat-button>
+          {{ selectListProgressData.stepThreeButtonForward }}
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <div *ngIf="processedItems > 0">
+        <mat-progress-bar [value]="processedItems" class="progress-bar" mode="determinate"/>
+        {{ processedItems }} / 100 %
+      </div>
+      <div>
+        {{ selectListProgressData.stepThreeInfoText }}
+        <mat-list>
+          @for (itemStatus of itemProcessingStatus; track itemProcessingStatus) {
+            <mat-list-item>{{ itemStatus }}</mat-list-item>
+          }
+        </mat-list>
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+</div>

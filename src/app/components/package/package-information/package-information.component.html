@@ -1,0 +1,72 @@
+<div class="main-content">
+  <div class="card-container">
+    <div class="package-name">
+      {{ packageEntity.name }}
+    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="package-options-buttons">
+        <button (click)="updatePackageName()" color="primary" mat-raised-button>Rename</button>
+        <button (click)="updatePackageExpectedReturnValue()" color="primary" mat-raised-button>Update return value
+        </button>
+        <button (click)="updatePackageContent()" color="primary" mat-raised-button>Update content</button>
+        <button (click)="resetAllDeployments()" color="primary" mat-raised-button>Reset deployments</button>
+        <button (click)="deletePackage()" color="primary" mat-raised-button>Delete</button>
+      </div>
+    </mat-expansion-panel>
+
+    <!--  general infos  -->
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="entries">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>UUID</h4>
+            <p matLine>{{ packageEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Name</h4>
+            <p matLine>{{ packageEntity.name }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Status</h4>
+            <p matLine>{{ packageEntity.packageStatus }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>OS</h4>
+            <p matLine>{{ packageEntity.targetOperatingSystem }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Expected Return Value</h4>
+            @if (packageEntity.expectedReturnValue) {
+              <p matLine>{{ packageEntity.expectedReturnValue }}</p>
+            } @else {
+              <p><em><i> No value set </i></em></p>
+            }
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Size (Plain Text/Encrypted)</h4>
+            <p matLine>{{ packageEntity.plaintextSize }} / {{ packageEntity.encryptedSize }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+
+    </mat-expansion-panel>
+
+  </div>
+</div>

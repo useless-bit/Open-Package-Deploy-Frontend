@@ -1,5 +1,5 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {LoadingFullscreenComponent} from "../../loading-fullscreen/loading-fullscreen.component";
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {LoadingComponent} from "../../loading/loading.component";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressBar} from "@angular/material/progress-bar";
@@ -25,19 +25,19 @@ import {
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatDivider} from "@angular/material/divider";
 import {MatPaginator} from "@angular/material/paginator";
-import {ApiService} from "../../../service/api/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {PackageEntity} from "../../../service/api/entity/packageEntity";
 import {PackageDetailPopupComponent} from "../package-detail-popup/package-detail-popup.component";
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
 import {PackageUploadComponent} from "../package-upload/package-upload.component";
+import {PackageApiService} from "../../../service/api/package.api.service";
 
 @Component({
   selector: 'app-package-overview',
   standalone: true,
   imports: [
-    LoadingFullscreenComponent,
+    LoadingComponent,
     MatFormField,
     MatLabel,
     MatIcon,
@@ -74,10 +74,10 @@ import {PackageUploadComponent} from "../package-upload/package-upload.component
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss'
 })
-export class PackageOverviewComponent {
+export class PackageOverviewComponent implements OnInit {
   @ViewChild('searchInputField') searchField: ElementRef | null = null;
   public dataLoaded: boolean = false;
-  public selectedColumns: String[] = ['name'];
+  public selectedColumns: string[] = ['name'];
   public searchLoadingBar: boolean = false;
   public isHideDeletedPackagesSliderChecked: boolean = true;
   private localStorageNameSelectedColumns: string = "selectedColumns_PackageOverview";
@@ -85,22 +85,22 @@ export class PackageOverviewComponent {
   public packageKeys = Object.keys(this.packageInstance) as Array<keyof PackageEntity>
   private packageResponse: PackageEntity[] | null = null;
 
-  constructor(private apiService: ApiService,
+  constructor(private packageApiService: PackageApiService,
               private dialog: MatDialog,
-              public dataSource: MatTableDataSource<PackageEntity>) {
-    this.dataSource = dataSource;
-    this.dataSource.filterPredicate = this.filterVisibleColumns.bind(this);
+              public dataSourcePackageOverviewTable: MatTableDataSource<PackageEntity>) {
+    this.dataSourcePackageOverviewTable = dataSourcePackageOverviewTable;
+    this.dataSourcePackageOverviewTable.filterPredicate = this.filterVisibleColumns.bind(this);
   }
 
   @ViewChild('tablePaginator') set paginator(paginator: MatPaginator) {
     if (paginator) {
-      this.dataSource.paginator = paginator;
+      this.dataSourcePackageOverviewTable.paginator = paginator;
     }
   }
 
   @ViewChild(MatSort) set tableSort(sort: MatSort) {
     if (sort) {
-      this.dataSource.sort = sort;
+      this.dataSourcePackageOverviewTable.sort = sort;
     }
   }
 
@@ -110,11 +110,11 @@ export class PackageOverviewComponent {
       this.selectedColumns = JSON.parse(storedSelectedColumns);
       this.selectedColumns = this.selectedColumns.filter(col => this.packageKeys.includes(col as keyof PackageEntity));
     }
-    this.apiService.getAllPackages().then(response => {
+    this.packageApiService.getAll().then(response => {
       if (response) {
         this.packageResponse = response.packages;
         this.filterData();
-        this.dataSource.filter = "";
+        this.dataSourcePackageOverviewTable.filter = "";
         this.dataLoaded = true;
         this.searchLoadingBar = false;
       }
@@ -129,16 +129,16 @@ export class PackageOverviewComponent {
         filteredPackages = filteredPackages.filter(item => item.packageStatus !== "MARKED_AS_DELETED");
       }
 
-      this.dataSource.data = filteredPackages;
+      this.dataSourcePackageOverviewTable.data = filteredPackages;
     }
   }
 
   applySearch(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourcePackageOverviewTable.filter = filterValue.trim().toLowerCase();
   }
 
-  changeSelectedColumns(package_item: String): void {
+  changeSelectedColumns(package_item: string): void {
     const index = this.selectedColumns.indexOf(package_item);
     if (index === -1) {
       this.selectedColumns.push(package_item);
@@ -146,7 +146,6 @@ export class PackageOverviewComponent {
       this.selectedColumns.splice(index, 1);
     }
     localStorage.setItem(this.localStorageNameSelectedColumns, JSON.stringify(this.selectedColumns));
-    this.dataSource.filter = this.dataSource.filter;
   }
 
   public isColumnSelected(package_item: string): boolean {
@@ -169,7 +168,7 @@ export class PackageOverviewComponent {
     });
   }
 
-  public convertStringChipName(str: string): string {
+  public convertStringChipNamePackageEntity(str: string): string {
     const convertedString = str.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
     return convertedString.split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -178,7 +177,7 @@ export class PackageOverviewComponent {
 
   refreshData(): void {
     this.searchLoadingBar = true;
-    this.apiService.getAllPackages().then(response => {
+    this.packageApiService.getAll().then(response => {
       if (response) {
         this.packageResponse = response.packages;
         this.filterData();
@@ -191,7 +190,7 @@ export class PackageOverviewComponent {
     if (this.searchField) {
       this.searchField.nativeElement.value = "";
     }
-    this.dataSource.filter = "";
+    this.dataSourcePackageOverviewTable.filter = "";
   }
 
   openAddNewPopup() {

@@ -1,4 +1,4 @@
-<app-loading-fullscreen *ngIf="!this.dataLoaded"></app-loading-fullscreen>
+<app-loading *ngIf="!this.dataLoaded"></app-loading>
 
 <div *ngIf="this.dataLoaded" class="main-content">
   <h2>Create new deployment</h2>
@@ -49,16 +49,9 @@
         <mat-error>Cannot be empty</mat-error>
       }
     </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Expected Return Value</mat-label>
-      <input [formControl]="formControlExpectedReturnValueInput" matInput>
-      <mat-hint>Can be empty</mat-hint>
-    </mat-form-field>
-
   </div>
   <div class="buttons">
-    <button (click)="createDeployment()" mat-raised-button>Create</button>
+    <button (click)="createDeployment()" color="primary" mat-raised-button>Create</button>
   </div>
 
 </div>

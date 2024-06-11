@@ -1,0 +1,67 @@
+<div class="main-content">
+  <div class="card-container">
+    <div class="agent-name">
+      {{ deploymentEntity.packageName }}
+      <mat-icon>arrow_forward</mat-icon>
+      {{ deploymentEntity.agentName }}
+    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="agent-options-buttons">
+        <button (click)="resetDeployment()" color="primary" mat-raised-button>Reset deployment</button>
+        <button (click)="deleteDeployment()" color="primary" mat-raised-button>Delete</button>
+      </div>
+    </mat-expansion-panel>
+
+    <!--  general infos  -->
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="entries">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>UUID</h4>
+            <p matLine>{{ deploymentEntity.uuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Agent</h4>
+            <p matLine>{{ deploymentEntity.agentName }} | {{ deploymentEntity.agentUuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Package</h4>
+            <p matLine>{{ deploymentEntity.packageName }} | {{ deploymentEntity.packageUuid }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Last deployed at</h4>
+            <p matLine>{{ deploymentEntity.lastDeploymentTime }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Status (Deployed/Expected return/Actual return)</h4>
+            @if (deploymentEntity.expectedReturnValue) {
+              <p matLine>{{ deploymentEntity.deployed }} / {{ deploymentEntity.expectedReturnValue }}
+                / {{ deploymentEntity.returnValue }}</p>
+            } @else {
+              <p matLine>{{ deploymentEntity.deployed }} / <em><i> No value set </i></em>
+                / {{ deploymentEntity.returnValue }}</p>
+
+            }
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+</div>

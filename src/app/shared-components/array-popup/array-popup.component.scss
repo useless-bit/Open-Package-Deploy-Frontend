@@ -1,0 +1,14 @@
+.main-content {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  background-color: var(--popup-background);
+}
+
+mat-list-item {
+  width: 100%;
+  text-align: left;
+}

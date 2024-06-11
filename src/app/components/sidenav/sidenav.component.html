@@ -4,25 +4,40 @@
   </div>
 
   <div class="main-buttons">
-    <button color="primary" mat-flat-button routerLink="/">
+    <button [style.background-color]="currentUrl === '/' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/">
       <mat-icon>home</mat-icon>
       Home
     </button>
-    <button color="primary" mat-flat-button routerLink="/agent">
+    <button [style.background-color]="currentUrl === '/agent' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/agent">
       <mat-icon>computer</mat-icon>
       Agents
     </button>
-    <button color="primary" mat-flat-button routerLink="/package">
-      <mat-icon>inventory</mat-icon>
+    <button [style.background-color]="currentUrl === '/group' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/group">
+      <mat-icon>devices</mat-icon>
+      Groups
+    </button>
+    <button [style.background-color]="currentUrl === '/package' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/package">
+      <mat-icon>folder_copy</mat-icon>
       Packages
     </button>
-    <button color="primary" mat-flat-button routerLink="/deployment">
-      <mat-icon>archive</mat-icon>
+    <button [style.background-color]="currentUrl === '/deployment' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/deployment">
+      <mat-icon>install_desktop</mat-icon>
       Deployments
     </button>
-    <button color="primary" mat-flat-button routerLink="/setting">
+    <button [style.background-color]="currentUrl === '/settings' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/settings">
       <mat-icon>settings</mat-icon>
       Settings
+    </button>
+    <button [style.background-color]="currentUrl === '/log' ? 'var(--button-selected)' : ''" color="primary"
+            mat-flat-button routerLink="/log">
+      <mat-icon>article</mat-icon>
+      Logs
     </button>
     <button (click)="logoutButtonPress()" color="primary" mat-flat-button>
       <mat-icon>logout</mat-icon>

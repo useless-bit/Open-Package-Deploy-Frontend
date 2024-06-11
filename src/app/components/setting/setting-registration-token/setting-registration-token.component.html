@@ -1,0 +1,15 @@
+<div class="main-content">
+  <h2>Registration Token</h2>
+  <mat-divider></mat-divider>
+  @if (!dataLoaded) {
+    <app-loading></app-loading>
+  } @else {
+    <mat-form-field>
+      <input disabled matInput>{{ registrationToken }}
+    </mat-form-field>
+    <div class="buttons">
+      <button color="primary" mat-raised-button (click)="generateNewRegistrationToken()">Generate new Token</button>
+      <button color="primary" mat-raised-button (click)="copyRegistrationTokenIntoClipboard()">Copy</button>
+    </div>
+  }
+</div>

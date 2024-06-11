@@ -1,0 +1,43 @@
+<div class="option-bar">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Options</mat-expansion-panel-header>
+      <div class="settings">
+        <div class="buttons">
+          <button (click)="changeRefreshInterval()" color="primary" mat-flat-button>Change Interval</button>
+          <button (click)="refreshComponents()" color="primary" mat-flat-button>Refresh now</button>
+        </div>
+        <mat-form-field>
+          <mat-label>Refresh in seconds</mat-label>
+          <input [formControl]="formControlRefreshIntervalInput" matInput type="number">
+          @if (formControlRefreshIntervalInput.hasError('min') || formControlRefreshIntervalInput.hasError('required')) {
+            <mat-error>Must be at least 10s</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-progress-bar
+    [value]="((refreshIntervalSeconds - refreshIntervalRemainingSeconds) / refreshIntervalSeconds) * 100"
+    mode="determinate"></mat-progress-bar>
+</div>
+<div class="main-content">
+  <div class="cards">
+    <mat-card>
+      <app-home-agent-status #homeAgentStatusComponent></app-home-agent-status>
+    </mat-card>
+    <mat-card>
+      <app-home-package-status #homePackageStatusComponent></app-home-package-status>
+    </mat-card>
+    <mat-card>
+      <app-home-deployment-status #homeDeploymentStatusComponent></app-home-deployment-status>
+    </mat-card>
+    <mat-card>
+      <app-home-server-storage-status #homeServerStorageStatusComponent></app-home-server-storage-status>
+    </mat-card>
+  </div>
+  <div>
+    <mat-card class="chart">
+      <app-home-server-status #homeServerStatusComponent></app-home-server-status>
+    </mat-card>
+  </div>
