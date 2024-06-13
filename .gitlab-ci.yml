@@ -36,8 +36,8 @@ build-image-dev:
   stage: publish
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build . -t $CI_REGISTRY/opd/frontend:dev --build-arg BASE_IMAGE_1=$DOCKER_IMAGE_NODE --build-arg BASE_IMAGE_2=$DOCKER_IMAGE_NGINX
-    - docker push $CI_REGISTRY/opd/frontend:dev
+    - docker build . -t $CI_REGISTRY/opd/opd-frontend:dev --build-arg BASE_IMAGE_1=$DOCKER_IMAGE_NODE --build-arg BASE_IMAGE_2=$DOCKER_IMAGE_NGINX
+    - docker push $CI_REGISTRY/opd/opd-frontend:dev
   only:
     - dev
   needs:
@@ -48,7 +48,7 @@ build-image-master:
   stage: publish
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build . -t $CI_REGISTRY/opd/frontend:latest --build-arg BASE_IMAGE_1=$DOCKER_IMAGE_NODE --build-arg BASE_IMAGE_2=$DOCKER_IMAGE_NGINX
-    - docker push $CI_REGISTRY/opd/frontend:latest
+    - docker build . -t $CI_REGISTRY/opd/opd-frontend:latest --build-arg BASE_IMAGE_1=$DOCKER_IMAGE_NODE --build-arg BASE_IMAGE_2=$DOCKER_IMAGE_NGINX
+    - docker push $CI_REGISTRY/opd/opd-frontend:latest
   only:
     - master
