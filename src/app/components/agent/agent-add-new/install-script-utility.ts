@@ -5,12 +5,12 @@ export class InstallScriptUtility {
 mkdir temp-opd-agent
 cd temp-opd-agent
 
-Token='${registrationToken}'
-Host='${backendURL}'
+export Token='${registrationToken}'
+export Host='${backendURL}'
 
 function install_apt {
-apt-get update
-apt-get install -y openjdk-19-jre-headless
+sudo apt-get update
+sudo apt-get install -y openjdk-19-jre-headless
 
 install_service_systemd
 }
@@ -20,7 +20,7 @@ sudo systemctl stop opd-agent
 }
 
 function install_service_systemd {
-bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
+sudo bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
 [Unit]
 Description=OPD Agent
 After=network.target network-online.target
@@ -47,10 +47,10 @@ wget --method GET --header 'Authentication: '$Token --output-document - $Host/do
 
 stop_service_systemd
 
-mkdir -p /etc/OPD-Agent
-cp Agent.jar /etc/OPD-Agent/Agent.jar
-echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
-echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
+sudo mkdir -p /etc/OPD-Agent
+sudo cp Agent.jar /etc/OPD-Agent/Agent.jar
+sudo -E echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
+sudo -E echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
 
 if command -v apt > /dev/null; then
 install_apt
