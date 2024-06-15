@@ -20,7 +20,7 @@ sudo systemctl stop opd-agent
 }
 
 function install_service_systemd {
-bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
+sudo bash -c "cat > /etc/systemd/system/opd-agent.service <<EOF
 [Unit]
 Description=OPD Agent
 After=network.target network-online.target
