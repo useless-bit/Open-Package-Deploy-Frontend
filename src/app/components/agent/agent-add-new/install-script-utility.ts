@@ -47,10 +47,10 @@ wget --method GET --header 'Authentication: '$Token --output-document - $Host/do
 
 stop_service_systemd
 
-sudo mkdir -p /etc/OPD-Agent
-sudo cp Agent.jar /etc/OPD-Agent/Agent.jar
-sudo echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
-sudo echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
+mkdir -p /etc/OPD-Agent
+cp Agent.jar /etc/OPD-Agent/Agent.jar
+echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
+echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
 
 if command -v apt > /dev/null; then
 install_apt
