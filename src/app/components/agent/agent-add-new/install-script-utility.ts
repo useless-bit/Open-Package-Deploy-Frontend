@@ -49,11 +49,13 @@ stop_service_systemd
 
 sudo mkdir -p /etc/OPD-Agent
 sudo cp Agent.jar /etc/OPD-Agent/Agent.jar
-sudo -E echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties
-sudo -E echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties
+sudo -E bash -c 'echo "Server.Url="$Host >> /etc/OPD-Agent/opd-agent.properties'
+sudo -E bash -c 'echo "Server.Registration-Token="$Token >> /etc/OPD-Agent/opd-agent.properties'
 
 if command -v apt > /dev/null; then
 install_apt
+else
+echo "The script is currently only tested with Ubuntu"
 fi
 
 cd ~
