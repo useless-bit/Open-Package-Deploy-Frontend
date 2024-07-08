@@ -10,7 +10,7 @@ export Host='${backendURL}'
 
 function install_apt {
 sudo apt-get update
-sudo apt-get install -y openjdk-19-jre-headless
+sudo apt-get install -y openjdk-21-jre
 
 install_service_systemd
 }
